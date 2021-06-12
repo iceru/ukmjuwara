@@ -91,12 +91,12 @@
     </div>
 </nav> --}}
 
-<nav class="container">
-    <div class="navbar d-flex justify-content-between">
+<nav>
+    <div class="navbar container d-flex justify-content-between">
         <div class="logo">
             <h4>#UKMJUWARA</h4>
         </div>
-        <div class="navigation">
+        <ul class="navigation">
             <li class="nav-item">
                 <a class="nav-link" href="#">Tentang Kami</a>
             </li>
@@ -109,7 +109,7 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">Kemitraan</a>
             </li>
-        </div>
+        </ul>
     </div>
     
 </nav>
