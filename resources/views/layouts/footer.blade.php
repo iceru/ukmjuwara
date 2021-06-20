@@ -14,9 +14,9 @@
                     <span>08112233444</span>
                 </div>
             </div>
-            <div class="col-12 col-md-4 mt-4">
+            <div class="col-12 col-md-5 mt-4">
                 <div class="row">
-                    <div class="col-6 col-md-4">
+                    <div class="col-6 col-md-5">
                         <ul>
                             <li>
                                 <a href="">Tentang Kami</a>
@@ -26,7 +26,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="col-6 col-md-4">
+                    <div class="col-6 col-md-5">
                         <ul>
                             <li>
                                 <a href="">Berita</a>
@@ -38,7 +38,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-4 mt-4">
+            <div class="col-12 col-md-3 mt-4">
                 <ul>
                     <li>
                         <a href="">Privacy Policy</a>

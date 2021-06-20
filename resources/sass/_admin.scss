@@ -1,0 +1,44 @@
+.sidebar-admin {
+    background-color: $primary-color;
+    padding: 1.5rem;
+    color: $background;
+    min-height: 100vh;
+
+    .user {
+        align-items: center;
+        padding: 1.5rem 0;
+        margin-bottom: 1.5rem;
+        border-bottom: 1px solid rgba(255,255,255, 0.3);
+
+        h5 {
+            font-weight: 500;
+        }
+        p {
+            font-weight: 200;
+            margin: 0;
+        }
+
+        .user-image {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 50%;
+            margin-right: 0.75rem;
+        }
+    }
+
+    li {
+        padding: 0.5rem 0;
+        &.active {
+            background-color: darken($primary-color, 20%);
+        }
+        a {
+            color: white;
+        }
+    }
+}
+
+.main-admin {
+    padding: 1.5rem;
+}

@@ -10844,22 +10844,89 @@ a:hover {
   text-decoration: none;
 }
 
-.slick-prev {
+.header-container {
+  position: relative;
+  width: 100%;
+}
+.header-container .slick-prev {
   z-index: 30;
   left: 20px;
 }
-
-.slick-next {
+.header-container .slick-next {
   z-index: 30;
   right: 20px;
 }
-
-.header, .slick-track {
+.header-container .header, .header-container .slick-track {
   height: 75vh;
   object-fit: cover;
   -o-object-position: center;
      object-position: center;
   -o-object-fit: cover;
+}
+.header-container .cta {
+  position: absolute;
+  bottom: 2rem;
+  left: 0;
+  justify-content: center;
+  display: flex;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+}
+.header-container .cta .cta-item {
+  display: flex;
+  background: #fff;
+  padding: 0.75rem 2rem;
+  border-radius: 60px;
+  margin: 0 1rem;
+}
+.header-container .cta .cta-item a {
+  color: #063934;
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.sidebar-admin {
+  background-color: #063934;
+  padding: 1.5rem;
+  color: #fff;
+  min-height: 100vh;
+}
+.sidebar-admin .user {
+  align-items: center;
+  padding: 1.5rem 0;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+.sidebar-admin .user h5, .sidebar-admin .user .h5 {
+  font-weight: 500;
+}
+.sidebar-admin .user p {
+  font-weight: 200;
+  margin: 0;
+}
+.sidebar-admin .user .user-image {
+  width: 60px;
+  height: 60px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+  border-radius: 50%;
+  margin-right: 0.75rem;
+}
+.sidebar-admin li {
+  padding: 0.5rem 0;
+}
+.sidebar-admin li.active {
+  background-color: black;
+}
+.sidebar-admin li a {
+  color: white;
+}
+
+.main-admin {
+  padding: 1.5rem;
 }
 
 nav {
@@ -10879,7 +10946,19 @@ nav .navbar ul.navigation {
 }
 nav .navbar ul.navigation li.nav-item {
   padding: 0 2rem;
-  border-right: 1px solid #fff;
+  position: relative;
+}
+nav .navbar ul.navigation li.nav-item:after {
+  content: "";
+  top: 25%;
+  right: 0;
+  height: 50%;
+  position: absolute;
+  background-color: white;
+  width: 1px;
+}
+nav .navbar ul.navigation li.nav-item:last-child:after {
+  height: 0;
 }
 nav .navbar ul.navigation li.nav-item a.nav-link {
   text-decoration: none;
@@ -10891,6 +10970,9 @@ nav .navbar ul.navigation li.nav-item a.nav-link {
 nav .navbar ul.navigation li.nav-item a.nav-link:hover {
   border-bottom: 1px solid #fff;
   transition: all 0.2s ease-in;
+}
+nav .navbar .search {
+  color: white;
 }
 
 .footer {

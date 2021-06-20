@@ -96,20 +96,25 @@
         <div class="logo">
             <h3>#UKMJUWARA</h3>
         </div>
-        <ul class="navigation">
-            <li class="nav-item">
-                <a class="nav-link" href="#">Tentang Kami</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Katalog</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Berita</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Kemitraan</a>
-            </li>
-        </ul>
+        <div class="d-flex align-items-center">
+            <ul class="navigation">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Tentang Kami</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Katalog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Berita</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Kemitraan</a>
+                </li>
+            </ul>
+            <div class="search">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </div>
+        </div>
     </div>
 
 </nav>
