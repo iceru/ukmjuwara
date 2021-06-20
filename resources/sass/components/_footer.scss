@@ -1,0 +1,16 @@
+.footer {
+    background: $secondary-color;
+    color: $background;
+    padding: 1.5rem 0;
+
+    ul {
+        li {
+            margin-bottom: .5rem;
+
+            a {
+                color: $background;
+            }
+        }
+    }
+
+}

@@ -1,3 +1,16 @@
-@mixin index {
-    
+.slick-prev {
+    z-index: 30;
+    left: 20px;
+}
+
+.slick-next {
+    z-index: 30;
+    right: 20px;
+}
+
+.header, .slick-track {
+    height: 75vh;
+    object-fit: cover;
+    object-position: center;
+    -o-object-fit: cover;
 }

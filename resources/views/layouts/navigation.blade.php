@@ -94,7 +94,7 @@
 <nav>
     <div class="navbar container d-flex justify-content-between">
         <div class="logo">
-            <h4>#UKMJUWARA</h4>
+            <h3>#UKMJUWARA</h3>
         </div>
         <ul class="navigation">
             <li class="nav-item">
@@ -111,6 +111,6 @@
             </li>
         </ul>
     </div>
-    
+
 </nav>
 

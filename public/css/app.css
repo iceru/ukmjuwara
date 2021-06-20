@@ -10832,11 +10832,42 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   margin-bottom: 0;
 }
 
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+
+.slick-prev {
+  z-index: 30;
+  left: 20px;
+}
+
+.slick-next {
+  z-index: 30;
+  right: 20px;
+}
+
+.header, .slick-track {
+  height: 75vh;
+  object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+  -o-object-fit: cover;
+}
+
 nav {
   background-color: #063934;
 }
 nav .navbar {
   align-items: center;
+  padding: 20px 0;
 }
 nav .navbar .logo {
   color: white;
@@ -10855,8 +10886,25 @@ nav .navbar ul.navigation li.nav-item a.nav-link {
   color: white;
   transition: all 0.2s ease-in;
   padding: 0.5rem 0;
+  border-bottom: 1px solid #063934;
 }
 nav .navbar ul.navigation li.nav-item a.nav-link:hover {
   border-bottom: 1px solid #fff;
   transition: all 0.2s ease-in;
+}
+
+.footer {
+  background: #C38459;
+  color: #fff;
+  padding: 1.5rem 0;
+}
+.footer ul li {
+  margin-bottom: 0.5rem;
+}
+.footer ul li a {
+  color: #fff;
+}
+
+body, html {
+  font-family: "Gotham", sans-serif;
 }

@@ -3,3 +3,9 @@
 @import 'variables';
 @import 'pages/index';
 @import 'components/navbar';
+@import 'components/footer';
+
+
+body, html {
+    font-family: 'Gotham', sans-serif;
+}
