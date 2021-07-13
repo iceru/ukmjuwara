@@ -25,6 +25,9 @@
                 <a class="nav-link" href="/kemitraan">Kemitraan</a>
             </li>
         </ul>
+        <div class="search">
+            <i class="fa fa-search" aria-hidden="true"></i>
+        </div>
     </div>
 
 </nav>
