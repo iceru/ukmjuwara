@@ -14,7 +14,9 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        $articles = Article::paginate(10);
+
+        return view('articles', compact('articles'));
     }
 
     /**
@@ -44,9 +46,11 @@ class ArticleController extends Controller
      * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function show(Article $article)
+    public function show($slug)
     {
-        //
+        $article = Article::findOrFail($slug);
+
+        return view('article-detail', compact('article'));
     }
 
     /**

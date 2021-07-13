@@ -2,8 +2,11 @@
 
 @import 'variables';
 @import 'pages/index';
+@import 'pages/login';
+@import 'pages/admin';
 @import 'components/navbar';
 @import 'components/footer';
+@import 'components/sidebar';
 
 
 body, html {

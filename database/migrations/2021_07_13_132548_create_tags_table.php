@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUkmsTable extends Migration
+class CreateTagsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,9 @@ class CreateUkmsTable extends Migration
      */
     public function up()
     {
-        Schema::create('ukms', function (Blueprint $table) {
+        Schema::create('tags', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('slug');
-            $table->string('description');
-            $table->text('images');
-            $table->string('whatsapp');
-            $table->string('instagram');
+            $table->text('tag_name');
             $table->timestamps();
         });
     }
@@ -32,6 +27,6 @@ class CreateUkmsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ukms');
+        Schema::dropIfExists('tags');
     }
 }

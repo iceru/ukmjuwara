@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Ukm;
 use Illuminate\Http\Request;
 
-class UkmController extends Controller
+class AdminUkmController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +13,9 @@ class UkmController extends Controller
      */
     public function index()
     {
-        return view('katalog');
+        $ukm = Ukm::all();
+
+        return view('admin.ukm.index');
     }
 
     /**
@@ -41,10 +42,10 @@ class UkmController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Ukm  $ukm
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Ukm $ukm)
+    public function show($id)
     {
         //
     }
@@ -52,10 +53,10 @@ class UkmController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Ukm  $ukm
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Ukm $ukm)
+    public function edit($id)
     {
         //
     }
@@ -64,10 +65,10 @@ class UkmController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Ukm  $ukm
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Ukm $ukm)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -75,10 +76,10 @@ class UkmController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Ukm  $ukm
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ukm $ukm)
+    public function destroy($id)
     {
         //
     }

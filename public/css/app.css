@@ -10862,6 +10862,34 @@ a:hover {
   -o-object-fit: cover;
 }
 
+.header img {
+  width: 100%;
+  object-fit: cover;
+  -o-object-fit: cover;
+  object-position: center;
+  -o-object-position: center;
+}
+
+.login {
+  padding: 2rem;
+}
+.login h4, .login .h4 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.login .login-card {
+  padding: 2rem;
+  width: 60%;
+  margin: auto;
+}
+
+.administrator {
+  min-height: 100vh;
+}
+.administrator main {
+  padding: 2rem;
+}
+
 nav {
   background-color: #063934;
 }
@@ -10903,6 +10931,16 @@ nav .navbar ul.navigation li.nav-item a.nav-link:hover {
 }
 .footer ul li a {
   color: #fff;
+}
+
+.sidebar-admin {
+  background-color: #063934;
+  padding: 2rem;
+  color: white;
+  min-height: 100vh;
+}
+.sidebar-admin a {
+  color: white;
 }
 
 body, html {

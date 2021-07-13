@@ -16,8 +16,7 @@
 
     <script>
         $(document).ready(function(){
-            $('.header').slick({
-            });
+            $('.header').slick();
         });
     </script>
 </x-app-layout>

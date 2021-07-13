@@ -14,3 +14,13 @@
     object-position: center;
     -o-object-fit: cover;
 }
+
+.header {
+    img {
+        width: 100%;
+        object-fit: cover;
+        -o-object-fit: cover;
+        object-position: center;
+        -o-object-position: center;
+    }
+}

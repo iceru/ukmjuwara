@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Ukm;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
-class UkmController extends Controller
+class TagController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class UkmController extends Controller
      */
     public function index()
     {
-        return view('katalog');
+        //
     }
 
     /**
@@ -41,10 +41,10 @@ class UkmController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Ukm  $ukm
+     * @param  \App\Models\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function show(Ukm $ukm)
+    public function show(Tag $tag)
     {
         //
     }
@@ -52,10 +52,10 @@ class UkmController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Ukm  $ukm
+     * @param  \App\Models\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function edit(Ukm $ukm)
+    public function edit(Tag $tag)
     {
         //
     }
@@ -64,10 +64,10 @@ class UkmController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Ukm  $ukm
+     * @param  \App\Models\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Ukm $ukm)
+    public function update(Request $request, Tag $tag)
     {
         //
     }
@@ -75,10 +75,10 @@ class UkmController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Ukm  $ukm
+     * @param  \App\Models\Tag  $tag
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ukm $ukm)
+    public function destroy(Tag $tag)
     {
         //
     }
