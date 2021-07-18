@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Catalog;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class CatalogController extends Controller
@@ -14,7 +15,8 @@ class CatalogController extends Controller
      */
     public function index()
     {
-        //
+        $catalogs = Catalog::all();
+        return view ('admin.catalog.index', compact('catalogs'));
     }
 
     /**
@@ -35,7 +37,21 @@ class CatalogController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $catalog = new Catalog;
+
+        $request->validate([
+            'title' => 'required',
+            'slug' => 'required',
+            'link' => 'nullable'
+        ]);
+
+        $catalog->title = $request->title;
+        $catalog->slug = Str::slug($request->title);
+        $catalog->link = $request->link;
+
+        $catalog->save();
+
+        return redirect()->route('admin.catalog')->with('success','Data berhasil di input');
     }
 
     /**
@@ -44,9 +60,9 @@ class CatalogController extends Controller
      * @param  \App\Models\Catalog  $catalog
      * @return \Illuminate\Http\Response
      */
-    public function show(Catalog $catalog)
+    public function show($slug)
     {
-        //
+        return view('katalog');
     }
 
     /**
@@ -55,9 +71,11 @@ class CatalogController extends Controller
      * @param  \App\Models\Catalog  $catalog
      * @return \Illuminate\Http\Response
      */
-    public function edit(Catalog $catalog)
+    public function edit($id)
     {
-        //
+        $catalog = Catalog::findOrFail($id);
+
+        return view('admin.catalog.edit', compact('catalog'));
     }
 
     /**
@@ -67,9 +85,23 @@ class CatalogController extends Controller
      * @param  \App\Models\Catalog  $catalog
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Catalog $catalog)
+    public function update(Request $request)
     {
-        //
+        $catalog = Catalog::find($request->id);
+        
+        $request->validate([
+            'title' => 'required',
+            'slug' => 'required',
+            'link' => 'nullable',
+        ]);
+
+        $catalog->title = $request->title;
+        $catalog->slug = Str::slug($request->title);
+        $catalog->link = $request->link;
+
+        $catalog->save();
+
+        return redirect()->route('admin.catalog')->with('success','Data berhasil di update');
     }
 
     /**
@@ -78,8 +110,10 @@ class CatalogController extends Controller
      * @param  \App\Models\Catalog  $catalog
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Catalog $catalog)
+    public function destroy($id)
     {
-        //
+        Catalog::find($id)->delete();
+
+        return redirect()->route('admin.catalog')->with('success', 'Data berhasil dihapus');
     }
 }

@@ -10844,6 +10844,10 @@ a:hover {
   text-decoration: none;
 }
 
+p {
+  margin-bottom: 0;
+}
+
 .header-container {
   position: relative;
   width: 100%;
@@ -10863,9 +10867,23 @@ a:hover {
      object-position: center;
   -o-object-fit: cover;
 }
+.header-container .header img {
+  width: 100%;
+  object-fit: cover;
+  -o-object-fit: cover;
+  object-position: center;
+  -o-object-position: center;
+}
+.header-container .header, .header-container .slick-track {
+  height: 75vh;
+  object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+  -o-object-fit: cover;
+}
 .header-container .cta {
   position: absolute;
-  bottom: 2rem;
+  bottom: 6rem;
   left: 0;
   justify-content: center;
   display: flex;
@@ -10884,6 +10902,19 @@ a:hover {
   color: #063934;
   font-weight: 700;
   font-size: 1.25rem;
+}
+
+.login {
+  padding: 2rem;
+}
+.login h4, .login .h4 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.login .login-card {
+  padding: 2rem;
+  width: 60%;
+  margin: auto;
 }
 
 .sidebar-admin {
@@ -10915,46 +10946,21 @@ a:hover {
   border-radius: 50%;
   margin-right: 0.75rem;
 }
-.sidebar-admin li {
-  padding: 0.5rem 0;
-}
-.sidebar-admin li.active {
-  background-color: black;
-}
-.sidebar-admin li a {
+.sidebar-admin a {
   color: white;
+}
+.sidebar-admin a li {
+  padding: 0.5rem 0;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid #063934;
 }
 
 .main-admin {
   padding: 1.5rem;
 }
 
-.header img {
-  width: 100%;
-  object-fit: cover;
-  -o-object-fit: cover;
-  object-position: center;
-  -o-object-position: center;
-}
-
-.login {
-  padding: 2rem;
-}
-.login h4, .login .h4 {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-.login .login-card {
-  padding: 2rem;
-  width: 60%;
-  margin: auto;
-}
-
-.administrator {
-  min-height: 100vh;
-}
-.administrator main {
-  padding: 2rem;
+.admin-content {
+  padding: 1.5rem;
 }
 
 nav {
@@ -11013,16 +11019,6 @@ nav .navbar .search {
 }
 .footer ul li a {
   color: #fff;
-}
-
-.sidebar-admin {
-  background-color: #063934;
-  padding: 2rem;
-  color: white;
-  min-height: 100vh;
-}
-.sidebar-admin a {
-  color: white;
 }
 
 body, html {

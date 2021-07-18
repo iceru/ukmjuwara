@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ukm;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AdminUkmController extends Controller
 {
@@ -13,9 +16,9 @@ class AdminUkmController extends Controller
      */
     public function index()
     {
-        $ukm = Ukm::all();
+        $ukms = Ukm::all();
 
-        return view('admin.ukm.index');
+        return view('admin.ukm.index', compact('ukms'));
     }
 
     /**
@@ -36,7 +39,39 @@ class AdminUkmController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $ukm = new Ukm;
+
+        $request->validate([
+            'inputTitle' => 'required',
+            'inputDescription' => 'required',
+            'inputWhatsapp' => 'required',
+            'inputImage' => 'required',
+            'inputImage.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'inputInstagram' => 'required',
+        ]);
+
+        if ($request->hasFile('inputImage')) {
+
+            $images = $request->file('inputImage');
+
+            foreach($images as $image) {
+                $name = $image->getClientOriginalName();
+                $filename = $request->inputTitle.'_'.time().'.'.$name;
+                $path = $image->storeAs('public/ukm-image', $filename);
+                $data[] = $filename;
+            }
+        }
+        $ukm->images=json_encode($data);
+
+        $ukm->title = $request->inputTitle;
+        $ukm->slug = Str::slug($request->inputTitle);
+        $ukm->description = $request->inputDescription;
+        $ukm->whatsapp = $request->inputWhatsapp;
+        $ukm->instagram = $request->inputInstagram;
+
+        $ukm->save();
+
+        return redirect()->route('admin.ukm')->with('success','Data berhasil di input');
     }
 
     /**
@@ -58,7 +93,9 @@ class AdminUkmController extends Controller
      */
     public function edit($id)
     {
-        //
+        $ukm = Ukm::findOrFail($id);
+
+        return view('admin.ukm.edit', compact('ukm'));
     }
 
     /**
@@ -68,9 +105,43 @@ class AdminUkmController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $ukm = Ukm::find($request->id);
+
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'slug' => 'required',
+            'whatsapp' => 'required',
+            'image' => 'nullable',
+            'image.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'instagram' => 'required',
+        ]);
+
+        if ($request->hasFile('image')) {
+
+            $images = $request->file('image');
+
+            foreach($images as $image) {
+                $name = $image->getClientOriginalName();
+                $filename = $request->inputTitle.'_'.time().'.'.$name;
+                $path = $image->storeAs('public/ukm-image', $filename);
+                $data[] = $filename;
+            }
+
+            $ukm->images=json_encode($data);
+        }
+
+        $ukm->title = $request->title;
+        $ukm->slug = Str::slug($request->title);
+        $ukm->description = $request->description;
+        $ukm->whatsapp = $request->whatsapp;
+        $ukm->instagram = $request->instagram;
+
+        $ukm->save();
+
+        return redirect()->route('admin.ukm')->with('success','Data berhasil di update');
     }
 
     /**
@@ -81,6 +152,10 @@ class AdminUkmController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $ukm = Ukm::findOrFail($id);
+        Storage::disk('public')->delete('ukm-image/'.$ukm->image);
+
+        Ukm::find($id)->delete();
+        return redirect()->route('admin.ukm')->with('success', 'Data berhasil dihapus');
     }
 }

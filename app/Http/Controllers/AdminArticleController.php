@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
 use App\Models\Article;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class AdminArticleController extends Controller
@@ -16,7 +18,7 @@ class AdminArticleController extends Controller
     {
         $articles = Article::all();
 
-        return view('admin.article.index');
+        return view('admin.article.index', compact('articles'));
     }
 
     /**
@@ -37,7 +39,48 @@ class AdminArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $article = new Article;
+
+        $request->validate([
+            'image' => 'required|image',
+            'title' => 'required',
+            'description' => 'required',
+            'author' => 'required',
+            'time_read' => 'required|integer',
+            'tags' => 'string|regex:/^[a-zA-Z0-9\s]+$/'
+        ]);
+
+        if ($request->hasFile('image')) {
+            $extension = $request->file('image')->getClientOriginalExtension();
+            $filename = $request->title.'_'.time().'.'.$extension;
+            $path = $request->image->storeAs('public/article-image', $filename);
+        }
+
+        $article->image = $filename;
+
+        $article->title = $request->title;
+        $article->slug = Str::slug($request->title);
+        $article->description = $request->description;
+        $article->author = $request->author;
+        $article->time_read = $request->time_read;
+        $article->save();
+
+        $tagsArray = explode(' ', strtolower($request->tags));
+        $tags = array();
+
+        foreach($tagsArray as $articleTag) {
+            if($articleTag != ' ') {
+                $tag = Tag::firstOrCreate([
+                    'tag_name' => $articleTag
+                ]);
+
+                $tags[$tag->id] = ['article_id' => $article->id];
+            }
+        }
+
+        $article->tags()->attach($tags);
+
+        return redirect()->route('admin.article')->with('success','Data berhasil di input');
     }
 
     /**
@@ -59,7 +102,9 @@ class AdminArticleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $article = Article::find($id);
+
+        return view('admin.article.edit', compact('article'));
     }
 
     /**
@@ -71,7 +116,49 @@ class AdminArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $article = Artcile::find($request->id);
+
+        $request->validate([
+            'image' => 'nullable|image',
+            'title' => 'required',
+            'slug' => 'required',
+            'description' => 'required',
+            'author' => 'required',
+            'time_read' => 'required|integer',
+            'tags' => 'string|regex:/^[a-zA-Z0-9\s]+$/'
+        ]);
+
+        if ($request->hasFile('image')) {
+            $extension = $request->file('image')->getClientOriginalExtension();
+            $filename = $request->title.'_'.time().'.'.$extension;
+            $path = $request->image->storeAs('public/article-image', $filename);
+            $article->image = $filename;
+        }
+
+
+        $article->title = $request->title;
+        $article->description = $request->description;
+        $article->author = $request->author;
+        $article->time_read = $request->time_read;
+        $article->slug = Str::slug($request->title);
+        $article->save();
+
+        $tagsArray = explode(' ', strtolower($request->tags));
+        $tags = array();
+
+        foreach($tagsArray as $articleTag) {
+            if($articleTag != ' ') {
+                $tag = Tags::firstOrCreate([
+                    'tag_name' => $articleTag
+                ]);
+
+                $tags[$tag->id] = ['article_id' => $article->id];
+            }
+        }
+
+        $article->tags()->sync($tags);
+
+        return redirect()->route('admin.article')->with('success','Data berhasil di update');
     }
 
     /**
@@ -82,6 +169,7 @@ class AdminArticleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Article::find($id)->delete();
+        return redirect()->route('admin.article')->with('success','Data berhasil dihapus');;
     }
 }

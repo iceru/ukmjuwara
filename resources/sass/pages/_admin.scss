@@ -1,7 +1,53 @@
-.administrator {
+.sidebar-admin {
+    background-color: $primary-color;
+    padding: 1.5rem;
+    color: $background;
     min-height: 100vh;
 
-    main {
-        padding: 2rem;
+    .user {
+        align-items: center;
+        padding: 1.5rem 0;
+        margin-bottom: 1.5rem;
+        border-bottom: 1px solid rgba(255,255,255, 0.3);
+
+        h5 {
+            font-weight: 500;
+        }
+        p {
+            font-weight: 200;
+            margin: 0;
+        }
+
+        .user-image {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 50%;
+            margin-right: 0.75rem;
+        }
     }
+    
+    a {
+        color: white;
+
+        li {
+            padding: 0.5rem 0;
+            margin-bottom: .5rem;
+            border-bottom: 1px solid $primary-color;
+    
+            // &.active {
+            //     border-bottom: 1px solid white;
+            // }
+        }
+    }
+    
+}
+
+.main-admin {
+    padding: 1.5rem;
+}
+
+.admin-content {
+    padding: 1.5rem;
 }

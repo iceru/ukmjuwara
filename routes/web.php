@@ -35,26 +35,26 @@ Route::get('/berita/{slug}', [ArticleController::class, 'show'])->name('article.
 //     return view('admin.dashboard');
 // })->middleware(['auth'])->name('dashboard');
 
-Route::middleware(['auth'])->group(function (){
+Route::middleware(['auth', 'role:administrator'])->group(function (){
     Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 
-    Route::get('/admin/articles', [AdminArticleController::class, 'index'])->name('admin.articles');
-    Route::post('/admin/articles/store', [AdminArticleController::class, 'store'])->name('admin.articles.store');
-    Route::get('/admin/articles/edit/{id}', [AdminArticleController::class, 'edit'])->name('admin.articles.edit');
-    Route::post('/admin/articles/update', [AdminArticleController::class, 'update'])->name('admin.articles.update');
-    Route::get('/admin/articles/delete/{id}', [AdminArticleController::class, 'destroy'])->name('admin.articles.destroy');
+    Route::get('/admin/article', [AdminArticleController::class, 'index'])->name('admin.article');
+    Route::post('/admin/article/store', [AdminArticleController::class, 'store'])->name('admin.article.store');
+    Route::get('/admin/article/edit/{id}', [AdminArticleController::class, 'edit'])->name('admin.article.edit');
+    Route::post('/admin/article/update', [AdminArticleController::class, 'update'])->name('admin.article.update');
+    Route::get('/admin/article/delete/{id}', [AdminArticleController::class, 'destroy'])->name('admin.article.destroy');
 
-    Route::get('/admin/catalog', [CatalogController::class, 'index'])->name('admin.ukm');
-    Route::post('/admin/catalog/store', [CatalogController::class, 'store'])->name('admin.ukm.store');
-    Route::get('/admin/catalog/edit/{id}', [CatalogController::class, 'edit'])->name('admin.ukm.edit');
-    Route::post('/admin/catalog/update', [CatalogController::class, 'update'])->name('admin.ukm.update');
-    Route::get('/admin/catalog/delete/{id}', [CatalogController::class, 'destroy'])->name('admin.ukm.destroy');
+    Route::get('/admin/catalog', [CatalogController::class, 'index'])->name('admin.catalog');
+    Route::post('/admin/catalog/store', [CatalogController::class, 'store'])->name('admin.catalog.store');
+    Route::get('/admin/catalog/edit/{id}', [CatalogController::class, 'edit'])->name('admin.catalog.edit');
+    Route::post('/admin/catalog/update', [CatalogController::class, 'update'])->name('admin.catalog.update');
+    Route::get('/admin/catalog/delete/{id}', [CatalogController::class, 'destroy'])->name('admin.catalog.destroy');
 
     Route::get('/admin/ukm', [AdminUkmController::class, 'index'])->name('admin.ukm');
     Route::post('/admin/ukm/store', [AdminUkmController::class, 'store'])->name('admin.ukm.store');
-    Route::get('/admin/ukm/edit/{id}', [AdminUkmController::class, 'edit'])->name('admin.ukm.edit');
+    Route::get('/admin/ukm/edit/{ukm}', [AdminUkmController::class, 'edit'])->name('admin.ukm.edit');
     Route::post('/admin/ukm/update', [AdminUkmController::class, 'update'])->name('admin.ukm.update');
-    Route::get('/admin/ukm/delete/{id}', [AdminUkmController::class, 'destroy'])->name('admin.ukm.destroy');
+    Route::get('/admin/ukm/delete/{ukm}', [AdminUkmController::class, 'destroy'])->name('admin.ukm.destroy');
 
     Route::get('/admin/tags', [AdminTagController::class, 'index'])->name('admin.tags');
     Route::post('/admin/tags/store', [AdminTagController::class, 'store'])->name('admin.tags.store');

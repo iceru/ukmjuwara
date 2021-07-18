@@ -23,19 +23,23 @@
             <div class="row mb-3">
                 <label for="title" class="col-12 col-md-2 col-form-label">Title</label>
                 <div class="col-12 col-md-10">
-                    <input type="text" class="form-control" id="title" name="title">
+                    <input type="text" class="form-control" value="{{ $article->title }}" id="title" name="title">
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="description" class="col-12 col-md-2 col-form-label">Article Content</label>
                 <div class="col-12 col-md-10">
-                    <textarea type="text" class="form-control" id="description" name="description"></textarea>
+                    <textarea type="text" class="form-control" id="description" name="description">{{ $article->description }}</textarea>
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="image" class="col-12 col-md-2 col-form-label">Featured Image</label>
                 <div class="col-12 col-md-10">
+                    <img src="{{ Storage::url('article-image/'.$article->image) }}" alt="image" class="mb-3" width="200">
                     <input type="file" class="form-control" id="image" name="image"></input>
+                    <p class="form-text text-muted">
+                        Image tidak perlu di input kembali jika tidak ingin diganti
+                    </p>
                 </div>
             </div>
             <div class="row mb-3">
@@ -43,7 +47,7 @@
                 <div class="col-12 col-md-10">
                     <select class="form-select" name="author" id="author">
                         @foreach (App\Models\User::all() as $user)
-                            <option value="{{ $user->name }}">{{ $user->name }}</option>
+                            <option {{old('author') == $user->name ? 'selected' : ''}} value="{{ $user->name }}">{{ $user->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -51,16 +55,13 @@
             <div class="row mb-3">
                 <label for="time_read" class="col-12 col-md-2 col-form-label">Read Time</label>
                 <div class="col-12 col-md-10">
-                    <input type="number" class="form-control" id="time_read" name="time_read">
-                    <p class="form-text text-muted">
-                        Dalam satuan menit
-                    </p>
+                    <input type="number" value="{{ $article->time_read }}" class="form-control" id="time_read" name="time_read">
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="tags" class="col-12 col-md-2 col-form-label">Tags</label>
                 <div class="col-12 col-md-10">
-                    <input type="text" class="form-control" id="tags" name="tags">
+                    <input type="text" value="@foreach ($article->tags as $tag){{$tag->tag_name}} @endforeach"  class="form-control" id="tags" name="tags">
                     <p class="form-text text-muted">
                         (Tag dipisah dengan spasi, contoh: tag1 tag2 tag3)
                     </p>
@@ -73,44 +74,9 @@
                 </div>
             </div>
         </form>
-
-        <table class="table" id="table">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Featured Image</th>
-                    <th>Author</th>
-                    <th>Read Time</th>
-                    <th>Tags</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($articles as $article)
-                <tr>
-                    <td scope="row">{{$loop->iteration}}</td>
-                    <td>{{ $article->title }}</td>
-                    <td>{!! substr($article->description, 0, 100) . '...' !!}</td>
-                    <td><img class="mb-2" src="{{Storage::url('article-image/'.$article->image )}}" alt="Image" width="100"></td>
-                    <td>{{ $article->author }}</td>
-                    <td>{{ $article->time_read }} menit</td>
-                    <td>@foreach ($article->tags as $tag){{$tag->tag_name}} @endforeach</td>
-                    <td><a class="btn btn-primary btn-small d-flex align-items-center justify-content-center mb-2" href="/admin/article/edit/{{$article->id}}"><i class="fas fa-edit me-1"></i> Edit</a>
-                        <a class="btn btn-danger btn-small d-flex align-items-center justify-content-center" href="/admin/article/delete/{{$article->id}}" onclick="return confirm('Hapus data ini?')"><i class="fa fa-trash me-1" aria-hidden="true"></i> Delete</a></td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
     </div>
-
-    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap5.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('#table').DataTable();
-
             $(".btn-success").click(function(){
                 var html = $(".clone").html();
                 $(".clone").after(html);
