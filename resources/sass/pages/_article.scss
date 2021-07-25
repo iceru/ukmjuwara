@@ -1,8 +1,7 @@
 .articles {
     padding-bottom: 3rem;
-    .article-medium {
+    .article {
         .article-image {
-            margin-bottom: 1rem;
             position: relative;
             width: 100%;
             padding-top: 100%;
@@ -16,6 +15,33 @@
                 left: 0;
                 width: 100%;
                 height: 100%;
+            }
+        }
+
+        &.medium {
+            .article-image {
+                margin-bottom: 1rem;
+            }
+        }
+
+        &.big {
+            min-height: 600px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 1rem;
+            color: white;
+            position: relative;
+
+            .article-content {
+                position: absolute;
+                bottom: 20px;
+                left: 1rem;
+                padding-right: 1rem;
+
+                .article-title {
+                    color: white;
+                }
             }
         }
 

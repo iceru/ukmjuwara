@@ -11053,13 +11053,12 @@ p {
 .articles {
   padding-bottom: 3rem;
 }
-.articles .article-medium .article-image {
-  margin-bottom: 1rem;
+.articles .article .article-image {
   position: relative;
   width: 100%;
   padding-top: 100%;
 }
-.articles .article-medium .article-image img {
+.articles .article .article-image img {
   border-radius: 1rem;
   position: absolute;
   -o-object-fit: cover;
@@ -11071,7 +11070,28 @@ p {
   width: 100%;
   height: 100%;
 }
-.articles .article-medium .author img {
+.articles .article.medium .article-image {
+  margin-bottom: 1rem;
+}
+.articles .article.big {
+  min-height: 600px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 1rem;
+  color: white;
+  position: relative;
+}
+.articles .article.big .article-content {
+  position: absolute;
+  bottom: 20px;
+  left: 1rem;
+  padding-right: 1rem;
+}
+.articles .article.big .article-content .article-title {
+  color: white;
+}
+.articles .article .author img {
   border-radius: 50%;
 }
 

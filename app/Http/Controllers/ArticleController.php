@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tag;
 use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Builder;
 
 class ArticleController extends Controller
 {
@@ -15,8 +17,24 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = Article::paginate(10);
+        $headerArticle = [];
+        $topArticles = [];
 
-        return view('articles', compact('articles'));
+        $headerTag = Tag::where('tag_name', 'header')->pluck('id');
+        if($headerTag->first()) {
+            $headerArticle = Article::whereHas('tags', function($query) use($headerTag) {
+                $query->where('tag_id', $headerTag);
+            })->get();
+        }
+
+        $topTag = Tag::where('tag_name', 'top')->pluck('id');
+        if($topTag->first()) {
+            $topArticles = Article::whereHas('tags', function($b) use($topTag) {
+                $b->where('tag_id', $topTag);
+            })->get();
+        }
+
+        return view('articles', compact('articles', 'headerArticle', 'topArticles'));
     }
 
     /**
