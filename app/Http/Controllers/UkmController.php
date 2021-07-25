@@ -44,9 +44,11 @@ class UkmController extends Controller
      * @param  \App\Models\Ukm  $ukm
      * @return \Illuminate\Http\Response
      */
-    public function show(Ukm $ukm)
+    public function show($slug)
     {
-        //
+        $ukm = Ukm::where('slug', $slug)->firstOrFail();
+
+        return view('ukm', compact('ukm'));
     }
 
     /**

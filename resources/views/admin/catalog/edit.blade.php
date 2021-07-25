@@ -17,7 +17,7 @@
             {{ session('success') }}
         </div>
         @endif
-        <form action="{{ route('admin.catalog.update') }}" method="POST" class="mt-4 mb-5">
+        <form action="{{ route('admin.catalog.update') }}" enctype="multipart/form-data" method="POST" class="mt-4 mb-5">
             @csrf
             <input type="hidden" name="id" value="{{$catalog->id}}">
 
@@ -39,6 +39,15 @@
                     <input type="text" class="form-control" value="{{ $catalog->link }}" id="link" name="link">
                     <p class="form-text text-muted">
                         Diisi jika katalog hanya berupa link
+                    </p>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="image" class="col-12 col-md-2 col-form-label">Image</label>
+                <div class="col-12 col-md-10">
+                    <input type="file" class="form-control" id="image" name="image">
+                    <p class="form-text text-muted">
+                        Image tidak perlu di input kembali jika tidak ingin diganti
                     </p>
                 </div>
             </div>

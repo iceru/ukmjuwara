@@ -10839,9 +10839,13 @@ ul {
 
 a {
   text-decoration: none;
+  transition: all 0.2s ease-in;
+  color: black;
 }
 a:hover {
   text-decoration: none;
+  color: #565455;
+  transition: all 0.2s ease-in;
 }
 
 p {
@@ -10869,6 +10873,7 @@ p {
 }
 .header-container .header img {
   width: 100%;
+  height: 100%;
   object-fit: cover;
   -o-object-fit: cover;
   object-position: center;
@@ -10904,17 +10909,41 @@ p {
   font-size: 1.25rem;
 }
 
-.login {
-  padding: 2rem;
+.login .login-content {
+  height: 100vh;
+  margin: auto 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-right: 3rem;
 }
-.login h4, .login .h4 {
-  text-align: center;
-  margin-bottom: 2rem;
+.login .login-content .login-text {
+  color: #063934;
+  padding-left: 2rem;
 }
-.login .login-card {
+.login .login-content .login-card {
   padding: 2rem;
-  width: 60%;
-  margin: auto;
+  padding-top: 1rem;
+}
+.login .login-content .login-card .form-control:focus {
+  border-color: #063934;
+  box-shadow: 0 0 0 0.25rem rgba(6, 57, 52, 0.25);
+}
+.login .login-content .login-card button {
+  background-color: #063934;
+  border-color: #063934;
+}
+.login .image {
+  justify-content: center;
+  align-items: center;
+}
+.login .image img {
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
+  -o-object-fit: contain;
+  object-position: center;
+  -o-object-position: center;
 }
 
 .sidebar-admin {
@@ -10961,6 +10990,89 @@ p {
 
 .admin-content {
   padding: 1.5rem;
+}
+
+.catalog .header {
+  height: 20vw;
+  width: 100%;
+  position: relative;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.catalog .header:after {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(6, 57, 52, 0.4);
+}
+.catalog .header .container {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+.catalog .header .container .row {
+  margin-left: 1rem;
+}
+.catalog .body {
+  margin-bottom: 2rem;
+}
+.catalog .body .most-viewed {
+  background-color: #565455;
+}
+.catalog .body .ukm {
+  height: 230px;
+  width: 230px;
+  padding: 1rem;
+  border-radius: 1rem;
+  margin: 1rem;
+  position: relative;
+  background-position: center;
+  background-size: cover;
+  background-color: #BFBBBA;
+  box-shadow: 3px 2px 7px rgba(0, 0, 0, 0.2);
+}
+.catalog .body .ukm .ukm-wa {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+}
+.catalog .body .ukm .ukm-wa img {
+  width: 40px;
+}
+.catalog .body .filter {
+  background-color: #BFBBBA;
+  padding: 2rem 1.5rem;
+  margin-top: -25rem;
+  border-radius: 2rem;
+  z-index: 99;
+  height: 660px;
+}
+
+.articles {
+  padding-bottom: 3rem;
+}
+.articles .article-medium .article-image {
+  margin-bottom: 1rem;
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+}
+.articles .article-medium .article-image img {
+  border-radius: 1rem;
+  position: absolute;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.articles .article-medium .author img {
+  border-radius: 50%;
 }
 
 nav {

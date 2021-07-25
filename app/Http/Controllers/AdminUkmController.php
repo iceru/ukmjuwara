@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ukm;
+use App\Models\Catalog;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -17,8 +18,9 @@ class AdminUkmController extends Controller
     public function index()
     {
         $ukms = Ukm::all();
+        $catalogs = Catalog::all();
 
-        return view('admin.ukm.index', compact('ukms'));
+        return view('admin.ukm.index', compact('ukms', 'catalogs'));
     }
 
     /**
@@ -48,6 +50,7 @@ class AdminUkmController extends Controller
             'inputImage' => 'required',
             'inputImage.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'inputInstagram' => 'required',
+            'inputCatalog' => 'required',
         ]);
 
         if ($request->hasFile('inputImage')) {
@@ -68,6 +71,7 @@ class AdminUkmController extends Controller
         $ukm->description = $request->inputDescription;
         $ukm->whatsapp = $request->inputWhatsapp;
         $ukm->instagram = $request->inputInstagram;
+        $ukm->catalog_id = $request->inputCatalog;
 
         $ukm->save();
 
@@ -94,8 +98,9 @@ class AdminUkmController extends Controller
     public function edit($id)
     {
         $ukm = Ukm::findOrFail($id);
+        $catalogs = Catalog::all();
 
-        return view('admin.ukm.edit', compact('ukm'));
+        return view('admin.ukm.edit', compact('ukm', 'catalogs'));
     }
 
     /**
@@ -112,11 +117,12 @@ class AdminUkmController extends Controller
         $request->validate([
             'title' => 'required',
             'description' => 'required',
-            'slug' => 'required',
+            'slug' => 'nullable',
             'whatsapp' => 'required',
             'image' => 'nullable',
             'image.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'instagram' => 'required',
+            'catalog' => 'required',
         ]);
 
         if ($request->hasFile('image')) {
@@ -138,6 +144,7 @@ class AdminUkmController extends Controller
         $ukm->description = $request->description;
         $ukm->whatsapp = $request->whatsapp;
         $ukm->instagram = $request->instagram;
+        $ukm->catalog_id = $request->catalog;
 
         $ukm->save();
 

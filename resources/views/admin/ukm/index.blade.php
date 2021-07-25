@@ -66,6 +66,16 @@
                     <input type="text" class="form-control" id="inputInstagram" name="inputInstagram">
                 </div>
             </div>
+            <div class="row mb-3">
+                <label for="catalog" class="col-12 col-md-2 col-form-label">Katalog</label>
+                <div class="col-12 col-md-10">
+                    <select class="form-select" name="inputCatalog" id="inputCatalog">
+                        @foreach ($catalogs as $catalog)
+                            <option value="{{ $catalog->id }}">{{ $catalog->title }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
             <div class="mb-3 row">
                 <div class="col-12 col-md-2"></div>
                 <div class="col-12 col-md-10">
@@ -84,6 +94,7 @@
                     <th>Images</th>
                     <th>Whatsapp</th>
                     <th>Instagram</th>
+                    <th>Katalog</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -101,6 +112,7 @@
                     </td>
                     <td>{{ $ukm->whatsapp }}</td>
                     <td>{{ $ukm->instagram }}</td>
+                    <td>{{ $ukm->catalog->title }}</td>
                     <td><a class="btn btn-primary btn-small d-flex align-items-center justify-content-center mb-2" href="/admin/ukm/edit/{{$ukm->id}}"><i class="fas fa-edit me-1"></i> Edit</a>
                         <a class="btn btn-danger btn-small d-flex align-items-center justify-content-center" href="/admin/ukm/delete/{{$ukm->id}}" onclick="return confirm('Hapus data ini?')"><i class="fa fa-trash me-1" aria-hidden="true"></i> Delete</a></td>
                 </tr>

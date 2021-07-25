@@ -75,6 +75,16 @@
                     <input type="text" class="form-control" id="instagram" value="{{ $ukm->instagram }}" name="instagram">
                 </div>
             </div>
+            <div class="row mb-3">
+                <label for="catalog" class="col-12 col-md-2 col-form-label">Katalog</label>
+                <div class="col-12 col-md-10">
+                    <select class="form-select" name="catalog" id="catalog">
+                        @foreach ($catalogs as $catalog)
+                            <option {{ $ukm->catalog->id == $catalog->id ? 'selected' : ''}} value="{{ $catalog->id }}">{{ $catalog->title }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
             <div class="mb-3 row">
                 <div class="col-12 col-md-2"></div>
                 <div class="col-12 col-md-10">

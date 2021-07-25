@@ -12,22 +12,24 @@
         right: 20px;
     }
 
-.header, .slick-track {
-    height: 75vh;
-    object-fit: cover;
-    object-position: center;
-    -o-object-fit: cover;
-}
-
-.header {
-    img {
-        width: 100%;
+    .header, .slick-track {
+        height: 75vh;
         object-fit: cover;
-        -o-object-fit: cover;
         object-position: center;
-        -o-object-position: center;
+        -o-object-fit: cover;
     }
-}
+
+    .header {
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            -o-object-fit: cover;
+            object-position: center;
+            -o-object-position: center;
+        }
+    }
+
     .header, .slick-track {
         height: 75vh;
         object-fit: cover;

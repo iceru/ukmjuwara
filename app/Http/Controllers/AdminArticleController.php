@@ -114,18 +114,18 @@ class AdminArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $article = Artcile::find($request->id);
+        $article = Article::find($request->id);
 
         $request->validate([
-            'image' => 'nullable|image',
             'title' => 'required',
-            'slug' => 'required',
+            'slug' => 'nullable',
             'description' => 'required',
             'author' => 'required',
             'time_read' => 'required|integer',
-            'tags' => 'string|regex:/^[a-zA-Z0-9\s]+$/'
+            'tags' => 'string|regex:/^[a-zA-Z0-9\s]+$/',
+            'image' => 'nullable'
         ]);
 
         if ($request->hasFile('image')) {
@@ -134,7 +134,6 @@ class AdminArticleController extends Controller
             $path = $request->image->storeAs('public/article-image', $filename);
             $article->image = $filename;
         }
-
 
         $article->title = $request->title;
         $article->description = $request->description;
@@ -148,7 +147,7 @@ class AdminArticleController extends Controller
 
         foreach($tagsArray as $articleTag) {
             if($articleTag != ' ') {
-                $tag = Tags::firstOrCreate([
+                $tag = Tag::firstOrCreate([
                     'tag_name' => $articleTag
                 ]);
 

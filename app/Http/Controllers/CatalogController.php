@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ukm;
 use App\Models\Catalog;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -41,13 +42,23 @@ class CatalogController extends Controller
 
         $request->validate([
             'title' => 'required',
-            'slug' => 'required',
-            'link' => 'nullable'
+            'slug' => 'nullable',
+            'link' => 'nullable',
+            'image' => 'required|image'
         ]);
 
-        $catalog->title = $request->title;
+        $catalog->title = $request->title;        
         $catalog->slug = Str::slug($request->title);
         $catalog->link = $request->link;
+        
+        if ($request->hasFile('image')) {
+            $extension = $request->file('image')->getClientOriginalExtension();
+            $filename = $request->title.'_'.time().'.'.$extension;
+            $path = $request->image->storeAs('public/catalog-image', $filename);
+        }
+
+        $catalog->image = $filename;
+
 
         $catalog->save();
 
@@ -62,7 +73,10 @@ class CatalogController extends Controller
      */
     public function show($slug)
     {
-        return view('katalog');
+        $catalog = Catalog::where('slug', $slug)->firstOrFail();
+        $ukms = Ukm::where('catalog_id', $catalog->id)->get();
+        
+        return view('catalog', compact('catalog','ukms'));
     }
 
     /**
@@ -93,8 +107,16 @@ class CatalogController extends Controller
             'title' => 'required',
             'slug' => 'required',
             'link' => 'nullable',
+            'image' => 'nullable'
         ]);
 
+        if ($request->hasFile('image')) {
+            $extension = $request->file('image')->getClientOriginalExtension();
+            $filename = $request->title.'_'.time().'.'.$extension;
+            $path = $request->image->storeAs('public/catalog-image', $filename);
+            $catalog->image = $filename;
+        }
+        
         $catalog->title = $request->title;
         $catalog->slug = Str::slug($request->title);
         $catalog->link = $request->link;

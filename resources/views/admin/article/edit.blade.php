@@ -18,8 +18,9 @@
         </div>
         @endif
 
-        <form action="{{ route('admin.article.store') }}" enctype="multipart/form-data" method="POST" class="mt-4 mb-5">
+        <form action="{{ route('admin.article.update') }}" enctype="multipart/form-data" method="POST" class="mt-4 mb-5">
             @csrf
+            <input type="text" name="id" value="{{ $article->id }}" hidden readonly>
             <div class="row mb-3">
                 <label for="title" class="col-12 col-md-2 col-form-label">Title</label>
                 <div class="col-12 col-md-10">
