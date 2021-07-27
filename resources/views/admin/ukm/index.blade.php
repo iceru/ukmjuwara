@@ -89,12 +89,12 @@
                 <tr>
                     <th>No</th>
                     <th>Title</th>
-                    <th>Slug</th>
                     <th>Description</th>
                     <th>Images</th>
                     <th>Whatsapp</th>
                     <th>Instagram</th>
                     <th>Katalog</th>
+                    <th>Featured</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -103,7 +103,6 @@
                 <tr>
                     <td scope="row">{{$loop->iteration}}</td>
                     <td>{{ $ukm->title }}</td>
-                    <td>{{ $ukm->slug }}</td>
                     <td>{!! substr($ukm->description, 0, 40) . '...' !!}</td>
                     <td> 
                         @foreach ((array)json_decode($ukm->images) as $item)
@@ -113,6 +112,7 @@
                     <td>{{ $ukm->whatsapp }}</td>
                     <td>{{ $ukm->instagram }}</td>
                     <td>{{ $ukm->catalog->title }}</td>
+                    <td>{{ $ukm->featured }}</td>
                     <td><a class="btn btn-primary btn-small d-flex align-items-center justify-content-center mb-2" href="/admin/ukm/edit/{{$ukm->id}}"><i class="fas fa-edit me-1"></i> Edit</a>
                         <a class="btn btn-danger btn-small d-flex align-items-center justify-content-center" href="/admin/ukm/delete/{{$ukm->id}}" onclick="return confirm('Hapus data ini?')"><i class="fa fa-trash me-1" aria-hidden="true"></i> Delete</a></td>
                 </tr>

@@ -1,7 +1,6 @@
 <x-admin-layout>
     <div class="admin-content">
-        <h4>Katalog UKM</h4>
-
+        <h4>Slider Images</h4>
         @if (count($errors) > 0)
         <div class="alert alert-danger mt-3">
           <strong>Sorry !</strong> There were some problems with your input.<br><br>
@@ -19,7 +18,7 @@
         </div>
         @endif
 
-        <form action="{{ route('admin.catalog.store') }}" enctype="multipart/form-data" method="POST" class="mt-4 mb-5">
+        <form action="{{ route('admin.slider.store') }}" enctype="multipart/form-data" method="POST" class="mt-4 mb-5">
             @csrf
             <div class="row mb-3">
                 <label for="title" class="col-12 col-md-2 col-form-label">Title</label>
@@ -28,31 +27,11 @@
                 </div>
             </div>
             <div class="row mb-3">
-                <label for="link" class="col-12 col-md-2 col-form-label">Link Katalog</label>
-                <div class="col-12 col-md-10">
-                    <input type="text" class="form-control" id="link" name="link">
-                    <p class="form-text text-muted">
-                        Diisi jika katalog hanya berupa link
-                    </p>
-                </div>
-            </div>
-            <div class="row mb-3">
                 <label for="image" class="col-12 col-md-2 col-form-label">Image</label>
                 <div class="col-12 col-md-10">
-                    <input type="file" class="form-control" id="image" name="image">
+                    <input type="file" class="form-control" id="image" name="image"></input>
                 </div>
             </div>
-            
-            <div class="row mb-3">
-                <label for="catalog" class="col-12 col-md-2 col-form-label">Featured</label>
-                <div class="col-12 col-md-10">
-                    <select class="form-select" name="featured" id="featured">
-                        <option value="no" selected>No</option>
-                        <option value="yes">Yes</option>
-                    </select>
-                </div>
-            </div>
-
             <div class="mb-3 row">
                 <div class="col-12 col-md-2"></div>
                 <div class="col-12 col-md-10">
@@ -66,24 +45,18 @@
                 <tr>
                     <th>No</th>
                     <th>Title</th>
-                    <th>Slug</th>
-                    <th>Link</th>
-                    <th>Featured</th>
                     <th>Image</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($catalogs as $catalog)
+                @foreach ($sliders as $slider)
                 <tr>
                     <td scope="row">{{$loop->iteration}}</td>
-                    <td>{{ $catalog->title }}</td>
-                    <td>{{ $catalog->slug }}</td>
-                    <td>{{ $catalog->link }}</td>
-                    <td class="text-capitalize">{{ $catalog->featured }}</td>
-                    <td><img src="{{ Storage::url('catalog-image/'.$catalog->image) }}" width="150" alt=""></td>
-                    <td><a class="btn btn-primary btn-small d-flex align-items-center justify-content-center mb-2" href="{{ route('admin.catalog.edit', $catalog->id) }}"><i class="fas fa-edit me-1"></i> Edit</a>
-                        <a class="btn btn-danger btn-small d-flex align-items-center justify-content-center" href="/admin/catalog/delete/{{$catalog->id}}" onclick="return confirm('Hapus data ini?')"><i class="fa fa-trash me-1" aria-hidden="true"></i> Delete</a></td>
+                    <td>{{ $slider->title }}</td>
+                    <td><img class="mb-2" src="{{Storage::url('slider-image/'.$slider->image )}}" alt="Image" width="250"></td>
+                    <td><a class="btn btn-primary btn-small d-flex align-items-center justify-content-center mb-2" href="/admin/slider/edit/{{$slider->id}}"><i class="fas fa-edit me-1"></i> Edit</a>
+                        <a class="btn btn-danger btn-small d-flex align-items-center justify-content-center" href="/admin/sliders/delete/{{$slider->id}}" onclick="return confirm('Hapus data ini?')"><i class="fa fa-trash me-1" aria-hidden="true"></i> Delete</a></td>
                 </tr>
                 @endforeach
             </tbody>
@@ -105,6 +78,14 @@
                 $(this).parents(".control-group").remove();
             });
         });
+
+        tinymce.init({
+          selector: 'textarea',
+          toolbar_mode: 'floating',
+          tinycomments_mode: 'embedded',
+          tinycomments_author: 'Author name',
+          height: "480"
+       });
     </script>
 
 </x-admin-layout>

@@ -169,6 +169,6 @@ class AdminArticleController extends Controller
     public function destroy($id)
     {
         Article::find($id)->delete();
-        return redirect()->route('admin.article')->with('success','Data berhasil dihapus');;
+        return redirect()->route('admin.article')->with('success','Data berhasil dihapus');
     }
 }

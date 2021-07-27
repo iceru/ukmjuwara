@@ -4,20 +4,18 @@
     @endsection
     <div class="header-container">
         <div class="header">
+            @foreach ($sliders as $slider)
             <div>
-                <img src="/images/header.png" alt="Header">
+                <img src="{{ Storage::url('slider-image/'.$slider->image) }}" alt="{{ $slider->title }}">
             </div>
-            <div>
-                <img src="/images/header.png" alt="Header">
-            </div>
+            @endforeach
         </div>
         <div class="cta">
+            @foreach ($featured as $catalog)
             <div class="cta-item">
-                <a href="">#UKMJUWARA 2021</a>
+                <a href="{{ route('catalog.show', $catalog->slug) }}">#{{ $catalog->title }}</a>
             </div>
-            <div class="cta-item">
-                <a href="">#UKMJUWARA GLOBAL</a>
-            </div>
+            @endforeach
         </div>
     </div>
 

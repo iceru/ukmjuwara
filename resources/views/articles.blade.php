@@ -4,20 +4,32 @@
     @endsection
 
     <div class="articles">
-        <div class="top-article" style="background-image: ">
-            <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit.</h2>
-            <div class="d-flex">
-                <img src="" alt="">
-                <p>Author</p>
+        @foreach ($headerArticle as $article)
+        <div class="article header-article" style="background-image: url('{{ Storage::url('article-image/'.$article->image) }}')">
+            <div class="article-content container">
+                <div class="row">
+                    <div class="col-12">
+                        <a href="{{ route('article.show', $article->slug) }}">
+                            <h2 class="article-title mb-3">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h2>
+                        </a>
+                        <div class="d-flex mb-3 author align-items-center">
+                            <img src="/images/default-user.jpg" class="me-3" width="37" alt="">
+                            <p>{{ $article->author }}</p>
+                        </div>
+                        <div class="article-title">
+                            <p >{!! $article->description!!}</p>
+                        </div>
+                        <p class="mt-3">{{  date('d F Y', strtotime($article->created_at )) }} | {{ $article->time_read }} Mins Read</p>
+                    </div>
+                </div>
             </div>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptas natus accusamus repellendus magnam minima voluptatibus culpa quisquam! Aliquam necessitatibus porro quibusdam quam unde. Tempore nihil saepe, in eius cumque eum?</p>
-            <p>12 Juni 2021 | 5 Mins Read</p>
         </div>
+        @endforeach
 
        <div class="container">
         @if ($topArticles)
         <h3 class="mb-3">Top Stories</h3>
-            <div class="row top-stories mb-4">
+            <div class="row top-stories">
                 <div class="col-12 col-md-6">
                     @foreach ($topArticles->slice(0,1) as $article)
                         <div class="article big" style="background-image: url('{{ Storage::url('article-image/'.$article->image) }}')">
@@ -29,7 +41,9 @@
                                     <img src="/images/default-user.jpg" class="me-3" width="37" alt="">
                                     <p>{{ $article->author }}</p>
                                 </div>
-                                <p>{!! \Illuminate\Support\Str::limit($article->description, 150, $end='...') !!}</p>
+                                <div class="article-description">
+                                    <p >{!! $article->description!!}</p>
+                                </div>
                                 <p class="mt-3">{{  date('d F Y', strtotime($article->created_at )) }} | {{ $article->time_read }} Mins Read</p>
                             </div>
                         </div>
@@ -47,13 +61,15 @@
                         </div>
                         <div class="col-8">
                             <a href="{{ route('article.show', $article->slug) }}">
-                                <h5 class="mb-2">{{ $article->title }}</h4>
+                                <h5 class="mb-2 article-title">{{ $article->title }}</h4>
                             </a>
                             <div class="d-flex mb-2 author align-items-center">
                                 <img src="/images/default-user.jpg" class="me-3" width="25" alt="">
                                 <p>{{ $article->author }}</p>
                             </div>
-                            <p>{!! \Illuminate\Support\Str::limit($article->description, 130, $end='...') !!}</p>
+                            <div class="article-description">
+                                <p >{!! $article->description!!}</p>
+                            </div>
                             <p class="mt-3">{{  date('d F Y', strtotime($article->created_at )) }} | {{ $article->time_read }} Mins Read</p>
                         </div>
                     </div>
@@ -68,13 +84,15 @@
                         <div class="article-image">
                             <img src="{{ Storage::url('article-image/'.$article->image) }}" alt="">
                         </div>
-                        <h4 class="mb-3">{{ $article->title }}</h4>
+                        <h4 class="mb-3 article-title">{{ $article->title }}</h4>
                     </a>
                     <div class="d-flex mb-3 author align-items-center">
                         <img src="/images/default-user.jpg" class="me-3" width="37" alt="">
                         <p>{{ $article->author }}</p>
                     </div>
-                    <p>{!! \Illuminate\Support\Str::limit($article->description, 150, $end='...') !!}</p>
+                    <div class="article-description">
+                        <p >{!! $article->description!!}</p>
+                    </div>
                     <p class="mt-3">{{  date('d F Y', strtotime($article->created_at )) }} | {{ $article->time_read }} Mins Read</p>
                 </div>
             @endforeach

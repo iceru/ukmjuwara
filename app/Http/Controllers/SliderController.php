@@ -14,7 +14,9 @@ class SliderController extends Controller
      */
     public function index()
     {
+        $sliders = Slider::all();
 
+        return view('admin.slider.index', compact('sliders'));
     }
 
     /**
@@ -35,7 +37,24 @@ class SliderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $slider = new Slider;
+
+        $request->validate([
+            'image' => 'required|image',
+            'title' => 'required'
+        ]);
+
+        if ($request->hasFile('image')) {
+            $extension = $request->file('image')->getClientOriginalExtension();
+            $filename = $request->title.'_'.time().'.'.$extension;
+            $path = $request->image->storeAs('public/slider-image', $filename);
+        }
+
+        $slider->image = $filename;
+        $slider->title = $request->title;
+        $slider->save();
+
+        return redirect()->route('admin.slider')->with('success','Data berhasil di input');
     }
 
     /**
@@ -55,9 +74,11 @@ class SliderController extends Controller
      * @param  \App\Models\Slider  $slider
      * @return \Illuminate\Http\Response
      */
-    public function edit(Slider $slider)
+    public function edit($id)
     {
-        //
+        $slider = Slider::find($id);
+
+        return view('admin.slider.edit', compact('slider'));
     }
 
     /**
@@ -67,9 +88,26 @@ class SliderController extends Controller
      * @param  \App\Models\Slider  $slider
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Slider $slider)
+    public function update(Request $request)
     {
-        //
+        $slider = Slider::find($request->id);
+
+        $request->validate([
+            'title' => 'required',
+            'image' => 'nullable'
+        ]);
+
+        if ($request->hasFile('image')) {
+            $extension = $request->file('image')->getClientOriginalExtension();
+            $filename = $request->title.'_'.time().'.'.$extension;
+            $path = $request->image->storeAs('public/slider-image', $filename);
+            $slider->image = $filename;
+        }
+
+        $slider->title = $request->title;
+        $slider->save();
+
+        return redirect()->route('admin.slider')->with('success','Data berhasil di update');
     }
 
     /**
@@ -78,8 +116,9 @@ class SliderController extends Controller
      * @param  \App\Models\Slider  $slider
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Slider $slider)
+    public function destroy($id)
     {
-        //
+        Slider::find($id)->delete();
+        return redirect()->route('admin.slider')->with('success','Data berhasil dihapus');
     }
 }

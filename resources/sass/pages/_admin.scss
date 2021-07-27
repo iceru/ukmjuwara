@@ -50,4 +50,21 @@
 
 .admin-content {
     padding: 1.5rem;
+
+    form {
+        .btn-check:focus + .btn-primary, .btn-primary:focus, .btn-primary:hover {
+            background-color: lighten($color: $primary-color, $amount: 10%);
+            border-color: lighten($color: $primary-color, $amount: 10%);
+            box-shadow: 0 0 0 0.25rem rgba($primary-color, 0.3);
+        }
+    
+        .btn-primary {
+            background-color: $primary-color;
+            border-color: $primary-color;
+    
+            &:hover {
+                box-shadow: none;
+            }
+        }
+    }
 }

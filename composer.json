@@ -11,7 +11,9 @@
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.40",
+        "laravel/scout": "^8.6.1",
         "laravel/tinker": "^2.5",
+        "meilisearch/meilisearch-laravel-scout": "^0.12.5",
         "santigarcor/laratrust": "^6.3"
     },
     "require-dev": {

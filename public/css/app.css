@@ -10837,6 +10837,10 @@ ul {
   padding: 0;
 }
 
+.circular {
+  border-radius: 50%;
+}
+
 a {
   text-decoration: none;
   transition: all 0.2s ease-in;
@@ -10888,7 +10892,7 @@ p {
 }
 .header-container .cta {
   position: absolute;
-  bottom: 6rem;
+  bottom: 4rem;
   left: 0;
   justify-content: center;
   display: flex;
@@ -10991,6 +10995,18 @@ p {
 .admin-content {
   padding: 1.5rem;
 }
+.admin-content form .btn-check:focus + .btn-primary, .admin-content form .btn-primary:focus, .admin-content form .btn-primary:hover {
+  background-color: #0b675e;
+  border-color: #0b675e;
+  box-shadow: 0 0 0 0.25rem rgba(6, 57, 52, 0.3);
+}
+.admin-content form .btn-primary {
+  background-color: #063934;
+  border-color: #063934;
+}
+.admin-content form .btn-primary:hover {
+  box-shadow: none;
+}
 
 .catalog .header {
   height: 20vw;
@@ -11053,12 +11069,16 @@ p {
 .articles {
   padding-bottom: 3rem;
 }
-.articles .article .article-image {
+.articles .top-stories {
+  margin-bottom: 4rem;
+}
+
+.article .article-image {
   position: relative;
   width: 100%;
   padding-top: 100%;
 }
-.articles .article .article-image img {
+.article .article-image img {
   border-radius: 1rem;
   position: absolute;
   -o-object-fit: cover;
@@ -11070,10 +11090,24 @@ p {
   width: 100%;
   height: 100%;
 }
-.articles .article.medium .article-image {
+.article .article-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.article .article-description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+.article.medium .article-image {
   margin-bottom: 1rem;
 }
-.articles .article.big {
+.article.big {
   min-height: 600px;
   background-size: cover;
   background-position: center;
@@ -11082,17 +11116,82 @@ p {
   color: white;
   position: relative;
 }
-.articles .article.big .article-content {
+.article.big:before {
+  position: absolute;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  content: "";
+  background: linear-gradient(transparent 0%, rgba(6, 57, 52, 0.5) 90%);
+  border-radius: 1rem;
+}
+.article.big .article-content {
   position: absolute;
   bottom: 20px;
   left: 1rem;
   padding-right: 1rem;
 }
-.articles .article.big .article-content .article-title {
+.article.big .article-content .article-title {
   color: white;
 }
-.articles .article .author img {
+.article.header-article {
+  height: 500px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  position: relative;
+  margin-bottom: 3rem;
+}
+.article.header-article:before {
+  position: absolute;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  content: "";
+  background: linear-gradient(transparent 0%, rgba(6, 57, 52, 0.8) 80%);
+}
+.article.header-article .article-content {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-right: 1rem;
+}
+.article.header-article .article-content .article-title {
+  color: white;
+}
+.article .author img {
   border-radius: 50%;
+}
+
+.article-detail {
+  padding-bottom: 3rem;
+}
+.article-detail .article.header-article {
+  margin-bottom: 0;
+}
+.article-detail .article.header-article:before {
+  background: linear-gradient(transparent 0%, rgba(6, 57, 52, 0.8) 70%);
+}
+.article-detail .article.header-article .article-content {
+  bottom: 4rem;
+}
+.article-detail .article.header-article .article-content .col-12 {
+  margin: auto;
+  width: 90%;
+}
+.article-detail .article-detail-content {
+  width: 90%;
+  margin: auto;
+  z-index: 20;
+  position: relative;
+  margin-top: -2rem;
+  box-shadow: 0px 4px 4px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+  background-color: white;
+  color: black;
+  padding: 2rem;
 }
 
 nav {

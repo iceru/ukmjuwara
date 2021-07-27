@@ -62,11 +62,11 @@ Route::middleware(['auth', 'role:administrator'])->group(function (){
     Route::post('/admin/tags/update', [AdminTagController::class, 'update'])->name('admin.tags.update');
     Route::get('/admin/tags/delete/{id}', [AdminTagController::class, 'destroy'])->name('admin.tags.destroy');
 
-    Route::get('/admin/sliders', [SliderController::class, 'index'])->name('admin.sliders');
-    Route::get('/admin/sliders/edit/{id}', [SliderController::class, 'edit'])->name('admin.sliders.edit');
-    Route::post('/admin/sliders/update', [SliderController::class, 'update'])->name('admin.sliders.update');
-    Route::post('/admin/sliders/store', [SliderController::class, 'store'])->name('admin.sliders.store');
-    Route::get('/admin/sliders/delete/{id}', [SliderController::class, 'destroy'])->name('admin.sliders.destroy');
+    Route::get('/admin/slider', [SliderController::class, 'index'])->name('admin.slider');
+    Route::post('/admin/slider/store', [SliderController::class, 'store'])->name('admin.slider.store');
+    Route::get('/admin/slider/edit/{id}', [SliderController::class, 'edit'])->name('admin.slider.edit');
+    Route::post('/admin/slider/update', [SliderController::class, 'update'])->name('admin.slider.update');
+    Route::get('/admin/slider/delete/{id}', [SliderController::class, 'destroy'])->name('admin.slider.destroy');
 });
 
 require __DIR__.'/auth.php';

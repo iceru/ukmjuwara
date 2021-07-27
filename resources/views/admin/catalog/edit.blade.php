@@ -51,6 +51,15 @@
                     </p>
                 </div>
             </div>
+            <div class="row mb-3">
+                <label for="catalog" class="col-12 col-md-2 col-form-label">Featured</label>
+                <div class="col-12 col-md-10">
+                    <select class="form-select" name="featured" id="featured">
+                        <option {{ $catalog->featured == 'no' ? 'selected' : '' }} value="no">No</option>
+                        <option {{ $catalog->featured == 'yes' ? 'selected' : '' }} value="yes">Yes</option>
+                    </select>
+                </div>
+            </div>
             <div class="mb-3 row">
                 <div class="col-12 col-md-2"></div>
                 <div class="col-12 col-md-10">

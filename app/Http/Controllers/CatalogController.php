@@ -42,6 +42,7 @@ class CatalogController extends Controller
 
         $request->validate([
             'title' => 'required',
+            'featured' => 'required',
             'slug' => 'nullable',
             'link' => 'nullable',
             'image' => 'required|image'
@@ -50,6 +51,7 @@ class CatalogController extends Controller
         $catalog->title = $request->title;        
         $catalog->slug = Str::slug($request->title);
         $catalog->link = $request->link;
+        $catalog->featured = $request->featured;
         
         if ($request->hasFile('image')) {
             $extension = $request->file('image')->getClientOriginalExtension();
@@ -107,6 +109,7 @@ class CatalogController extends Controller
             'title' => 'required',
             'slug' => 'required',
             'link' => 'nullable',
+            'featured' => 'required',
             'image' => 'nullable'
         ]);
 
@@ -120,6 +123,7 @@ class CatalogController extends Controller
         $catalog->title = $request->title;
         $catalog->slug = Str::slug($request->title);
         $catalog->link = $request->link;
+        $catalog->featured = $request->featured;
 
         $catalog->save();
 

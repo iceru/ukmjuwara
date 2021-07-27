@@ -2,8 +2,8 @@
     <a href="/">
         <h5>#UKMJUWARA</h5>
     </a>
-    <div class="admin mb-4">
-        <img src="" alt="">
+    <div class="admin mb-4 mt-4 d-flex">
+        <img src="/images/default-user.jpg" class="me-3 circular" width="50" height="50" alt="">
         <div class="admin-text">
             <p>
                 {{ Auth::user()->name }}
@@ -27,6 +27,9 @@
         </a>
         <a href="{{ route('admin.article') }}">
             <li class="{{ (request()->is('admin/article')) ? 'active' : '' }}"> <i class="fas fa-newspaper fa-fw"></i> &nbsp; Artikel</li>
+        </a>
+        <a href="{{ route('admin.slider') }}">
+            <li class="{{ (request()->is('admin/slider')) ? 'active' : '' }}"> <i class="fas fa-images fa-fw"></i> &nbsp; Slider Images</li>
         </a>
         <form method="POST" action="{{ route('logout') }}">
             @csrf

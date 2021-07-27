@@ -4,7 +4,11 @@
     @endsection
 
     <div class="catalog">
+        @if ($catalog->image == '')
+        <div class="header" style="background-image: url('/images/header.png')">
+        @else
         <div class="header" style="background-image: url('{{ Storage::url('catalog-image/'.$catalog->image) }}')">
+        @endif
             <div class="container">
                 <div class="row">
                     <div class="col-md-3"></div>
