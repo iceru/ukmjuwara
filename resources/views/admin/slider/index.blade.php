@@ -56,7 +56,7 @@
                     <td>{{ $slider->title }}</td>
                     <td><img class="mb-2" src="{{Storage::url('slider-image/'.$slider->image )}}" alt="Image" width="250"></td>
                     <td><a class="btn btn-primary btn-small d-flex align-items-center justify-content-center mb-2" href="/admin/slider/edit/{{$slider->id}}"><i class="fas fa-edit me-1"></i> Edit</a>
-                        <a class="btn btn-danger btn-small d-flex align-items-center justify-content-center" href="/admin/sliders/delete/{{$slider->id}}" onclick="return confirm('Hapus data ini?')"><i class="fa fa-trash me-1" aria-hidden="true"></i> Delete</a></td>
+                        <a class="btn btn-danger btn-small d-flex align-items-center justify-content-center" href="/admin/slider/delete/{{$slider->id}}" onclick="return confirm('Hapus data ini?')"><i class="fa fa-trash me-1" aria-hidden="true"></i> Delete</a></td>
                 </tr>
                 @endforeach
             </tbody>

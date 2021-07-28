@@ -4,19 +4,25 @@
     @endsection
 
     <div class="catalog">
-        @if ($catalog->image == '')
-        <div class="header" style="background-image: url('/images/header.png')">
-        @else
-        <div class="header" style="background-image: url('{{ Storage::url('catalog-image/'.$catalog->image) }}')">
-        @endif
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3"></div>
-                    <div class="col-md-9">
-                        <h2>{{ $catalog->title }}</h2>
+        <div class="header">
+            <div class="header-image">
+                <div class="image-container ratio1x4">
+                    @if ($catalog->image == '')
+                    <img src="/images/header.png" alt="">
+                    @else
+                    <img src="{{ Storage::url('catalog-image/'.$catalog->image) }}" alt="">
+                    @endif
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-9">
+                            <h2>{{ $catalog->title }}</h2>
+                        </div>
                     </div>
                 </div>
             </div>
+            
         </div>
         <div class="body">
             <div class="most-viewed">

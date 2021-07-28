@@ -28,9 +28,9 @@
                 </div>
             </div>
             <div class="row mb-3">
-                <label for="image" class="col-12 col-md-2 col-form-label">Featured Image</label>
-                <div class="col-12 col-md-10">
-                    <img src="{{ Storage::url('slider-image/'.$slider->image) }}" alt="image" class="mb-3" width="200">
+                <label for="image" class="col-12 col-md-2 col-form-label">Image</label>
+                <div class="col-12 col-md-10 edit-image">
+                    <img src="{{ Storage::url('slider-image/'.$slider->image) }}" alt="image" class="mb-3" width="100" height="100">
                     <input type="file" class="form-control" id="image" name="image"></input>
                     <p class="form-text text-muted">
                         Image tidak perlu di input kembali jika tidak ingin diganti

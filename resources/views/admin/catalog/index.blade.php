@@ -32,7 +32,7 @@
                 <div class="col-12 col-md-10">
                     <input type="text" class="form-control" id="link" name="link">
                     <p class="form-text text-muted">
-                        Diisi jika katalog hanya berupa link
+                        Link harus lengkap, contoh: https://google.com. <strong>Diisi jika katalog hanya berupa link</strong>
                     </p>
                 </div>
             </div>

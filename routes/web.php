@@ -2,10 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UkmController;
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CatalogController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\AdminTagController;
 use App\Http\Controllers\AdminUkmController;
 use App\Http\Controllers\AdminArticleController;
@@ -23,9 +26,9 @@ use App\Http\Controllers\AdminDashboardController;
 */
 
 Route::get('/', [IndexController::class, 'index'])->name('index');
-
+Route::get('/tentang-kami', [AboutController::class, 'index'])->name('about');
+Route::get('/kemitraan', [ContactController::class, 'index'])->name('contact');
 Route::get('/katalog/{slug}', [CatalogController::class, 'show'])->name('catalog.show');
-
 Route::get('/ukm/{slug}', [UkmController::class, 'show'])->name('ukm.show');
 
 Route::get('/berita', [ArticleController::class, 'index'])->name('article.index');
@@ -67,6 +70,12 @@ Route::middleware(['auth', 'role:administrator'])->group(function (){
     Route::get('/admin/slider/edit/{id}', [SliderController::class, 'edit'])->name('admin.slider.edit');
     Route::post('/admin/slider/update', [SliderController::class, 'update'])->name('admin.slider.update');
     Route::get('/admin/slider/delete/{id}', [SliderController::class, 'destroy'])->name('admin.slider.destroy');
+
+    Route::get('/admin/sponsor', [SponsorController::class, 'index'])->name('admin.sponsor');
+    Route::post('/admin/sponsor/store', [SponsorController::class, 'store'])->name('admin.sponsor.store');
+    Route::get('/admin/sponsor/edit/{id}', [SponsorController::class, 'edit'])->name('admin.sponsor.edit');
+    Route::post('/admin/sponsor/update', [SponsorController::class, 'update'])->name('admin.sponsor.update');
+    Route::get('/admin/sponsor/delete/{id}', [SponsorController::class, 'destroy'])->name('admin.sponsor.destroy');
 });
 
 require __DIR__.'/auth.php';

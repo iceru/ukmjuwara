@@ -1,5 +1,5 @@
 $primary-color:#063934;
-$secondary-color : #C38459;
+$secondary-color : #B46F41;
 $body : #000;
 $background : #fff;
 $darkgrey : #565455;
@@ -32,4 +32,50 @@ a {
 
 p {
     margin-bottom: 0;
+}
+
+.image-container {
+    position: relative;
+    width: 100%;
+
+    img {
+        position: absolute;
+        object-fit: cover;
+        object-position: center;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    &.ratio1x1 {
+        padding-top: 100%;
+    }
+
+    &.ratio16x9 {
+        padding-top: 56.25%;
+    }
+
+    &.ratio4x3 {
+        padding-top: 75%;
+    }
+
+    &.ratio1x4{
+        padding-top: 25%;
+    }
+
+    &.ratio2x3 {
+        padding-top: 33%;
+    }
+
+    &.ratio3x2 {
+        padding-top: 66%;
+    }
+
+    &.ratio2x1 {
+        padding-top: 50%;
+    }
+    &.ratio2halfx1 {
+        padding-top: 40%;
+    }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Slider;
 use App\Models\Catalog;
+use App\Models\Sponsor;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -16,9 +17,10 @@ class IndexController extends Controller
     public function index()
     {
         $sliders = Slider::all();
+        $sponsors = Sponsor::all();
         $featured = Catalog::where('featured', 'yes')->take(2)->get();
         
-        return view('index', compact('sliders', 'featured'));
+        return view('index', compact('sliders', 'featured', 'sponsors'));
     }
 
     /**

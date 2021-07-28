@@ -67,4 +67,16 @@
             }
         }
     }
+
+    .table, .edit-image {
+        img {
+            object-fit: cover;
+            object-position: center;
+        }
+        &.contain {
+            img {
+                object-fit: contain;
+            }
+        }
+    }
 }

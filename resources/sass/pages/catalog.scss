@@ -1,11 +1,24 @@
 .catalog {
     .header {
-        height: 20vw;
-        width: 100%;
         position: relative;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
+        .header-image {
+            width: 100%;
+            position: relative;
+
+            .container {
+                z-index: 10;
+                position: absolute;
+                bottom: 20px;
+                left: 50%;
+                transform: translate(-50%, -50%); 
+                color: white;
+    
+                .row {
+                    margin-left: 1rem;
+                }
+            }
+        }
+        }
 
         &:after {
             width:100%;
@@ -13,18 +26,7 @@
             background-color: rgba($primary-color, 0.4);
         }
 
-        .container {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translate(-50%, -50%); 
-            color: white;
-
-            .row {
-                margin-left: 1rem;
-            }
-        }
-    }
+        
 
     .body {
         margin-bottom: 2rem;

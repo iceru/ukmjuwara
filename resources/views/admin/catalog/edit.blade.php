@@ -38,13 +38,14 @@
                 <div class="col-12 col-md-10">
                     <input type="text" class="form-control" value="{{ $catalog->link }}" id="link" name="link">
                     <p class="form-text text-muted">
-                        Diisi jika katalog hanya berupa link
+                        Link harus lengkap, contoh: https://google.com. <strong>Diisi jika katalog hanya berupa link</strong>
                     </p>
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="image" class="col-12 col-md-2 col-form-label">Image</label>
                 <div class="col-12 col-md-10">
+                    <img src="{{ Storage::url('catalog-image/'.$catalog->image) }}" alt="image" class="mb-3" width="200">
                     <input type="file" class="form-control" id="image" name="image">
                     <p class="form-text text-muted">
                         Image tidak perlu di input kembali jika tidak ingin diganti

@@ -1,6 +1,6 @@
 <nav>
     <div class="navbar container d-flex justify-content-between">
-        <a href="/">
+        <a href="{{ route('index') }}">
             <div class="logo">
                 <h3>#UKMJUWARA</h3>
             </div>
@@ -8,7 +8,7 @@
         <div class="d-flex align-items-center">
             <ul class="navigation">
                 <li class="nav-item">
-                    <a class="nav-link" href="/tentang-kami">Tentang Kami</a>
+                    <a class="nav-link" href="{{ route('about') }}">Tentang Kami</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
@@ -17,15 +17,15 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         @foreach ($catalogs as $catalog)
-                        <li><a class="dropdown-item" href="{{ route('catalog.show', $catalog->slug) }}">{{ $catalog->title }}</a></li>
+                        <li><a class="dropdown-item" href="{{ $catalog->link ? $catalog->link : route('catalog.show', $catalog->slug) }}">{{ $catalog->title }}</a></li>
                         @endforeach
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/berita">Berita</a>
+                    <a class="nav-link" href="{{ route('article.index') }}">Berita</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/kemitraan">Kemitraan</a>
+                    <a class="nav-link" href="{{ route('contact') }}">Kemitraan</a>
                 </li>
             </ul>
             <div class="search">
