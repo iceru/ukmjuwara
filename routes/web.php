@@ -28,6 +28,7 @@ use App\Http\Controllers\AdminDashboardController;
 Route::get('/', [IndexController::class, 'index'])->name('index');
 Route::get('/tentang-kami', [AboutController::class, 'index'])->name('about');
 Route::get('/kemitraan', [ContactController::class, 'index'])->name('contact');
+
 Route::get('/katalog/{slug}', [CatalogController::class, 'show'])->name('catalog.show');
 Route::get('/ukm/{slug}', [UkmController::class, 'show'])->name('ukm.show');
 

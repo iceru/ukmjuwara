@@ -61,4 +61,17 @@
     .section-2, .featured-about {
         margin-bottom: 2rem;
     }
+
+    
+
+    @include breakpoint-down(small) {
+        h5 {
+            font-size: 1.1rem;
+            line-height: 1.5rem;
+        }
+
+        .image-container.ratio2halfx1 {
+            padding-top: 75%;
+        }
+    }
 }

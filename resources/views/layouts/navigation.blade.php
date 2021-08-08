@@ -1,12 +1,15 @@
 <nav>
     <div class="navbar container d-flex justify-content-between">
+        <a class="hamburger d-block d-md-none" data-bs-toggle="offcanvas" href="#side_navigation" role="button" aria-controls="side_navigation">
+             <img src="/images/hamburger.png" alt="">
+        </a>
         <a href="{{ route('index') }}">
             <div class="logo">
                 <h3>#UKMJUWARA</h3>
             </div>
         </a>
         <div class="d-flex align-items-center">
-            <ul class="navigation">
+            <ul class="navigation d-none d-md-flex">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('about') }}">Tentang Kami</a>
                 </li>
@@ -63,3 +66,26 @@
     </script>
 
 </nav>
+
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="side_navigation" aria-labelledby="sideNavigationLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="sideNavigationLabel">Offcanvas</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div>
+        Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
+      </div>
+      <div class="dropdown mt-3">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
+          Dropdown button
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <li><a class="dropdown-item" href="#">Action</a></li>
+          <li><a class="dropdown-item" href="#">Another action</a></li>
+          <li><a class="dropdown-item" href="#">Something else here</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>

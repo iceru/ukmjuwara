@@ -14,23 +14,24 @@
 
     .cta {
         position: absolute;
-        bottom: 4rem;
         left: 0;
         justify-content: center;
         display: flex;
         left: 50%;
         transform: translateX(-50%);
-        width: 100%;
+        width: 80%;
+        bottom: 4rem;
 
         .cta-item {
             display: flex;
+            justify-content: center;
             background: $background;
-            padding: .75rem 2rem;
+            padding: .75rem 5rem;
             border-radius: 60px;
             margin: 0 1rem;
+            font-size: 1.25rem;
             color: $primary-color;
             font-weight: 700;
-            font-size: 1.25rem;
             transition: all .2s ease-out;
 
             &:hover {
@@ -45,11 +46,35 @@
             }
         }
     }
+
+    
+
+    @include breakpoint-down(small) {
+        .image-container.ratio2halfx1 {
+            padding-top: 100%;
+        }
+
+        .cta {
+            flex-direction: column;
+            width: 100%;
+            bottom: 5px;
+
+            .cta-item {
+                font-size: 1rem;
+                margin-bottom: 1rem;
+                padding: .75rem 1rem;
+            }
+        }
+    }
 }
 
 .supported-by {
     padding: 3rem 0;
     padding-bottom: 5rem;
+
+    .slick-prev:before, .slick-next:before {
+        color: lightgray;
+    }
     
     .support-title {
         padding-bottom: 1rem;
@@ -72,18 +97,32 @@
                 background-color: rgba(0,0,0,0.1);
             }
         }
-
-        
     }
+
+    @include breakpoint-down(small){
+        padding: 3rem 2rem;
+
+        .support-title {
+            margin-bottom: 1.5rem;
+        }
+    }
+
     .slick-initialized .slick-slide {
         display: flex;
         justify-content: center;
     }
 
     img {
-        width:auto;
-        height: 80px;
+        width: 100%;
+        height: 45px;
         object-fit: contain;
         object-position: center;
+        padding: 0 4px;
+    }
+
+    @include breakpoint(medium) {
+        img {
+            height: 80px;
+        }
     }
 }

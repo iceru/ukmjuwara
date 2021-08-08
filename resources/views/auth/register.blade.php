@@ -55,7 +55,7 @@
     </x-auth-card> --}}
 
     <div class="login">
-        <div class="container-fluid g-0">
+        <div class="container g-0">
             <div class="row g-0">
                 <div class="col-12 col-md-6 login-content">
                     <h3 class="login-text">#UKMJUWARA</h3>

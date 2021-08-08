@@ -27,8 +27,6 @@
             }
 
             .item {
-                display: flex;
-                align-items: center;
                 margin-bottom: .75rem;
 
                 i {
@@ -40,6 +38,7 @@
                     width: 2.25rem;
                     height: 2.25rem;
                     margin-right: .5rem;
+                    margin-top: 6px;
 
                     &:before {
                         position: absolute;
@@ -49,33 +48,36 @@
                     }
                 }
             }
-
-            .whatsapp {
-                background-color: #13990A;
-                padding: .75rem 3rem;
-                border-radius: 2rem;
-                color: white;
-                margin-right: 1rem;
-                display: flex;
-                align-items: center;
-
-                i {
-                    font-size: 1.5rem;
-                }
-            }
-
-            .instagram {
-                background: linear-gradient(90deg, #405DE6 0%, #5851DB 18.23%, #833AB4 40.62%, #C13584 64.58%, #E1306C 83.85%, #FD1D1D 100%);
-                padding: .75rem 3rem;
-                border-radius: 2rem;
-                color: white;
-                display: flex;
-                align-items: center;
-
-                i {
-                    font-size: 1.5rem;
-                }
-            }
         }
     }
+}
+
+.social {
+    padding: .75rem 3rem;
+    border-radius: 2rem;
+    color: white;
+    margin-right: 1rem;
+    display: flex;
+    align-items: center;
+
+    i {
+        font-size: 1.5rem;
+    }
+
+    &.instagram {
+        background: linear-gradient(90deg, #405DE6 0%, #5851DB 18.23%, #833AB4 40.62%, #C13584 64.58%, #E1306C 83.85%, #FD1D1D 100%);
+    }
+
+    &.whatsapp {
+        background-color: #075E54;
+    }
+
+    &.facebook {
+        background-color: #4267b2;
+    }
+
+    &.youtube {
+        background-color: #FF0000;
+    }
+
 }

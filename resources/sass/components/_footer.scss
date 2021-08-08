@@ -3,6 +3,19 @@
     color: $background;
     padding: 1.5rem 0;
 
+    @include breakpoint-down(small) {
+        padding: 1rem 0;
+
+        .example::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .example {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    }
+
     ul {
         li {
             margin-bottom: .5rem;

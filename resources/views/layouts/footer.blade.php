@@ -1,6 +1,6 @@
 <div class="footer">
-    <div class="container g-0">
-        <div class="row g-0">
+    <div class="container">
+        <div class="row">
             <div class="col-12">
                 <h3>#UKMJUWARA</h3>
             </div>

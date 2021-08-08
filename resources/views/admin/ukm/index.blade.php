@@ -94,7 +94,6 @@
                     <th>Whatsapp</th>
                     <th>Instagram</th>
                     <th>Katalog</th>
-                    <th>Featured</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -104,15 +103,16 @@
                     <td scope="row">{{$loop->iteration}}</td>
                     <td>{{ $ukm->title }}</td>
                     <td>{!! substr($ukm->description, 0, 40) . '...' !!}</td>
-                    <td> 
+                    <td class="d-flex flex-wrap"> 
                         @foreach ((array)json_decode($ukm->images) as $item)
-                        <img class="mb-2" src="{{Storage::url('ukm-image/'.$item)}}" alt="Image" width="100">
+                       <div>
+                        <img class="mb-2" src="{{Storage::url('ukm-image/'.$item)}}" alt="Image" width="100" height="100">
+                       </div>
                         @endforeach
                     </td>
                     <td>{{ $ukm->whatsapp }}</td>
                     <td>{{ $ukm->instagram }}</td>
                     <td>{{ $ukm->catalog->title }}</td>
-                    <td>{{ $ukm->featured }}</td>
                     <td><a class="btn btn-primary btn-small d-flex align-items-center justify-content-center mb-2" href="/admin/ukm/edit/{{$ukm->id}}"><i class="fas fa-edit me-1"></i> Edit</a>
                         <a class="btn btn-danger btn-small d-flex align-items-center justify-content-center" href="/admin/ukm/delete/{{$ukm->id}}" onclick="return confirm('Hapus data ini?')"><i class="fa fa-trash me-1" aria-hidden="true"></i> Delete</a></td>
                 </tr>

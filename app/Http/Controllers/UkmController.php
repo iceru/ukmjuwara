@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ukm;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
 class UkmController extends Controller
 {
@@ -48,7 +49,13 @@ class UkmController extends Controller
     {
         $ukm = Ukm::where('slug', $slug)->firstOrFail();
 
-        return view('ukm', compact('ukm'));
+        views($ukm)
+        ->cooldown(10)
+        ->record();
+        
+        $view = views($ukm)->unique()->count();
+    
+        return view('ukm', compact('ukm', 'view'));
     }
 
     /**

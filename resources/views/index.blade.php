@@ -12,7 +12,7 @@
             </div>
             @endforeach
         </div>
-        <div class="cta ">
+        <div class="cta">
             @foreach ($featured as $catalog)
             <a href="{{ route('catalog.show', $catalog->slug) }}">
                 <div class="cta-item align-items-center">
@@ -45,8 +45,16 @@
         $(document).ready(function(){
             $('#supported').slick({
                 infinite: true,
-                slidesToShow: 3,
-                slidesToScroll: 1
+                slidesToShow: 4,
+                slidesToScroll: 1,
+                responsive: [
+                    {
+                        breakpoint: 567,
+                        settings: {
+                            slidesToShow: 2
+                        }
+                    },
+                ]
             });
 
             $('.header').slick();

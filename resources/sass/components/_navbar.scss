@@ -2,7 +2,12 @@ nav {
     background-color: $primary-color;
     .navbar {
         align-items: center;
-        padding: 20px 0;
+        padding: 1rem .75rem;
+
+        @include breakpoint(medium) {
+            padding: 20px .75rem;
+        }
+        
         .logo {
             color: white;
         }
@@ -43,11 +48,36 @@ nav {
                         transition: all .2s ease-in;
                     }
                 }
+
+                ul.dropdown-menu {
+                    padding: 0;
+                    li {
+                        a {
+                            padding: 1rem;
+                            border-bottom: 1px solid rgba(0,0,0, 0.1);
+                        }
+
+                        &:last-child {
+                            a{
+                                border-bottom: none;
+                            }
+                        }
+                    }
+                }
             }
+        }
+
+        .hamburger {
+            img {
+                height: 20px;
+            }
+            cursor: pointer;
         }
 
         .search {
             color: white;
+            font-size: 20px;
+            cursor: pointer;
         }
     }
 }
