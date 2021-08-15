@@ -1,0 +1,116 @@
+.articles {
+    padding-bottom: 3rem;
+    
+    .top-stories {
+        margin-bottom: 4rem;
+    }
+}
+
+.article {
+    .article-image {
+        position: relative;
+        width: 100%;
+        padding-top: 100%;
+
+        img {
+            border-radius: 1rem;
+            position: absolute;
+            object-fit: cover;
+            object-position: center;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .article-title {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+
+    .article-description {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+    }
+
+    &.medium {
+        .article-image {
+            margin-bottom: 1rem;
+        }
+    }
+
+    &.big {
+        min-height: 600px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        border-radius: 1rem;
+        color: white;
+        position: relative;
+
+        &:before {
+            position: absolute;
+            bottom: 0;
+            height: 100%;
+            width: 100%;
+            content: '';
+            background: linear-gradient(transparent 0%, rgba($primary-color, 0.5) 90%);
+            border-radius: 1rem;
+        }
+
+        .article-content {
+            position: absolute;
+            bottom: 20px;
+            left: 1rem;
+            padding-right: 1rem;
+
+            .article-title {
+                color: white;
+            }
+        }
+    }
+
+    &.header-article {
+        height: 500px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        color: white;
+        position: relative;
+        margin-bottom: 3rem;
+
+        &:before {
+            position: absolute;
+            bottom: 0;
+            height: 100%;
+            width: 100%;
+            content: '';
+            background: linear-gradient(transparent 0%, rgba($primary-color, 0.8) 80%);
+        }
+
+        .article-content {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding-right: 1rem;
+
+            .article-title {
+                color: white;
+            }
+        }
+    }
+
+    .author {
+        img {
+            border-radius: 50%;
+        }
+    }
+}

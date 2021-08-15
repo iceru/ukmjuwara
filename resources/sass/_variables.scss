@@ -1,0 +1,135 @@
+$primary-color:#063934;
+$secondary-color : #B46F41;
+$body : #000;
+$background : #fff;
+$darkgrey : #565455;
+$grey : #BFBBBA;
+
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 0;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.circular {
+    border-radius: 50%;
+}
+
+.primary-color {
+    color: $primary-color;
+}
+
+.container-padding {
+    padding: 3rem 0;
+}
+
+a {
+    text-decoration: none;
+    transition: all .2s ease-in;
+    color: black;
+
+    &:hover {
+        text-decoration: none;
+        color: $darkgrey;
+        transition: all .2s ease-in;
+    }
+}
+
+p {
+    margin-bottom: 0;
+}
+
+.image-container {
+    position: relative;
+    width: 100%;
+
+    img {
+        position: absolute;
+        object-fit: cover;
+        object-position: center;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    &.ratio1x1 {
+        padding-top: 100%;
+    }
+
+    &.ratio16x9 {
+        padding-top: 56.25%;
+    }
+
+    &.ratio4x3 {
+        padding-top: 75%;
+    }
+
+    &.ratio1x4{
+        padding-top: 25%;
+    }
+
+    &.ratio2x3 {
+        padding-top: 33%;
+    }
+
+    &.ratio3x2 {
+        padding-top: 66%;
+    }
+
+    &.ratio2x1 {
+        padding-top: 50%;
+    }
+    &.ratio2halfx1 {
+        padding-top: 40%;
+    }
+}
+
+//Mixin Breakpoint
+$breakpoints: (
+    'xsmall': 200px,
+    'small':  567px,
+    'medium': 768px,
+    'large':  992px,
+    'xlarge': 1200px,
+    'xxlarge': 1440px
+) !default;
+
+/// Mixin to manage responsive breakpoints
+/// @author Kitty Giraudel
+/// @param {String} $breakpoint - Breakpoint name
+/// @require $breakpoints
+@mixin breakpoint($breakpoint) {
+    // If the key exists in the map
+    @if map-has-key($breakpoints, $breakpoint) {
+      // Prints a media query based on the value
+      @media (min-width: map-get($breakpoints, $breakpoint)) {
+        @content;
+      }
+    }
+   
+    // If the key doesn't exist in the map
+    @else {
+      @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+          + "Available breakpoints are: #{map-keys($breakpoints)}.";
+    }
+}
+
+@mixin breakpoint-down($breakpoint) {
+    // If the key exists in the map
+    @if map-has-key($breakpoints, $breakpoint) {
+      // Prints a media query based on the value
+      @media (max-width: map-get($breakpoints, $breakpoint)) {
+        @content;
+      }
+    }
+   
+    // If the key doesn't exist in the map
+    @else {
+      @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+          + "Available breakpoints are: #{map-keys($breakpoints)}.";
+    }
+}

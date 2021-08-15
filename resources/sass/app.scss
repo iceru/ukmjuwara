@@ -1,0 +1,19 @@
+@import '~bootstrap/scss/bootstrap';
+
+@import 'variables';
+@import 'pages/index';
+@import 'pages/login';
+@import 'pages/admin';
+@import 'pages/catalog';
+@import 'pages/article';
+@import 'pages/article-detail';
+@import 'pages/about';
+@import 'pages/contact';
+@import 'pages/ukm';
+@import 'components/navbar';
+@import 'components/footer';
+
+
+body, html {
+    font-family: 'Gotham', sans-serif;
+}

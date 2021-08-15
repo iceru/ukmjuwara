@@ -1,0 +1,128 @@
+.header-container {
+    position: relative;
+    width: 100%;
+
+    .slick-prev {
+        z-index: 30;
+        left: 20px;
+    }
+
+    .slick-next {
+        z-index: 30;
+        right: 20px;
+    }
+
+    .cta {
+        position: absolute;
+        left: 0;
+        justify-content: center;
+        display: flex;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80%;
+        bottom: 4rem;
+
+        .cta-item {
+            display: flex;
+            justify-content: center;
+            background: $background;
+            padding: .75rem 5rem;
+            border-radius: 60px;
+            margin: 0 1rem;
+            font-size: 1.25rem;
+            color: $primary-color;
+            font-weight: 700;
+            transition: all .2s ease-out;
+
+            &:hover {
+                background-color: $secondary-color;
+                color: white;
+                transition: all .2s ease-in;
+
+                img {
+                    transition: all .2s ease-in;
+                    filter: brightness(0) invert(1);
+                }
+            }
+        }
+    }
+
+    
+
+    @include breakpoint-down(small) {
+        .image-container.ratio2halfx1 {
+            padding-top: 100%;
+        }
+
+        .cta {
+            flex-direction: column;
+            width: 100%;
+            bottom: 5px;
+
+            .cta-item {
+                font-size: 1rem;
+                margin-bottom: 1rem;
+                padding: .75rem 1rem;
+            }
+        }
+    }
+}
+
+.supported-by {
+    padding: 3rem 0;
+    padding-bottom: 5rem;
+
+    .slick-prev:before, .slick-next:before {
+        color: lightgray;
+    }
+    
+    .support-title {
+        padding-bottom: 1rem;
+        margin-bottom: 3rem;
+        display: flex;
+        justify-content: center;
+
+        h3 {
+            position: relative;
+            display: inline-block;
+
+            &:after {
+                position: absolute;
+                content: '';
+                height: 1px;
+                width: 80%;
+                bottom: -1rem;
+                left: 50%;
+                transform: translateX(-50%);
+                background-color: rgba(0,0,0,0.1);
+            }
+        }
+    }
+
+    @include breakpoint-down(small){
+        padding: 3rem 2rem;
+
+        .support-title {
+            margin-bottom: 1.5rem;
+        }
+    }
+
+    .slick-initialized .slick-slide {
+        display: flex;
+        justify-content: center;
+    }
+
+    img {
+        width: 100%;
+        height: 45px;
+        object-fit: contain;
+        object-position: center;
+        padding: 0 4px;
+    }
+
+    @include breakpoint(medium) {
+        img {
+            height: 80px;
+        }
+    }
+}
