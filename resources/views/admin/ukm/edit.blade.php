@@ -38,7 +38,7 @@
                 <div class="col-sm-10">
                     <div class="d-flex mb-3">
                         @foreach ((array)json_decode($ukm->images) as $item)
-                            <img class="me-2" src="{{Storage::url('ukm-image/'.$item)}}" alt="Image" width="100">
+                            <img class="image me-2" src="{{Storage::url('ukm-image/'.$item)}}" alt="Image" width="100" height="100">
                         @endforeach
                     </div>
                     <div class="input-group control-group increment" >
@@ -106,14 +106,6 @@
                 $(this).parents(".control-group").remove();
             });
         });
-
-        tinymce.init({
-          selector: 'textarea',
-          toolbar_mode: 'floating',
-          tinycomments_mode: 'embedded',
-          tinycomments_author: 'Author name',
-          height: "480"
-       });
     </script>
 
 </x-admin-layout>

@@ -3,8 +3,17 @@
         UKM Juwara
     @endsection
     <div class="header-container">
-        <div class="header">
-            @foreach ($sliders as $slider)
+        <div class="desktop header">
+            @foreach ($sliderDesktop as $slider)
+            <div>
+                <div class="image-container ratio2halfx1">
+                    <img class="image" src="{{ Storage::url('slider-image/'.$slider->image) }}" alt="{{ $slider->title }}">
+                </div>
+            </div>
+            @endforeach
+        </div>
+        <div class="mobile header">
+            @foreach ($sliderMobile as $slider)
             <div>
                 <div class="image-container ratio2halfx1">
                     <img class="image" src="{{ Storage::url('slider-image/'.$slider->image) }}" alt="{{ $slider->title }}">

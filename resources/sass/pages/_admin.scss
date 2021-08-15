@@ -41,6 +41,27 @@
             // }
         }
     }
+
+    .button-close {
+        font-size: 25px;
+        color: white;
+    }
+
+    @include breakpoint-down(medium) {
+        z-index: 999999;
+        transform: translateX(-150vw);
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+        transition: .2s all ease-in;
+
+        &.active {
+            transform: translateX(0);
+            transition: .2s all ease-out;
+            opacity: 1;
+        }
+    }
     
 }
 
@@ -50,6 +71,13 @@
 
 .admin-content {
     padding: 1.5rem;
+    @include breakpoint-down(medium) {
+        padding: 1rem 0;
+
+        .dataTables_length {
+            margin-bottom: 1rem;
+        }
+    }
 
     form {
         .btn-check:focus + .btn-primary, .btn-primary:focus, .btn-primary:hover {

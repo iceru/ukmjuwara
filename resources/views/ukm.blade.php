@@ -2,11 +2,10 @@
     @section('title')
         {{ $ukm->title }}
     @endsection
-    <p></p>
     <div class="ukm">
         <div class="container container-padding">
             <div class="row">
-                <div class="col-12 col-md-5">
+                <div class="col-12 col-md-5 ukm-image">
                     <div id="sliders">
                         @foreach ((array)json_decode($ukm->images) as $image)
                             <div>
@@ -19,10 +18,36 @@
                 </div>
                 <div class="col-12 col-md-7">
                     <div class="container-ukm">
-                        <div class="detail-head mb-3">
-                            <h1>{{ $ukm->title }}</h1>
+                        <div class="detail-head">
+                            <h1 class="mb-4">{{ $ukm->title }}</h1>
+                            <div class="row description">
+                                <div class="col-6 mb-3">
+                                    <div class="desc-item">
+                                        <h6>Description 1</h6>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                                    </div>
+                                </div>
+                                <div class="col-6 mb-3">
+                                    <div class="desc-item">
+                                        <h6>Description 2</h6>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="desc-item">
+                                        <h6>Description 3</h6>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="desc-item">
+                                        <h6>Description 4</h6>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="description mb-3">
+                        <div class="description mb-4">
                             <p>{!! $ukm->description !!}</p>
                         </div>
                         <div class="d-flex align-items-center mb-4">

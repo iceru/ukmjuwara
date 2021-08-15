@@ -12,6 +12,29 @@
         right: 20px;
     }
 
+    .slick-prev, .slick-next {
+        &:before {
+            color: white;
+        }
+    }
+
+    .desktop {
+        display: block;
+    }
+
+    .mobile {
+        display: none;
+    }
+
+    @include breakpoint-down(small) {
+        .desktop {
+            display: none;
+        }
+        .mobile {
+            display: block;
+        } 
+    }
+
     .cta {
         position: absolute;
         left: 0;
@@ -43,6 +66,16 @@
                     transition: all .2s ease-in;
                     filter: brightness(0) invert(1);
                 }
+            }
+        }
+    }
+
+    @include breakpoint-down(medium) {
+        .cta {
+            bottom: 20px;
+
+            .cta-item {
+                padding: .75rem;
             }
         }
     }

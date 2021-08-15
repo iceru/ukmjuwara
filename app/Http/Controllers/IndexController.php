@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ukm;
 use App\Models\Slider;
+use App\Models\Article;
 use App\Models\Catalog;
 use App\Models\Sponsor;
 use Illuminate\Http\Request;
+use Spatie\Searchable\Search;
 
 class IndexController extends Controller
 {
@@ -16,11 +19,22 @@ class IndexController extends Controller
      */
     public function index()
     {
-        $sliders = Slider::all();
+        $sliderDesktop = Slider::where('type', 'desktop')->get();
+        $sliderMobile = Slider::where('type', 'mobile')->get();
         $sponsors = Sponsor::all();
         $featured = Catalog::where('featured', 'yes')->take(2)->get();
         
-        return view('index', compact('sliders', 'featured', 'sponsors'));
+        return view('index', compact('sliderDesktop', 'sliderMobile', 'featured', 'sponsors'));
+    }
+
+    public function search(Request $request)
+    {
+        $searchTerm = $request->input('search_query');
+        $searchResults = (new Search())->registerModel(Ukm::class, 'title', 'images')
+        ->registerModel(Article::class, 'title', 'image','description', 'author')
+        ->perform($request->input('search_query'));
+
+        return view('search', compact('searchResults', 'searchTerm'));
     }
 
     /**

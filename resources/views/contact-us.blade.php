@@ -24,7 +24,7 @@
                                 <p>Gedung Lembaga Penyelidikan Ekonomi dan Masyarakat Ruang 118, Kampus UI Salemba, Jl. Salemba Raya No. 4, Jakarta. 10430</p>
                             </div>
                         </div>
-                        <div class="item row align-items-center">
+                        <div class="item row align-items-center mb-4">
                             <div class="col-1">
                                 <i class="fas fa-envelope fa-fws"></i>
                             </div>
@@ -36,7 +36,7 @@
                             <i class="fas fa-phone-volume fa-fw"></i>
                             <p>021-212121</p>
                         </div> --}}
-                        <div class="d-flex align-items-center mb-4">
+                        <div class="d-flex flex-wrap align-items-center mb-4">
                             <a href="https://www.facebook.com/ukmindonesia.org/">
                                 <div class="social facebook">
                                     <p class="me-2">Facebook</p>
@@ -59,7 +59,9 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
-
+                    <div style="width: 100%"  class="corner-wrapper">
+                        <iframe width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Universitas%20Indonesia%20Salemba+(UKM%20Juwara)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed">
+                    </iframe>
                 </div>
             </div>
             <div class="row">
@@ -89,8 +91,16 @@
                 $(document).ready(function(){
                     $('#supported').slick({
                         infinite: true,
-                        slidesToShow: 3,
-                        slidesToScroll: 1
+                        slidesToShow: 4,
+                        slidesToScroll: 1,
+                        responsive: [
+                            {
+                                breakpoint: 567,
+                                settings: {
+                                    slidesToShow: 2
+                                }
+                            },
+                        ]
                     });
         
                     $('.header').slick();

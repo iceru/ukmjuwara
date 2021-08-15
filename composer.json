@@ -15,7 +15,9 @@
         "laravel/scout": "^8.6.1",
         "laravel/tinker": "^2.5",
         "meilisearch/meilisearch-laravel-scout": "^0.12.5",
-        "santigarcor/laratrust": "^6.3"
+        "santigarcor/laratrust": "^6.3",
+        "spatie/laravel-searchable": "^1.10",
+        "yurtesen/geonames": "dev-master"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

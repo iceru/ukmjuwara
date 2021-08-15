@@ -53,7 +53,7 @@ class UkmController extends Controller
         ->cooldown(10)
         ->record();
         
-        $view = views($ukm)->unique()->count();
+        $view = views($ukm)->count();
     
         return view('ukm', compact('ukm', 'view'));
     }

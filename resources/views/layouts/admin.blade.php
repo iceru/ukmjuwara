@@ -26,8 +26,8 @@
 
 <body class="font-sans antialiased">
     <div class="container-fluid administrator">
-        {{-- @include('layouts.navigation-admin') --}}
         <div class="row">
+            @include('layouts.navigation-admin')
             @include('layouts.sidebar-admin')
 
             <!-- Page Content -->
@@ -38,6 +38,54 @@
     </div>
 
     @yield('js')
+
+    <script>
+        $(document).ready(function(){
+            $('.hamburger').click(function(){
+                $('.sidebar-admin').toggleClass('active');
+                $('body').css('overflow-y', 'hidden');
+            })
+
+            $('.button-close').click(function () {
+                $('.sidebar-admin').removeClass('active');
+                $('body').css('overflow-y', 'auto');
+            })
+
+            tinymce.init({
+                selector: 'textarea',
+                plugins: 'link image imagetools',
+                a11y_advanced_options: true,
+                toolbar_mode: 'floating',
+                tinycomments_mode: 'embedded',
+                tinycomments_author: 'Early Theory',
+                height : "480",
+                image_title: true,
+                automatic_uploads: true,
+                images_upload_url: '/upload/image',
+                file_picker_types: 'image',
+                file_picker_callback: function(cb, value, meta) {
+                    var input = document.createElement('input');
+                    input.setAttribute('type', 'file');
+                    input.setAttribute('accept', 'image/*');
+                    input.onchange = function() {
+                        var file = this.files[0];
+
+                        var reader = new FileReader();
+                        reader.readAsDataURL(file);
+                        reader.onload = function () {
+                            var id = 'blobid' + (new Date()).getTime();
+                            var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
+                            var base64 = reader.result.split(',')[1];
+                            var blobInfo = blobCache.create(id, file, base64);
+                            blobCache.add(blobInfo);
+                            cb(blobInfo.blobUri(), { title: file.name });
+                        };
+                    };
+                    input.click();
+                }
+            });
+        })
+    </script>
 </body>
 
 </html>

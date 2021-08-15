@@ -81,3 +81,55 @@ nav {
         }
     }
 }
+
+.offcanvas {
+    background-color: $primary-color;
+    color: white;
+    padding: 2rem;
+
+    .button-close {
+        i {
+            color: white;
+            font-size: 24px;
+        }
+    }
+
+    .menu-overlay {
+        padding-top: 1rem;
+        h1 {
+            margin-bottom: 1.5rem;
+        }
+        .list-menu {
+            li {
+                padding: .5rem 0;
+                a {
+                    color: white;
+                    font-size: 20px;
+                }
+            }
+
+            .child-menu {
+                li {
+                    padding-left: 1rem;
+
+                    a {
+                        font-size: 1rem;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.navigation-admin {
+    background-color: $primary-color;
+    color: white;
+    padding: 1rem;
+
+    .hamburger {
+        img {
+            height: 20px;
+            width: auto;
+        }
+    }
+}

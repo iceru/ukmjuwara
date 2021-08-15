@@ -16,7 +16,6 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::paginate(10);
         $headerArticle = [];
         $topArticles = [];
 
@@ -33,6 +32,11 @@ class ArticleController extends Controller
                 $b->where('tag_id', $topTag);
             })->get();
         }
+
+        
+        $articles = Article::whereHas('tags', function($query) use($headerTag, $topTag) {
+            $query->where('tag_id', '!=', $headerTag)->where('tag_id', '!=', $topTag);
+        })->get();
 
         return view('articles', compact('articles', 'headerArticle', 'topArticles'));
     }

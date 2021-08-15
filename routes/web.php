@@ -29,6 +29,8 @@ Route::get('/', [IndexController::class, 'index'])->name('index');
 Route::get('/tentang-kami', [AboutController::class, 'index'])->name('about');
 Route::get('/kemitraan', [ContactController::class, 'index'])->name('contact');
 
+Route::get('/search', [IndexController::class, 'search'])->name('search');
+
 Route::get('/katalog/{slug}', [CatalogController::class, 'show'])->name('catalog.show');
 Route::get('/ukm/{slug}', [UkmController::class, 'show'])->name('ukm.show');
 
@@ -41,6 +43,7 @@ Route::get('/berita/{slug}', [ArticleController::class, 'show'])->name('article.
 
 Route::middleware(['auth', 'role:administrator'])->group(function (){
     Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+    Route::post('/upload/image', [AdminArticleController::class, 'upload'])->name('admin.upload.image');
 
     Route::get('/admin/article', [AdminArticleController::class, 'index'])->name('admin.article');
     Route::post('/admin/article/store', [AdminArticleController::class, 'store'])->name('admin.article.store');

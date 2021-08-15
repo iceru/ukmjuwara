@@ -1,9 +1,41 @@
 .ukm {
     .container {
         .row {
+            .ukm-image {
+                img {
+                    border-radius: 1rem;
+                }
+            }
             div:last-child {
                 .container-ukm {
                     padding-left: 2rem;
+
+                    .detail-head {
+                        padding-bottom: 1.5rem;
+                        margin-bottom: 1.5rem;
+                        border-bottom: 1px solid rgba($color: #000000, $alpha: .1);
+
+                        .description {
+                            .desc-item {
+                                padding-left: 1rem;
+                                border-left: 2px solid $primary-color;
+                                
+                                h5 {
+                                    color: $primary-color;
+                                }
+                            }
+
+                            .col-6:nth-child(even) {
+                                .desc-item {
+                                    border-left: 2px solid $secondary-color;
+                                    
+                                    h5 {
+                                        color: $secondary-color;
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }

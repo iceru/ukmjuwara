@@ -32,6 +32,15 @@
                     <input type="file" class="form-control" id="image" name="image"></input>
                 </div>
             </div>
+            <div class="row mb-3">
+                <label for="title" class="col-12 col-md-2 col-form-label form-label">Type</label>
+                <div class="col-12 col-md-10">
+                    <select class="form-select" name="type" id="type">
+                        <option value="desktop">Desktop Slider</option>
+                        <option value="mobile">Mobile Slider</option>
+                    </select>
+                </div>
+            </div>
             <div class="mb-3 row">
                 <div class="col-12 col-md-2"></div>
                 <div class="col-12 col-md-10">
@@ -45,6 +54,7 @@
                 <tr>
                     <th>No</th>
                     <th>Title</th>
+                    <th>Type</th>
                     <th>Image</th>
                     <th>Action</th>
                 </tr>
@@ -54,6 +64,7 @@
                 <tr>
                     <td scope="row">{{$loop->iteration}}</td>
                     <td>{{ $slider->title }}</td>
+                    <td class="text-capitalize">{{ $slider->type }}</td>
                     <td><img class="mb-2" src="{{Storage::url('slider-image/'.$slider->image )}}" alt="Image" width="250"></td>
                     <td><a class="btn btn-primary btn-small d-flex align-items-center justify-content-center mb-2" href="/admin/slider/edit/{{$slider->id}}"><i class="fas fa-edit me-1"></i> Edit</a>
                         <a class="btn btn-danger btn-small d-flex align-items-center justify-content-center" href="/admin/slider/delete/{{$slider->id}}" onclick="return confirm('Hapus data ini?')"><i class="fa fa-trash me-1" aria-hidden="true"></i> Delete</a></td>

@@ -77,8 +77,9 @@ class CatalogController extends Controller
     {
         $catalog = Catalog::where('slug', $slug)->firstOrFail();
         $ukms = Ukm::where('catalog_id', $catalog->id)->get();
-        
-        return view('catalog', compact('catalog','ukms'));
+        $bests = Ukm::where('catalog_id', $catalog->id)->orderByViews()->get()->take(4);
+
+        return view('catalog', compact('catalog','ukms', 'bests'));
     }
 
     /**
