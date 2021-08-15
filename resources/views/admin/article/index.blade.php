@@ -74,35 +74,37 @@
             </div>
         </form>
 
-        <table class="table" id="table">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Featured Image</th>
-                    <th>Author</th>
-                    <th>Read Time</th>
-                    <th>Tags</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($articles as $article)
-                <tr>
-                    <td scope="row">{{$loop->iteration}}</td>
-                    <td>{{ $article->title }}</td>
-                    <td>{!! substr($article->description, 0, 100) . '...' !!}</td>
-                    <td><img class="mb-2" src="{{Storage::url('article-image/'.$article->image )}}" alt="Image" width="100"></td>
-                    <td>{{ $article->author }}</td>
-                    <td>{{ $article->time_read }} menit</td>
-                    <td>@foreach ($article->tags as $tag){{$tag->tag_name}} @endforeach</td>
-                    <td><a class="btn btn-primary btn-small d-flex align-items-center justify-content-center mb-2" href="/admin/article/edit/{{$article->id}}"><i class="fas fa-edit me-1"></i> Edit</a>
-                        <a class="btn btn-danger btn-small d-flex align-items-center justify-content-center" href="/admin/article/delete/{{$article->id}}" onclick="return confirm('Hapus data ini?')"><i class="fa fa-trash me-1" aria-hidden="true"></i> Delete</a></td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table" id="table">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Featured Image</th>
+                        <th>Author</th>
+                        <th>Read Time</th>
+                        <th>Tags</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($articles as $article)
+                    <tr>
+                        <td scope="row">{{$loop->iteration}}</td>
+                        <td>{{ $article->title }}</td>
+                        <td>{!! strlen($article->description) > 150 ? (substr($article->description, 0, 150) . '...') : $article->description !!}</td>
+                        <td><img class="mb-2" src="{{Storage::url('article-image/'.$article->image )}}" alt="Image" width="100"></td>
+                        <td>{{ $article->author }}</td>
+                        <td>{{ $article->time_read }} menit</td>
+                        <td>@foreach ($article->tags as $tag){{$tag->tag_name}} @endforeach</td>
+                        <td><a class="btn btn-primary btn-small d-flex align-items-center justify-content-center mb-2" href="/admin/article/edit/{{$article->id}}"><i class="fas fa-edit me-1"></i> Edit</a>
+                            <a class="btn btn-danger btn-small d-flex align-items-center justify-content-center" href="/admin/article/delete/{{$article->id}}" onclick="return confirm('Hapus data ini?')"><i class="fa fa-trash me-1" aria-hidden="true"></i> Delete</a></td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
@@ -120,14 +122,6 @@
                 $(this).parents(".control-group").remove();
             });
         });
-
-        tinymce.init({
-          selector: 'textarea',
-          toolbar_mode: 'floating',
-          tinycomments_mode: 'embedded',
-          tinycomments_author: 'Author name',
-          height: "480"
-       });
     </script>
 
 </x-admin-layout>

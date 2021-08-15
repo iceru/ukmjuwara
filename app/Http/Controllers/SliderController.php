@@ -41,7 +41,8 @@ class SliderController extends Controller
 
         $request->validate([
             'image' => 'required|image',
-            'title' => 'required'
+            'title' => 'required',
+            'type' => 'required'
         ]);
 
         if ($request->hasFile('image')) {
@@ -52,6 +53,7 @@ class SliderController extends Controller
 
         $slider->image = $filename;
         $slider->title = $request->title;
+        $slider->type = $request->type;
         $slider->save();
 
         return redirect()->route('admin.slider')->with('success','Data berhasil di input');
@@ -94,6 +96,7 @@ class SliderController extends Controller
 
         $request->validate([
             'title' => 'required',
+            'type' => 'required',
             'image' => 'nullable'
         ]);
 
@@ -105,6 +108,7 @@ class SliderController extends Controller
         }
 
         $slider->title = $request->title;
+        $slider->type = $request->type;
         $slider->save();
 
         return redirect()->route('admin.slider')->with('success','Data berhasil di update');

@@ -5,6 +5,63 @@ $background : #fff;
 $darkgrey : #565455;
 $grey : #BFBBBA;
 
+
+
+//Mixin Breakpoint
+$breakpoints: (
+    'xsmall': 200px,
+    'small':  567px,
+    'medium': 768px,
+    'large':  992px,
+    'xlarge': 1200px,
+    'xxlarge': 1440px
+) !default;
+
+/// Mixin to manage responsive breakpoints
+/// @author Kitty Giraudel
+/// @param {String} $breakpoint - Breakpoint name
+/// @require $breakpoints
+@mixin breakpoint($breakpoint) {
+    // If the key exists in the map
+    @if map-has-key($breakpoints, $breakpoint) {
+      // Prints a media query based on the value
+      @media (min-width: map-get($breakpoints, $breakpoint)) {
+        @content;
+      }
+    }
+   
+    // If the key doesn't exist in the map
+    @else {
+      @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+          + "Available breakpoints are: #{map-keys($breakpoints)}.";
+    }
+}
+
+@mixin breakpoint-down($breakpoint) {
+    // If the key exists in the map
+    @if map-has-key($breakpoints, $breakpoint) {
+      // Prints a media query based on the value
+      @media (max-width: map-get($breakpoints, $breakpoint)) {
+        @content;
+      }
+    }
+   
+    // If the key doesn't exist in the map
+    @else {
+      @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+          + "Available breakpoints are: #{map-keys($breakpoints)}.";
+    }
+}
+
+main {
+    min-height: 45vw; 
+} 
+
+@include breakpoint-down(small) {
+    main {
+        min-height: 70vh;
+    }
+}
 h1, h2, h3, h4, h5, h6 {
     margin-bottom: 0;
 }
@@ -22,8 +79,18 @@ ul {
     color: $primary-color;
 }
 
+.secondary-color {
+    color: $secondary-color;
+}
+
 .container-padding {
-    padding: 3rem 0;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+
+    @include breakpoint-down(small) {
+        padding-top: 2.5rem;
+        padding-bottom: 2.5rem;
+    }
 }
 
 a {
@@ -35,6 +102,13 @@ a {
         text-decoration: none;
         color: $darkgrey;
         transition: all .2s ease-in;
+ 
+    }
+}
+
+.slick-prev, .slick-next {
+    &:before {
+        color: $secondary-color;
     }
 }
 
@@ -85,51 +159,5 @@ p {
     }
     &.ratio2halfx1 {
         padding-top: 40%;
-    }
-}
-
-//Mixin Breakpoint
-$breakpoints: (
-    'xsmall': 200px,
-    'small':  567px,
-    'medium': 768px,
-    'large':  992px,
-    'xlarge': 1200px,
-    'xxlarge': 1440px
-) !default;
-
-/// Mixin to manage responsive breakpoints
-/// @author Kitty Giraudel
-/// @param {String} $breakpoint - Breakpoint name
-/// @require $breakpoints
-@mixin breakpoint($breakpoint) {
-    // If the key exists in the map
-    @if map-has-key($breakpoints, $breakpoint) {
-      // Prints a media query based on the value
-      @media (min-width: map-get($breakpoints, $breakpoint)) {
-        @content;
-      }
-    }
-   
-    // If the key doesn't exist in the map
-    @else {
-      @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
-          + "Available breakpoints are: #{map-keys($breakpoints)}.";
-    }
-}
-
-@mixin breakpoint-down($breakpoint) {
-    // If the key exists in the map
-    @if map-has-key($breakpoints, $breakpoint) {
-      // Prints a media query based on the value
-      @media (max-width: map-get($breakpoints, $breakpoint)) {
-        @content;
-      }
-    }
-   
-    // If the key doesn't exist in the map
-    @else {
-      @warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
-          + "Available breakpoints are: #{map-keys($breakpoints)}.";
     }
 }

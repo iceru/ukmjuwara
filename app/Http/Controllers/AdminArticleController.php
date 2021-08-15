@@ -47,7 +47,7 @@ class AdminArticleController extends Controller
             'description' => 'required',
             'author' => 'required',
             'time_read' => 'required|integer',
-            'tags' => 'string|regex:/^[a-zA-Z0-9\s]+$/'
+            'tags' => 'nullable|string|regex:/^[a-zA-Z0-9\s]+$/'
         ]);
 
         if ($request->hasFile('image')) {
@@ -124,7 +124,7 @@ class AdminArticleController extends Controller
             'description' => 'required',
             'author' => 'required',
             'time_read' => 'required|integer',
-            'tags' => 'string|regex:/^[a-zA-Z0-9\s]+$/',
+            'tags' => 'nullable|string|regex:/^[a-zA-Z0-9\s]+$/',
             'image' => 'nullable'
         ]);
 
@@ -170,5 +170,11 @@ class AdminArticleController extends Controller
     {
         Article::find($id)->delete();
         return redirect()->route('admin.article')->with('success','Data berhasil dihapus');
+    }
+
+    public function upload(Request $request){
+        $fileName=$request->file('file')->getClientOriginalName();
+        $path=$request->file('file')->storeAs('uploads', $fileName, 'public');
+        return response()->json(['location'=>"/storage/$path"]); 
     }
 }

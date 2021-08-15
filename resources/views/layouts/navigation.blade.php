@@ -1,7 +1,8 @@
 <nav>
     <div class="navbar container d-flex justify-content-between">
-        <a class="hamburger d-block d-md-none" data-bs-toggle="offcanvas" href="#side_navigation" role="button" aria-controls="side_navigation">
-             <img src="/images/hamburger.png" alt="">
+        <a class="hamburger d-block d-lg-none" data-bs-toggle="offcanvas" href="#side_navigation" role="button"
+            aria-controls="side_navigation">
+            <img src="/images/hamburger.png" alt="">
         </a>
         <a href="{{ route('index') }}">
             <div class="logo">
@@ -9,7 +10,7 @@
             </div>
         </a>
         <div class="d-flex align-items-center">
-            <ul class="navigation d-none d-md-flex">
+            <ul class="navigation d-none d-lg-flex">
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('about') }}">Tentang Kami</a>
                 </li>
@@ -20,7 +21,9 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         @foreach ($catalogs as $catalog)
-                        <li><a class="dropdown-item" href="{{ $catalog->link ? $catalog->link : route('catalog.show', $catalog->slug) }}">{{ $catalog->title }}</a></li>
+                        <li><a class="dropdown-item"
+                                href="{{ $catalog->link ? $catalog->link : route('catalog.show', $catalog->slug) }}">{{ $catalog->title }}</a>
+                        </li>
                         @endforeach
                     </ul>
                 </li>
@@ -32,7 +35,7 @@
                 </li>
             </ul>
             <div class="search">
-                <i class="fa fa-search" aria-hidden="true"></i>
+                <i class="fa fa-search" id="search_btn" aria-hidden="true"></i>
             </div>
         </div>
     </div>
@@ -64,28 +67,68 @@
         }
         });
     </script>
-
 </nav>
+
+<div id="search">
+    <div class="close"><i class="fa fa-times" aria-hidden="true"></i></div>
+    <form action="{{ route('search') }}" role="search" id="search_form" action="" method="GET">
+         @csrf
+        <input type="search" name="search_query" placeholder="Search">
+        <button type="submit" value="" class="btn">
+            <i class="fa fa-search" aria-hidden="true"></i>
+        </button>
+    </form>
+</div>
 
 
 <div class="offcanvas offcanvas-start" tabindex="-1" id="side_navigation" aria-labelledby="sideNavigationLabel">
-    <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="sideNavigationLabel">Offcanvas</h5>
-      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-      <div>
-        Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images, lists, etc.
-      </div>
-      <div class="dropdown mt-3">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown">
-          Dropdown button
+    <div class="d-flex justify-content-end">
+        <button type="button" class="btn button-close" data-bs-dismiss="offcanvas">
+            <i class="fa fa-times" aria-hidden="true"></i>
         </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <li><a class="dropdown-item" href="#">Action</a></li>
-          <li><a class="dropdown-item" href="#">Another action</a></li>
-          <li><a class="dropdown-item" href="#">Something else here</a></li>
-        </ul>
-      </div>
     </div>
-  </div>
+    <div class="menu-overlay">
+        <h1>#UKMJUWARA</h1>
+        <div class="list-menu">
+            <ul>
+                <li>
+                    <a href="{{ route('about') }}">Tentang Kami</a>
+                </li>
+                <li>
+                    <a data-bs-toggle="collapse" href="#katalog" role="button" aria-expanded="false"
+                        aria-controls="katalog">Katalog &nbsp; <span><i class="fa fa-caret-down"
+                                aria-hidden="true"></i></span></a>
+                    <div class="collapse" id="katalog">
+                        <ul class="child-menu">
+                            @foreach ($catalogs as $catalog)
+                            <li>
+                                <a
+                                    href="{{ $catalog->link ? $catalog->link : route('catalog.show', $catalog->slug) }}">{{ $catalog->title }}</a>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="{{ route('article.index') }}">Berita</a>
+                </li>
+                <li>
+                    <a href="{{ route('contact') }}">Kemitraan</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $('#search_btn').on('click', function(event) {    
+            $('#search').addClass('open');
+            $('#search > form > input[type="search"]').focus();
+        });            
+        $('#search .close').on('click', function(event) {
+            $('#search').removeClass('open');
+        });            
+    });
+
+</script>

@@ -2,6 +2,7 @@
     background: $secondary-color;
     color: $background;
     padding: 1.5rem 0;
+    width: 100%;
 
     @include breakpoint-down(small) {
         padding: 1rem 0;

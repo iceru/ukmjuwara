@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3740d9fdca8d5848499eceef33ec057b",
+    "content-hash": "e36d2d0228ff99af733fb06a8a028a2b",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3752,6 +3752,72 @@
             "time": "2021-03-03T13:34:32+00:00"
         },
         {
+            "name": "spatie/laravel-searchable",
+            "version": "1.10.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-searchable.git",
+                "reference": "1c57e0adb522f5567d93e2c98e42ffe6bb2ea884"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-searchable/zipball/1c57e0adb522f5567d93e2c98e42ffe6bb2ea884",
+                "reference": "1c57e0adb522f5567d93e2c98e42ffe6bb2ea884",
+                "shasum": ""
+            },
+            "require": {
+                "ext-pdo": "*",
+                "laravel/framework": "^8.0",
+                "php": "^7.3|^8.0"
+            },
+            "require-dev": {
+                "larapack/dd": "^1.0",
+                "orchestra/testbench": "^6.0",
+                "phpunit/phpunit": "^9.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Searchable\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alex Vanderbist",
+                    "email": "alex@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Pragmatically search through models and other sources",
+            "homepage": "https://github.com/spatie/laravel-searchable",
+            "keywords": [
+                "laravel-searchable",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-searchable/issues",
+                "source": "https://github.com/spatie/laravel-searchable/tree/1.10.0"
+            },
+            "funding": [
+                {
+                    "url": "https://spatie.be/open-source/support-us",
+                    "type": "custom"
+                }
+            ],
+            "time": "2021-06-24T13:05:38+00:00"
+        },
+        {
             "name": "swiftmailer/swiftmailer",
             "version": "v6.2.7",
             "source": {
@@ -6333,6 +6399,63 @@
                 "source": "https://github.com/webmozarts/assert/tree/1.10.0"
             },
             "time": "2021-03-09T10:59:23+00:00"
+        },
+        {
+            "name": "yurtesen/geonames",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yurtesen/geonames.git",
+                "reference": "fff99487a68dbcd4029cac81285f1a15531e82aa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yurtesen/geonames/zipball/fff99487a68dbcd4029cac81285f1a15531e82aa",
+                "reference": "fff99487a68dbcd4029cac81285f1a15531e82aa",
+                "shasum": ""
+            },
+            "require": {
+                "ext-zip": "*",
+                "illuminate/config": "^5.2.0|^6.0|^7.0|^8.0",
+                "illuminate/console": "^5.2.0|^6.0|^7.0|^8.0",
+                "illuminate/database": "^5.2.0|^6.0|^7.0|^8.0",
+                "illuminate/filesystem": "^5.2.0|^6.0|^7.0|^8.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/Models"
+                ],
+                "psr-4": {
+                    "Yurtesen\\Geonames\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Evren Yurtesen",
+                    "email": "eyurtese@abo.fi"
+                }
+            ],
+            "description": "Geonames importer and models for Eloquent ORM",
+            "keywords": [
+                "city",
+                "country",
+                "eloquent",
+                "geonames",
+                "laravel",
+                "location",
+                "timezone"
+            ],
+            "support": {
+                "issues": "https://github.com/yurtesen/geonames/issues",
+                "source": "https://github.com/yurtesen/geonames/tree/v0.1.5"
+            },
+            "time": "2020-09-22T19:21:28+00:00"
         }
     ],
     "packages-dev": [
@@ -8896,7 +9019,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "yurtesen/geonames": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

@@ -30,11 +30,20 @@
             <div class="row mb-3">
                 <label for="image" class="col-12 col-md-2 col-form-label">Image</label>
                 <div class="col-12 col-md-10 edit-image">
-                    <img src="{{ Storage::url('slider-image/'.$slider->image) }}" alt="image" class="mb-3" width="100" height="100">
+                    <img src="{{ Storage::url('slider-image/'.$slider->image) }}" alt="image" class="mb-3" width="200">
                     <input type="file" class="form-control" id="image" name="image"></input>
                     <p class="form-text text-muted">
                         Image tidak perlu di input kembali jika tidak ingin diganti
                     </p>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="title" class="col-12 col-md-2 col-form-label">Type</label>
+                <div class="col-12 col-md-10">
+                    <select class="form-select" name="type" id="type">
+                        <option value="desktop">Desktop Slider</option>
+                        <option value="mobile">Mobile Slider</option>
+                    </select>
                 </div>
             </div>
             <div class="mb-3 row">

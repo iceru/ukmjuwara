@@ -1,4 +1,7 @@
 <div class="col-lg-2 sidebar-admin">
+    <div class="btn button-close d-flex d-lg-none justify-content-end">
+        <i class="fa fa-times" aria-hidden="true"></i>
+    </div>
     <a href="/">
         <h5>#UKMJUWARA</h5>
     </a>
