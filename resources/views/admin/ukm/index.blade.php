@@ -23,27 +23,27 @@
             <div class="row mb-3">
                 <label for="title" class="col-12 col-md-2 col-form-label">Title</label>
                 <div class="col-12 col-md-10">
-                    <input type="text" class="form-control" id="inputTitle" name="inputTitle">
+                    <input type="text" class="form-control" id="title" name="title">
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="description" class="col-12 col-md-2 col-form-label">Description</label>
                 <div class="col-12 col-md-10">
-                    <textarea type="text" class="form-control" id="inputDescription" name="inputDescription"></textarea>
+                    <textarea type="text" class="form-control" id="description" name="description"></textarea>
                 </div>
             </div>
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label">Image</label>
                 <div class="col-sm-10">
                     <div class="input-group control-group increment" >
-                        <input type="file" name="inputImage[]" class="form-control">
+                        <input type="file" name="image[]" class="form-control">
                         <div class="input-group-btn">
                           <button class="btn btn-success" type="button"><i class="fas fa-plus    "></i> Add</button>
                         </div>
                       </div>
                       <div class="clone hide">
                         <div class="control-group input-group" style="margin-top:10px">
-                          <input type="file" name="inputImage[]" class="form-control">
+                          <input type="file" name="image[]" class="form-control">
                           <div class="input-group-btn">
                             <button class="btn btn-danger" type="button"><i class="fas fa-times    "></i> Remove</button>
                           </div>
@@ -54,7 +54,7 @@
             <div class="row mb-3">
                 <label for="whatsapp" class="col-12 col-md-2 col-form-label">Whatsapp</label>
                 <div class="col-12 col-md-10">
-                    <input type="tel" class="form-control" id="inputWhatsapp" name="inputWhatsapp">
+                    <input type="tel" class="form-control" id="whatsapp" name="whatsapp">
                     <p class="form-text text-muted">
                         Contoh: 081211221111
                     </p>
@@ -63,17 +63,27 @@
             <div class="row mb-3">
                 <label for="instagram" class="col-12 col-md-2 col-form-label">Instagram Link</label>
                 <div class="col-12 col-md-10">
-                    <input type="text" class="form-control" id="inputInstagram" name="inputInstagram">
+                    <input type="text" class="form-control" id="instagram" name="instagram">
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="catalog" class="col-12 col-md-2 col-form-label">Katalog</label>
                 <div class="col-12 col-md-10">
-                    <select class="form-select" name="inputCatalog" id="inputCatalog">
+                    <select class="form-select" name="catalog" id="catalog">
+                        <option disabled selected>Pilih Katalog</option>
                         @foreach ($catalogs as $catalog)
                             <option value="{{ $catalog->id }}">{{ $catalog->title }}</option>
                         @endforeach
                     </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="tags" class="col-12 col-md-2 col-form-label">Kategori</label>
+                <div class="col-12 col-md-10">
+                    <input type="text" class="form-control" id="categories" name="categories">
+                    <p class="form-text text-muted">
+                        (Kategori dipisah dengan spasi, contoh: kategori1 kategori2 kategori3)
+                    </p>
                 </div>
             </div>
             <div class="mb-3 row">
@@ -94,6 +104,7 @@
                     <th>Whatsapp</th>
                     <th>Instagram</th>
                     <th>Katalog</th>
+                    <th>Kategori</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -113,6 +124,9 @@
                     <td>{{ $ukm->whatsapp }}</td>
                     <td>{{ $ukm->instagram }}</td>
                     <td>{{ $ukm->catalog->title }}</td>
+                    <td class="categories">@foreach ($ukm->categories as $item)
+                        <span>{{ $item->title }}</span>
+                    @endforeach</td>
                     <td><a class="btn btn-primary btn-small d-flex align-items-center justify-content-center mb-2" href="/admin/ukm/edit/{{$ukm->id}}"><i class="fas fa-edit me-1"></i> Edit</a>
                         <a class="btn btn-danger btn-small d-flex align-items-center justify-content-center" href="/admin/ukm/delete/{{$ukm->id}}" onclick="return confirm('Hapus data ini?')"><i class="fa fa-trash me-1" aria-hidden="true"></i> Delete</a></td>
                 </tr>
@@ -134,6 +148,39 @@
 
             $('body').on("click", ".btn-danger", function() {
                 $(this).parents(".control-group").remove();
+            });
+
+            function split( val ) {
+                return val.split(/,\s*/);
+            }
+
+            function extractLast( term ) {
+                return split( term ).pop();
+            }
+
+            $('#categories').autocomplete({
+                source: function( request, response ) {
+                    // delegate back to autocomplete, but extract the last term
+                    response( $.ui.autocomplete.filter(
+                        {!! json_encode($categories) !!}, extractLast( request.term ) ) );
+                },
+                select: function( event, ui ) {
+                    var terms = split( this.value );
+                    // remove the current input
+                    terms.pop();
+                    // add the selected item
+                    terms.push( ui.item.value );
+                    // add placeholder to get the comma-and-space at the end
+                    terms.push("");
+                    this.value = terms.join(", " );
+                    this.value = terms.replace(/,\s*$/, "");
+                    
+                    metrics = jQuery.grep(metrics, function(element) {
+                        return element.value != ui.item.value;
+                    });
+                    $('#autocomplete').autocomplete('option', 'source', metrics)
+                    return false;
+                }
             });
         });
     </script>

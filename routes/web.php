@@ -11,6 +11,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\AdminTagController;
 use App\Http\Controllers\AdminUkmController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AdminArticleController;
 use App\Http\Controllers\AdminDashboardController;
 
@@ -56,6 +57,12 @@ Route::middleware(['auth', 'role:administrator'])->group(function (){
     Route::get('/admin/catalog/edit/{id}', [CatalogController::class, 'edit'])->name('admin.catalog.edit');
     Route::post('/admin/catalog/update', [CatalogController::class, 'update'])->name('admin.catalog.update');
     Route::get('/admin/catalog/delete/{id}', [CatalogController::class, 'destroy'])->name('admin.catalog.destroy');
+
+    Route::get('/admin/category', [CategoryController::class, 'index'])->name('admin.category');
+    Route::post('/admin/category/store', [CategoryController::class, 'store'])->name('admin.category.store');
+    Route::get('/admin/category/edit/{id}', [CategoryController::class, 'edit'])->name('admin.category.edit');
+    Route::post('/admin/category/update', [CategoryController::class, 'update'])->name('admin.category.update');
+    Route::get('/admin/category/delete/{id}', [CategoryController::class, 'destroy'])->name('admin.category.destroy');
 
     Route::get('/admin/ukm', [AdminUkmController::class, 'index'])->name('admin.ukm');
     Route::post('/admin/ukm/store', [AdminUkmController::class, 'store'])->name('admin.ukm.store');

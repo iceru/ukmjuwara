@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUkmsCategoriesTable extends Migration
+class CreateUkmCategoryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateUkmsCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('ukms_categories', function (Blueprint $table) {
+        Schema::create('ukm_category', function (Blueprint $table) {
             $table->unsignedBigInteger('ukm_id');
             $table->foreign('ukm_id')->references('id')->on('ukms')->onDelete('cascade');
             $table->unsignedBigInteger('category_id');
@@ -29,6 +29,6 @@ class CreateUkmsCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ukms_categories');
+        Schema::dropIfExists('ukm_category');
     }
 }
