@@ -96,6 +96,16 @@
         }
     }
 
+    .table {
+        .categories {
+            span:not(:last-child) {
+                &:after {
+                    content: ',';
+                }
+            }
+        }
+    }
+
     .table, .edit-image {
         img {
             object-fit: cover;

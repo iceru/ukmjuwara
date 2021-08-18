@@ -79,10 +79,21 @@
                 <label for="catalog" class="col-12 col-md-2 col-form-label">Katalog</label>
                 <div class="col-12 col-md-10">
                     <select class="form-select" name="catalog" id="catalog">
+                        <option disabled>Pilih Katalog</option>
                         @foreach ($catalogs as $catalog)
                             <option {{ $ukm->catalog->id == $catalog->id ? 'selected' : ''}} value="{{ $catalog->id }}">{{ $catalog->title }}</option>
                         @endforeach
                     </select>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label for="tags" class="col-12 col-md-2 col-form-label">Kategori</label>
+                <div class="col-12 col-md-10">
+                    <input type="text" class="form-control" value="{{ $categories_array }}" id="categories" name="categories">
+                    <p class="form-text text-muted">
+                        (Kategori dipisah dengan spasi, contoh: kategori1 kategori2 kategori3)
+                    </p>
                 </div>
             </div>
            
@@ -104,6 +115,36 @@
 
             $('body').on("click", ".btn-danger", function() {
                 $(this).parents(".control-group").remove();
+            });
+
+            function split( val ) {
+                return val.split(/,\s*/);
+            }
+
+            function extractLast( term ) {
+                return split( term ).pop();
+            }
+
+            var categories = {!! json_encode($categories) !!};
+
+            $('#categories').autocomplete({
+                source: function( request, response ) {
+                    // delegate back to autocomplete, but extract the last term
+                    response( $.ui.autocomplete.filter(
+                      categories  , extractLast( request.term ) ) );
+                },
+                select: function( event, ui ) {
+                    var terms = split( this.value );
+                    // remove the current input
+                    terms.pop();
+                    // add the selected item
+                    terms.push( ui.item.value );
+                    // add placeholder to get the comma-and-space at the end
+                    terms.push("");
+                    this.value = terms.join("");
+                    
+                    return false;
+                }
             });
         });
     </script>

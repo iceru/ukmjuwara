@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ukm;
 use App\Models\Catalog;
+use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -19,8 +20,9 @@ class AdminUkmController extends Controller
     {
         $ukms = Ukm::all();
         $catalogs = Catalog::all();
+        $categories = Category::pluck('title')->toArray();
 
-        return view('admin.ukm.index', compact('ukms', 'catalogs'));
+        return view('admin.ukm.index', compact('ukms', 'catalogs', 'categories'));
     }
 
     /**
@@ -44,36 +46,50 @@ class AdminUkmController extends Controller
         $ukm = new Ukm;
 
         $request->validate([
-            'inputTitle' => 'required',
-            'inputDescription' => 'required',
-            'inputWhatsapp' => 'required',
-            'inputImage' => 'required',
-            'inputImage.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'inputInstagram' => 'required',
-            'inputCatalog' => 'required',
+            'title' => 'required',
+            'description' => 'required',
+            'whatsapp' => 'required',
+            'image' => 'required',
+            'image.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'instagram' => 'required',
+            'catalog' => 'required',
+            'categories' => 'nullable|string|regex:/^([a-z0-9\s]+,)*([a-z0-9\s]+){1}$/i',
         ]);
 
-        if ($request->hasFile('inputImage')) {
+        if ($request->hasFile('image')) {
 
-            $images = $request->file('inputImage');
+            $images = $request->file('image');
 
             foreach($images as $image) {
                 $name = $image->getClientOriginalName();
-                $filename = $request->inputTitle.'_'.time().'.'.$name;
+                $filename = $request->title.'_'.time().'.'.$name;
                 $path = $image->storeAs('public/ukm-image', $filename);
                 $data[] = $filename;
             }
         }
         $ukm->images=json_encode($data);
 
-        $ukm->title = $request->inputTitle;
-        $ukm->slug = Str::slug($request->inputTitle);
-        $ukm->description = $request->inputDescription;
-        $ukm->whatsapp = $request->inputWhatsapp;
-        $ukm->instagram = $request->inputInstagram;
-        $ukm->catalog_id = $request->inputCatalog;
+        $ukm->title = $request->title;
+        $ukm->slug = Str::slug($request->title);
+        $ukm->description = $request->description;
+        $ukm->whatsapp = $request->whatsapp;
+        $ukm->instagram = $request->instagram;
+        $ukm->catalog_id = $request->catalog;
 
         $ukm->save();
+
+        $categoryArray = explode(',', $request->categories);
+        $categories = array();
+
+        foreach($categoryArray as $ukmCategory) {
+            $category = Category::firstOrCreate([
+                'title' => $ukmCategory
+            ]);
+
+            $categories[$category->id] = ['ukm_id' => $ukm->id];
+        }
+
+        $ukm->categories()->attach($categories);
 
         return redirect()->route('admin.ukm')->with('success','Data berhasil di input');
     }
@@ -99,8 +115,15 @@ class AdminUkmController extends Controller
     {
         $ukm = Ukm::findOrFail($id);
         $catalogs = Catalog::all();
+        $categories = Category::pluck('title')->toArray();
+        $array = array();
 
-        return view('admin.ukm.edit', compact('ukm', 'catalogs'));
+        foreach($ukm->categories as $category) {
+            array_push($array, $category->title);
+        }
+
+        $categories_array = implode(", ", $array);
+        return view('admin.ukm.edit', compact('ukm', 'catalogs', 'categories', 'categories_array'));
     }
 
     /**
@@ -123,6 +146,7 @@ class AdminUkmController extends Controller
             'image.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'instagram' => 'required',
             'catalog' => 'required',
+            'categories' => 'nullable|string|regex:/^([a-z0-9\s]+,)*([a-z0-9\s]+){1}$/i',
         ]);
 
         if ($request->hasFile('image')) {
@@ -147,6 +171,19 @@ class AdminUkmController extends Controller
         $ukm->catalog_id = $request->catalog;
 
         $ukm->save();
+
+        $categoryArray = explode(',', $request->categories);
+        $categories = array();
+
+        foreach($categoryArray as $ukmCategory) {
+            $category = Category::firstOrCreate([
+                'title' => $ukmCategory
+            ]);
+
+            $categories[$category->id] = ['ukm_id' => $ukm->id];
+        }
+
+        $ukm->categories()->sync($categories);
 
         return redirect()->route('admin.ukm')->with('success','Data berhasil di update');
     }
