@@ -20,22 +20,19 @@
                <div class="footer-item">
                     <ul>
                         <li>
-                            <a href="">Tentang Kami</a>
+                            <a href="{{ route('about') }}">Tentang Kami</a>
                         </li>
                         <li>
-                            <a href="">Katalog</a>
+                            <a href="{{ route('article.index') }}">Berita</a>
                         </li>
                         <li>
-                            <a href="">Berita</a>
-                        </li>
-                        <li>
-                            <a href="">Kemitraan</a>
+                            <a href="{{ route('contact') }}">Kemitraan</a>
                         </li>
                     </ul>
                </div>
             </div>
             <div class="col-12 col-md-3">
-                <div class="footer-item">
+                {{-- <div class="footer-item">
                     <ul>
                         <li>
                             <a href="">Privacy Policy</a>
@@ -44,14 +41,14 @@
                             <a href="">Terms of Services</a>
                         </li>
                     </ul>
-                </div>
+                </div> --}}
             </div>
             <div class="col-md-1">
                 <div class="footer-item">
                     <div class="d-flex mt-3" style="font-size: 1.25rem">
-                        <i class="fab fa-instagram me-2" aria-hidden="true"></i>
-                        <i class="fab fa-facebook me-2" aria-hidden="true"></i>
-                        <i class="fab fa-youtube" aria-hidden="true"></i>
+                        <a href="https://www.instagram.com/ukmindonesiaid"><i class="fab fa-instagram me-2" aria-hidden="true"></i></a>
+                        <a href="https://www.facebook.com/ukmindonesia.org/"><i class="fab fa-facebook me-2" aria-hidden="true"></i></a>
+                        <a href="https://www.youtube.com/channel/UCWcTn1tlRbqifDA3uY67Sfw"><i class="fab fa-youtube" aria-hidden="true"></i></a>
                     </div>
                 </div>
             </div>

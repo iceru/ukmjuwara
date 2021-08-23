@@ -23,7 +23,7 @@
         </div>
         <div class="header-image">
             <div class="image-container ratio2halfx1">
-                <img class="image" src="/images/header tentang kami.jpg" alt="">
+                <img class="image" src="/images/header tentang kami.jpg" alt="" loading="lazy">
             </div>
         </div>
         <div class="container section-2">
@@ -40,7 +40,7 @@
                 </div>
                 <div class="col-12 col-md-5">
                     <div class="image-container ratio4x3">
-                        <img class="image" src="/images/tentang kami 1.jpg" alt="">
+                        <img class="image" src="/images/tentang kami 1.jpg" alt="" loading="lazy">
                     </div>
                 </div>
             </div>
@@ -50,7 +50,7 @@
                 <div class="row">
                     <div class="col-12 col-md-5 mb-3 mb-md-0">
                         <div class="image-container ratio4x3">
-                            <img class="image" src="/images/tentang kami 2.jpg" alt="">
+                            <img class="image" src="/images/tentang kami 2.jpg" alt="" loading="lazy">
                         </div>
                     </div>
                     <div class="col-12 col-md-7">
@@ -87,24 +87,24 @@
                     <div class="row">
                         <div class="col-6 mb-3">
                             <div class="image-container ratio1x1">
-                                <img class="image" src="/images/tentang kami 3.jpg" alt="">
+                                <img class="image" src="/images/tentang kami 3.jpg" alt="" loading="lazy">
                             </div>
                         </div>
                         <div class="col-6 mb-3">
                             <div class="image-container ratio1x1">
-                                <img class="image" src="/images/tentang kami 4.jpg" alt="">
+                                <img class="image" src="/images/tentang kami 4.jpg" alt="" loading="lazy">
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="image-container ratio2x1">
-                                <img class="image" src="/images/tentang kami 5.jpg" alt="">
+                                <img class="image" src="/images/tentang kami 5.jpg" alt="" loading="lazy">
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
                     <div class="image-container ratio1x1">
-                        <img class="image" src="/images/tentang kami 6.jpg" alt="">
+                        <img class="image" src="/images/tentang kami 6.jpg" alt="" loading="lazy">
                     </div>
                 </div>
             </div>
