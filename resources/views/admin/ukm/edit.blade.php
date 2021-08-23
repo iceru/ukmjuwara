@@ -22,19 +22,19 @@
             <input type="hidden" name="id" value="{{$ukm->id}}">
 
             <div class="row mb-3">
-                <label for="title" class="col-12 col-md-2 col-form-label">Title</label>
+                <label for="title" class="col-12 col-md-2 col-form-label">Nama UKM</label>
                 <div class="col-12 col-md-10">
                     <input type="text" class="form-control" value="{{ $ukm->title }}" id="title" name="title">
                 </div>
             </div>
             <div class="row mb-3">
-                <label for="description" class="col-12 col-md-2 col-form-label">Description</label>
+                <label for="description" class="col-12 col-md-2 col-form-label">Deskripsi</label>
                 <div class="col-12 col-md-10">
                     <textarea type="text" class="form-control" id="description" name="description">{{ $ukm->description }}</textarea>
                 </div>
             </div>
             <div class="row mb-3">
-                <label class="col-sm-2 col-form-label">Image</label>
+                <label class="col-sm-2 col-form-label">Images</label>
                 <div class="col-sm-10">
                     <div class="d-flex mb-3">
                         @foreach ((array)json_decode($ukm->images) as $item)
@@ -90,10 +90,53 @@
             <div class="row mb-3">
                 <label for="tags" class="col-12 col-md-2 col-form-label">Kategori</label>
                 <div class="col-12 col-md-10">
-                    <input type="text" class="form-control" value="{{ $categories_array }}" id="categories" name="categories">
+                    <select type="text" class="form-control" multiple aria-label="multiple size 4 select example" id="categories" name="categories[]">
+                        @foreach ($categories as $category)
+                            <option {{ in_array($category->title, $categories_array) ? "selected" : "" }} value="{{ $category->title }}">{{ $category->title }}</option>
+                        @endforeach
+                    </select>
                     <p class="form-text text-muted">
-                        (Kategori dipisah dengan spasi, contoh: kategori1 kategori2 kategori3)
+                        Untuk memilih lebih dari satu kategori, gunakan <b>Ctrl+Left Click</b>
                     </p>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label for="instagram" class="col-12 col-md-2 col-form-label">Alamat Lengkap</label>
+                <div class="col-12 col-md-10">
+                    <input type="text" class="form-control" value="{{ $ukm->address }}" id="address" name="address">
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label for="catalog" class="col-12 col-md-2 col-form-label">Provinsi</label>
+                <div class="col-12 col-md-10">
+                    <select class="form-select" name="state" id="state">
+                        <option disabled selected>Pilih Provinsi</option>
+                        @foreach ($states as $state)
+                        <option {{ $state['id'] == $ukm->state ? 'selected' : '' }} value="{{ $state['id']}}">{{ $state['nama']}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label for="catalog" class="col-12 col-md-2 col-form-label">Kota</label>
+                <div class="col-12 col-md-10">
+                    <select class="form-select" name="city" id="city">
+                        <option disabled selected>Pilih Kota</option>
+                    </select>
+                </div>
+            </div>
+
+            <input type="text" name="city_name" id="city_name" hidden>
+
+            <div class="row mb-3">
+                <label for="catalog" class="col-12 col-md-2 col-form-label">Kecamatan</label>
+                <div class="col-12 col-md-10">
+                    <select class="form-select" name="subDistrict" id="subDistrict">
+                        <option disabled selected>Pilih Kecamatan</option>
+                    </select>
                 </div>
             </div>
            
@@ -117,36 +160,153 @@
                 $(this).parents(".control-group").remove();
             });
 
-            function split( val ) {
-                return val.split(/,\s*/);
-            }
+            // function split( val ) {
+            //     return val.split(/,\s*/);
+            // }
 
-            function extractLast( term ) {
-                return split( term ).pop();
-            }
+            // function extractLast( term ) {
+            //     return split( term ).pop();
+            // }
 
-            var categories = {!! json_encode($categories) !!};
+            // var categories = {!! json_encode($categories) !!};
 
-            $('#categories').autocomplete({
-                source: function( request, response ) {
-                    // delegate back to autocomplete, but extract the last term
-                    response( $.ui.autocomplete.filter(
-                      categories  , extractLast( request.term ) ) );
-                },
-                select: function( event, ui ) {
-                    var terms = split( this.value );
-                    // remove the current input
-                    terms.pop();
-                    // add the selected item
-                    terms.push( ui.item.value );
-                    // add placeholder to get the comma-and-space at the end
-                    terms.push("");
-                    this.value = terms.join("");
+            // $('#categories').autocomplete({
+            //     source: function( request, response ) {
+            //         // delegate back to autocomplete, but extract the last term
+            //         response( $.ui.autocomplete.filter(
+            //           categories  , extractLast( request.term ) ) );
+            //     },
+            //     select: function( event, ui ) {
+            //         var terms = split( this.value );
+            //         // remove the current input
+            //         terms.pop();
+            //         // add the selected item
+            //         terms.push( ui.item.value );
+            //         // add placeholder to get the comma-and-space at the end
+            //         terms.push("");
+            //         this.value = terms.join("");
                     
-                    return false;
-                }
-            });
+            //         return false;
+            //     }
+            // });
         });
+    </script>
+    
+    <script>
+        $(document).ready(function(){
+            var stateID = $('#state').val();
+            if (stateID) {
+                $.ajax({
+                    type: "GET",
+                    url: "{{url('getCity')}}?state_id=" + stateID,
+                    success: function (res) {
+                        if (res) {
+                            $("#city").empty();
+                            $.each(res, function (key, value) {
+                                if(value.id == '{{ $ukm->city }}') {
+                                    $("#city").append(
+                                        '<option selected value="' + value.id + '">' + value.nama + "</option>"
+                                    );
+                                } else {
+                                    $("#city").append(
+                                        '<option value="' + value.id + '">' + value.nama + "</option>"
+                                    );
+                                }
+                            });
+                            subDistrict();
+                        } else {
+                            $("#city").empty();
+                        }
+                    },
+                });
+            } else {
+                $("#city").empty();
+            }
+            debugger
+
+           function subDistrict () {
+               debugger
+                var city_name = $('#city').find('option:selected').text();
+                $("#city_name").val(city_name);
+                var cityID = $('#city').val();
+                if (cityID) {
+                    $.ajax({
+                        type: "GET",
+                        url: "{{url('getSubdistrict')}}?city_id=" + cityID,
+                        success: function (res) {
+                            if (res) {
+                                $("#subDistrict").empty();
+                                $.each(res, function (key, value) {
+                                    if(value.id === '{{ $ukm->subDistrict }}') {
+                                        $("#subDistrict").append(
+                                            '<option selected value="' + value.id + '">' + value.nama + "</option>"
+                                        );
+                                    } else {
+                                        $("#subDistrict").append(
+                                            '<option value="' + value.id + '">' + value.nama + "</option>"
+                                        );
+                                    }
+                                });
+                            } else {
+                                $("#subDistrict").empty();
+                            }
+                        },
+                    });
+                } else {
+                    $("#subDistrict").empty();
+                }
+           }
+        })
+        $("#state").on("change", function () {
+            var stateID = $(this).val();
+            if (stateID) {
+                $.ajax({
+                    type: "GET",
+                    url: "{{url('getCity')}}?state_id=" + stateID,
+                    success: function (res) {
+                        if (res) {
+                            $("#city").empty();
+                            $.each(res, function (key, value) {
+                                $("#city").append(
+                                    '<option {{' + value.id + '== $ukm->city ? `selected` : `` }} value="' + value.id + '">' + value.nama + "</option>"
+                                );
+                            });
+                        } else {
+                            $("#city").empty();
+                        }
+                    },
+                });
+            } else {
+                $("#city").empty();
+            }
+        });
+
+        $("#city").on("change", function () {
+            var city_name = $(this).find('option:selected').text();
+            $("#city_name").val(city_name);
+            var cityID = $(this).val();
+            if (cityID) {
+                $.ajax({
+                    type: "GET",
+                    url: "{{url('getSubdistrict')}}?city_id=" + cityID,
+                    success: function (res) {
+                        if (res) {
+                            $("#subDistrict").empty();
+                            $.each(res, function (key, value) {
+                                $("#subDistrict").append(
+                                    '<option value="' + value.nama + '">' + value.nama + "</option>"
+                                );
+                            });
+                        } else {
+                            $("#subDistrict").empty();
+                        }
+                    },
+                });
+            } else {
+                $("#subDistrict").empty();
+            }
+        });
+
     </script>
 
 </x-admin-layout>

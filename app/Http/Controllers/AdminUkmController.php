@@ -7,6 +7,8 @@ use App\Models\Catalog;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Validator;
 use Illuminate\Support\Facades\Storage;
 
 class AdminUkmController extends Controller
@@ -20,9 +22,22 @@ class AdminUkmController extends Controller
     {
         $ukms = Ukm::all();
         $catalogs = Catalog::all();
-        $categories = Category::pluck('title')->toArray();
+        $categories = Category::all();
+        $states = json_decode(file_get_contents('https://ibnux.github.io/data-indonesia/propinsi.json'), true);
 
-        return view('admin.ukm.index', compact('ukms', 'catalogs', 'categories'));
+        return view('admin.ukm.index', compact('ukms', 'catalogs', 'categories', 'states'));
+    }
+
+    public function getCity(Request $request)
+    {
+        $cities = json_decode(file_get_contents('https://ibnux.github.io/data-indonesia/kabupaten/'.$request->state_id.'.json'), true);
+        return response()->json($cities);
+    }
+
+    public function getSubdistrict(Request $request)
+    {
+        $cities = json_decode(file_get_contents('https://ibnux.github.io/data-indonesia/kecamatan/'.$request->city_id.'.json'), true);
+        return response()->json($cities);
     }
 
     /**
@@ -45,7 +60,7 @@ class AdminUkmController extends Controller
     {
         $ukm = new Ukm;
 
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'title' => 'required',
             'description' => 'required',
             'whatsapp' => 'required',
@@ -53,8 +68,19 @@ class AdminUkmController extends Controller
             'image.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'instagram' => 'required',
             'catalog' => 'required',
-            'categories' => 'nullable|string|regex:/^([a-z0-9\s]+,)*([a-z0-9\s]+){1}$/i',
+            'categories' => 'nullable',
+            'address' => 'required',
+            'state' => 'required',
+            'city' => 'required',
+            'subDistrict' => 'required',
+            'city_name'=> 'required'
         ]);
+
+        
+        if ($validator->fails()) {
+            return back()->withErrors($validator)
+            ->withInput();
+        }
 
         if ($request->hasFile('image')) {
 
@@ -75,10 +101,15 @@ class AdminUkmController extends Controller
         $ukm->whatsapp = $request->whatsapp;
         $ukm->instagram = $request->instagram;
         $ukm->catalog_id = $request->catalog;
+        $ukm->address = $request->address;
+        $ukm->state = $request->state;
+        $ukm->city = $request->city;
+        $ukm->city_name = $request->city_name;
+        $ukm->subDistrict = $request->subDistrict;
 
         $ukm->save();
 
-        $categoryArray = explode(',', $request->categories);
+        $categoryArray = $request->categories;
         $categories = array();
 
         foreach($categoryArray as $ukmCategory) {
@@ -91,7 +122,8 @@ class AdminUkmController extends Controller
 
         $ukm->categories()->attach($categories);
 
-        return redirect()->route('admin.ukm')->with('success','Data berhasil di input');
+
+        return redirect()->back()->with('success','Data berhasil di input');
     }
 
     /**
@@ -115,15 +147,16 @@ class AdminUkmController extends Controller
     {
         $ukm = Ukm::findOrFail($id);
         $catalogs = Catalog::all();
-        $categories = Category::pluck('title')->toArray();
-        $array = array();
+        $categories = Category::all();
+        $states = json_decode(file_get_contents('https://ibnux.github.io/data-indonesia/propinsi.json'), true);
+
+        $categories_array = array();
 
         foreach($ukm->categories as $category) {
-            array_push($array, $category->title);
+            array_push($categories_array, $category->title);
         }
 
-        $categories_array = implode(", ", $array);
-        return view('admin.ukm.edit', compact('ukm', 'catalogs', 'categories', 'categories_array'));
+        return view('admin.ukm.edit', compact('ukm', 'catalogs', 'categories', 'categories_array', 'states'));
     }
 
     /**
@@ -146,7 +179,11 @@ class AdminUkmController extends Controller
             'image.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'instagram' => 'required',
             'catalog' => 'required',
-            'categories' => 'nullable|string|regex:/^([a-z0-9\s]+,)*([a-z0-9\s]+){1}$/i',
+            'categories' => 'nullable',
+            'address' => 'required',
+            'state' => 'required',
+            'city' => 'required',
+            'subDistrict' => 'required'
         ]);
 
         if ($request->hasFile('image')) {
@@ -169,10 +206,14 @@ class AdminUkmController extends Controller
         $ukm->whatsapp = $request->whatsapp;
         $ukm->instagram = $request->instagram;
         $ukm->catalog_id = $request->catalog;
+        $ukm->address = $request->address;
+        $ukm->state = $request->state;
+        $ukm->city = $request->city;
+        $ukm->subDistrict = $request->subDistrict;
 
         $ukm->save();
 
-        $categoryArray = explode(',', $request->categories);
+        $categoryArray = $request->categories;
         $categories = array();
 
         foreach($categoryArray as $ukmCategory) {

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddFeaturedToUkmsTable extends Migration
+class AddCityNameToUkmsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddFeaturedToUkmsTable extends Migration
     public function up()
     {
         Schema::table('ukms', function (Blueprint $table) {
-            $table->string('featured');
+            $table->string('city_name');
         });
     }
 
@@ -26,7 +26,7 @@ class AddFeaturedToUkmsTable extends Migration
     public function down()
     {
         Schema::table('ukms', function (Blueprint $table) {
-            $table->dropColumn('featured');
+            $table->dropColumn('city_name');
         });
     }
 }

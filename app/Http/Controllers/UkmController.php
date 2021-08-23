@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Ukm;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cookie;
 
 class UkmController extends Controller
@@ -48,6 +49,45 @@ class UkmController extends Controller
     public function show($slug)
     {
         $ukm = Ukm::where('slug', $slug)->firstOrFail();
+        $state_name = '';
+        $city_name = '';
+        $sub_name = '';
+        if($ukm->state) {
+            $state_res = Http::get('https://ibnux.github.io/data-indonesia/propinsi.json');
+            $states = json_decode($state_res->body());
+            foreach ($states as $item){
+                if($item->id == $ukm->state) {
+                    $state_name = strtolower($item->nama);
+                    if($state_name == "dki jakarta") {
+                        $state_name = "DKI Jakarta";
+                    }
+                }
+            }
+            $city_res = Http::get('https://ibnux.github.io/data-indonesia/kabupaten/'.$ukm->state.'.json');
+            $cities = json_decode($city_res->body());
+            foreach ($cities as $item){
+                if($item->id == $ukm->city) {
+                    $city_name = strtolower($item->nama);
+                }
+            }
+
+            $subDiscrict_res = Http::get('https://ibnux.github.io/data-indonesia/kecamatan/'.$ukm->city.'.json');
+            $subDistricts = json_decode($subDiscrict_res->body());
+            foreach ($subDistricts as $item){
+                if($item->id == $ukm->subDistrict) {
+                    $sub_name = strtolower($item->nama);
+                }
+            }
+        }
+
+        $categoryId = array();
+        foreach($ukm->categories as $category) {
+            array_push($categoryId, $category->id);
+        }
+
+        $relatedUkms = Ukm::where('id', '!=', $ukm->id)->whereHas('categories', function($query) use($categoryId, $ukm) {
+            $query->whereIn('category_id', $categoryId);
+        })->get()->take(4);
 
         views($ukm)
         ->cooldown(10)
@@ -55,7 +95,7 @@ class UkmController extends Controller
         
         $view = views($ukm)->count();
     
-        return view('ukm', compact('ukm', 'view'));
+        return view('ukm', compact('ukm', 'view', 'city_name', 'sub_name', 'state_name', 'relatedUkms'));
     }
 
     /**

@@ -46,12 +46,13 @@
                                         @foreach ($bests as $ukm)
                                         <div>
                                             <a href="{{ route('ukm.show', $ukm->slug) }}">
-                                            @foreach ((array)json_decode($ukm->images)[0] as $image)
-                                            <div class="ratio ratio-1x1 ukm" style="background-image: url('{{ Storage::url('ukm-image/'.$image) }}')">
-                                            @endforeach
-                                                <div class="ukm-content">
-                                                    <div class="ukm-title">
-                                                        <h5>{{ $ukm->title }}</h5>
+                                                <div class="ukm">
+                                                    <div class="ukm-image">
+                                                        <div class="ratio ratio-1x1">
+                                                            @foreach ((array)json_decode($ukm->images)[0] as $image)
+                                                            <img src="{{ Storage::url('ukm-image/'.$image) }}" alt="">
+                                                            @endforeach
+                                                        </div>
                                                     </div>
                                                     <div class="ukm-wa">
                                                         <a href="https://wa.me/{{ $ukm->whatsapp }}">
@@ -59,7 +60,11 @@
                                                         </a>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </a>
+                                            <a href="{{ route('ukm.show', $ukm->slug) }}">
+                                                <div class="ukm-title mt-2">
+                                                    <p title="{{ $ukm->title }}">{{ $ukm->title }}</p>
+                                                </div>
                                             </a>
                                         </div>
                                         @endforeach
@@ -75,81 +80,37 @@
                     <div class="col-md-3 filter">
                         <h3 class="mb-3">Filter</h3>
                         <div class="search-ukm">
-                            <input type="text" class="form-control" placeholder="Search" name="search">
+                            <form action="{{ route('search') }}" role="search" id="search_form" action="" method="GET">
+                            <input type="text" class="form-control" placeholder="Search" type="search" name="search_query">
                             <div class="icon-search">
-                                <i class="fa fa-search" aria-hidden="true"></i>
+                                <button type="submit" value="" class="btn">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </button>
                             </div>
+                            </form>
                         </div>
                         <div class="category-filter mb-4">
                             <h5 class="mb-2">Kategori</h5>
+                            @foreach ($categories as $category)
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <input class="form-check-input" type="checkbox" value="{{ $category->id }}" id="cat{{ $category->id }}" name="cat[]">
                                 <label class="form-check-label" for="flexCheckDefault">
-                                    Kategori 1
+                                    {{ $category->title }}
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    Kategori 2
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    Kategori 3
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    Kategori 4
-                            </div>
+                            @endforeach
                         </div>
                         <div class="location-filter">
                             <h5 class="mb-2">Lokasi</h5>
+                            @foreach ($cities as $item)
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    Lokasi 1
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    Lokasi 2
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    Lokasi 3
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    Lokasi 4
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-9 katalog-ukm">
-                        <div class="row">
-                            @foreach ($ukms as $ukm)
-                            <div class="col-6 col-md-4 col-xl-3 mb-4">
-                                <a href="{{ route('ukm.show', $ukm->slug) }}">
-                                @foreach ((array)json_decode($ukm->images)[0] as $image)
-                                <div class="ratio ratio-1x1 ukm" style="background-image: url('{{ Storage::url('ukm-image/'.$image) }}')">
-                                @endforeach
-                                    <div class="ukm-content">
-                                        <div class="ukm-title">
-                                            <h5>{{ $ukm->title }}</h5>
-                                        </div>
-                                        <div class="ukm-wa">
-                                            <a href="https://wa.me/{{ $ukm->whatsapp }}">
-                                                <img src="/images/whatsapp.png" alt="">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
+                                <input class="form-check-input city" type="checkbox" value="{{ $item->city_name }}" id="city" name="city[]">
+                                <label class="form-check-label text-capitalize" for="flexCheckDefault" > {{ strtolower($item->city_name) }}
                             </div>
                             @endforeach
-                            </a>
                         </div>
+                    </div>
+                    <div class="col-md-9 katalog-ukm" id="catalog">
+                        @include('catalog-ukm');
                     </div>
                 </div>
             </div>
@@ -170,16 +131,64 @@
                     },
                 ]
             });
+            // var states=[];
+            // var cities=[];
 
-        });
-        // $('')
-        function getContrastYIQ(hexcolor){
-            hexcolor = hexcolor.replace("#", "");
-            var r = parseInt(hexcolor.substr(0,2),16);
-            var g = parseInt(hexcolor.substr(2,2),16);
-            var b = parseInt(hexcolor.substr(4,2),16);
-            var yiq = ((r*299)+(g*587)+(b*114))/1000;
-            return (yiq >= 128) ? 'black' : 'white';
-        }
+            // $('.city').each(function() { 
+            //     var state = ($(this).attr('state-id'));
+            //     var city = ($(this).val());
+            //     $.ajax({
+            //         url:"{{url('getCity')}}?state_id=" + state,
+            //         success: function (res) {
+            //             if (res) {
+            //                 $.each(res, function(i, val){
+            //                     if(val.id == city)
+            //                         $('#city_label_'+city).html(val.nama.toLowerCase());
+
+            //                     $('#city_label_'+city).css('text-transform', 'capitalize');
+            //                 })
+            //             }
+            //         },
+            //     })
+            // });
+            $('input[name="cat[]"]').on('change', function (e) {
+                var categories = [];
+                var catalog = '{{ $catalog->id }}'
+                $('input[name="cat[]"]:checked').each(function(){
+                    categories.push($(this).val());
+                });
+
+                $.ajax({
+                    url:"/katalog/filter",
+                    type: "POST",
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: {categories: categories, catalog: catalog}
+                    }).done( function(results){
+                        $('#catalog').html(results);
+                    })
+                });
+            });
+
+            $('input[name="city[]"]').on('change', function (e) {
+                var cities = [];
+                var catalog = '{{ $catalog->id }}'
+
+                $('input[name="city[]"]:checked').each(function(){
+                    cities.push($(this).val());
+                });
+
+                $.ajax({
+                    url:"/katalog/filter",
+                    type: "POST",
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: {cities: cities, catalog: catalog}
+                    }).done( function(results){
+                        $('#catalog').html(results);
+                })
+            });
     </script>
 </x-app-layout>

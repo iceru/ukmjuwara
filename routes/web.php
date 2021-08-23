@@ -33,6 +33,7 @@ Route::get('/kemitraan', [ContactController::class, 'index'])->name('contact');
 Route::get('/search', [IndexController::class, 'search'])->name('search');
 
 Route::get('/katalog/{slug}', [CatalogController::class, 'show'])->name('catalog.show');
+Route::post('/katalog/filter', [CatalogController::class, 'filter'])->name('catalog.filter');
 Route::get('/ukm/{slug}', [UkmController::class, 'show'])->name('ukm.show');
 
 Route::get('/berita', [ArticleController::class, 'index'])->name('article.index');
@@ -69,6 +70,8 @@ Route::middleware(['auth', 'role:administrator'])->group(function (){
     Route::get('/admin/ukm/edit/{ukm}', [AdminUkmController::class, 'edit'])->name('admin.ukm.edit');
     Route::post('/admin/ukm/update', [AdminUkmController::class, 'update'])->name('admin.ukm.update');
     Route::get('/admin/ukm/delete/{ukm}', [AdminUkmController::class, 'destroy'])->name('admin.ukm.destroy');
+    Route::get('getSubdistrict',[AdminUkmController::class, 'getSubdistrict'])->name('admin.ukm.getSubdistrict');
+    Route::get('getCity',[AdminUkmController::class, 'getCity'])->name('admin.ukm.getCity');
 
     Route::get('/admin/tags', [AdminTagController::class, 'index'])->name('admin.tags');
     Route::post('/admin/tags/store', [AdminTagController::class, 'store'])->name('admin.tags.store');

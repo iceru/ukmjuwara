@@ -3,15 +3,15 @@
         <h4>UKM</h4>
         @if (count($errors) > 0)
         <div class="alert alert-danger mt-3">
-          <strong>Sorry !</strong> There were some problems with your input.<br><br>
-          <ul>
-            @foreach ($errors->all() as $error)
+            <strong>Sorry !</strong> There were some problems with your input.<br><br>
+            <ul>
+                @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
-            @endforeach
-          </ul>
+                @endforeach
+            </ul>
         </div>
         @endif
-    
+
         @if(session('success'))
         <div class="alert alert-success mt-3">
             {{ session('success') }}
@@ -21,40 +21,41 @@
         <form action="{{ route('admin.ukm.store') }}" enctype="multipart/form-data" method="POST" class="mt-4 mb-5">
             @csrf
             <div class="row mb-3">
-                <label for="title" class="col-12 col-md-2 col-form-label">Title</label>
+                <label for="title" class="col-12 col-md-2 col-form-label">Nama UKM</label>
                 <div class="col-12 col-md-10">
-                    <input type="text" class="form-control" id="title" name="title">
+                    <input type="text" class="form-control" value="{{ old('title') }}" id="title" name="title">
                 </div>
             </div>
             <div class="row mb-3">
-                <label for="description" class="col-12 col-md-2 col-form-label">Description</label>
+                <label for="description" class="col-12 col-md-2 col-form-label">Deskripsi</label>
                 <div class="col-12 col-md-10">
-                    <textarea type="text" class="form-control" id="description" name="description"></textarea>
+                    <textarea type="text" class="form-control" id="description" name="description">{{ old('description') }}</textarea>
                 </div>
             </div>
             <div class="row mb-3">
-                <label class="col-sm-2 col-form-label">Image</label>
+                <label class="col-sm-2 col-form-label">Images</label>
                 <div class="col-sm-10">
-                    <div class="input-group control-group increment" >
+                    <div class="input-group control-group increment">
                         <input type="file" name="image[]" class="form-control">
                         <div class="input-group-btn">
-                          <button class="btn btn-success" type="button"><i class="fas fa-plus    "></i> Add</button>
+                            <button class="btn btn-success" type="button"><i class="fas fa-plus    "></i> Add</button>
                         </div>
-                      </div>
-                      <div class="clone hide">
+                    </div>
+                    <div class="clone hide">
                         <div class="control-group input-group" style="margin-top:10px">
-                          <input type="file" name="image[]" class="form-control">
-                          <div class="input-group-btn">
-                            <button class="btn btn-danger" type="button"><i class="fas fa-times    "></i> Remove</button>
-                          </div>
+                            <input type="file" name="image[]" class="form-control">
+                            <div class="input-group-btn">
+                                <button class="btn btn-danger" type="button"><i class="fas fa-times    "></i>
+                                    Remove</button>
+                            </div>
                         </div>
-                      </div>
+                    </div>
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="whatsapp" class="col-12 col-md-2 col-form-label">Whatsapp</label>
                 <div class="col-12 col-md-10">
-                    <input type="tel" class="form-control" id="whatsapp" name="whatsapp">
+                    <input type="tel" class="form-control" value="{{ old('whatsapp') }}" id="whatsapp" name="whatsapp">
                     <p class="form-text text-muted">
                         Contoh: 081211221111
                     </p>
@@ -63,7 +64,7 @@
             <div class="row mb-3">
                 <label for="instagram" class="col-12 col-md-2 col-form-label">Instagram Link</label>
                 <div class="col-12 col-md-10">
-                    <input type="text" class="form-control" id="instagram" name="instagram">
+                    <input type="text" class="form-control" value="{{ old('instagram') }}" id="instagram" name="instagram">
                 </div>
             </div>
             <div class="row mb-3">
@@ -72,18 +73,57 @@
                     <select class="form-select" name="catalog" id="catalog">
                         <option disabled selected>Pilih Katalog</option>
                         @foreach ($catalogs as $catalog)
-                            <option value="{{ $catalog->id }}">{{ $catalog->title }}</option>
+                        <option value="{{ $catalog->id }}">{{ $catalog->title }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            
+            <div class="row mb-3">
+                <label for="tags" class="col-12 col-md-2 col-form-label">Kategori</label>
+                <div class="col-12 col-md-10">
+                    <select type="text" class="form-control" multiple aria-label="multiple size 4 select example" id="categories" name="categories[]">
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->title }}">{{ $category->title }}</option>
+                        @endforeach
+                    </select>
+                    <p class="form-text text-muted">
+                        Untuk memilih lebih dari satu kategori, gunakan <b>Ctrl+Left Click</b>
+                    </p>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="instagram" class="col-12 col-md-2 col-form-label">Alamat Lengkap</label>
+                <div class="col-12 col-md-10">
+                    <input type="text" class="form-control" value="{{ old('address') }}" id="address" name="address">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="catalog" class="col-12 col-md-2 col-form-label">Provinsi</label>
+                <div class="col-12 col-md-10">
+                    <select class="form-select" name="state" id="state">
+                        <option disabled selected>Pilih Provinsi</option>
+                        @foreach ($states as $state)
+                        <option value="{{ $state['id']}}">{{ $state['nama']}}</option>
                         @endforeach
                     </select>
                 </div>
             </div>
             <div class="row mb-3">
-                <label for="tags" class="col-12 col-md-2 col-form-label">Kategori</label>
+                <label for="catalog" class="col-12 col-md-2 col-form-label">Kota</label>
                 <div class="col-12 col-md-10">
-                    <input type="text" class="form-control" id="categories" name="categories">
-                    <p class="form-text text-muted">
-                        (Kategori dipisah dengan spasi, contoh: kategori1 kategori2 kategori3)
-                    </p>
+                    <select class="form-select" name="city" id="city">
+                        <option disabled selected>Pilih Kota</option>
+                    </select>
+                </div>
+            </div>
+            <input type="text" name="city_name" id="city_name" hidden>
+            <div class="row mb-3">
+                <label for="catalog" class="col-12 col-md-2 col-form-label">Kecamatan</label>
+                <div class="col-12 col-md-10">
+                    <select class="form-select" name="subDistrict" id="subDistrict">
+                        <option disabled selected>Pilih Kecamatan</option>
+                    </select>
                 </div>
             </div>
             <div class="mb-3 row">
@@ -105,6 +145,7 @@
                     <th>Instagram</th>
                     <th>Katalog</th>
                     <th>Kategori</th>
+                    <th>Alamat</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -113,12 +154,13 @@
                 <tr>
                     <td scope="row">{{$loop->iteration}}</td>
                     <td>{{ $ukm->title }}</td>
-                    <td>{!! substr($ukm->description, 0, 40) . '...' !!}</td>
-                    <td class="d-flex flex-wrap"> 
+                    <td>{!! strlen($ukm->description) > 50 ? substr($ukm->description, 0, 50).'...' : $ukm->description !!}</td>
+                    <td>
                         @foreach ((array)json_decode($ukm->images) as $item)
-                       <div>
-                        <img class="mb-2" src="{{Storage::url('ukm-image/'.$item)}}" alt="Image" width="100" height="100">
-                       </div>
+                        <div>
+                            <img class="mb-2" src="{{Storage::url('ukm-image/'.$item)}}" alt="Image" width="100"
+                                height="100">
+                        </div>
                         @endforeach
                     </td>
                     <td>{{ $ukm->whatsapp }}</td>
@@ -126,63 +168,132 @@
                     <td>{{ $ukm->catalog->title }}</td>
                     <td class="categories">@foreach ($ukm->categories as $item)
                         <span>{{ $item->title }}</span>
-                    @endforeach</td>
-                    <td><a class="btn btn-primary btn-small d-flex align-items-center justify-content-center mb-2" href="/admin/ukm/edit/{{$ukm->id}}"><i class="fas fa-edit me-1"></i> Edit</a>
-                        <a class="btn btn-danger btn-small d-flex align-items-center justify-content-center" href="/admin/ukm/delete/{{$ukm->id}}" onclick="return confirm('Hapus data ini?')"><i class="fa fa-trash me-1" aria-hidden="true"></i> Delete</a></td>
+                        @endforeach</td>
+                    <td>{{ $ukm->address }}</td>
+
+                    <td><a class="btn btn-primary btn-small d-flex align-items-center justify-content-center mb-2"
+                            href="/admin/ukm/edit/{{$ukm->id}}"><i class="fas fa-edit me-1"></i> Edit</a>
+                        <a class="btn btn-danger btn-small d-flex align-items-center justify-content-center"
+                            href="/admin/ukm/delete/{{$ukm->id}}" onclick="return confirm('Hapus data ini?')"><i
+                                class="fa fa-trash me-1" aria-hidden="true"></i> Delete</a></td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
-
-    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap5.min.js"></script>
     <script>
         $(document).ready(function() {
-            $('#table').DataTable();
+            $('#table').DataTable({
+                "order": [[ 0, "desc" ]],
+                responsive: true
+            });
 
+            $('.clone.hide .btn-danger').attr('disabled', 'disabled');
             $(".btn-success").click(function(){
+                debugger
                 var html = $(".clone").html();
                 $(".clone").after(html);
+                $('.btn-danger').removeAttr('disabled');
+                $('.clone.hide .btn-danger').attr('disabled', 'disabled');
             });
+
 
             $('body').on("click", ".btn-danger", function() {
                 $(this).parents(".control-group").remove();
             });
 
-            function split( val ) {
-                return val.split(/,\s*/);
-            }
+            // function split( val ) {
+            //     return val.split(/,\s*/);
+            // }
 
-            function extractLast( term ) {
-                return split( term ).pop();
-            }
+            // function extractLast( term ) {
+            //     return split( term ).pop();
+            // }
 
-            $('#categories').autocomplete({
-                source: function( request, response ) {
-                    // delegate back to autocomplete, but extract the last term
-                    response( $.ui.autocomplete.filter(
-                        {!! json_encode($categories) !!}, extractLast( request.term ) ) );
-                },
-                select: function( event, ui ) {
-                    var terms = split( this.value );
-                    // remove the current input
-                    terms.pop();
-                    // add the selected item
-                    terms.push( ui.item.value );
-                    // add placeholder to get the comma-and-space at the end
-                    terms.push("");
-                    this.value = terms.join(", " );
-                    this.value = terms.replace(/,\s*$/, "");
-                    
-                    metrics = jQuery.grep(metrics, function(element) {
-                        return element.value != ui.item.value;
-                    });
-                    $('#autocomplete').autocomplete('option', 'source', metrics)
-                    return false;
-                }
-            });
+            // $('#categories').autocomplete({
+            //     source: function( request, response ) {
+            //         // delegate back to autocomplete, but extract the last term
+            //         response( $.ui.autocomplete.filter(
+            //             {!! json_encode($categories) !!}, extractLast( request.term ) ) );
+            //     },
+            //     search: function () {
+            //         // custom minLength
+            //         var term = extractLast(this.value);
+            //         if (term.length < 1) {
+            //             return false;
+            //         }
+            //     },
+            //     focus: function () {
+            //         // prevent value inserted on focus
+            //         return false;
+            //     },
+            //     select: function( event, ui ) {
+            //         var terms = split(this.value);
+            //         // remove the current input
+            //         terms.pop();
+            //         // add the selected item
+            //         terms.push(ui.item.value);
+            //         // add placeholder to get the comma-and-space at the end
+            //         terms.push("");
+            //         this.value = terms.join(",");
+            //         return false;
+                
+            //     }
+            // });
         });
+    </script>
+
+    <script>
+        $("#state").on("change", function () {
+            var stateID = $(this).val();
+            if (stateID) {
+                $.ajax({
+                    type: "GET",
+                    url: "{{url('getCity')}}?state_id=" + stateID,
+                    success: function (res) {
+                        if (res) {
+                            $("#city").empty();
+                            $.each(res, function (key, value) {
+                                $("#city").append(
+                                    '<option value="' + value.id + '">' + value.nama + "</option>"
+                                );
+                            });
+                        } else {
+                            $("#city").empty();
+                        }
+                    },
+                });
+            } else {
+                $("#city").empty();
+            }
+        });
+
+        $("#city").on("change", function () {
+            var city_name = $(this).find('option:selected').text();
+            $("#city_name").val(city_name);
+            var cityID = $(this).val();
+            if (cityID) {
+                $.ajax({
+                    type: "GET",
+                    url: "{{url('getSubdistrict')}}?city_id=" + cityID,
+                    success: function (res) {
+                        if (res) {
+                            $("#subDistrict").empty();
+                            $.each(res, function (key, value) {
+                                $("#subDistrict").append(
+                                    '<option value="' + value.nama + '">' + value.nama + "</option>"
+                                );
+                            });
+                        } else {
+                            $("#subDistrict").empty();
+                        }
+                    },
+                });
+            } else {
+                $("#subDistrict").empty();
+            }
+        });
+
     </script>
 
 </x-admin-layout>

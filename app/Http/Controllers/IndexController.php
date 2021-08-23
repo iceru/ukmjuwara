@@ -30,7 +30,7 @@ class IndexController extends Controller
     public function search(Request $request)
     {
         $searchTerm = $request->input('search_query');
-        $searchResults = (new Search())->registerModel(Ukm::class, 'title', 'images')
+        $searchResults = (new Search())->registerModel(Ukm::class, 'title', 'images', 'whatsapp')
         ->registerModel(Article::class, 'title', 'image','description', 'author')
         ->perform($request->input('search_query'));
 
