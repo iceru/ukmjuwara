@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Ukm;
 use App\Models\Catalog;
+use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 
 class CatalogController extends Controller
 {
@@ -78,8 +81,32 @@ class CatalogController extends Controller
         $catalog = Catalog::where('slug', $slug)->firstOrFail();
         $ukms = Ukm::where('catalog_id', $catalog->id)->get();
         $bests = Ukm::where('catalog_id', $catalog->id)->orderByViews()->get()->take(4);
+        $cities = Ukm::where('catalog_id', $catalog->id)->select('city_name')->distinct()->where('city_name', '!=', '')->get();
+        $categories = Category::take(6)->get();
+        
+        return view('catalog', compact('catalog','ukms', 'bests', 'categories', 'cities'));
+    }
 
-        return view('catalog', compact('catalog','ukms', 'bests'));
+    public function filter(Request $request)
+    {
+        if($request->categories) {
+            $categories = $request->categories;
+            $categoryId = Category::whereIn('id', $categories)->pluck('id');
+
+            $ukms = Ukm::where('catalog_id', $request->catalog)->whereHas('categories', function($query) use($categoryId) {
+                $query->whereIn('category_id', $categoryId);
+            })->get();
+        }
+        elseif ($request->cities) {
+            $cities = $request->cities;
+            $ukms = Ukm::where('catalog_id', $request->catalog)->whereIn('city_name', $cities)->get();
+        }
+        else {
+            $ukms = Ukm::where('catalog_id', $request->catalog)->get();
+        }
+        response()->json($ukms);
+
+        return view('catalog-ukm', compact('ukms'));
     }
 
     /**

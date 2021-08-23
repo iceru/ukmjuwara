@@ -17,9 +17,12 @@
 
                     @foreach($searchResults->groupByType() as $type => $modelSearchResults)
                     <div class="col-6">
-                    <h4 class="mb-2">{{ ucwords($type) }}</h2>
+                    <h4 class="mb-2">{{ ucwords($type) == "Ukms" ? "UKM" : ucwords($type) }}</h2>
                         @foreach($modelSearchResults as $searchResult)
                             <ul>
+                                @foreach ((array)json_decode($searchResult->images)[0] as $image)
+                                    <img src="{{ Storage::url('ukm-image/'.$image) }}" alt="">
+                                @endforeach
                                 <a href="{{ $searchResult->url }}">{{ $searchResult->title }}</a>
                             </ul>
                         </div>

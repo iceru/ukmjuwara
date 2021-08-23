@@ -6,7 +6,15 @@
                     border-radius: 1rem;
                 }
             }
-            div:last-child {
+
+            .ukm-title {
+                font-size: 22px;
+            }
+
+            .slick-list{
+                padding:0 0 0 0 !important;
+            }
+            .col-md-7 {
                 .container-ukm {
                     padding-left: 2rem;
 
@@ -19,6 +27,7 @@
                             .desc-item {
                                 padding-left: 1rem;
                                 border-left: 2px solid $primary-color;
+                                height: 100%;
                                 
                                 h5 {
                                     color: $primary-color;

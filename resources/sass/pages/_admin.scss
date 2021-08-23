@@ -65,6 +65,26 @@
     
 }
 
+.dashboard {
+    .stat-number {
+        background-color: $primary-color;
+        color: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+
+        .icon {
+            margin-bottom: 1rem;
+            span {
+                font-size: 18px;
+                font-weight: 500;
+            }
+            i {
+                margin-right: .5rem;
+            }
+        }
+    }
+}
+
 .main-admin {
     padding: 1.5rem;
 }
@@ -77,6 +97,10 @@
         .dataTables_length {
             margin-bottom: 1rem;
         }
+    }
+
+    img {
+        object-fit: cover;
     }
 
     form {

@@ -75,34 +75,10 @@
         .katalog-ukm {
             padding: 2rem 0 2rem 2rem; 
         }
-        
-        .ukm {
-            padding: 1rem;
-            border-radius: 1rem;
-            background-position: center;
-            background-size: cover;
-            background-color: $grey;
-            box-shadow: 3px 2px 7px rgb(0, 0, 0, 0.2);
 
-            .ukm-content {
-                padding: 1rem;
-            }
-
-            .ukm-wa {
-                position: absolute;
-                bottom: 15px;
-                right: 15px;
-
-                img {
-                    width: 40px;
-                }
-            }
-
+        #ukm_bests {
             .ukm-title {
-                position: absolute;
-                top: 15px;
-                right: 15px;
-                left: 15px;
+                color: white;
             }
         }
 
@@ -134,5 +110,47 @@
                 }
             }
         }
+    }
+}
+
+
+        
+.ukm {
+    border-radius: 1rem;
+    background-position: center;
+    background-size: cover;
+    background-color: $grey;
+    box-shadow: 3px 2px 7px rgb(0, 0, 0, 0.2);
+    position: relative;
+
+    .ukm-image {
+        img {
+            object-fit: cover;
+            border-radius: 1rem;
+            object-position: center;
+        }
+    }
+
+    .ukm-wa {
+        position: absolute;
+        bottom: 15px;
+        right: 15px;
+
+        img {
+            width: 40px;
+        }
+    }
+}
+
+.ukm-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+
+    p {
+        font-size: 1.15rem;
+        font-weight: 500;
     }
 }

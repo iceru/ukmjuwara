@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ukm;
+use App\Models\Article;
+use App\Models\Catalog;
 use Illuminate\Http\Request;
 
 class AdminDashboardController extends Controller
@@ -13,7 +16,10 @@ class AdminDashboardController extends Controller
      */
     public function index()
     {
-        return view('admin.dashboard');
+        $ukms = Ukm::count();
+        $articles = Article::count();
+        $catalogs = Catalog::count();
+        return view('admin.dashboard', compact('ukms', 'articles', 'catalogs'));
     }
 
     /**

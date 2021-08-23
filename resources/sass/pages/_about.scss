@@ -1,5 +1,9 @@
 .about {
     padding: 3rem 0;
+    p {
+        font-size: 18px;
+    }
+
     .header-about {
         margin-bottom: 2rem;
 
@@ -21,7 +25,7 @@
             }
         }
 
-        h2 {
+        h3 {
             margin-bottom: 1rem;
             color: $primary-color;
         }

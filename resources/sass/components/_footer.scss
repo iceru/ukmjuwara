@@ -3,6 +3,13 @@
     color: $background;
     padding: 1.5rem 0;
     width: 100%;
+    font-size: .9rem;
+
+    .footer-item:first-child {
+        border-top: none;
+        padding-right: 3rem;
+        margin-top: 1.5rem;
+    }
 
     @include breakpoint-down(small) {
         padding: 1rem 0;
@@ -15,9 +22,21 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+
+        .col-12 .footer-item {
+            padding: 1rem 0;
+            position: relative;
+            border-top: 1px solid rgba(255,255,255,0.4);
+        }
+
+        .col-12:nth-child(2) .footer-item{
+            border-top: none;
+            padding-right: 0;
+        }
     }
 
     ul {
+        margin-bottom: 0;
         li {
             margin-bottom: .5rem;
 
