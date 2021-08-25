@@ -76,7 +76,7 @@
                     <select class="form-select" name="catalog" id="catalog">
                         <option disabled selected>Pilih Katalog</option>
                         @foreach ($catalogs as $catalog)
-                        <option value="{{ $catalog->id }}">{{ $catalog->title }}</option>
+                        <option {{ old('catalog') == $catalog->id ? "selected" : "" }} value="{{ $catalog->id }}">{{ $catalog->title }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -87,7 +87,7 @@
                 <div class="col-12 col-md-10">
                     <select type="text" class="form-control" multiple aria-label="multiple size 4 select example" id="categories" name="categories[]">
                         @foreach ($categories as $category)
-                            <option value="{{ $category->title }}">{{ $category->title }}</option>
+                            <option @if(old('categories[]')) {{ in_array($category->title, old('categories[]')) ? "selected" : "" }} @endif value="{{ $category->title }}">{{ $category->title }}</option>
                         @endforeach
                     </select>
                     <p class="form-text text-muted">
@@ -107,7 +107,7 @@
                     <select class="form-select" name="state" id="state">
                         <option disabled selected>Pilih Provinsi</option>
                         @foreach ($states as $state)
-                        <option value="{{ $state['id']}}">{{ $state['nama']}}</option>
+                        <option {{ old('state') == $state['id'] ? "selected" : "" }} value="{{ $state['id']}}">{{ $state['nama']}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -203,49 +203,74 @@
             $('body').on("click", ".btn-danger", function() {
                 $(this).parents(".control-group").remove();
             });
-
-            // function split( val ) {
-            //     return val.split(/,\s*/);
-            // }
-
-            // function extractLast( term ) {
-            //     return split( term ).pop();
-            // }
-
-            // $('#categories').autocomplete({
-            //     source: function( request, response ) {
-            //         // delegate back to autocomplete, but extract the last term
-            //         response( $.ui.autocomplete.filter(
-            //             {!! json_encode($categories) !!}, extractLast( request.term ) ) );
-            //     },
-            //     search: function () {
-            //         // custom minLength
-            //         var term = extractLast(this.value);
-            //         if (term.length < 1) {
-            //             return false;
-            //         }
-            //     },
-            //     focus: function () {
-            //         // prevent value inserted on focus
-            //         return false;
-            //     },
-            //     select: function( event, ui ) {
-            //         var terms = split(this.value);
-            //         // remove the current input
-            //         terms.pop();
-            //         // add the selected item
-            //         terms.push(ui.item.value);
-            //         // add placeholder to get the comma-and-space at the end
-            //         terms.push("");
-            //         this.value = terms.join(",");
-            //         return false;
-                
-            //     }
-            // });
         });
     </script>
 
     <script>
+        $(document).ready(function() {
+        var stateID = $('#state').val();
+            if (stateID) {
+                $.ajax({
+                    type: "GET",
+                    url: "{{url('getCity')}}?state_id=" + stateID,
+                    success: function (res) {
+                        if (res) {
+                            $("#city").empty();
+                            $.each(res, function (key, value) {
+                                if(value.id == "{{ old('city') }}") {
+                                    $("#city").append(
+                                        '<option selected value="' + value.id + '">' + value.nama + "</option>"
+                                    );
+                                } else {
+                                    $("#city").append(
+                                        '<option value="' + value.id + '">' + value.nama + "</option>"
+                                    );
+                                }
+                            });
+                            subDistrict();
+                        } else {
+                            $("#city").empty();
+                        }
+                    },
+                });
+            } else {
+                $("#city").empty();
+            }
+
+           function subDistrict () {
+               debugger
+                var city_name = $('#city').find('option:selected').text();
+                $("#city_name").val(city_name);
+                var cityID = $('#city').val();
+                if (cityID) {
+                    $.ajax({
+                        type: "GET",
+                        url: "{{url('getSubdistrict')}}?city_id=" + cityID,
+                        success: function (res) {
+                            if (res) {
+                                $("#subDistrict").empty();
+                                $.each(res, function (key, value) {
+                                    if(value.id === "{{ old('subDistrict')}}") {
+                                        $("#subDistrict").append(
+                                            '<option selected value="' + value.id + '">' + value.nama + "</option>"
+                                        );
+                                    } else {
+                                        $("#subDistrict").append(
+                                            '<option value="' + value.id + '">' + value.nama + "</option>"
+                                        );
+                                    }
+                                });
+                            } else {
+                                $("#subDistrict").empty();
+                            }
+                        },
+                    });
+                } else {
+                    $("#subDistrict").empty();
+                }
+           }
+        });
+
         $("#state").on("change", function () {
             var stateID = $(this).val();
             if (stateID) {
@@ -257,7 +282,7 @@
                             $("#city").empty();
                             $.each(res, function (key, value) {
                                 $("#city").append(
-                                    '<option value="' + value.id + '">' + value.nama + "</option>"
+                                    '<option selected value="' + value.id + '">' + value.nama + "</option>"
                                 );
                             });
                         } else {
@@ -283,7 +308,7 @@
                             $("#subDistrict").empty();
                             $.each(res, function (key, value) {
                                 $("#subDistrict").append(
-                                    '<option value="' + value.nama + '">' + value.nama + "</option>"
+                                    '<option selected value="' + value.id + '">' + value.nama + "</option>"
                                 );
                             });
                         } else {

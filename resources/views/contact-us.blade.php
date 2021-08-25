@@ -10,9 +10,9 @@
                     <div class="contact-title">
                         <h2>Kemitraan</h2>
                     </div>
-                    <h3 class="mb-3">
-                        ukmindonesia.id
-                    </h3>
+                    <h4 class="mb-3">
+                        <a href="https://ukmindonesia.id/" class="primary-color">ukmindonesia.id</a>
+                    </h4>
 
                     <div class="contact-items">
                         <h5>Kontak UKM Juwara</h5>
@@ -36,25 +36,31 @@
                             <i class="fas fa-phone-volume fa-fw"></i>
                             <p>021-212121</p>
                         </div> --}}
-                        <div class="d-flex flex-wrap align-items-center mb-4">
-                            <a href="https://www.facebook.com/ukmindonesia.org/">
-                                <div class="social facebook">
-                                    <p class="me-2">Facebook</p>
-                                    <i class="fab fa-facebook fa-fw "></i>
-                               </div>
-                            </a>
-                            <a href="https://www.instagram.com/ukmindonesiaid">
-                                <div class="social instagram">
-                                    <p class="me-2">Instagram</p>
-                                    <i class="fab fa-instagram fa-fw"></i>
-                                </div>
-                            </a>
-                            <a href="https://www.youtube.com/channel/UCWcTn1tlRbqifDA3uY67Sfw">
-                                <div class="social youtube">
-                                    <p class="me-2">Youtube</p>
-                                    <i class="fab fa-youtube fa-fw"></i>
-                                </div>
-                            </a>
+                        <div class="row mb-4">
+                            <div class="col-12 col-lg-6">
+                                <a href="https://www.facebook.com/ukmindonesia.org/">
+                                    <div class="social facebook">
+                                        <p class="me-2">Facebook</p>
+                                        <i class="fab fa-facebook fa-fw "></i>
+                                   </div>
+                                </a>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <a href="https://www.instagram.com/ukmindonesiaid">
+                                    <div class="social instagram">
+                                        <p class="me-2">Instagram</p>
+                                        <i class="fab fa-instagram fa-fw"></i>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <a href="https://www.youtube.com/channel/UCWcTn1tlRbqifDA3uY67Sfw">
+                                    <div class="social youtube">
+                                        <p class="me-2">Youtube</p>
+                                        <i class="fab fa-youtube fa-fw"></i>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

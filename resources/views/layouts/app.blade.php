@@ -6,6 +6,11 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>@yield('title')</title>
+        <meta name="description" content="Sebagai komunitas pertama di dunia yang menghadirkan katalog member dalam format Whatsapp
+        Business Catalog c-commerce s.id/UKMJUWARA dan katalog pada situs www.ukmjuwara.id, kanal ini akan terus memproduksi katalog berkala dan
+        melakukan pengembangan konten dengan menghadirkan variasi tema katalog seperti UKM JUWARA GLOBAL
+        yang berfokus pada peningkatan penetrasi pasar global oleh pelaku UKM Iokal berikut dengan
+        berita-berita sangat relevan dengan kebutuhan UKM untuk meroket.">
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
@@ -31,13 +36,6 @@
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
             @include('layouts.navigation', ['catalogs' => \App\Models\Catalog::all()])
-
-            {{-- <!-- Page Heading -->
-            <header class="bg-white shadow">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-            </header> --}}
 
             <!-- Page Content -->
             <main>

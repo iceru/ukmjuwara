@@ -151,6 +151,9 @@
                 -webkit-line-clamp: 3;
                 -webkit-box-orient: vertical;
             }
+            p:not(:first-child) {
+                display: none;
+            }
         }
     }
 
