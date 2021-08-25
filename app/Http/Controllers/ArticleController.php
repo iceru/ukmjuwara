@@ -33,10 +33,13 @@ class ArticleController extends Controller
             })->get();
         }
 
-        
-        $articles = Article::whereHas('tags', function($query) use($headerTag, $topTag) {
-            $query->where('tag_id', '!=', $headerTag)->where('tag_id', '!=', $topTag);
-        })->get();
+        if($topTag->first() or $headerTag->first()) {
+            $articles = Article::whereHas('tags', function($query) use($headerTag, $topTag) {
+                $query->where('tag_id', '!=', $headerTag)->where('tag_id', '!=', $topTag);
+            })->get();
+        } else {
+            $articles = Article::all();
+        }
 
         return view('articles', compact('articles', 'headerArticle', 'topArticles'));
     }

@@ -8,7 +8,7 @@
             @if (isset($searchResults))
             @if ($searchResults->isEmpty())
                     <div class="col-12">
-                        <h3>Pencarian <b>{{ $searchTerm }}</b> tidak ditemukan</h3>
+                        <h3>Pencarian <b class="primary-color">{{ $searchTerm }}</b> tidak ditemukan</h3>
                     </div>
                 @else
                     <div class="col-12 mb-3">

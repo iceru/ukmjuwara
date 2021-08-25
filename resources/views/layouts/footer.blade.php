@@ -32,7 +32,7 @@
                </div>
             </div>
             <div class="col-12 col-md-3">
-                {{-- <div class="footer-item">
+                <div class="footer-item">
                     <ul>
                         <li>
                             <a href="">Privacy Policy</a>
@@ -41,7 +41,7 @@
                             <a href="">Terms of Services</a>
                         </li>
                     </ul>
-                </div> --}}
+                </div>
             </div>
             <div class="col-md-1">
                 <div class="footer-item">

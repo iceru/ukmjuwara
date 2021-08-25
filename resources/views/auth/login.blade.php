@@ -3,9 +3,9 @@
     <div class="login">
         <div class="container g-0">
             <div class="row g-0">
-                <div class="col-12">
+                <div class="col-12 col-md-6 login-content">
                     @if (count($errors) > 0)
-                        <div class="alert alert-danger mt-3">
+                        <div class="alert alert-danger mb-3">
                             <strong>Sorry !</strong> There were some problems with your input.<br><br>
                             <ul>
                             @foreach ($errors->all() as $error)
@@ -14,8 +14,6 @@
                             </ul>
                         </div>
                     @endif
-                </div>
-                <div class="col-12 col-md-6 login-content">
                     <h3 class="login-text">#UKMJUWARA</h3>
                     <div class="login-card">
                         <form method="POST" action="{{ route('login') }}">
