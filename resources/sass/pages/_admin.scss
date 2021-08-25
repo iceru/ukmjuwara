@@ -85,6 +85,20 @@
     }
 }
 
+.administrator {
+    .col-lg-2.sidebar-admin {
+        width: 20% !important;
+    }
+
+    .col-lg-10.content-admin {
+        width: 80%;
+
+        @include breakpoint-down(small) {
+            width: 100%;
+        }
+    }
+}
+
 .main-admin {
     padding: 1.5rem;
 }

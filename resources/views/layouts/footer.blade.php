@@ -1,7 +1,7 @@
 <div class="footer">
     <div class="container">
         <div class="row">
-            <div class="col-12">
+            <div class="col-12 mb-2 mb-lg-3">
                 <h3>#UKMJUWARA</h3>
             </div>
             <div class="col-12 col-md-5">
@@ -43,9 +43,9 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-md-1">
+            <div class="col-12 col-md-1">
                 <div class="footer-item">
-                    <div class="d-flex mt-3" style="font-size: 1.25rem">
+                    <div class="d-flex" style="font-size: 1.25rem">
                         <a href="https://www.instagram.com/ukmindonesiaid"><i class="fab fa-instagram me-2" aria-hidden="true"></i></a>
                         <a href="https://www.facebook.com/ukmindonesia.org/"><i class="fab fa-facebook me-2" aria-hidden="true"></i></a>
                         <a href="https://www.youtube.com/channel/UCWcTn1tlRbqifDA3uY67Sfw"><i class="fab fa-youtube" aria-hidden="true"></i></a>

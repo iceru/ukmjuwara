@@ -3,7 +3,7 @@
         Berita - UKM Juwara
     @endsection
 
-    <div class="articles container-padding">
+    <div class="articles">
         @foreach ($headerArticle as $article)
         <div class="article header-article" style="background-image: url('{{ Storage::url('article-image/'.$article->image) }}')">
             <div class="article-content container">
@@ -26,8 +26,8 @@
         </div>
         @endforeach
 
-       <div class="container">
-        @if ($topArticles->count() > 0)
+       <div class="container container-padding">
+        @if ($topArticles)
         <h3 class="mb-3">Top Stories</h3>
             <div class="row top-stories">
                 <div class="col-12 col-md-6 mb-3">

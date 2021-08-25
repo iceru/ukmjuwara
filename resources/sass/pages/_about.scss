@@ -2,6 +2,10 @@
     padding: 3rem 0;
     p {
         font-size: 18px;
+
+        @include breakpoint-down(small) {
+            font-size: 16px;
+        }
     }
 
     .header-about {
