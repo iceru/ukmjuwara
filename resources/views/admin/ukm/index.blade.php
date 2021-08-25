@@ -57,7 +57,7 @@
                 <div class="col-12 col-md-10">
                     <input type="tel" class="form-control" value="{{ old('whatsapp') }}" id="whatsapp" name="whatsapp">
                     <p class="form-text text-muted">
-                        Contoh: 081211221111
+                        Contoh: <b>081211221111</b>
                     </p>
                 </div>
             </div>
@@ -65,6 +65,9 @@
                 <label for="instagram" class="col-12 col-md-2 col-form-label">Instagram Link</label>
                 <div class="col-12 col-md-10">
                     <input type="text" class="form-control" value="{{ old('instagram') }}" id="instagram" name="instagram">
+                    <p class="form-text text-muted">
+                        Full link. Contoh: <b>https://www.instagram.com/ukmindonesiaid/</b>
+                    </p>
                 </div>
             </div>
             <div class="row mb-3">
@@ -141,11 +144,11 @@
                     <th>Title</th>
                     <th>Description</th>
                     <th>Images</th>
-                    <th>Whatsapp</th>
-                    <th>Instagram</th>
                     <th>Katalog</th>
                     <th>Kategori</th>
                     <th>Alamat</th>
+                    <th>Whatsapp</th>
+                    <th>Instagram</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -154,7 +157,7 @@
                 <tr>
                     <td scope="row">{{$loop->iteration}}</td>
                     <td>{{ $ukm->title }}</td>
-                    <td>{!! strlen($ukm->description) > 50 ? substr($ukm->description, 0, 50).'...' : $ukm->description !!}</td>
+                    <td class="description">{!! strlen($ukm->description) > 50 ? substr($ukm->description, 0, 50).'...' : $ukm->description !!}</td>
                     <td>
                         @foreach ((array)json_decode($ukm->images) as $item)
                         <div>
@@ -163,13 +166,13 @@
                         </div>
                         @endforeach
                     </td>
-                    <td>{{ $ukm->whatsapp }}</td>
-                    <td>{{ $ukm->instagram }}</td>
                     <td>{{ $ukm->catalog->title }}</td>
                     <td class="categories">@foreach ($ukm->categories as $item)
                         <span>{{ $item->title }}</span>
                         @endforeach</td>
                     <td>{{ $ukm->address }}</td>
+                    <td>{{ $ukm->whatsapp }}</td>
+                    <td>{{ $ukm->instagram }}</td>
 
                     <td><a class="btn btn-primary btn-small d-flex align-items-center justify-content-center mb-2"
                             href="/admin/ukm/edit/{{$ukm->id}}"><i class="fas fa-edit me-1"></i> Edit</a>
@@ -184,7 +187,6 @@
     <script>
         $(document).ready(function() {
             $('#table').DataTable({
-                "order": [[ 0, "desc" ]],
                 responsive: true
             });
 

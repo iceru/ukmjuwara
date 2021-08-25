@@ -39,11 +39,10 @@
         margin-bottom: 0;
         li {
             margin-bottom: .5rem;
-
-            a {
-                color: $background;
-            }
         }
+    }
+    a {
+        color: $background;
     }
 
 }

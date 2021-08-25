@@ -268,7 +268,7 @@
                             $("#city").empty();
                             $.each(res, function (key, value) {
                                 $("#city").append(
-                                    '<option {{' + value.id + '== $ukm->city ? `selected` : `` }} value="' + value.id + '">' + value.nama + "</option>"
+                                    '<option value="' + value.id + '">' + value.nama + "</option>"
                                 );
                             });
                         } else {

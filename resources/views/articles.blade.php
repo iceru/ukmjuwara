@@ -3,7 +3,7 @@
         Berita - UKM Juwara
     @endsection
 
-    <div class="articles">
+    <div class="articles container-padding">
         @foreach ($headerArticle as $article)
         <div class="article header-article" style="background-image: url('{{ Storage::url('article-image/'.$article->image) }}')">
             <div class="article-content container">
@@ -27,7 +27,7 @@
         @endforeach
 
        <div class="container">
-        @if ($topArticles)
+        @if ($topArticles->count() > 0)
         <h3 class="mb-3">Top Stories</h3>
             <div class="row top-stories">
                 <div class="col-12 col-md-6 mb-3">
@@ -79,7 +79,7 @@
         @endif
         <div class="row">
             @foreach ($articles as $article)
-                <div class="article medium col-md-4 mb-3 mb-lg-4">
+                <div class="article medium col-md-4 mb-3 mb-lg-4 col-xxl-3">
                     <a href="{{ route('article.show', $article->slug) }}">
                         <div class="article-image">
                             <img src="{{ Storage::url('article-image/'.$article->image) }}" alt="">
