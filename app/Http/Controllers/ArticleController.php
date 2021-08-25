@@ -74,7 +74,7 @@ class ArticleController extends Controller
     public function show($slug)
     {
         $article = Article::where('slug', $slug)->firstOrFail();
-        $relatedArticles = Article::orderBy('created_at', 'asc')->get()->take(3);
+        $relatedArticles = Article::orderBy('created_at', 'asc')->get()->take(4);
 
         return view('article-detail', compact('article', 'relatedArticles'));
     }

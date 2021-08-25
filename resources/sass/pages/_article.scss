@@ -1,8 +1,10 @@
 .articles {
-    padding-bottom: 3rem;
-    
     .top-stories {
-        margin-bottom: 4rem;
+        margin-bottom: 3rem;
+    }
+
+    .container-padding {
+        padding-top: 2rem;
     }
 }
 
@@ -56,7 +58,7 @@
         position: relative;
 
         @include breakpoint-down(medium) {
-            min-height: 300px;
+            min-height: 450px;
         }
 
         &:before {
@@ -88,7 +90,6 @@
         background-repeat: no-repeat;
         color: white;
         position: relative;
-        margin-bottom: 3rem;
 
         &:before {
             position: absolute;

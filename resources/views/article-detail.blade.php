@@ -37,7 +37,7 @@
                             <h3>Berita Lainnya</h3>
                         </div>
                         @foreach ($relatedArticles as $article)
-                            <div class="article medium col-md-4">
+                            <div class="article medium col-md-3">
                                 <a href="{{ route('article.show', $article->slug) }}">
                                     <div class="article-image">
                                         <img src="{{ Storage::url('article-image/'.$article->image) }}" alt="">

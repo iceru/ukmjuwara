@@ -39,7 +39,7 @@
             @include('layouts.sidebar-admin')
 
             <!-- Page Content -->
-            <main class="col-12 col-lg-10">
+            <main class="col-12 col-lg-10 content-admin">
                 {{ $slot }}
             </main>
         </div>
