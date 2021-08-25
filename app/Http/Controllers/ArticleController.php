@@ -33,11 +33,11 @@ class ArticleController extends Controller
             })->get();
         }
 
-        if($topTag->first() or $headerTag->first()) {
+        if($topTag->first() and $headerTag->first()) {
             $articles = Article::whereHas('tags', function($query) use($headerTag, $topTag) {
                 $query->where('tag_id', '!=', $headerTag)->where('tag_id', '!=', $topTag);
             })->get();
-        } else {
+        } else { 
             $articles = Article::all();
         }
 
