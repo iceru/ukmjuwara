@@ -109,19 +109,20 @@ class AdminUkmController extends Controller
 
         $ukm->save();
 
-        $categoryArray = $request->categories;
-        $categories = array();
+        if($request->categories) {
+            $categoryArray = $request->categories;
+            $categories = array();
 
-        foreach($categoryArray as $ukmCategory) {
-            $category = Category::firstOrCreate([
-                'title' => $ukmCategory
-            ]);
+            foreach($categoryArray as $ukmCategory) {
+                $category = Category::firstOrCreate([
+                    'title' => $ukmCategory
+                ]);
 
-            $categories[$category->id] = ['ukm_id' => $ukm->id];
+                $categories[$category->id] = ['ukm_id' => $ukm->id];
+            }
+
+            $ukm->categories()->attach($categories);
         }
-
-        $ukm->categories()->attach($categories);
-
 
         return redirect()->back()->with('success','Data berhasil di input');
     }

@@ -222,7 +222,6 @@
             } else {
                 $("#city").empty();
             }
-            debugger
 
            function subDistrict () {
                debugger

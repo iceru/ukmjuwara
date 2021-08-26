@@ -58,9 +58,7 @@
     </div>
     <script>
         $(document).ready(function() {
-            $('#table').DataTable([
-                responsive: true
-            ]);
+            $('#table').DataTable();
 
             $(".btn-success").click(function(){
                 var html = $(".clone").html();

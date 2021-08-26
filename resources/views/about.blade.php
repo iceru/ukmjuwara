@@ -72,7 +72,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 mb-5">
-                    <p class="mb-3">  Sebagai komunitas pertama di dunia yang menghadirkan katalog member dalam format Whatsapp
+                    <p class="mb-3">Sebagai komunitas pertama di dunia yang menghadirkan katalog member dalam format Whatsapp
                         Business Catalog c-commerce s.id/UKMJUWARA dan
                         katalog pada situs www.ukmjuwara.id, kanal ini akan terus memproduksi katalog berkala dan
                         melakukan pengembangan konten dengan menghadirkan variasi tema katalog seperti UKM JUWARA GLOBAL
