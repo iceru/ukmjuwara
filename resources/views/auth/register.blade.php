@@ -14,7 +14,7 @@
                             </ul>
                         </div>
                     @endif
-                    <h3 class="login-text">#UKMJUWARA</h3>
+                    <h3 class="login-text">#UKMJuWAra</h3>
                     <div class="login-card">
                         <form method="POST" action="{{ route('register') }}">
                             @csrf

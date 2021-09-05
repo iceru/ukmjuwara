@@ -37,7 +37,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="support-title">
-                    <h3 class="text-center fw-bold">Didukung Oleh</h3>
+                    <h3 class="text-center fw-bold">Dipersembahkan oleh</h3>
                 </div>
                 <div id="supported">
                     @foreach ($sponsors as $sponsor)

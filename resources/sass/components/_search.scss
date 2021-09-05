@@ -77,3 +77,13 @@
         right: 21%;
     }
 }
+
+.search-body {
+    .result-category:first-child{
+        padding-right: 3rem;
+    }
+
+    .result-category:nth-child(2){
+        padding-left: 3rem;
+    }
+}

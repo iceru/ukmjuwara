@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12 mb-2 mb-lg-3">
-                <h3>#UKMJUWARA</h3>
+                <h3>#UKMJuWAra</h3>
             </div>
             <div class="col-12 col-md-5">
                 <div class="footer-item">
@@ -54,7 +54,7 @@
             </div>
 
             <div class="col-12 text-center mt-3 copyright">
-                <i class="fa fa-copyright" aria-hidden="true"></i> Copyright  {{ now()->year }} | UKM Juwara
+                <i class="fa fa-copyright" aria-hidden="true"></i> Copyright  {{ now()->year }} | UKMJuWAra
             </div>
         </div>
     </div>
