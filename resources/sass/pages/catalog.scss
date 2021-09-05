@@ -5,6 +5,12 @@
             width: 100%;
             position: relative;
 
+            @include breakpoint-down(small) {
+                .image-container.ratio1x4 {
+                    padding-top: 40%;
+                }
+            }
+
             .container {
                 z-index: 10;
                 position: absolute;
@@ -37,9 +43,13 @@
         .most-viewed {
             background-color: $darkgrey;
             padding: 2rem;
-
+            
             .slick-slide {
                 margin: 0 1rem;
+            }
+
+            .slick-list {
+                padding:0 10% 0 0 !important;
             }
 
             .slick-prev {
@@ -56,6 +66,7 @@
                 }
             }
 
+
             .most-viewed-text {
                 > div {
                     display: flex;
@@ -67,6 +78,39 @@
                 }
             }
 
+            
+
+            @include breakpoint-down(medium) {
+                padding: 1rem .5rem;
+
+                .slick-slide {
+                    margin: 0 .5rem;
+                }
+
+                .slick-prev {
+                    left: -18px;
+                }
+    
+                .slick-next {
+                    right: -18px;
+                }
+
+                .most-viewed-text {
+                    > div {
+                        padding: 0;
+                    }
+                }
+
+                .ukm {
+                    .ukm-wa {
+                        img {
+                            width: 35px;
+                        }
+                    }
+                }
+    
+            }
+
             .ukm {
                 box-shadow: none;
             }
@@ -74,12 +118,34 @@
 
         .katalog-ukm {
             padding: 2rem 0 2rem 2rem; 
+
+            @include breakpoint-down(medium) {
+                padding: 1rem;
+            }
         }
 
         #ukm_bests {
             .ukm-title {
                 color: white;
             }
+        }
+
+        .filter-mobile {
+            background-color: $secondary-color;
+            color: white;
+            font-size: 1.15rem;
+            padding: .5rem 1rem;
+            border-radius: 10px;
+            font-weight: 500;
+
+            i {
+                font-size: .85rem;
+                margin-right: .25rem;
+            }
+        }
+
+        .city-selected {
+            text-transform: capitalize;
         }
 
         .filter {
@@ -90,23 +156,27 @@
             z-index: 99;
             height: 660px;
 
-            .search-ukm {
-                position: relative;
-                margin-bottom: 2rem;
+            @include breakpoint-down(medium) {
+                display: none;
+            }
+        }
 
-                .form-control {
-                    border-radius: 12px;
-                }
+        .search-ukm {
+            position: relative;
+            margin-bottom: 2rem;
 
-                .icon-search {
-                    position: absolute;
-                    top: 50%;
-                    right: 15px;
-                    transform: translateY(-50%);
+            .form-control {
+                border-radius: 12px;
+            }
 
-                    i {
-                        color: $primary-color
-                    }
+            .icon-search {
+                position: absolute;
+                top: 50%;
+                right: 15px;
+                transform: translateY(-50%);
+
+                i {
+                    color: $primary-color
                 }
             }
         }
