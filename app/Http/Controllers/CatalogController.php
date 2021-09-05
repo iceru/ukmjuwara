@@ -81,7 +81,7 @@ class CatalogController extends Controller
         $catalog = Catalog::where('slug', $slug)->firstOrFail();
         $ukms = Ukm::where('catalog_id', $catalog->id)->get();
         $bests = Ukm::where('catalog_id', $catalog->id)->orderByViews()->get()->take(4);
-        $cities = Ukm::where('catalog_id', $catalog->id)->select('city_name')->distinct()->where('city_name', '!=', '')->get();
+        $cities = Ukm::where('catalog_id', $catalog->id)->select('city_name')->distinct()->where('city_name', '!=', '')->orderBy('city_name')->get();
         $categories = Category::take(6)->get();
         
         return view('catalog', compact('catalog','ukms', 'bests', 'categories', 'cities'));

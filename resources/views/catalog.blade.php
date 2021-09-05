@@ -110,7 +110,7 @@
                         </div>
                     </div>
                     <div class="col-md-9 katalog-ukm" id="catalog">
-                        @include('catalog-ukm');
+                        @include('catalog-ukm')
                     </div>
                 </div>
             </div>
