@@ -95,14 +95,14 @@ class CatalogController extends Controller
 
             $ukms = Ukm::where('catalog_id', $request->catalog)->whereHas('categories', function($query) use($categoryId) {
                 $query->whereIn('category_id', $categoryId);
-            })->get();
+            })->paginate(20);
         }
         elseif ($request->cities) {
             $cities = $request->cities;
-            $ukms = Ukm::where('catalog_id', $request->catalog)->whereIn('city_name', $cities)->get();
+            $ukms = Ukm::where('catalog_id', $request->catalog)->whereIn('city_name', $cities)->paginate(20);
         }
         else {
-            $ukms = Ukm::where('catalog_id', $request->catalog)->get();
+            $ukms = Ukm::where('catalog_id', $request->catalog)->paginate(20);
         }
         response()->json($ukms);
 

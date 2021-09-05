@@ -55,19 +55,23 @@
                         <div class="description mb-4">
                             <p>{!! $ukm->description !!}</p>
                         </div>
-                        <div class="d-flex align-items-center mb-4">
-                            <a href="https://wa.me/{{ $ukm->whatsapp }}">
-                                <div class="social whatsapp">
-                                    <p class="me-2">Whatsapp</p>
-                                    <i class="fab fa-whatsapp fa-fw "></i>
-                               </div>
-                            </a>
-                            <a href="{{ $ukm->instagram }}">
-                                <div class="social instagram">
-                                    <p class="me-2">Instagram</p>
-                                    <i class="fab fa-instagram fa-fw"></i>
-                                </div>
-                            </a>
+                        <div class="mb-4">
+                            <div>
+                                <a class="mb-3" href="https://wa.me/{{ $ukm->whatsapp }}">
+                                    <div class="social whatsapp">
+                                        <i class="fab fa-whatsapp fa-fw me-2"></i>
+                                        <p>Klik untuk kontak langsung & belanja</p>
+                                   </div>
+                                </a>
+                            </div>
+                            <div>
+                                <a href="{{ $ukm->instagram }}">
+                                    <div class="social instagram">
+                                        <i class="fab fa-instagram fa-fw me-2"></i>
+                                        <p>Klik untuk tahu lebih banyak</p>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

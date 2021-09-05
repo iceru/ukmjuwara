@@ -19,8 +19,8 @@
                     padding-left: 2rem;
 
                     .detail-head {
-                        padding-bottom: 1.5rem;
-                        margin-bottom: 1.5rem;
+                        padding-bottom: 1rem;
+                        margin-bottom: 1rem;
                         border-bottom: 1px solid rgba($color: #000000, $alpha: .1);
 
                         .description {
@@ -29,7 +29,7 @@
                                 border-left: 2px solid $primary-color;
                                 height: 100%;
                                 
-                                h5 {
+                                h6 {
                                     color: $primary-color;
                                 }
                             }
@@ -38,12 +38,18 @@
                                 .desc-item {
                                     border-left: 2px solid $secondary-color;
                                     
-                                    h5 {
+                                    h6 {
                                         color: $secondary-color;
                                     }
                                 }
                             }
                         }
+                    }
+
+                    .social {
+                        display: inline-flex;
+                        justify-content: start;
+                        padding: .75rem 2rem;
                     }
                 }
             }

@@ -6,7 +6,7 @@
         </a>
         <a href="{{ route('index') }}">
             <div class="logo">
-                <h3>#UKMJUWARA</h3>
+                <h3>#UKMJuWAra</h3>
             </div>
         </a>
         <div class="d-flex align-items-center">
@@ -88,7 +88,7 @@
         </button>
     </div>
     <div class="menu-overlay">
-        <h1>#UKMJUWARA</h1>
+        <h1>#UKMJuWAra</h1>
         <div class="list-menu">
             <ul>
                 <li>
