@@ -25,11 +25,11 @@
         <a href="{{ route('admin.catalog') }}">
             <li class="{{ (request()->is('admin/catalog')) ? 'active' : '' }}"><i class="fas fa-list-alt fa-fw"></i> &nbsp; Katalog</li>
         </a>
-        <a href="{{ route('admin.ukm') }}">
-            <li class="{{ (request()->is('admin/ukm')) ? 'active' : '' }}"><i class="fas fa-store fa-fw"></i> &nbsp; UKM</li>
-        </a>
         <a href="{{ route('admin.category') }}">
             <li class="{{ (request()->is('admin/category')) ? 'active' : '' }}"><i class="fas fa-box fa-fw"></i> &nbsp; Kategori UKM</li>
+        </a>
+        <a href="{{ route('admin.ukm') }}">
+            <li class="{{ (request()->is('admin/ukm')) ? 'active' : '' }}"><i class="fas fa-store fa-fw"></i> &nbsp; UKM</li>
         </a>
         <a href="{{ route('admin.article') }}">
             <li class="{{ (request()->is('admin/article')) ? 'active' : '' }}"><i class="fas fa-newspaper fa-fw"></i> &nbsp; Artikel</li>
