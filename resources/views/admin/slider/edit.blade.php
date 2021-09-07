@@ -41,8 +41,8 @@
                 <label for="title" class="col-12 col-md-2 col-form-label">Type</label>
                 <div class="col-12 col-md-10">
                     <select class="form-select" name="type" id="type">
-                        <option value="desktop">Desktop Slider</option>
-                        <option value="mobile">Mobile Slider</option>
+                        <option {{ $slider->type == 'desktop' ? 'selected' : '' }} value="desktop">Desktop Slider</option>
+                        <option {{ $slider->type == 'mobile' ? 'selected' : '' }} value="mobile">Mobile Slider</option>
                     </select>
                 </div>
             </div>
