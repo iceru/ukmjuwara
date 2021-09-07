@@ -12,6 +12,16 @@
         yang berfokus pada peningkatan penetrasi pasar global oleh pelaku UKM Iokal berikut dengan
         berita-berita sangat relevan dengan kebutuhan UKM untuk meroket.">
 
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-5F5EVBNE2Q"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-5F5EVBNE2Q');
+        </script>
+
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
