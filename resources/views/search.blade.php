@@ -46,7 +46,7 @@
                                             </a>
                                         </div>
                                     @else
-                                        <div class="article medium mb-3 col-lg-6">
+                                        <div class="article medium mb-3 col-lg-4">
                                             <a href="{{ route('article.show', $searchResult->searchable->slug) }}">
                                                 <div class="article-image">
                                                     <img src="{{ Storage::url('article-image/'.$searchResult->searchable->image) }}" alt="">

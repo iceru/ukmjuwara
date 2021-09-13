@@ -25,15 +25,15 @@
             @foreach ($featured as $catalog)
             <a href="{{ route('catalog.show', $catalog->slug) }}">
                 <div class="cta-item align-items-center">
-                    #{{ $catalog->title }}
+                    {{ $catalog->title }}
                     <img src="/images/cursor.png" class="ms-2" height="20" width="20" alt="">
                 </div>
             </a>
             @endforeach
         </div>
     </div>
-
-    <div class="container supported-by">
+    @if (count($sponsors) > 0)
+    <div class="container supported-by mb-5">
         <div class="row">
             <div class="col-12">
                 <div class="support-title">
@@ -49,10 +49,43 @@
             </div>
         </div>
     </div>
+    @endif
+
+    @if (count($sponsors_dukung) > 0)
+    <div class="container supported-by">
+        <div class="row">
+            <div class="col-12">
+                <div class="support-title">
+                    <h3 class="text-center fw-bold">Didukung oleh</h3>
+                </div>
+                <div id="supported_dukung">
+                    @foreach ($sponsors_dukung as $sponsor)
+                        <div>
+                            <img src="{{ Storage::url('sponsor-image/'.$sponsor->image) }}" alt="{{ $sponsor->title }}">
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif
 
     <script>
         $(document).ready(function(){
             $('#supported').slick({
+                infinite: true,
+                slidesToShow: 4,
+                slidesToScroll: 1,
+                responsive: [
+                    {
+                        breakpoint: 567,
+                        settings: {
+                            slidesToShow: 2
+                        }
+                    },
+                ]
+            });
+            $('#supported_dukung').slick({
                 infinite: true,
                 slidesToShow: 4,
                 slidesToScroll: 1,

@@ -21,10 +21,11 @@ class IndexController extends Controller
     {
         $sliderDesktop = Slider::where('type', 'desktop')->get();
         $sliderMobile = Slider::where('type', 'mobile')->get();
-        $sponsors = Sponsor::all();
+        $sponsors = Sponsor::where('type', 'dipersembahkan')->get();
+        $sponsors_dukung = Sponsor::where('type', 'didukung')->get();
         $featured = Catalog::where('featured', 'yes')->take(2)->get();
         
-        return view('index', compact('sliderDesktop', 'sliderMobile', 'featured', 'sponsors'));
+        return view('index', compact('sliderDesktop', 'sliderMobile', 'featured', 'sponsors', 'sponsors_dukung'));
     }
 
     public function search(Request $request)

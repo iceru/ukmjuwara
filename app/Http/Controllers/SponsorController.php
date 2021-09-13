@@ -41,7 +41,8 @@ class SponsorController extends Controller
         $request->validate([
             'image' => 'required|image',
             'title' => 'required',
-            'link' => 'nullable'
+            'link' => 'nullable',
+            'type' => 'required',
         ]);
 
         if ($request->hasFile('image')) {
@@ -53,6 +54,7 @@ class SponsorController extends Controller
         $sponsor->image = $filename;
         $sponsor->title = $request->title;
         $sponsor->link = $request->link;
+        $sponsor->type = $request->type;
         $sponsor->save();
 
         return redirect()->route('admin.sponsor')->with('success','Data berhasil di input');
@@ -108,6 +110,7 @@ class SponsorController extends Controller
 
         $sponsor->title = $request->title;
         $sponsor->link = $request->link;
+        $sponsor->type = $request->type;
         $sponsor->save();
 
         return redirect()->route('admin.sponsor')->with('success','Data berhasil di update');

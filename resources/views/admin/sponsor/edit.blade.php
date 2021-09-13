@@ -34,6 +34,16 @@
                 </div>
             </div>
             <div class="row mb-3">
+                <label for="image" class="col-12 col-md-2 col-form-label">Tipe</label>
+                <div class="col-12 col-md-10">
+                    <select class="form-select" name="type" id="type">
+                        <option disabled selected>Pilih Tipe</option>
+                        <option {{ $sponsor->type == 'dipersembahkan' ? 'selected' : '' }} value="dipersembahkan">Dipersembahkan Oleh</option>
+                        <option {{ $sponsor->type == 'didukung' ? 'selected' : '' }} value="didukung">Didukung Oleh</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
                 <label for="image" class="col-12 col-md-2 col-form-label">Image</label>
                 <div class="col-12 col-md-10 edit-image contain">
                     <img src="{{ Storage::url('sponsor-image/'.$sponsor->image) }}" alt="image" class="mb-3" width="70" height="70">
@@ -45,7 +55,7 @@
             </div>
             <div class="mb-3 row">
                 <div class="col-12 col-md-2"></div>
-                <div class="col-12 col-md-10">
+                <div class="col-12 col-md-10"> 
                     <button class="btn btn-primary" type="submit">Submit</button>
                 </div>
             </div>
