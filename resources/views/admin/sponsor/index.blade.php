@@ -36,6 +36,16 @@
                 </div>
             </div>
             <div class="row mb-3">
+                <label for="image" class="col-12 col-md-2 col-form-label">Tipe</label>
+                <div class="col-12 col-md-10">
+                    <select class="form-select" name="type" id="type">
+                        <option disabled selected>Pilih Tipe</option>
+                        <option value="dipersembahkan">Dipersembahkan Oleh</option>
+                        <option value="didukung">Didukung Oleh</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
                 <label for="image" class="col-12 col-md-2 col-form-label">Image</label>
                 <div class="col-12 col-md-10">
                     <input type="file" class="form-control" id="image" name="image"></input>
@@ -55,6 +65,7 @@
                     <th>No</th>
                     <th>Title</th>
                     <th>Link</th>
+                    <th>Tipe</th>
                     <th>Image</th>
                     <th>Action</th>
                 </tr>
@@ -65,6 +76,7 @@
                     <td scope="row">{{$loop->iteration}}</td>
                     <td>{{ $sponsor->title }}</td>
                     <td>{{ $sponsor->link }}</td>
+                    <td class="text-capitalize">{{ $sponsor->type }}</td>
                     <td><img class="mb-2" src="{{Storage::url('sponsor-image/'.$sponsor->image )}}" alt="Image" width="70" height="70"></td>
                     <td><a class="btn btn-primary btn-small d-flex align-items-center justify-content-center mb-2" href="/admin/sponsor/edit/{{$sponsor->id}}"><i class="fas fa-edit me-1"></i> Edit</a>
                         <a class="btn btn-danger btn-small d-flex align-items-center justify-content-center" href="/admin/sponsor/delete/{{$sponsor->id}}" onclick="return confirm('Hapus data ini?')"><i class="fa fa-trash me-1" aria-hidden="true"></i> Delete</a></td>

@@ -3,6 +3,20 @@
         UKM Juwara
     @endsection
 
+    <a href="https://wa.me/c/628118995115" target="_blank">
+        <div class="floating-button">
+            <div class="row">
+                <div class="col-9">
+                    Katalog Whatsapp <br>
+                    UKM Indonesia
+                </div>
+                <div class="col-3">
+                    <img src="/images/whatsapp.png" alt="">
+                </div>
+            </div>
+        </div>
+    </a>
+
     <div class="catalog">
         <div class="header">
             <div class="header-image">
