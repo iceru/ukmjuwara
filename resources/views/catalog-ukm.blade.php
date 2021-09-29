@@ -25,4 +25,5 @@
         
     </div>
     @endforeach
+    <div class="d-flex justify-content-center">{{$ukms->links()}}</div>
 </div>

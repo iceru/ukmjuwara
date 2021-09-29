@@ -13,13 +13,13 @@
         berita-berita sangat relevan dengan kebutuhan UKM untuk meroket.">
 
         <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-5F5EVBNE2Q"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-206865884-3"></script>
         <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
 
-        gtag('config', 'G-5F5EVBNE2Q');
+        gtag('config', 'UA-206865884-3');
         </script>
 
         <!-- Fonts -->
