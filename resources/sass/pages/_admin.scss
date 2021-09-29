@@ -120,6 +120,9 @@
         object-fit: cover;
     }
 
+    .chart {
+        padding: 2rem;
+    }
     form {
         .btn-check:focus + .btn-primary, .btn-primary:focus, .btn-primary:hover {
             background-color: lighten($color: $primary-color, $amount: 10%);
