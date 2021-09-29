@@ -14,9 +14,10 @@ class ContactController extends Controller
      */
     public function index()
     {
-        $sponsors = Sponsor::all();
+        $sponsors = Sponsor::where('type', 'dipersembahkan')->get();
+        $sponsors_dukung = Sponsor::where('type', 'didukung')->get();
 
-        return view('contact-us', compact('sponsors'));
+        return view('contact-us', compact('sponsors', 'sponsors_dukung'));
     }
 
     /**
