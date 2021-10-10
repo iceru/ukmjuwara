@@ -1,5 +1,5 @@
 <div class="row">
-    @foreach ($ukms as $ukm)
+    @forelse ($ukms as $ukm)
     <div class="col-6 col-md-4 col-xl-3 mb-5">
         <a href="{{ route('ukm.show', $ukm->slug) }}">
             <div class="ukm">
@@ -11,7 +11,7 @@
                     </div>
                 </div>
                 <div class="ukm-wa">
-                    <a href="https://wa.me/{{ $ukm->whatsapp }}">
+                    <a href="{{ $ukm->whatsapp }}">
                         <img src="/images/whatsapp.png" alt="">
                     </a>
                 </div>
@@ -24,6 +24,11 @@
         </a>
         
     </div>
-    @endforeach
+
+    @empty
+
+    <h3>Data tidak ditemukan</h3>
+
+    @endforelse
     <div class="d-flex justify-content-center">{{$ukms->links()}}</div>
 </div>

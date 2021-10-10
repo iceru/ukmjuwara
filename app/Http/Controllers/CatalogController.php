@@ -81,32 +81,39 @@ class CatalogController extends Controller
         $catalog = Catalog::where('slug', $slug)->firstOrFail();
         $ukms = Ukm::where('catalog_id', $catalog->id)->paginate(20);
         $bests = Ukm::where('catalog_id', $catalog->id)->orderByViews()->get()->take(4);
-        $cities = Ukm::where('catalog_id', $catalog->id)->select('city_name')->distinct()->where('city_name', '!=', '')->orderBy('city_name')->get();
+        $states = Ukm::where('catalog_id', $catalog->id)->select('state_name')->distinct()->where('state_name', '!=', '')->orderBy('state_name')->get();
         $categories = Category::take(6)->get();
         
-        return view('catalog', compact('catalog','ukms', 'bests', 'categories', 'cities'));
+        return view('catalog', compact('catalog','ukms', 'bests', 'categories', 'states'));
     }
 
     public function filter(Request $request)
     {
-        if($request->categories) {
-            $categories = $request->categories;
-            $categoryId = Category::whereIn('id', $categories)->pluck('id');
+        if ($request->ajax()) {
+            $ukms = Ukm::where('catalog_id', $request->catalog);
 
-            $ukms = Ukm::where('catalog_id', $request->catalog)->whereHas('categories', function($query) use($categoryId) {
-                $query->whereIn('category_id', $categoryId);
-            })->paginate(20);
-        }
-        elseif ($request->cities) {
-            $cities = $request->cities;
-            $ukms = Ukm::where('catalog_id', $request->catalog)->whereIn('city_name', $cities)->paginate(20);
-        }
-        else {
+            if (isset($request->categories)) {
+                $categoryId = Category::whereIn('id', request('categories'))->pluck('id');
+                $ukms = $ukms->whereHas('categories', function($q) use($categoryId) {
+                    $q->whereIn('category_id', $categoryId);
+                });
+            }
+
+            if (isset($request->states)) {
+                $ukms = $ukms->whereIn('state_name', $request->states);
+            }
+
+            if (isset($request->owner_genders)) {
+                $ukms = $ukms->whereIn('owner_gender', $request->owner_genders);
+            }
+
+            $ukms = $ukms->paginate(20);
+            return view('catalog-ukm', compact('ukms'));
+        } else {
             $ukms = Ukm::where('catalog_id', $request->catalog)->paginate(20);
+            return view('catalog-ukm', compact('ukms'));
         }
-        response()->json($ukms);
 
-        return view('catalog-ukm', compact('ukms'));
     }
 
     /**

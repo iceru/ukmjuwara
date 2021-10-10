@@ -88,6 +88,45 @@
             </div>
 
             <div class="row mb-3">
+                <label for="catalog" class="col-12 col-md-2 col-form-label">Jenis Kelamin Pemilik</label>
+                <div class="col-12 col-md-10">
+                    <select class="form-select" name="owner_gender" id="owner_gender">
+                        <option disabled selected>Pilih Jenis Kelamin Pemilik</option>
+                        <option {{ $ukm->owner_gender == 'pria' ? 'selected' : '' }} value="pria">Pria</option>
+                        <option {{ $ukm->owner_gender == 'wanita' ? 'selected' : '' }}  value="wanita">Wanita</option>
+                        <option {{ $ukm->owner_gender == 'pria-wanita' ? 'selected' : '' }}  value="pria-wanita">Pria & Wanita</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3 non-global">
+                <label for="achievement" class="col-12 col-md-2 col-form-label">Capaian</label>
+                <div class="col-12 col-md-10">
+                    <textarea type="text" class="form-control" id="description" name="achievement">{{ $ukm->achievement }}</textarea>
+                </div>
+            </div>
+            <div class="row mb-3 non-global">
+                <label for="operational_hours" class="col-12 col-md-2 col-form-label">Jam Operasional</label>
+                <div class="col-12 col-md-5 mb-2 mb-md-0">
+                    <input type="time" class="form-control" value="{{ $ukm->operational_hours }}" id="operational_hours" name="operational_hours">
+                </div>
+                <div class="col-12 col-md-5">
+                    <input type="time" class="form-control" value="{{ $ukm->operational_hours_end }}" id="operational_hours_end" name="operational_hours_end">
+                </div>
+            </div>
+            <div class="row mb-3 global">
+                <label for="permission" class="col-12 col-md-2 col-form-label">Perizinan</label>
+                <div class="col-12 col-md-10">
+                    <textarea type="text" class="form-control" id="description" name="permission">{{ $ukm->permission }}</textarea>
+                </div>
+            </div>
+            <div class="row mb-3 global">
+                <label for="capacity" class="col-12 col-md-2 col-form-label">Kapasitas</label>
+                <div class="col-12 col-md-10">
+                    <input type="text" class="form-control" value="{{ $ukm->capacity }}" id="capacity" name="capacity">
+                </div>
+            </div>
+
+            <div class="row mb-3">
                 <label for="tags" class="col-12 col-md-2 col-form-label">Kategori</label>
                 <div class="col-12 col-md-10">
                     <select type="text" class="form-control" multiple aria-label="multiple size 4 select example" id="categories" name="categories[]">
@@ -130,6 +169,7 @@
             </div>
 
             <input type="text" name="city_name" id="city_name" hidden>
+            <input type="text" name="state_name" id="state_name" hidden>
 
             <div class="row mb-3">
                 <label for="catalog" class="col-12 col-md-2 col-form-label">Kecamatan</label>
@@ -155,45 +195,23 @@
                 var html = $(".clone").html();
                 $(".clone").after(html);
             });
+            
+            //hide all extra input
+            $('.non-global').hide();
+            $('.global').hide();
+            var catalog = $('#catalog option:selected').text().toLowerCase();
+            if(catalog.indexOf('global') !== -1)
+                $('.global').show();
+            else
+                $('.non-global').show();
 
             $('body').on("click", ".btn-danger", function() {
                 $(this).parents(".control-group").remove();
             });
 
-            // function split( val ) {
-            //     return val.split(/,\s*/);
-            // }
-
-            // function extractLast( term ) {
-            //     return split( term ).pop();
-            // }
-
-            // var categories = {!! json_encode($categories) !!};
-
-            // $('#categories').autocomplete({
-            //     source: function( request, response ) {
-            //         // delegate back to autocomplete, but extract the last term
-            //         response( $.ui.autocomplete.filter(
-            //           categories  , extractLast( request.term ) ) );
-            //     },
-            //     select: function( event, ui ) {
-            //         var terms = split( this.value );
-            //         // remove the current input
-            //         terms.pop();
-            //         // add the selected item
-            //         terms.push( ui.item.value );
-            //         // add placeholder to get the comma-and-space at the end
-            //         terms.push("");
-            //         this.value = terms.join("");
-                    
-            //         return false;
-            //     }
-            // });
-        });
-    </script>
-    
-    <script>
-        $(document).ready(function(){
+            //Dependant Dropdown Input Location
+            var state_name = $('#state').find('option:selected').text();
+            $("#state_name").val(state_name);
             var stateID = $('#state').val();
             if (stateID) {
                 $.ajax({
@@ -224,7 +242,6 @@
             }
 
            function subDistrict () {
-               debugger
                 var city_name = $('#city').find('option:selected').text();
                 $("#city_name").val(city_name);
                 var cityID = $('#city').val();
@@ -255,7 +272,19 @@
                     $("#subDistrict").empty();
                 }
            }
+        });
+        
+         //check whether the catalog is ukm global or not
+         $('#catalog').on('change', function () {
+            $('.non-global').hide();
+            $('.global').hide();
+            var catalog = $('#catalog option:selected').text().toLowerCase();
+            if(catalog.indexOf('global') !== -1)
+                $('.global').show();
+            else
+                $('.non-global').show();
         })
+
         $("#state").on("change", function () {
             var stateID = $(this).val();
             if (stateID) {
