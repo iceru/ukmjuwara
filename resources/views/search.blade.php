@@ -51,7 +51,9 @@
                                                 <div class="article-image">
                                                     <img src="{{ Storage::url('article-image/'.$searchResult->searchable->image) }}" alt="">
                                                 </div>
-                                                <h4 class="mb-3 article-title">{{ $searchResult->searchable->title }}</h4>
+                                                <div class="ukm-title mt-2">
+                                                    <p>{{ $searchResult->searchable->title }}</p>
+                                                </div>
                                             </a>
                                         </div>
                                     @endif
