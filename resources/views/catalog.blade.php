@@ -104,23 +104,38 @@
                             </form>
                         </div>
                         <div class="category-filter mb-4">
-                            <h5 class="mb-2">Kategori</h5>
+                            <h5 class="mb-2">Kategori Produk</h5>
                             @foreach ($categories as $category)
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="{{ $category->id }}" id="cat{{ $category->id }}" name="cat[]">
+                                <input class="form-check-input" type="checkbox" value="{{ $category->id }}" id="category" name="category[]">
                                 <label class="form-check-label" for="flexCheckDefault">
                                     {{ $category->title }}
                             </div>
                             @endforeach
                         </div>
-                        <div class="location-filter">
+                        <div class="location-filter mb-4">
                             <h5 class="mb-2">Lokasi</h5>
-                            @foreach ($cities as $item)
+                            @foreach ($states as $item)
                             <div class="form-check">
-                                <input class="form-check-input city" type="checkbox" value="{{ $item->city_name }}" id="city" name="city[]">
-                                <label class="form-check-label text-capitalize" for="flexCheckDefault" > {{ strtolower($item->city_name) }}
+                                <input class="form-check-input state" type="checkbox" value="{{ $item->state_name }}" id="state" name="state[]">
+                                <label class="form-check-label text-capitalize" for="flexCheckDefault" > {{ strtolower($item->state_name) }}
                             </div>
                             @endforeach
+                        </div>
+                        <div class="owner-gender-filter">
+                            <h5 class="mb-2">Gender Pemilik</h5>
+                            <div class="form-check">
+                                <input class="form-check-input owner" type="checkbox" value="pria" id="owner_gender" name="owner_gender[]">
+                                <label class="form-check-label" for="flexCheckDefault"> Pria
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input owner" type="checkbox" value="wanita" id="owner_gender" name="owner_gender[]">
+                                <label class="form-check-label" for="flexCheckDefault"> Wanita
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input owner" type="checkbox" value="pria-wanita" id="owner_gender" name="owner_gender[]">
+                                <label class="form-check-label" for="flexCheckDefault"> Pria & Wanita
+                            </div>
                         </div>
                     </div>
                     <div class="col-12 mt-3 mb-2 d-block d-lg-none">
@@ -129,11 +144,14 @@
                                 <i class="fas fa-filter" style="font-size: 1rem"></i>&nbsp;Filter
                             </a>
                         </div>
-                        <div class="mb-2 cat-filter" hidden>
-                            <b>Kategori: </b> <span class="cat-selected"></span>
+                        <div class="mb-2 category-data" hidden>
+                            <b>Kategori: </b> <span class="category-selected"></span>
                         </div>
-                        <div class="mb-2 city-filter" hidden>
-                            <b>Lokasi: </b> <span class="city-selected"></span>
+                        <div class="mb-2 state-data" hidden>
+                            <b>Lokasi: </b> <span class="state-selected"></span>
+                        </div>
+                        <div class="mb-2 owner_gender-data" hidden>
+                            <b>Gender Pemilik: </b> <span class="owner_gender-selected"></span>
                         </div>
                     </div>
 
@@ -160,7 +178,7 @@
                             <h5 class="mb-2">Kategori</h5>
                             @foreach ($categories as $category)
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="{{ $category->id }}" id="cat{{ $category->id }}" name="cat[]">
+                                <input class="form-check-input" type="checkbox" value="{{ $category->id }}" id="category" name="category[]">
                                 <label class="form-check-label" for="flexCheckDefault">
                                     {{ $category->title }}
                             </div>
@@ -168,12 +186,27 @@
                         </div>
                         <div class="location-filter mb-3">
                             <h5 class="mb-2">Lokasi</h5>
-                            @foreach ($cities as $item)
+                            @foreach ($states as $item)
                             <div class="form-check">
-                                <input class="form-check-input city" type="checkbox" value="{{ $item->city_name }}" id="city" name="city[]">
-                                <label class="form-check-label text-capitalize" for="flexCheckDefault" > {{ strtolower($item->city_name) }}
+                                <input class="form-check-input state" type="checkbox" value="{{ $item->state_name }}" id="state" name="state[]">
+                                <label class="form-check-label text-capitalize" for="flexCheckDefault" > {{ strtolower($item->state_name) }}
                             </div>
                             @endforeach
+                        </div>
+                        <div class="owner-gender-filter">
+                            <h5 class="mb-2">Gender Pemilik</h5>
+                            <div class="form-check">
+                                <input class="form-check-input owner" type="checkbox" value="pria" id="owner_gender" name="owner_gender[]">
+                                <label class="form-check-label" for="flexCheckDefault"> Pria
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input owner" type="checkbox" value="wanita" id="owner_gender" name="owner_gender[]">
+                                <label class="form-check-label" for="flexCheckDefault"> Wanita
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input owner" type="checkbox" value="pria-wanita" id="owner_gender" name="owner_gender[]">
+                                <label class="form-check-label" for="flexCheckDefault"> Pria & Wanita
+                            </div>
                         </div>
                         <button type="button" class="btn btn-light" data-bs-dismiss="offcanvas">
                             Filter
@@ -221,69 +254,51 @@
             //         },
             //     })
             // });
+                    
+            function get_filter(filter)
+            {
+                var filters = [];
+                var filter_selected = [];
 
-            $('input[name="cat[]"]').on('change', function (e) {
-                var categories = [];
-                var cat_selected = [];
-
-                var catalog = '{{ $catalog->id }}'
-                $('input[name="cat[]"]:checked').each(function(){
-                    categories.push($(this).val());
-                    cat_selected.push($(this).next('label').text());
+                $('#'+filter+':checked').each(function(){
+                    filters.push($(this).val());
+                    filter_selected.push($(this).next('label').text());
                 });
-                
-                var cat_text = cat_selected.join(', ');
-                $('.cat-selected').html(cat_text);
 
-                if (cat_selected.length > 0) {
-                    $('.cat-filter').removeAttr('hidden')
+                var filter_text = filter_selected.join(', ');
+                $('.'+filter+'-selected').html(filter_text);
+
+                if (filter_selected.length > 0) {
+                    $('.'+filter+'-data').removeAttr('hidden')
                 } else {
-                    $('.cat-filter').attr('hidden', 'hidden')
+                    $('.'+filter+'-data').attr('hidden', 'hidden')
                 }
 
-                $.ajax({
-                    url:"/katalog/filter",
-                    type: "POST",
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-                    data: {categories: categories, catalog: catalog}
-                    }).done( function(results){
-                        $('#catalog').html(results);
-                    })
-                });
+                return filters;
+            }
+
+            $('input[type="checkbox"], input[type="radio"]').click(function(){
+                ajaxFilter();
             });
 
-            $('input[name="city[]"]').on('change', function (e) {
-                var cities = [];
-                var city_selected = [];
 
+            function ajaxFilter() {
                 var catalog = '{{ $catalog->id }}'
-
-                $('input[name="city[]"]:checked').each(function(){
-                    cities.push($(this).val());
-                    city_selected.push($(this).next('label').text())
-                });
-
-                var city_text = city_selected.join(', ');
-                $('.city-selected').html(city_text);
-
-                if (city_selected.length > 0) {
-                    $('.city-filter').removeAttr('hidden')
-                } else {
-                    $('.city-filter').attr('hidden', 'hidden')
-                }
-
+                var states = get_filter('state');
+                var owner_genders = get_filter('owner_gender');
+                var categories = get_filter('category');
                 $.ajax({
                     url:"/katalog/filter",
                     type: "POST",
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
-                    data: {cities: cities, catalog: catalog}
+                    data: {states: states, owner_genders: owner_genders, categories: categories, catalog: catalog}
                     }).done( function(results){
                         $('#catalog').html(results);
                 })
-            });
+            };
+        });
+            
     </script>
 </x-app-layout>

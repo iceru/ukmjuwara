@@ -57,7 +57,7 @@
                 <div class="col-12 col-md-10">
                     <input type="tel" class="form-control" value="{{ old('whatsapp') }}" id="whatsapp" name="whatsapp">
                     <p class="form-text text-muted">
-                        Contoh: <b>081211221111</b>
+                        Full link
                     </p>
                 </div>
             </div>
@@ -81,7 +81,44 @@
                     </select>
                 </div>
             </div>
-            
+            <div class="row mb-3">
+                <label for="catalog" class="col-12 col-md-2 col-form-label">Jenis Kelamin Pemilik</label>
+                <div class="col-12 col-md-10">
+                    <select class="form-select" name="owner_gender" id="owner_gender">
+                        <option disabled selected>Pilih Jenis Kelamin Pemilik</option>
+                        <option {{ old('owner_gender') == 'pria' ? "selected" : "" }} value="pria">Pria</option>
+                        <option {{ old('owner_gender') == 'wanita' ? "selected" : "" }} value="wanita">Wanita</option>
+                        <option {{ old('owner_gender') == 'pria-wanita' ? "selected" : "" }} value="pria-wanita">Pria & Wanita</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3 non-global">
+                <label for="achievement" class="col-12 col-md-2 col-form-label">Capaian</label>
+                <div class="col-12 col-md-10">
+                    <textarea type="text" class="form-control" id="description" name="achievement">{{ old('achievement') }}</textarea>
+                </div>
+            </div>
+            <div class="row mb-3 non-global">
+                <label for="operational_hours" class="col-12 col-md-2 col-form-label">Jam Operasional</label>
+                <div class="col-12 col-md-5 mb-2 mb-md-0">
+                    <input type="time" class="form-control" value="{{ old('operational_hours') }}" id="operational_hours" name="operational_hours">
+                </div>
+                <div class="col-12 col-md-5">
+                    <input type="time" class="form-control" value="{{ old('operational_hours_end') }}" id="operational_hours_end" name="operational_hours_end">
+                </div>
+            </div>
+            <div class="row mb-3 global">
+                <label for="permission" class="col-12 col-md-2 col-form-label">Perizinan</label>
+                <div class="col-12 col-md-10">
+                    <textarea type="text" class="form-control" id="description" name="permission">{{ old('permission') }}</textarea>
+                </div>
+            </div>
+            <div class="row mb-3 global">
+                <label for="capacity" class="col-12 col-md-2 col-form-label">Kapasitas</label>
+                <div class="col-12 col-md-10">
+                    <input type="text" class="form-control" value="{{ old('capacity') }}" id="capacity" name="capacity">
+                </div>
+            </div>
             <div class="row mb-3">
                 <label for="tags" class="col-12 col-md-2 col-form-label">Kategori</label>
                 <div class="col-12 col-md-10">
@@ -121,6 +158,7 @@
                 </div>
             </div>
             <input type="text" name="city_name" id="city_name" hidden>
+            <input type="text" name="state_name" id="state_name" hidden>
             <div class="row mb-3">
                 <label for="catalog" class="col-12 col-md-2 col-form-label">Kecamatan</label>
                 <div class="col-12 col-md-10">
@@ -149,6 +187,11 @@
                     <th>Alamat</th>
                     <th>Whatsapp</th>
                     <th>Instagram</th>
+                    <th>Views</th>
+                    <th>Capaian</th>
+                    <th>Jam Operasional</th>
+                    <th>Perizinan</th>
+                    <th>Kapasitas</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -173,6 +216,11 @@
                     <td>{{ $ukm->address }}</td>
                     <td>{{ $ukm->whatsapp }}</td>
                     <td>{{ $ukm->instagram }}</td>
+                    <td>{{ views($ukm)->count(); }}</td>
+                    <td>{!! !str_contains(strtolower($ukm->catalog->title), 'global') ? $ukm->achievement : '-' !!}</td>
+                    <td>{{ !str_contains(strtolower($ukm->catalog->title), 'global') ? $ukm->operational_hours.'-'.$ukm->operational_hours_end : '-'  }}</td>
+                    <td>{!! str_contains(strtolower($ukm->catalog->title), 'global') ? $ukm->permission : '-' !!}</td>
+                    <td>{{ str_contains(strtolower($ukm->catalog->title), 'global') ? $ukm->capacity : '-' }}</td>
 
                     <td><a class="btn btn-primary btn-small d-flex align-items-center justify-content-center mb-2"
                             href="/admin/ukm/edit/{{$ukm->id}}"><i class="fas fa-edit me-1"></i> Edit</a>
@@ -190,25 +238,32 @@
                 responsive: true
             });
 
+            //hide all extra input
+            $('.non-global').hide();
+            $('.global').hide();
+            var catalog = $('#catalog option:selected').text().toLowerCase();
+            if(catalog.indexOf('global') !== -1)
+                $('.global').show();
+            else
+                $('.non-global').show();
+            
+            // Upload image add-remove button
             $('.clone.hide .btn-danger').attr('disabled', 'disabled');
             $(".btn-success").click(function(){
-                debugger
                 var html = $(".clone").html();
                 $(".clone").after(html);
                 $('.btn-danger').removeAttr('disabled');
                 $('.clone.hide .btn-danger').attr('disabled', 'disabled');
             });
 
-
             $('body').on("click", ".btn-danger", function() {
                 $(this).parents(".control-group").remove();
             });
-        });
-    </script>
 
-    <script>
-        $(document).ready(function() {
-        var stateID = $('#state').val();
+            //Dependant Dropdown Input Location
+            var state_name = $('#state').find('option:selected').text();
+            $("#state_name").val(state_name);
+            var stateID = $('#state').val();
             if (stateID) {
                 $.ajax({
                     type: "GET",
@@ -237,8 +292,7 @@
                 $("#city").empty();
             }
 
-           function subDistrict () {
-               debugger
+            function subDistrict () {
                 var city_name = $('#city').find('option:selected').text();
                 $("#city_name").val(city_name);
                 var cityID = $('#city').val();
@@ -268,10 +322,23 @@
                 } else {
                     $("#subDistrict").empty();
                 }
-           }
+            }
         });
 
+        //check whether the catalog is ukm global or not
+        $('#catalog').on('change', function () {
+            $('.non-global').hide();
+            $('.global').hide();
+            var catalog = $('#catalog option:selected').text().toLowerCase();
+            if(catalog.indexOf('global') !== -1)
+                $('.global').show();
+            else
+                $('.non-global').show();
+        })
+
         $("#state").on("change", function () {
+            var state_name = $(this).find('option:selected').text();
+            $("#state_name").val(state_name);
             var stateID = $(this).val();
             if (stateID) {
                 $.ajax({

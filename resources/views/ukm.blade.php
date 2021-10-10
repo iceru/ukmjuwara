@@ -23,14 +23,6 @@
                             <div class="row description">
                                 <div class="col-6 mb-3">
                                     <div class="desc-item">
-                                        <h6 class="mb-2">Lokasi</h6>
-                                        @if($ukm->address)
-                                            <p class="text-capitalize">{{ $ukm->address }}, {{ $sub_name }}, {{ $city_name }}, {{ $state_name }} </p>
-                                        @endif
-                                    </div>
-                                </div>
-                                <div class="col-6 mb-3">
-                                    <div class="desc-item">
                                         <h6 class="mb-2">Kategori</h6>
                                         <p>@foreach ($ukm->categories as $item)
                                             <span>{{ $item->title }}</span>
@@ -38,18 +30,46 @@
                                         </p>
                                     </div>
                                 </div>
-                                {{-- <div class="col-6">
+                                @if ($ukm->achievement)
+                                    <div class="col-6 mb-3">
+                                        <div class="desc-item">
+                                            <h6 class="mb-2">Capaian</h6>
+                                            <p>{!! $ukm->achievement !!}</p>
+                                        </div>
+                                    </div>
+                                @endif
+                                @if ($ukm->permission)
+                                    <div class="col-6 mb-3">
+                                        <div class="desc-item">
+                                            <h6 class="mb-2">Perizinan</h6>
+                                            <p>{!! $ukm->permission !!}</p>
+                                        </div>
+                                    </div>
+                                @endif
+                                <div class="col-6 mb-3">
                                     <div class="desc-item">
-                                        <h6>Description 3</h6>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                                        <h6 class="mb-2">Lokasi</h6>
+                                        @if($ukm->address)
+                                            <p class="text-capitalize">{{ $ukm->address }}, {{ $sub_name }}, {{ $city_name }}, {{ $state_name }} </p>
+                                        @endif
                                     </div>
                                 </div>
-                                <div class="col-6">
-                                    <div class="desc-item">
-                                        <h6>Description 4</h6>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                                @if ($ukm->operational_hours && $ukm->operational_hours_end)
+                                    <div class="col-6 mb-3">
+                                        <div class="desc-item">
+                                            <h6 class="mb-2">Jam Operasional</h6>
+                                            <p>{{ $ukm->operational_hours }} - {{ $ukm->operational_hours_end }}</p>
+                                        </div>
                                     </div>
-                                </div> --}}
+                                @endif
+                                @if ($ukm->capacity)
+                                    <div class="col-6 mb-3">
+                                        <div class="desc-item">
+                                            <h6 class="mb-2">Kapasitas</h6>
+                                            <p>{{ $ukm->capacity }}</p>
+                                        </div>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                         <div class="description mb-4">

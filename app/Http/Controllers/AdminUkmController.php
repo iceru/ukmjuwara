@@ -20,7 +20,7 @@ class AdminUkmController extends Controller
      */
     public function index()
     {
-        $ukms = Ukm::all();
+        $ukms = Ukm::orderBy('created_at', 'desc')->get();
         $catalogs = Catalog::all();
         $categories = Category::all();
         $states = json_decode(file_get_contents('https://ibnux.github.io/data-indonesia/propinsi.json'), true);
@@ -73,7 +73,14 @@ class AdminUkmController extends Controller
             'state' => 'required',
             'city' => 'required',
             'subDistrict' => 'required',
-            'city_name'=> 'required'
+            'city_name'=> 'required',
+            'owner_gender'=> 'required',
+            'operational_hours' => 'nullable',
+            'operational_hours_end' => 'nullable',
+            'achievement' => 'nullable',
+            'capacity' => 'nullable',
+            'permission' => 'nullable',
+
         ]);
 
         
@@ -103,9 +110,16 @@ class AdminUkmController extends Controller
         $ukm->catalog_id = $request->catalog;
         $ukm->address = $request->address;
         $ukm->state = $request->state;
+        $ukm->state_name = $request->state_name;
         $ukm->city = $request->city;
         $ukm->city_name = $request->city_name;
         $ukm->subDistrict = $request->subDistrict;
+        $ukm->owner_gender = $request->owner_gender;
+        $ukm->operational_hours = $request->operational_hours;
+        $ukm->operational_hours_end = $request->operational_hours_end;
+        $ukm->achievement = $request->achievement;
+        $ukm->capacity = $request->capacity;
+        $ukm->permission = $request->permission;
 
         $ukm->save();
 
@@ -184,7 +198,14 @@ class AdminUkmController extends Controller
             'address' => 'required',
             'state' => 'required',
             'city' => 'required',
-            'subDistrict' => 'required'
+            'city_name' => 'required',
+            'subDistrict' => 'required',
+            'owner_gender' => 'required',
+            'operational_hours' => 'nullable',
+            'operational_hours_end' => 'nullable',
+            'achievement' => 'nullable',
+            'capacity' => 'nullable',
+            'permission' => 'nullable',
         ]);
 
         if ($request->hasFile('image')) {
@@ -209,8 +230,16 @@ class AdminUkmController extends Controller
         $ukm->catalog_id = $request->catalog;
         $ukm->address = $request->address;
         $ukm->state = $request->state;
+        $ukm->state_name = $request->state_name;
         $ukm->city = $request->city;
         $ukm->subDistrict = $request->subDistrict;
+        $ukm->city_name = $request->city_name;
+        $ukm->owner_gender = $request->owner_gender;
+        $ukm->operational_hours = $request->operational_hours;
+        $ukm->operational_hours_end = $request->operational_hours_end;
+        $ukm->achievement = $request->achievement;
+        $ukm->capacity = $request->capacity;
+        $ukm->permission = $request->permission;
 
         $ukm->save();
 
