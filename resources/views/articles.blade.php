@@ -96,6 +96,9 @@
                     <p class="mt-3">{{  date('d F Y', strtotime($article->created_at )) }} | {{ $article->time_read }} Mins Read</p>
                 </div>
             @endforeach
+            <div class="col-12 mt-3 justify-content-center d-flex">
+                {{ $articles->links() }}
+            </div>
         </div>
     </div>
 

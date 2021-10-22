@@ -1,4 +1,4 @@
-<nav>
+<nav id="nav">
     <div class="navbar container d-flex justify-content-between">
         <a class="hamburger d-block d-lg-none" data-bs-toggle="offcanvas" href="#side_navigation" role="button"
             aria-controls="side_navigation">
