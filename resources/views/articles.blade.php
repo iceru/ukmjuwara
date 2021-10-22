@@ -27,7 +27,7 @@
         @endforeach
 
        <div class="container container-padding">
-        @if ($topArticles)
+        @if (!$topArticles->isEmpty())
         <h3 class="mb-3">Top Stories</h3>
             <div class="row top-stories">
                 <div class="col-12 col-md-6 mb-3">
