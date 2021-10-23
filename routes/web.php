@@ -33,7 +33,7 @@ Route::get('/kemitraan', [ContactController::class, 'index'])->name('contact');
 Route::get('/search', [IndexController::class, 'search'])->name('search');
 
 Route::get('/katalog/{slug}', [CatalogController::class, 'show'])->name('catalog.show');
-Route::post('/katalog/filter', [CatalogController::class, 'filter'])->name('catalog.filter');
+Route::get('/katalog/filter', [CatalogController::class, 'filter'])->name('catalog.filter');
 Route::get('/ukm/{slug}', [UkmController::class, 'show'])->name('ukm.show');
 
 Route::get('/berita', [ArticleController::class, 'index'])->name('article.index');

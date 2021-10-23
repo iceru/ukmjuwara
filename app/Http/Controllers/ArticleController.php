@@ -23,22 +23,22 @@ class ArticleController extends Controller
         if($headerTag->first()) {
             $headerArticle = Article::whereHas('tags', function($query) use($headerTag) {
                 $query->where('tag_id', $headerTag);
-            })->get();
+            })->take(1)->get();
         }
 
         $topTag = Tag::where('tag_name', 'top')->pluck('id');
         if($topTag->first()) {
             $topArticles = Article::whereHas('tags', function($b) use($topTag) {
                 $b->where('tag_id', $topTag);
-            })->get();
+            })->take(5)->get();
         }
 
         if($topTag->first() and $headerTag->first()) {
             $articles = Article::whereHas('tags', function($query) use($headerTag, $topTag) {
                 $query->where('tag_id', '!=', $headerTag)->where('tag_id', '!=', $topTag);
-            })->get();
-        } else { 
-            $articles = Article::all();
+            })->paginate(10);
+        } else {
+            $articles = Article::paginate(10);
         }
 
         return view('articles', compact('articles', 'headerArticle', 'topArticles'));

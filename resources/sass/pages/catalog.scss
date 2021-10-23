@@ -57,7 +57,7 @@
             }
 
             .slick-next {
-                right: -12px;
+                right: -30px;
             }
 
             .slick-prev, .slick-next {
@@ -87,12 +87,8 @@
                     margin: 0 .5rem;
                 }
 
-                .slick-prev {
-                    left: -18px;
-                }
-    
-                .slick-next {
-                    right: -18px;
+                .slick-prev, .slick-next {
+                    display: none;
                 }
 
                 .most-viewed-text {

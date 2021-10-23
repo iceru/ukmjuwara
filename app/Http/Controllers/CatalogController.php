@@ -76,19 +76,14 @@ class CatalogController extends Controller
      * @param  \App\Models\Catalog  $catalog
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
+    public function show($slug, Request $request)
     {
         $catalog = Catalog::where('slug', $slug)->firstOrFail();
         $ukms = Ukm::where('catalog_id', $catalog->id)->paginate(20);
         $bests = Ukm::where('catalog_id', $catalog->id)->orderByViews()->get()->take(4);
         $states = Ukm::where('catalog_id', $catalog->id)->select('state_name')->distinct()->where('state_name', '!=', '')->orderBy('state_name')->get();
         $categories = Category::take(6)->get();
-        
-        return view('catalog', compact('catalog','ukms', 'bests', 'categories', 'states'));
-    }
 
-    public function filter(Request $request)
-    {
         if ($request->ajax()) {
             $ukms = Ukm::where('catalog_id', $request->catalog);
 
@@ -109,11 +104,14 @@ class CatalogController extends Controller
 
             $ukms = $ukms->paginate(20);
             return view('catalog-ukm', compact('ukms'));
-        } else {
-            $ukms = Ukm::where('catalog_id', $request->catalog)->paginate(20);
-            return view('catalog-ukm', compact('ukms'));
         }
+        
+        return view('catalog', compact('catalog','ukms', 'bests', 'categories', 'states'));
+    }
 
+    public function filter(Request $request)
+    {
+        
     }
 
     /**

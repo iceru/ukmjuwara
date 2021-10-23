@@ -148,15 +148,13 @@
                             <b>Kategori: </b> <span class="category-selected"></span>
                         </div>
                         <div class="mb-2 state-data" hidden>
-                            <b>Lokasi: </b> <span class="state-selected"></span>
+                            <b>Lokasi: </b> <span class="state-selected text-capitalize"></span>
                         </div>
                         <div class="mb-2 owner_gender-data" hidden>
                             <b>Gender Pemilik: </b> <span class="owner_gender-selected"></span>
                         </div>
                     </div>
 
-                   
-                      
                     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                         <div class="d-flex justify-content-end">
                             <button type="button" class="btn button-close" data-bs-dismiss="offcanvas">
@@ -174,7 +172,7 @@
                             </div>
                             </form>
                         </div>
-                        <div class="category-filter mb-4">
+                        <div class="category-filter mb-3">
                             <h5 class="mb-2">Kategori</h5>
                             @foreach ($categories as $category)
                             <div class="form-check">
@@ -193,7 +191,7 @@
                             </div>
                             @endforeach
                         </div>
-                        <div class="owner-gender-filter">
+                        <div class="owner-gender-filter mb-3">
                             <h5 class="mb-2">Gender Pemilik</h5>
                             <div class="form-check">
                                 <input class="form-check-input owner" type="checkbox" value="pria" id="owner_gender" name="owner_gender[]">
@@ -254,7 +252,29 @@
             //         },
             //     })
             // });
-                    
+                        
+            $(window).on('hashchange',function(){
+                if (window.location.hash) {
+                    var page = window.location.hash.replace('#', '');
+                    if (page == Number.NaN || page <= 0) {
+                        return false;
+                    } else{
+                        ajaxFilter(page);
+                    }
+                }
+            });
+
+            $(document).ready(function(){
+                $(document).on('click','.pagination a',function(event){
+                    event.preventDefault();
+                    $('li').removeClass('active');
+                    $(this).parent('li').addClass('active');
+                    var url = $(this).attr('href');
+                    var page = $(this).attr('href').split('page=')[1];
+                    ajaxFilter(page);
+                });
+            });
+        
             function get_filter(filter)
             {
                 var filters = [];
@@ -281,21 +301,33 @@
                 ajaxFilter();
             });
 
-
-            function ajaxFilter() {
+            function getData(page) {
+                // body...
+                $.ajax({
+                    url : '?page=' + page,
+                    type : 'get',
+                    datatype : 'html',
+                }).done(function(data){
+                    $('#tag_container').empty().html(data);
+                    location.hash = page;
+                }).fail(function(jqXHR,ajaxOptions,thrownError){
+                    alert('No response from server');
+                });
+            }
+            
+            function ajaxFilter(page) {
                 var catalog = '{{ $catalog->id }}'
                 var states = get_filter('state');
                 var owner_genders = get_filter('owner_gender');
                 var categories = get_filter('category');
                 $.ajax({
-                    url:"/katalog/filter",
-                    type: "POST",
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
+                    url:"/katalog/{{ $catalog->slug }}?page="+page,
+                    type: "GET",
+                    datatype : 'html',
                     data: {states: states, owner_genders: owner_genders, categories: categories, catalog: catalog}
                     }).done( function(results){
                         $('#catalog').html(results);
+                        location.hash = page;
                 })
             };
         });
