@@ -2,6 +2,7 @@
     @section('title')
         {{ $article->title }} - UKM Juwara
     @endsection
+    @section('meta-content'){!! substr(strip_tags($article->description), 0, 120) !!}@endsection
 
     <div class="article-detail">
         <header class="article header-article" style="background-image: url('{{ Storage::url('article-image/'.$article->image) }}')">

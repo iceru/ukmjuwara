@@ -6,11 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>@yield('title')</title>
-        <meta name="description" content="Sebagai komunitas pertama di dunia yang menghadirkan katalog member dalam format Whatsapp
-        Business Catalog c-commerce s.id/UKMJUWARA dan katalog pada situs www.ukmjuwara.id, kanal ini akan terus memproduksi katalog berkala dan
-        melakukan pengembangan konten dengan menghadirkan variasi tema katalog seperti UKM JUWARA GLOBAL
-        yang berfokus pada peningkatan penetrasi pasar global oleh pelaku UKM Iokal berikut dengan
-        berita-berita sangat relevan dengan kebutuhan UKM untuk meroket.">
+        <meta name="description" content="@yield('meta-content')">
 
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-206865884-3"></script>

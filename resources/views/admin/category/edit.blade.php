@@ -1,6 +1,7 @@
 <x-admin-layout>
     <div class="admin-content">
-        <h4>Katalog UKM</h4>
+        <h4>Kategori Produk</h4>
+        
         @if (count($errors) > 0)
         <div class="alert alert-danger">
           <strong>Sorry !</strong> There were some problems with your input.<br><br>

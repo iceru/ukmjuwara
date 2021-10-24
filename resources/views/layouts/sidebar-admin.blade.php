@@ -29,7 +29,7 @@
             <li class="{{ (request()->is('admin/ukm')) ? 'active' : '' }}"><i class="fas fa-store fa-fw"></i> &nbsp; UKM</li>
         </a>
         <a href="{{ route('admin.category') }}">
-            <li class="{{ (request()->is('admin/category')) ? 'active' : '' }}"><i class="fas fa-box fa-fw"></i> &nbsp; Kategori UKM</li>
+            <li class="{{ (request()->is('admin/category')) ? 'active' : '' }}"><i class="fas fa-box fa-fw"></i> &nbsp; Kategori Produk</li>
         </a>
         <a href="{{ route('admin.article') }}">
             <li class="{{ (request()->is('admin/article')) ? 'active' : '' }}"><i class="fas fa-newspaper fa-fw"></i> &nbsp; Artikel</li>
