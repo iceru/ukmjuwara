@@ -62,6 +62,7 @@ class AdminUkmController extends Controller
 
         $validator = Validator::make($request->all(), [
             'title' => 'required',
+            'product' => 'required',
             'description' => 'required',
             'whatsapp' => 'required',
             'image' => 'required',
@@ -103,6 +104,7 @@ class AdminUkmController extends Controller
         $ukm->images=json_encode($data);
 
         $ukm->title = $request->title;
+        $ukm->product = $request->product;
         $ukm->slug = Str::slug($request->title);
         $ukm->description = $request->description;
         $ukm->whatsapp = $request->whatsapp;
@@ -188,6 +190,7 @@ class AdminUkmController extends Controller
         $request->validate([
             'title' => 'required',
             'description' => 'required',
+            'product' => 'required',
             'slug' => 'nullable',
             'whatsapp' => 'required',
             'image' => 'nullable',
@@ -223,6 +226,7 @@ class AdminUkmController extends Controller
         }
 
         $ukm->title = $request->title;
+        $ukm->product = $request->product;
         $ukm->slug = Str::slug($request->title);
         $ukm->description = $request->description;
         $ukm->whatsapp = $request->whatsapp;

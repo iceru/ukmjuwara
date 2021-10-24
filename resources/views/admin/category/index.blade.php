@@ -1,6 +1,6 @@
 <x-admin-layout>
     <div class="admin-content">
-        <h4>Kategori UKM</h4>
+        <h4>Kategori Produk</h4>
 
         @if (count($errors) > 0)
         <div class="alert alert-danger mt-3">

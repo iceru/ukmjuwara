@@ -33,6 +33,12 @@
                 </div>
             </div>
             <div class="row mb-3">
+                <label for="product" class="col-12 col-md-2 col-form-label">Produk</label>
+                <div class="col-12 col-md-10">
+                    <input type="text" class="form-control" value="{{ old('product') }}" id="product" name="product">
+                </div>
+            </div>
+            <div class="row mb-3">
                 <label class="col-sm-2 col-form-label">Images</label>
                 <div class="col-sm-10">
                     <div class="input-group control-group increment">
@@ -182,6 +188,7 @@
                     <th>Title</th>
                     <th>Description</th>
                     <th>Images</th>
+                    <th>Produk</th>
                     <th>Katalog</th>
                     <th>Kategori</th>
                     <th>Alamat</th>
@@ -209,6 +216,7 @@
                         </div>
                         @endforeach
                     </td>
+                    <td>{{ $ukm->product }}</td>
                     <td>{{ $ukm->catalog->title }}</td>
                     <td class="categories">@foreach ($ukm->categories as $item)
                         <span>{{ $item->title }}</span>

@@ -2,7 +2,7 @@
     @section('title')
         Berita - UKM Juwara
     @endsection
-
+    @section('meta-content')Sebagai komunitas pertama di dunia yang menghadirkan katalog member dalam format Whatsapp. Business Catalog c-commerce s.id/UKMJUWARA dan katalog pada situs www.ukmjuwara.id, kanal ini akan terus memproduksi katalog berkala dan melakukan pengembangan konten dengan menghadirkan variasi tema katalog seperti UKM JUWARA GLOBAL yang berfokus pada peningkatan penetrasi pasar global oleh pelaku UKM Iokal berikut dengan berita-berita sangat relevan dengan kebutuhan UKM untuk meroket.@endsection
     <div class="articles">
         @foreach ($headerArticle as $article)
         <div class="article header-article" style="background-image: url('{{ Storage::url('article-image/'.$article->image) }}')">
@@ -41,9 +41,9 @@
                                     <img src="/images/default-user.jpg" class="me-3" width="37" alt="">
                                     <p>{{ $article->author }}</p>
                                 </div>
-                                <div class="article-description">
+                                <article class="article-description">
                                     <p >{!! $article->description!!}</p>
-                                </div>
+                                </article>
                                 <p class="mt-3">{{  date('d F Y', strtotime($article->created_at )) }} | {{ $article->time_read }} Mins Read</p>
                             </div>
                         </div>

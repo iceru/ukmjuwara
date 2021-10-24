@@ -34,6 +34,12 @@
                 </div>
             </div>
             <div class="row mb-3">
+                <label for="title" class="col-12 col-md-2 col-form-label">Produk</label>
+                <div class="col-12 col-md-10">
+                    <input type="text" class="form-control" value="{{ $ukm->product }}" id="product" name="product">
+                </div>
+            </div>
+            <div class="row mb-3">
                 <label class="col-sm-2 col-form-label">Images</label>
                 <div class="col-sm-10">
                     <div class="d-flex mb-3">
