@@ -96,11 +96,9 @@
                         <h3 class="mb-3">Filter</h3>
                         <div class="search-ukm">
                             {{-- <form action="{{ route('search') }}" role="search" id="search_form" action="" method="GET"> --}}
-                            <input type="text" class="form-control" placeholder="Search" type="search" name="search_query" id="search_ukm">
+                            <input type="text" class="form-control" placeholder="Search" type="search" id="search_ukm">
                             <div class="icon-search">
                                 <i class="fa fa-search" aria-hidden="true"></i>
-                                {{-- <button type="submit" value="" class="btn">
-                                </button> --}}
                             </div>
                             </form>
                         </div>
