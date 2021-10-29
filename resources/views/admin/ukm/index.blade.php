@@ -221,7 +221,7 @@
                     <td class="categories">@foreach ($ukm->categories as $item)
                         <span>{{ $item->title }}</span>
                         @endforeach</td>
-                    <td>{{ $ukm->address }}</td>
+                    <td>{{ $ukm->address.', '.ucwords(strtolower($ukm->city_name)).', '.ucwords(strtolower($ukm->state_name)) }}</td>
                     <td>{{ $ukm->whatsapp }}</td>
                     <td>{{ $ukm->instagram }}</td>
                     <td>{{ views($ukm)->count(); }}</td>

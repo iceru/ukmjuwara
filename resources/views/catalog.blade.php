@@ -95,12 +95,10 @@
                     <div class="col-md-3 filter">
                         <h3 class="mb-3">Filter</h3>
                         <div class="search-ukm">
-                            <form action="{{ route('search') }}" role="search" id="search_form" action="" method="GET">
-                            <input type="text" class="form-control" placeholder="Search" type="search" name="search_query">
+                            {{-- <form action="{{ route('search') }}" role="search" id="search_form" action="" method="GET"> --}}
+                            <input type="text" class="form-control" placeholder="Search" type="search" id="search_ukm">
                             <div class="icon-search">
-                                <button type="submit" value="" class="btn">
-                                    <i class="fa fa-search" aria-hidden="true"></i>
-                                </button>
+                                <i class="fa fa-search" aria-hidden="true"></i>
                             </div>
                             </form>
                         </div>
@@ -108,7 +106,7 @@
                             <h5 class="mb-2">Kategori Produk</h5>
                             @foreach ($categories as $category)
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="{{ $category->id }}" id="category" name="category[]">
+                                <input class="form-check-input category-large" type="checkbox" value="{{ $category->id }}" id="category" name="category[]">
                                 <label class="form-check-label" for="flexCheckDefault">
                                     {{ $category->title }}
                             </div>
@@ -118,8 +116,8 @@
                             <h5 class="mb-2">Lokasi</h5>
                             @foreach ($states as $item)
                             <div class="form-check">
-                                <input class="form-check-input state" type="checkbox" value="{{ $item->state_name }}" id="state" name="state[]">
-                                <label class="form-check-label text-capitalize" for="flexCheckDefault" > {{ strtolower($item->state_name) }}
+                                <input class="form-check-input state state-large" type="checkbox" value="{{ $item->state_name }}" id="state" name="state[]">
+                                <label class="form-check-label text-capitalize" for="flexCheckDefault" > @if ($item->state_name == 'DKI JAKARTA') DKI Jakarta @elseif ($item->state_name == 'P A P U A') Papua @else {{ strtolower($item->state_name) }} @endif
                             </div>
                             @endforeach
                         </div>
@@ -156,7 +154,7 @@
                         </div>
                     </div>
 
-                    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+                    <div class="offcanvas filter-offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                         <div class="d-flex justify-content-end">
                             <button type="button" class="btn button-close" data-bs-dismiss="offcanvas">
                                 <i class="fa fa-times" aria-hidden="true"></i>
@@ -182,6 +180,9 @@
                                     {{ $category->title }}
                             </div>
                             @endforeach
+                            <div class="show-filter category-more">
+                                <p>Show More</p>
+                            </div>
                         </div>
                         <div class="location-filter mb-3">
                             <h5 class="mb-2">Lokasi</h5>
@@ -191,6 +192,9 @@
                                 <label class="form-check-label text-capitalize" for="flexCheckDefault" > {{ strtolower($item->state_name) }}
                             </div>
                             @endforeach
+                            <div class="show-filter location-more">
+                                <p>Show More</p>
+                            </div>
                         </div>
                         <div class="owner-gender-filter mb-3">
                             <h5 class="mb-2">Gender Pemilik</h5>
@@ -233,6 +237,8 @@
                     },
                 ]
             });
+            $('.loading-spinner').hide();
+
             // var states=[];
             // var cities=[];
 
@@ -302,6 +308,10 @@
                 ajaxFilter();
             });
 
+            $('#search_ukm').on('keyup',function(){
+                ajaxFilter()
+            })
+
             function getData(page) {
                 // body...
                 $.ajax({
@@ -321,14 +331,20 @@
                 var states = get_filter('state');
                 var owner_genders = get_filter('owner_gender');
                 var categories = get_filter('category');
+                var search = $('#search_ukm').val();
+                $('.loading-spinner').show();
+                $('.ukm-content').hide();
+
                 $.ajax({
                     url:"/katalog/{{ $catalog->slug }}?page="+page,
                     type: "GET",
                     datatype : 'html',
-                    data: {states: states, owner_genders: owner_genders, categories: categories, catalog: catalog}
+                    data: {states: states, owner_genders: owner_genders, categories: categories, catalog: catalog, search: search}
                     }).done( function(results){
                         $('#catalog').html(results);
+                        $('.ukm-content').show();
                         location.hash = page;
+                        $('.loading-spinner').hide();
                 })
             };
         });
