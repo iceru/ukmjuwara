@@ -86,7 +86,7 @@
                         </div>
                         <div class="mb-4">
                             <div>
-                                <a class="mb-3" href="https://wa.me/{{ $ukm->whatsapp }}">
+                                <a class="mb-3" href="{{ $ukm->whatsapp }}">
                                     <div class="social whatsapp">
                                         <i class="fab fa-whatsapp fa-fw me-2"></i>
                                         <p>Klik untuk kontak langsung & belanja</p>

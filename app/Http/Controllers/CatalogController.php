@@ -58,7 +58,7 @@ class CatalogController extends Controller
         
         if ($request->hasFile('image')) {
             $extension = $request->file('image')->getClientOriginalExtension();
-            $filename = $request->title.'_'.time().'.'.$extension;
+            $filename = 'UKMJuWAra_'.time().'.'.$extension;
             $path = $request->image->storeAs('public/catalog-image', $filename);
         }
 
@@ -148,7 +148,7 @@ class CatalogController extends Controller
 
         if ($request->hasFile('image')) {
             $extension = $request->file('image')->getClientOriginalExtension();
-            $filename = $request->title.'_'.time().'.'.$extension;
+            $filename = 'UKMJuWAra_'.time().'.'.$extension;
             $path = $request->image->storeAs('public/catalog-image', $filename);
             $catalog->image = $filename;
         }

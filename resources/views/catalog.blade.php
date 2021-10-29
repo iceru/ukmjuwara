@@ -1,6 +1,6 @@
 <x-app-layout>
     @section('title')
-        UKM Juwara
+        {{ $catalog->title }}
     @endsection
     @section('meta-content')Sebagai komunitas pertama di dunia yang menghadirkan katalog member dalam format Whatsapp. Business Catalog c-commerce s.id/UKMJUWARA dan katalog pada situs www.ukmjuwara.id, kanal ini akan terus memproduksi katalog berkala dan melakukan pengembangan konten dengan menghadirkan variasi tema katalog seperti UKM JUWARA GLOBAL yang berfokus pada peningkatan penetrasi pasar global oleh pelaku UKM Iokal berikut dengan berita-berita sangat relevan dengan kebutuhan UKM untuk meroket.@endsection
 
@@ -70,7 +70,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="ukm-wa">
-                                                        <a href="https://wa.me/{{ $ukm->whatsapp }}">
+                                                        <a href="{{ $ukm->whatsapp }}">
                                                             <img src="/images/whatsapp.png" alt="">
                                                         </a>
                                                     </div>
