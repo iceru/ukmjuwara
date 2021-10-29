@@ -102,6 +102,10 @@ class CatalogController extends Controller
                 $ukms = $ukms->whereIn('owner_gender', $request->owner_genders);
             }
 
+            if (isset($request->search)) {
+                $ukms = $ukms->where('title', 'LIKE','%'.$request->search.'%');
+            }
+
             $ukms = $ukms->paginate(20);
             return view('catalog-ukm', compact('ukms'));
         }

@@ -1,4 +1,9 @@
-<div class="row">
+<div class="loading-spinner justify-content-center mb-3">
+    <div class="spinner-border" role="status">
+    </div>
+</div>
+
+<div class="row ukm-content">
     @forelse ($ukms as $ukm)
     <div class="col-6 col-md-4 col-xl-3 mb-5">
         <a href="{{ route('ukm.show', $ukm->slug) }}">

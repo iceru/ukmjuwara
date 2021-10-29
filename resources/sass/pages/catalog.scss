@@ -78,8 +78,6 @@
                 }
             }
 
-            
-
             @include breakpoint-down(medium) {
                 padding: 1rem .5rem;
 
@@ -88,7 +86,7 @@
                 }
 
                 .slick-prev, .slick-next {
-                    display: none;
+                    display: none !important;
                 }
 
                 .most-viewed-text {
@@ -150,13 +148,16 @@
             margin-top: -25rem;
             border-radius: 2rem;
             z-index: 99;
-            height: 660px;
+            height: 100%;
 
             @include breakpoint-down(medium) {
                 display: none;
             }
         }
 
+        .filter-offcanvas {
+            overflow-y: auto;
+        }
         .search-ukm {
             position: relative;
             margin-bottom: 2rem;
@@ -240,6 +241,12 @@
         font-size: 1.15rem;
         font-weight: 500;
     }
+}
+
+
+
+.loading-spinner {
+    display: flex;
 }
 
 

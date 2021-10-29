@@ -11,12 +11,29 @@
                 font-size: 22px;
             }
 
+            @include breakpoint-down(medium) {
+                
+                .slick-prev {
+                    left: 5px;
+                    z-index: 5;
+                }
+
+                .slick-next {
+                    right: 5px;
+                    z-index: 5;
+                }
+
+            }
             .slick-list{
                 padding:0 0 0 0 !important;
             }
             .col-md-7 {
                 .container-ukm {
                     padding-left: 2rem;
+
+                    @include breakpoint-down(medium) {
+                        padding-left: 0;
+                    }
 
                     .detail-head {
                         padding-bottom: 1rem;
