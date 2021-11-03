@@ -31,33 +31,31 @@
                 background-color: rgba($primary-color, 0.4);
             }
         }
-
-        
     }
-
-
 
     .body {
         margin-bottom: 2rem;
 
         .most-viewed {
-            background-color: $darkgrey;
-            padding: 2rem;
-            
+            background-color: $secondary-color;
+            padding: 2rem 0;
+            color: white;
+
             .slick-slide {
-                margin: 0 1rem;
+                margin: 0 .75rem;
             }
 
-            .slick-list {
-                padding:0 10% 0 0 !important;
+            .col-md-9 {
+                padding-left: 1.5rem;
+                padding-right: 0;
             }
 
             .slick-prev {
-                left: -12px;
+                left: -20px;
             }
 
             .slick-next {
-                right: -30px;
+                right: -20px;
             }
 
             .slick-prev, .slick-next {
@@ -66,16 +64,9 @@
                 }
             }
 
-
             .most-viewed-text {
-                > div {
-                    display: flex;
-                    height: 100%;
-                    flex-direction: column;
-                    justify-content: center;
-                    color: white;
-                    padding: .5rem
-                }
+                padding-left: .5rem;
+                text-transform: uppercase;
             }
 
             @include breakpoint-down(medium) {
@@ -119,7 +110,7 @@
         }
 
         #ukm_bests {
-            .ukm-title {
+            .ukm-title, .ukm-desc {
                 color: white;
             }
         }
@@ -143,12 +134,13 @@
         }
 
         .filter {
-            background-color: $grey;
+            background-color: $primary-color;
             padding: 2rem 1.5rem;
             margin-top: -25rem;
             border-radius: 2rem;
             z-index: 99;
             height: 100%;
+            color: white;
 
             @include breakpoint-down(medium) {
                 display: none;
@@ -221,11 +213,11 @@
 
     .ukm-wa {
         position: absolute;
-        bottom: 15px;
-        right: 15px;
+        bottom: 8px;
+        right: 8px;
 
         img {
-            width: 40px;
+            width: 35px;
         }
     }
 }
@@ -257,10 +249,11 @@
     right: 20px;
     bottom: 20px;
     z-index: 99;
-    padding: 1rem 2rem;
+    padding: .75rem 2rem;
     border-radius: 100px;
     color: white;
     align-items: center;
+    box-shadow: 0 0 10px rgba(black, 0.3);
 
     .col-3  {
         display: flex;

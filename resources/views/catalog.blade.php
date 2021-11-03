@@ -41,50 +41,43 @@
         </div>
         <div class="body">
             <div class="most-viewed">
-                <div class="container">
+                <div class="container pe-0">
                     <div class="row">
                         <div class="col-md-3">
                         </div>
                         <div class="col-md-9">
-                            <div class="row">
-                                <div class="col-12 col-lg-2 most-viewed-text">
-                                    <div>
-                                        <h5 class="mb-3">Banyak Dikunjungi</h5>
-                                        <div class="d-none d-lg-flex">
-                                            <i class="fa fa-arrow-right me-3" style="font-size: 25px" aria-hidden="true"></i>
-                                            <i class="fa fa-arrow-right" style="font-size: 25px" aria-hidden="true"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-lg-10">
-                                    <div id="ukm_bests">
-                                        @foreach ($bests as $ukm)
-                                        <div>
-                                            <a href="{{ route('ukm.show', $ukm->slug) }}">
-                                                <div class="ukm">
-                                                    <div class="ukm-image">
-                                                        <div class="ratio ratio-1x1">
-                                                            @foreach ((array)json_decode($ukm->images)[0] as $image)
-                                                            <img src="{{ Storage::url('ukm-image/'.$image) }}" alt="">
-                                                            @endforeach
-                                                        </div>
-                                                    </div>
-                                                    <div class="ukm-wa">
-                                                        <a href="https://wa.me/{{ $ukm->whatsapp }}">
-                                                            <img src="/images/whatsapp.png" alt="">
-                                                        </a>
-                                                    </div>
+                            <div class="most-viewed-text">
+                                <h5 class="mb-3">Banyak Dikunjungi</h5>
+                            </div>
+                            <div id="ukm_bests">
+                                @foreach ($bests as $ukm)
+                                <div>
+                                    <a href="{{ route('ukm.show', $ukm->slug) }}">
+                                        <div class="ukm">
+                                            <div class="ukm-image">
+                                                <div class="ratio ratio-1x1">
+                                                    @foreach ((array)json_decode($ukm->images)[0] as $image)
+                                                    <img src="{{ Storage::url('ukm-image/'.$image) }}" alt="">
+                                                    @endforeach
                                                 </div>
-                                            </a>
-                                            <a href="{{ route('ukm.show', $ukm->slug) }}">
-                                                <div class="ukm-title mt-2">
-                                                    <p title="{{ $ukm->title }}">{{ $ukm->title }}</p>
-                                                </div>
-                                            </a>
+                                            </div>
+                                            <div class="ukm-wa">
+                                                <a href="https://wa.me/{{ $ukm->whatsapp }}">
+                                                    <img src="/images/whatsapp.png" alt="">
+                                                </a>
+                                            </div>
                                         </div>
-                                        @endforeach
-                                    </div>
+                                    </a>
+                                    <a href="{{ route('ukm.show', $ukm->slug) }}">
+                                        <div class="ukm-title mt-2">
+                                            <p title="{{ $ukm->title }}">{{ $ukm->title }}</p>
+                                        </div>
+                                        <div class="ukm-desc">
+                                            <small>{{ $ukm->product }}</small>
+                                        </div>
+                                    </a>
                                 </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
@@ -226,8 +219,10 @@
         $(document).ready(function(){
             $('#ukm_bests').slick({
                 infinite: true,
-                slidesToShow: 3,
+                slidesToShow: 4,
                 slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 3000,
                 responsive: [
                     {
                         breakpoint: 567,
@@ -238,27 +233,6 @@
                 ]
             });
             $('.loading-spinner').hide();
-
-            // var states=[];
-            // var cities=[];
-
-            // $('.city').each(function() { 
-            //     var state = ($(this).attr('state-id'));
-            //     var city = ($(this).val());
-            //     $.ajax({
-            //         url:"{{url('getCity')}}?state_id=" + state,
-            //         success: function (res) {
-            //             if (res) {
-            //                 $.each(res, function(i, val){
-            //                     if(val.id == city)
-            //                         $('#city_label_'+city).html(val.nama.toLowerCase());
-
-            //                     $('#city_label_'+city).css('text-transform', 'capitalize');
-            //                 })
-            //             }
-            //         },
-            //     })
-            // });
                         
             $(window).on('hashchange',function(){
                 if (window.location.hash) {

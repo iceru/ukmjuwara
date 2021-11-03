@@ -26,6 +26,9 @@
             <div class="ukm-title mt-2">
                 <p>{{ $ukm->title }}</p>
             </div>
+            <div class="ukm-desc">
+                <small>{{ $ukm->product }}</small>
+            </div>
         </a>
         
     </div>

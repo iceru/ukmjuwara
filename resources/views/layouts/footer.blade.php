@@ -16,7 +16,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-3">
+            <div class="col-12 col-md-5">
                <div class="footer-item">
                     <ul>
                         <li>
@@ -31,7 +31,7 @@
                     </ul>
                </div>
             </div>
-            <div class="col-12 col-md-3">
+            {{-- <div class="col-12 col-md-3">
                 <div class="footer-item">
                     <ul>
                         <li>
@@ -42,7 +42,7 @@
                         </li>
                     </ul>
                 </div>
-            </div>
+            </div> --}}
             <div class="col-12 col-md-1">
                 <div class="footer-item">
                     <div class="d-flex" style="font-size: 1.25rem">
@@ -52,10 +52,11 @@
                     </div>
                 </div>
             </div>
-
-            <div class="col-12 text-center mt-3 copyright">
-                <i class="fa fa-copyright" aria-hidden="true"></i> Copyright  {{ now()->year }} | UKMJuWAra
-            </div>
         </div>
     </div>
+</div>
+
+
+<div class="col-12 text-center copyright">
+    <i class="fa fa-copyright" aria-hidden="true"></i> Copyright  {{ now()->year }} | UKMJuWAra
 </div>

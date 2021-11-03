@@ -80,7 +80,7 @@ class CatalogController extends Controller
     {
         $catalog = Catalog::where('slug', $slug)->firstOrFail();
         $ukms = Ukm::where('catalog_id', $catalog->id)->paginate(20);
-        $bests = Ukm::where('catalog_id', $catalog->id)->orderByViews()->get()->take(4);
+        $bests = Ukm::where('catalog_id', $catalog->id)->orderByViews()->get()->take(8);
         $states = Ukm::where('catalog_id', $catalog->id)->select('state_name')->distinct()->where('state_name', '!=', '')->get();
         $categories = Category::take(6)->get();
 

@@ -39,7 +39,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="support-title">
-                    <h3 class="text-center fw-bold">Dipersembahkan oleh</h3>
+                    <h4 class="text-center fw-light">Dipersembahkan Oleh</h4>
                 </div>
                 <div id="supported">
                     @foreach ($sponsors as $sponsor)
@@ -58,7 +58,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="support-title">
-                    <h3 class="text-center fw-bold">Didukung oleh</h3>
+                    <h4 class="text-center fw-light">Didukung Oleh</h4>
                 </div>
                 <div id="supported_dukung">
                     @foreach ($sponsors_dukung as $sponsor)
@@ -78,6 +78,8 @@
                 infinite: true,
                 slidesToShow: 4,
                 slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 4000,
                 responsive: [
                     {
                         breakpoint: 567,
@@ -91,6 +93,8 @@
                 infinite: true,
                 slidesToShow: 4,
                 slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 4000,
                 responsive: [
                     {
                         breakpoint: 567,
