@@ -57,8 +57,15 @@
                                         @endif
                                     </div>
                                 </div>
+                                <div class="col-6 mb-4">
+                                    <div class="desc-item">
+                                        <h6 class="mb-2">Produk</h6>
+                                        <p>{{$ukm->product}}</p>
+                                    </div>
+                                </div>
+                                
                                 @if ($ukm->achievement)
-                                    <div class="col-6 mb-4">
+                                    <div class="col-12 mb-4">
                                         <div class="desc-item">
                                             <h6 class="mb-2">Capaian</h6>
                                             <p>{!! $ukm->achievement !!}</p>
@@ -66,19 +73,13 @@
                                     </div>
                                 @endif
                                 @if ($ukm->permission)
-                                    <div class="col-6 mb-4">
+                                    <div class="col-12 mb-4">
                                         <div class="desc-item">
                                             <h6 class="mb-2">Perizinan</h6>
                                             <p>{!! $ukm->permission !!}</p>
                                         </div>
                                     </div>
                                 @endif
-                                <div class="col-12 mb-4">
-                                    <div class="desc-item">
-                                        <h6 class="mb-2">Produk</h6>
-                                        <p>{{$ukm->product}}</p>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <div class="description mb-4">

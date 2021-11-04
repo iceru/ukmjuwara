@@ -61,7 +61,8 @@
 
             tinymce.init({
                 selector: 'textarea',
-                plugins: 'link image imagetools',
+                plugins: 'link image imagetools paste',
+                paste_as_text: true,
                 a11y_advanced_options: true,
                 toolbar_mode: 'floating',
                 tinycomments_mode: 'embedded',
