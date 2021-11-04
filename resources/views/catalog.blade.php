@@ -73,7 +73,7 @@
                                             <p title="{{ $ukm->title }}">{{ $ukm->title }}</p>
                                         </div>
                                         <div class="ukm-desc">
-                                            <small>{{ $ukm->product }}</small>
+                                            <small title="{{ $ukm->product }}" class="ellipsis">{{ $ukm->product }}</small>
                                         </div>
                                     </a>
                                 </div>
