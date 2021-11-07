@@ -62,15 +62,15 @@
                                                 </div>
                                             </div>
                                             <div class="ukm-wa">
-                                                <a href="https://wa.me/{{ $ukm->whatsapp }}">
+                                                <a href="{{ $ukm->whatsapp }}">
                                                     <img src="/images/whatsapp.png" alt="">
                                                 </a>
                                             </div>
                                         </div>
                                     </a>
                                     <a href="{{ route('ukm.show', $ukm->slug) }}">
-                                        <div class="ukm-title mt-2">
-                                            <p title="{{ $ukm->title }}">{{ $ukm->title }}</p>
+                                        <div class="ukm-title mt-3">
+                                            <h5 title="{{ $ukm->title }}">{{ $ukm->title }}</h5>
                                         </div>
                                         <div class="ukm-desc">
                                             <small title="{{ $ukm->product }}" class="ellipsis">{{ $ukm->product }}</small>
@@ -209,7 +209,7 @@
                         </button>
                     </div>
                     <div class="col-12 col-md-9 katalog-ukm" id="catalog">
-                        @include('catalog-ukm');
+                        @include('catalog-ukm')
                     </div>
                 </div>
             </div>

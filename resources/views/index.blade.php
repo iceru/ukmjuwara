@@ -105,7 +105,10 @@
                 ]
             });
 
-            $('.header').slick();
+            $('.header').slick({
+                autoplay: true,
+                autoplaySpeed: 4000,
+            });
 
         });
     </script>

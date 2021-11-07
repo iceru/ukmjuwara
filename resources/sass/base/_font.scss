@@ -25,3 +25,29 @@
     font-style: normal;
     font-display: swap;
 }
+
+@font-face {
+    font-family: 'DIN Next LT';
+    src: url('/fonts/DINNextLTPro-Medium.eot');
+    src: url('/fonts/DINNextLTPro-Medium.eot?#iefix') format('embedded-opentype'),
+        url('/fonts/DINNextLTPro-Medium.woff2') format('woff2'),
+        url('/fonts/DINNextLTPro-Medium.woff') format('woff'),
+        url('/fonts/DINNextLTPro-Medium.ttf') format('truetype'),
+        url('/fonts/DINNextLTPro-Medium.svg#DINNextLTPro-Medium') format('svg');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'DIN Next LT';
+    src: url('/fonts/DINNextLTPro-Regular.eot');
+    src: url('/fonts/DINNextLTPro-Regular.eot?#iefix') format('embedded-opentype'),
+        url('/fonts/DINNextLTPro-Regular.woff2') format('woff2'),
+        url('/fonts/DINNextLTPro-Regular.woff') format('woff'),
+        url('/fonts/DINNextLTPro-Regular.ttf') format('truetype'),
+        url('/fonts/DINNextLTPro-Regular.svg#DINNextLTPro-Regular') format('svg');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
