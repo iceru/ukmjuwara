@@ -30,7 +30,7 @@
                 <div class="col-12 col-md-7 ">
                     <div class="container-ukm">
                         <div class="detail-head">
-                            <h1 class="mb-4">{{ $ukm->title }}</h1>
+                            <h1 class="mb-4 primary-color">{{ $ukm->title }}</h1>
                             <div class="row description">
                                 <div class="col-6">
                                     <div class="desc-item">
@@ -62,7 +62,7 @@
                                     <div class="desc-item">
                                         <h6 class="mb-2">Lokasi</h6>
                                         @if($ukm->address)
-                                            <p class="text-capitalize">{{ $ukm->address }}, {{ $sub_name }}, {{ $city_name }}, {{ $state_name }} </p>
+                                            <p class="text-capitalize">{{ $ukm->address }}, {{ $state_name }} </p>
                                         @endif
                                     </div>
                                 </div>
@@ -129,7 +129,7 @@
                                     </div>
                                 </div>
                                 <div class="ukm-wa">
-                                    <a href="https://wa.me/{{ $ukm->whatsapp }}">
+                                    <a href="{{ $ukm->whatsapp }}">
                                         <img src="/images/whatsapp.png" alt="">
                                     </a>
                                 </div>

@@ -42,6 +42,9 @@
                     transition: all .2s ease-in;
                     padding: .5rem 0;
                     border-bottom: 1px solid $primary-color;
+                    text-transform: uppercase;
+                    font-family: 'DIN Next LT', sans-serif;
+                    font-weight: 500;
 
                     &:hover {
                         border-bottom: 1px solid $background;

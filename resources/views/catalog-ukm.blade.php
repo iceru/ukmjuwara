@@ -23,8 +23,8 @@
             </div>
         </a>
         <a href="{{ route('ukm.show', $ukm->slug) }}">
-            <div class="ukm-title mt-2">
-                <p>{{ $ukm->title }}</p>
+            <div class="ukm-title mt-3">
+                <h5>{{ $ukm->title }}</h5>
             </div>
             <div class="ukm-desc">
                 <small title={{ $ukm->product }} class="ellipsis">{{ $ukm->product }}</small>
