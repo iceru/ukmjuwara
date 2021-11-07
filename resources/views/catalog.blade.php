@@ -41,7 +41,7 @@
         </div>
         <div class="body">
             <div class="most-viewed">
-                <div class="container pe-0">
+                <div class="container pe-lg-0">
                     <div class="row">
                         <div class="col-md-3">
                         </div>

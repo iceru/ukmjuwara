@@ -44,7 +44,9 @@
                 <div id="supported">
                     @foreach ($sponsors as $sponsor)
                         <div>
-                            <img src="{{ Storage::url('sponsor-image/'.$sponsor->image) }}" alt="{{ $sponsor->title }}">
+                            <a href="{{ $sponsor->link }}">
+                                <img src="{{ Storage::url('sponsor-image/'.$sponsor->image) }}" alt="{{ $sponsor->title }}">
+                            </a>
                         </div>
                     @endforeach
                 </div>
@@ -63,7 +65,9 @@
                 <div id="supported_dukung">
                     @foreach ($sponsors_dukung as $sponsor)
                         <div>
-                            <img src="{{ Storage::url('sponsor-image/'.$sponsor->image) }}" alt="{{ $sponsor->title }}">
+                            <a href="{{ $sponsor->link }}">
+                                <img src="{{ Storage::url('sponsor-image/'.$sponsor->image) }}" alt="{{ $sponsor->title }}">
+                            </a>
                         </div>
                     @endforeach
                 </div>
