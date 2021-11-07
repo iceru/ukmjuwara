@@ -52,15 +52,6 @@
                         border-bottom: 1px solid rgba($color: #000000, $alpha: .1);
 
                         .description {
-                            .categories {
-                                span:not(:last-child) {
-                                    &:after {
-                                        content: ',';
-                                        padding-left: 2px;
-                                        font-size: .75rem;
-                                    }
-                                }
-                            }
                             .desc-item {
                                 padding-left: 1rem;
                                 padding-bottom: 1.5rem;
@@ -88,4 +79,14 @@
             }
         }
     }    
+}
+
+.categories-text {
+    span:not(:last-child) {
+        &:after {
+            content: ',';
+            padding-left: 2px;
+            font-size: .75rem;
+        }
+    }
 }
