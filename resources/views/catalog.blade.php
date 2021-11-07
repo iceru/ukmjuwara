@@ -73,7 +73,11 @@
                                             <h5 title="{{ $ukm->title }}">{{ $ukm->title }}</h5>
                                         </div>
                                         <div class="ukm-desc">
-                                            <small title="{{ $ukm->product }}" class="ellipsis">{{ $ukm->product }}</small>
+                                            <small title="{{ $ukm->product }}" class="ellipsis categories-text">
+                                                @foreach ($ukm->categories as $item)
+                                                    <span>{{ $item->title }}</span>
+                                                @endforeach
+                                            </small>
                                         </div>
                                     </a>
                                 </div>

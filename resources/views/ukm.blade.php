@@ -35,7 +35,7 @@
                                 <div class="col-6">
                                     <div class="desc-item">
                                         <h6 class="mb-2">Kategori</h6>
-                                        <p class="categories">@foreach ($ukm->categories as $item)
+                                        <p class="categories-text">@foreach ($ukm->categories as $item)
                                             <span>{{ $item->title }}</span>
                                             @endforeach
                                         </p>
