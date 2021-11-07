@@ -45,9 +45,11 @@
                 margin: 0 .75rem;
             }
 
-            .col-md-9 {
-                padding-left: 1.5rem;
-                padding-right: 0;
+            @include breakpoint(medium) {
+                .col-md-9 {
+                    padding-left: 1.5rem;
+                    padding-right: 0;
+                }
             }
 
             .slick-prev {
@@ -76,14 +78,22 @@
                     margin: 0 .5rem;
                 }
 
-                .slick-prev, .slick-next {
-                    display: none !important;
-                }
+                // .slick-prev, .slick-next {
+                //     display: none !important;
+                // }
 
                 .most-viewed-text {
                     > div {
                         padding: 0;
                     }
+                }
+
+                .slick-prev {
+                    left: -15px;
+                }
+
+                .slick-next {
+                    right: -15px;
                 }
 
                 .ukm {
