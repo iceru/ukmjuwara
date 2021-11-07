@@ -21,7 +21,7 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         @foreach ($catalogs as $catalog)
-                        <li><a class="dropdown-item"
+                        <li><a class="dropdown-item" @if($catalog->link) target="_blank" @endif
                                 href="{{ $catalog->link ? $catalog->link : route('catalog.show', $catalog->slug) }}">{{ $catalog->title }}</a>
                         </li>
                         @endforeach
