@@ -49,13 +49,21 @@
             display: flex;
             justify-content: center;
             background: $background;
-            padding: .75rem 5rem;
+            padding: 1rem 5rem;
             border-radius: 60px;
             margin: 0 1rem;
             font-size: 1.25rem;
             color: $primary-color;
             font-weight: 700;
             transition: all .2s ease-out;
+
+            h5 {
+                margin-bottom: -6px;
+
+                @include breakpoint(medium) {
+                    font-size: 1.5rem;
+                }
+            }
 
             &:hover {
                 background-color: $secondary-color;
