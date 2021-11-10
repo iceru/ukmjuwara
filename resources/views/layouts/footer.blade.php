@@ -44,8 +44,8 @@
                 </div>
             </div> --}}
             <div class="col-12 col-md-1">
-                <div class="footer-item">
-                    <div class="d-flex" style="font-size: 1.25rem">
+                <div class="footer-item social-icons">
+                    <div class="d-flex" style="font-size: 1.75rem">
                         <a href="https://www.instagram.com/ukmindonesiaid" target="_blank"><i class="fab fa-instagram me-2" aria-hidden="true"></i></a>
                         <a href="https://www.facebook.com/ukmindonesia.org/" target="_blank"><i class="fab fa-facebook me-2" aria-hidden="true"></i></a>
                         <a href="https://www.youtube.com/channel/UCWcTn1tlRbqifDA3uY67Sfw" target="_blank"><i class="fab fa-youtube" aria-hidden="true"></i></a>

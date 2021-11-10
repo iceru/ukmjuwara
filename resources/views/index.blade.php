@@ -27,7 +27,7 @@
             @foreach ($featured as $catalog)
             <a href="{{ route('catalog.show', $catalog->slug) }}">
                 <div class="cta-item align-items-center">
-                    {{ $catalog->title }}
+                    <h5>{{ $catalog->title }}</h5>
                     <img src="/images/cursor.png" class="ms-2" height="20" width="20" alt="">
                 </div>
             </a>
@@ -39,7 +39,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="support-title">
-                    <h4 class="text-center fw-light">Dipersembahkan Oleh</h4>
+                    <h5 class="text-center fw-light">Dipersembahkan Oleh</h5>
                 </div>
                 <div id="supported">
                     @foreach ($sponsors as $sponsor)
@@ -60,7 +60,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="support-title">
-                    <h4 class="text-center fw-light">Didukung Oleh</h4>
+                    <h5 class="text-center fw-light">Didukung Oleh</h5>
                 </div>
                 <div id="supported_dukung">
                     @foreach ($sponsors_dukung as $sponsor)
@@ -112,8 +112,11 @@
             $('.header').slick({
                 autoplay: true,
                 autoplaySpeed: 4000,
+                pauseOnHover: false,
+                pauseOnFocus: false,
             });
 
         });
     </script>
 </x-app-layout>
+
