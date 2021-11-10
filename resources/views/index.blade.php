@@ -28,7 +28,7 @@
             <a href="{{ route('catalog.show', $catalog->slug) }}">
                 <div class="cta-item align-items-center">
                     <h5>{{ $catalog->title }}</h5>
-                    <img src="/images/cursor.png" class="ms-2" height="20" width="20" alt="">
+                    <img src="/images/cursor-2.png" class="ms-2" height="20" width="20" alt="">
                 </div>
             </a>
             @endforeach

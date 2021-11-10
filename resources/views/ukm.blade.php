@@ -34,7 +34,7 @@
                             <div class="row description">
                                 
                                 <div class="col-6">
-                                    <div class="desc-item last">
+                                    <div class="desc-item">
                                         <h6 class="mb-2">Produk</h6>
                                         <p>{{$ukm->product}}</p>
                                     </div>
@@ -48,7 +48,7 @@
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <div class="desc-item">
+                                    <div class="desc-item last">
                                         <h6 class="mb-2">Kategori</h6>
                                         <p class="categories-text">@foreach ($ukm->categories as $item)
                                             <span>{{ $item->title }}</span>
@@ -58,7 +58,7 @@
                                 </div>
                                 @if ($ukm->operational_hours && $ukm->operational_hours_end)
                                     <div class="col-6">
-                                        <div class="desc-item">
+                                        <div class="desc-item last">
                                             <h6 class="mb-2">Jam Operasional</h6>
                                             <p>{{ $ukm->operational_hours }} - {{ $ukm->operational_hours_end }}</p>
                                         </div>
@@ -66,7 +66,7 @@
                                 @endif
                                 @if ($ukm->capacity)
                                     <div class="col-6">
-                                        <div class="desc-item">
+                                        <div class="desc-item last">
                                             <h6 class="mb-2">Kapasitas</h6>
                                             <p>{{ $ukm->capacity }}</p>
                                         </div>
