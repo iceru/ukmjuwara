@@ -14,14 +14,22 @@
             .container {
                 z-index: 10;
                 position: absolute;
-                bottom: 20px;
+                bottom: 5px;
                 left: 50%;
                 transform: translate(-50%, -50%); 
                 color: white;
     
-                .row {
-                    margin-left: 1rem;
+                .catalog-title {
+                    padding-left: .75rem;
                 }
+
+                @include breakpoint(medium) {
+                    .catalog-title {
+                        padding-left: 1rem;
+                        font-size: 2.5rem;
+                    }
+                }
+
             }
 
             
@@ -158,6 +166,10 @@
             height: 100%;
             color: white;
 
+            .form-check-label {
+                font-size: .9rem;
+            }
+
             @include breakpoint-down(medium) {
                 display: none;
             }
@@ -246,6 +258,10 @@
     -webkit-box-orient: vertical;
     color: $primary-color;
 
+    h5 {
+        font-size: 1.1rem;
+    }
+
     p {
         font-size: 1.15rem;
         font-weight: 500;
@@ -271,19 +287,26 @@
     color: white;
     align-items: center;
     box-shadow: 0 0 10px rgba(black, 0.3);
+    font-size: .9rem;
 
     .col-3  {
         display: flex;
         align-items: center;
     }
 
-    @include breakpoint-down(small) {
-        width: 70vw;
-        font-size: .9rem;
 
+    img {
+        width: 35px;
+    }
+
+    @include breakpoint-down(small) {
+        width: 50vw;
+        font-size: .75rem;
+        padding: .5rem 1.5rem;
 
         img {
-            width: 35px;
+            width: 30px;
         }
+    
     }
 }

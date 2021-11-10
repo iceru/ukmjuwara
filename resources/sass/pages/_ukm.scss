@@ -1,6 +1,10 @@
 .ukm-page {
     .container {
-        .row {
+        .main-product {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba($color: #000000, $alpha: .1);
+
             .ukm-image {
                 img {
                     border-radius: 1rem;
@@ -9,11 +13,14 @@
                 #carousel {
                     .slick-slide {
                         margin: 0 .5rem;
-                        border-radius: 1rem;
+                        border-radius: .5rem;
+                        cursor: pointer;
                     }
 
                     .slick-current {
-                        border: 2px solid $primary-color;
+                        img {
+                            border: 2px solid $primary-color;
+                        }
                     }
                 }
             }
@@ -51,6 +58,10 @@
                         margin-bottom: 1rem;
                         border-bottom: 1px solid rgba($color: #000000, $alpha: .1);
 
+                        &.no-border {
+                            border-bottom: none;
+                        }
+
                         .description {
                             .desc-item {
                                 padding-left: 1rem;
@@ -72,8 +83,13 @@
 
                     .social {
                         display: inline-flex;
-                        justify-content: start;
+                        justify-content: center;
                         padding: .75rem 2rem;
+                        min-width: 340px;
+
+                        @include breakpoint-down(medium) {
+                            min-width: 100%;
+                        }
                     }
                 }
             }

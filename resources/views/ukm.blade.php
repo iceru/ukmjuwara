@@ -6,7 +6,7 @@
 
     <div class="ukm-page">
         <div class="container container-padding">
-            <div class="row">
+            <div class="row main-product">
                 <div class="col-12 col-md-5 ukm-image mb-5">
                     <div id="sliders" class="mb-3"> 
                         @foreach ((array)json_decode($ukm->images) as $image)
@@ -32,6 +32,21 @@
                         <div class="detail-head">
                             <h1 class="mb-4 primary-color">{{ $ukm->title }}</h1>
                             <div class="row description">
+                                
+                                <div class="col-6">
+                                    <div class="desc-item last">
+                                        <h6 class="mb-2">Produk</h6>
+                                        <p>{{$ukm->product}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="desc-item">
+                                        <h6 class="mb-2">Lokasi</h6>
+                                        @if($ukm->address)
+                                            <p class="text-capitalize">{{ $ukm->address }}, {{ $state_name }} </p>
+                                        @endif
+                                    </div>
+                                </div>
                                 <div class="col-6">
                                     <div class="desc-item">
                                         <h6 class="mb-2">Kategori</h6>
@@ -58,31 +73,23 @@
                                     </div>
                                 @endif
                                 
-                                <div class="col-6">
-                                    <div class="desc-item">
-                                        <h6 class="mb-2">Lokasi</h6>
-                                        @if($ukm->address)
-                                            <p class="text-capitalize">{{ $ukm->address }}, {{ $state_name }} </p>
-                                        @endif
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="desc-item last">
-                                        <h6 class="mb-2">Produk</h6>
-                                        <p>{{$ukm->product}}</p>
-                                    </div>
-                                </div>
-                                
+                            </div>
+                        </div>
+                        <div class="description mb-4">
+                            <p>{!! $ukm->description !!}</p>
+                        </div>
+                        <div class="detail-head no-border">
+                            <div class="description row">
                                 @if ($ukm->achievement)
-                                    <div class="col-6">
-                                        <div class="desc-item last">
-                                            <h6 class="mb-2">Capaian</h6>
-                                            <p>{!! $ukm->achievement !!}</p>
-                                        </div>
+                                <div class="col-12">
+                                    <div class="desc-item last">
+                                        <h6 class="mb-2">Capaian</h6>
+                                        <p>{!! $ukm->achievement !!}</p>
                                     </div>
+                                </div>
                                 @endif
                                 @if ($ukm->permission)
-                                    <div class="col-6">
+                                    <div class="col-12">
                                         <div class="desc-item last">
                                             <h6 class="mb-2">Perizinan</h6>
                                             <p>{!! $ukm->permission !!}</p>
@@ -91,15 +98,12 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="description mb-4">
-                            <p>{!! $ukm->description !!}</p>
-                        </div>
                         <div class="mb-4">
                             <div>
                                 <a class="mb-3" href="{{ $ukm->whatsapp }}">
                                     <div class="social whatsapp">
                                         <i class="fab fa-whatsapp fa-fw me-2"></i>
-                                        <p>Klik untuk kontak langsung & belanja</p>
+                                        <p>Kontak langsung untuk belanja</p>
                                    </div>
                                 </a>
                             </div>
@@ -107,13 +111,17 @@
                                 <a href="{{ $ukm->instagram }}">
                                     <div class="social instagram">
                                         <i class="fab fa-instagram fa-fw me-2"></i>
-                                        <p>Klik untuk tahu lebih banyak</p>
+                                        <p>Cari tahu lebih lanjut</p>
                                     </div>
                                 </a>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div class="row">
+                
                 <div class="col-12 mb-4">
                     <h3 class="text-center text-uppercase">UKM Lainnya</h3>
                 </div>

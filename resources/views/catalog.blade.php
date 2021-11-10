@@ -32,7 +32,7 @@
                     <div class="row">
                         <div class="col-md-3"></div>
                         <div class="col-md-9">
-                            <h2>{{ $catalog->title }}</h2>
+                            <h2 class="catalog-title">{{ $catalog->title }}</h2>
                         </div>
                     </div>
                 </div>
