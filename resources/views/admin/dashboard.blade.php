@@ -110,7 +110,7 @@
         </div>
 
         <div class="mt-4">
-            <a class="btn btn-primary align-items-center" href="https://www.analytics.google.com">
+            <a class="btn btn-primary align-items-center" href="https://analytics.google.com/analytics/web">
                 Open Google Analytics <i class="fas fa-chart-line ms-2"></i>
             </a>
         </div>
