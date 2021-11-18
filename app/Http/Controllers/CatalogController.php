@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use CyrildeWit\EloquentViewable\Support\Period;
 
 class CatalogController extends Controller
 {
@@ -80,7 +81,7 @@ class CatalogController extends Controller
     {
         $catalog = Catalog::where('slug', $slug)->firstOrFail();
         $ukms = Ukm::where('catalog_id', $catalog->id)->orderBy('title')->paginate(20);
-        $bests = Ukm::where('catalog_id', $catalog->id)->orderByViews()->get()->take(8);
+        $bests = Ukm::where('catalog_id', $catalog->id)->orderByViews('desc', Period::since('2021-11-18'))->get()->take(8);
         $states = Ukm::where('catalog_id', $catalog->id)->select('state_name')->distinct()->where('state_name', '!=', '')->get();
         $categories = Category::take(6)->get();
 

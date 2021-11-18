@@ -224,7 +224,7 @@
                     <td>{{ $ukm->address.', '.ucwords(strtolower($ukm->city_name)).', '.ucwords(strtolower($ukm->state_name)) }}</td>
                     <td>{{ $ukm->whatsapp }}</td>
                     <td>{{ $ukm->instagram }}</td>
-                    <td>{{ views($ukm)->count(); }}</td>
+                    <td>{{ views($ukm)->period(\CyrildeWit\EloquentViewable\Support\Period::since('2021-11-18'))->unique()->count(); }}</td>
                     <td>{!! !str_contains(strtolower($ukm->catalog->title), 'global') ? $ukm->achievement : '-' !!}</td>
                     <td>{{ !str_contains(strtolower($ukm->catalog->title), 'global') ? $ukm->operational_hours.'-'.$ukm->operational_hours_end : '-'  }}</td>
                     <td>{!! str_contains(strtolower($ukm->catalog->title), 'global') ? $ukm->permission : '-' !!}</td>
