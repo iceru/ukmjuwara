@@ -18,6 +18,7 @@
         </div>
     </a>
 
+    @if($catalog->ukm->count() > 0)
     <div class="catalog">
         <div class="header">
             <div class="header-image">
@@ -219,6 +220,11 @@
             </div>
         </div>
     </div>
+    @else
+    <div class="d-flex justify-content-center p-5">
+        <h1 class="primary-color">Coming Soon!</h1>
+    </div>
+    @endif
     <script>
         $(document).ready(function(){
             $('#ukm_bests').slick({

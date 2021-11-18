@@ -79,7 +79,7 @@ class CatalogController extends Controller
      */
     public function show($slug, Request $request)
     {
-        $catalog = Catalog::where('slug', $slug)->firstOrFail();
+        $catalog = Catalog::with('ukm')->where('slug', $slug)->firstOrFail();
         $ukms = Ukm::where('catalog_id', $catalog->id)->orderBy('title')->paginate(20);
         $bests = Ukm::where('catalog_id', $catalog->id)->orderByViews('desc', Period::since('2021-11-18'))->get()->take(8);
         $states = Ukm::where('catalog_id', $catalog->id)->select('state_name')->distinct()->where('state_name', '!=', '')->get();
