@@ -67,7 +67,7 @@
                                 <img src="/images/default-user.jpg" class="me-3" width="25" alt="">
                                 <p>{{ $article->author }}</p>
                             </div>
-                            <div class="article-description">
+                            <div class="article-description" style="display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3;">
                                 <p >{!! $article->description!!}</p>
                             </div>
                             <p class="mt-3">{{  date('d F Y', strtotime($article->created_at )) }} | {{ $article->time_read }} Mins Read</p>
@@ -90,7 +90,7 @@
                         <img src="/images/default-user.jpg" class="me-3" width="37" alt="">
                         <p>{{ $article->author }}</p>
                     </div>
-                    <div class="article-description">
+                    <div class="article-description" style="height:73px">
                         <p >{!! $article->description!!}</p>
                     </div>
                     <p class="mt-3">{{  date('d F Y', strtotime($article->created_at )) }} | {{ $article->time_read }} Mins Read</p>

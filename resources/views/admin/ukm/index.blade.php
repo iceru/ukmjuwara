@@ -192,9 +192,9 @@
                     <th>Katalog</th>
                     <th>Kategori</th>
                     <th>Alamat</th>
+                    <th>Views</th>
                     <th>Whatsapp</th>
                     <th>Instagram</th>
-                    <th>Views</th>
                     <th>Capaian</th>
                     <th>Jam Operasional</th>
                     <th>Perizinan</th>
@@ -222,9 +222,9 @@
                         <span>{{ $item->title }}</span>
                         @endforeach</td>
                     <td>{{ $ukm->address.', '.ucwords(strtolower($ukm->city_name)).', '.ucwords(strtolower($ukm->state_name)) }}</td>
+                    <td>{{ views($ukm)->period(\CyrildeWit\EloquentViewable\Support\Period::since('2021-11-18'))->unique()->count(); }}</td>
                     <td>{{ $ukm->whatsapp }}</td>
                     <td>{{ $ukm->instagram }}</td>
-                    <td>{{ views($ukm)->period(\CyrildeWit\EloquentViewable\Support\Period::since('2021-11-18'))->unique()->count(); }}</td>
                     <td>{!! !str_contains(strtolower($ukm->catalog->title), 'global') ? $ukm->achievement : '-' !!}</td>
                     <td>{{ !str_contains(strtolower($ukm->catalog->title), 'global') ? $ukm->operational_hours.'-'.$ukm->operational_hours_end : '-'  }}</td>
                     <td>{!! str_contains(strtolower($ukm->catalog->title), 'global') ? $ukm->permission : '-' !!}</td>
