@@ -48,7 +48,7 @@ class UkmController extends Controller
      */
     public function show($slug)
     {
-        $ukm = Ukm::where('slug', $slug)->firstOrFail();
+        $ukm = Ukm::with('catalog')->where('slug', $slug)->firstOrFail();
         $state_name = '';
         $city_name = '';
         $sub_name = '';

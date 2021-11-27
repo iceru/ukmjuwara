@@ -98,7 +98,7 @@
                     </select>
                 </div>
             </div>
-            <div class="row mb-3 non-global">
+            <div class="row mb-3">
                 <label for="achievement" class="col-12 col-md-2 col-form-label">Capaian</label>
                 <div class="col-12 col-md-10">
                     <textarea type="text" class="form-control" id="description" name="achievement">{{ old('achievement') }}</textarea>
@@ -116,13 +116,31 @@
             <div class="row mb-3 global">
                 <label for="permission" class="col-12 col-md-2 col-form-label">Perizinan</label>
                 <div class="col-12 col-md-10">
-                    <textarea type="text" class="form-control" id="description" name="permission">{{ old('permission') }}</textarea>
+                    <textarea type="text" class="form-control" id="permission" name="permission">{{ old('permission') }}</textarea>
                 </div>
             </div>
             <div class="row mb-3 global">
                 <label for="capacity" class="col-12 col-md-2 col-form-label">Kapasitas</label>
                 <div class="col-12 col-md-10">
-                    <input type="text" class="form-control" value="{{ old('capacity') }}" id="capacity" name="capacity">
+                    <textarea type="text" class="form-control" id="capacity" name="capacity">{{ old('capacity') }}</textarea>
+                </div>
+            </div>
+            <div class="row mb-3 global">
+                <label for="minimum_order" class="col-12 col-md-2 col-form-label">Minimum Order Quantity untuk Ekspor</label>
+                <div class="col-12 col-md-10">
+                    <textarea type="text" class="form-control" id="minimum_order" name="minimum_order">{{ old('minimum_order') }}</textarea>
+                </div>
+            </div>
+            <div class="row mb-3 global">
+                <label for="fulfillment_duration" class="col-12 col-md-2 col-form-label">Durasi masa tunggu pemenuhan pesanan</label>
+                <div class="col-12 col-md-10">
+                    <textarea type="text" class="form-control" id="fulfillment_duration" name="fulfillment_duration">{{ old('fulfillment_duration') }}</textarea>
+                </div>
+            </div>
+            <div class="row mb-3 global">
+                <label for="preferred_incoterm" class="col-12 col-md-2 col-form-label">Preferred Incoterm</label>
+                <div class="col-12 col-md-10">
+                    <textarea type="text" class="form-control" id="preferred_incoterm" name="preferred_incoterm">{{ old('preferred_incoterm') }}</textarea>
                 </div>
             </div>
             <div class="row mb-3">
@@ -199,6 +217,9 @@
                     <th>Jam Operasional</th>
                     <th>Perizinan</th>
                     <th>Kapasitas</th>
+                    <th>Minimum Order Quantity untuk Ekspor</th>
+                    <th>Durasi masa tunggu pemenuhan pesanan</th>
+                    <th>Preferred Incoterm</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -225,9 +246,12 @@
                     <td>{{ $ukm->whatsapp }}</td>
                     <td>{{ $ukm->instagram }}</td>
                     <td>{{ views($ukm)->period(\CyrildeWit\EloquentViewable\Support\Period::since('2021-11-18'))->unique()->count(); }}</td>
-                    <td>{!! !str_contains(strtolower($ukm->catalog->title), 'global') ? $ukm->achievement : '-' !!}</td>
+                    <td>{!! $ukm->achievement !!}</td>
                     <td>{{ !str_contains(strtolower($ukm->catalog->title), 'global') ? $ukm->operational_hours.'-'.$ukm->operational_hours_end : '-'  }}</td>
                     <td>{!! str_contains(strtolower($ukm->catalog->title), 'global') ? $ukm->permission : '-' !!}</td>
+                    <td>{!! str_contains(strtolower($ukm->catalog->title), 'global') ? $ukm->minimum_order : '-' !!}</td>
+                    <td>{!! str_contains(strtolower($ukm->catalog->title), 'global') ? $ukm->fulfillment_duration : '-' !!}</td>
+                    <td>{!! str_contains(strtolower($ukm->catalog->title), 'global') ? $ukm->preferred_incoterm : '-' !!}</td>
                     <td>{{ str_contains(strtolower($ukm->catalog->title), 'global') ? $ukm->capacity : '-' }}</td>
 
                     <td><a class="btn btn-primary btn-small d-flex align-items-center justify-content-center mb-2"
