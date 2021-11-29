@@ -67,7 +67,7 @@
                 toolbar_mode: 'floating',
                 tinycomments_mode: 'embedded',
                 tinycomments_author: 'UKM Juwara',
-                height : "480",
+                height : "350",
                 image_title: true,
                 automatic_uploads: true,
                 images_upload_url: '/upload/image',

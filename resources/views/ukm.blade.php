@@ -39,6 +39,14 @@
                                         <p>{{$ukm->product}}</p>
                                     </div>
                                 </div>
+                                @if ($ukm->capacity)
+                                    <div class="col-6">
+                                        <div class="desc-item last">
+                                            <h6 class="mb-2">Kapasitas</h6>
+                                            <p>{!! $ukm->capacity !!}</p>
+                                        </div>
+                                    </div>
+                                @endif
                                 <div class="col-6">
                                     <div class="desc-item">
                                         <h6 class="mb-2">Lokasi</h6>
@@ -47,15 +55,18 @@
                                         @endif
                                     </div>
                                 </div>
-                                <div class="col-6">
-                                    <div class="desc-item last">
-                                        <h6 class="mb-2">Kategori</h6>
-                                        <p class="categories-text">@foreach ($ukm->categories as $item)
-                                            <span>{{ $item->title }}</span>
-                                            @endforeach
-                                        </p>
+                                @if(!str_contains(strtolower($ukm->catalog->title), 'global'))
+                                    <div class="col-6">
+                                        <div class="desc-item last">
+                                            <h6 class="mb-2">Kategori</h6>
+                                            <p class="categories-text">@foreach ($ukm->categories as $item)
+                                                <span>{{ $item->title }}</span>
+                                                @endforeach
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
+                                @endif
+                               
                                 @if ($ukm->operational_hours && $ukm->operational_hours_end)
                                     <div class="col-6">
                                         <div class="desc-item last">
@@ -64,15 +75,41 @@
                                         </div>
                                     </div>
                                 @endif
-                                @if ($ukm->capacity)
-                                    <div class="col-6">
-                                        <div class="desc-item last">
-                                            <h6 class="mb-2">Kapasitas</h6>
-                                            <p>{{ $ukm->capacity }}</p>
+                                
+                                @if ($ukm->permission)
+                                    <div class="col-6 mb-3">
+                                        <div class="desc-item">
+                                            <h6 class="mb-2">Perizinan</h6>
+                                            <p>{!! $ukm->permission !!}</p>
                                         </div>
                                     </div>
                                 @endif
-                                
+
+                                @if ($ukm->minimum_order)
+                                    <div class="col-12">
+                                        <div class="desc-item">
+                                            <h6 class="mb-2">Minimum Order Quantity untuk Ekspor
+                                            </h6>
+                                            <p>{!! $ukm->minimum_order !!}</p>
+                                        </div>
+                                    </div>
+                                @endif
+                                @if ($ukm->fulfillment_duration)
+                                    <div class="col-12">
+                                        <div class="desc-item">
+                                            <h6 class="mb-2">Durasi masa tunggu pemenuhan pesanan</h6>
+                                            <p>{!! $ukm->fulfillment_duration !!}</p>
+                                        </div>
+                                    </div>
+                                @endif
+                                @if ($ukm->preferred_incoterm)
+                                    <div class="col-12">
+                                        <div class="desc-item last">
+                                            <h6 class="mb-2">Preferred Incoterm</h6>
+                                            <p>{!! $ukm->preferred_incoterm !!}</p>
+                                        </div>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                         <div class="description mb-4">
@@ -87,14 +124,6 @@
                                         <p>{!! $ukm->achievement !!}</p>
                                     </div>
                                 </div>
-                                @endif
-                                @if ($ukm->permission)
-                                    <div class="col-12">
-                                        <div class="desc-item last">
-                                            <h6 class="mb-2">Perizinan</h6>
-                                            <p>{!! $ukm->permission !!}</p>
-                                        </div>
-                                    </div>
                                 @endif
                             </div>
                         </div>

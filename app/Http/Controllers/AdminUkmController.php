@@ -81,6 +81,9 @@ class AdminUkmController extends Controller
             'achievement' => 'nullable',
             'capacity' => 'nullable',
             'permission' => 'nullable',
+            'minimum_order' => 'nullable',
+            'fulfillment_duration' => 'nullable',
+            'preferred_incoterm' => 'nullable',
 
         ]);
 
@@ -122,6 +125,9 @@ class AdminUkmController extends Controller
         $ukm->achievement = $request->achievement;
         $ukm->capacity = $request->capacity;
         $ukm->permission = $request->permission;
+        $ukm->minimum_order = $request->minimum_order;
+        $ukm->fulfillment_duration = $request->fulfillment_duration;
+        $ukm->preferred_incoterm = $request->preferred_incoterm;
 
         $ukm->save();
 
@@ -209,6 +215,9 @@ class AdminUkmController extends Controller
             'achievement' => 'nullable',
             'capacity' => 'nullable',
             'permission' => 'nullable',
+            'minimum_order' => 'nullable',
+            'fulfillment_duration' => 'nullable',
+            'preferred_incoterm' => 'nullable',
         ]);
 
         if ($request->hasFile('image')) {
@@ -244,6 +253,9 @@ class AdminUkmController extends Controller
         $ukm->achievement = $request->achievement;
         $ukm->capacity = $request->capacity;
         $ukm->permission = $request->permission;
+        $ukm->minimum_order = $request->minimum_order;
+        $ukm->fulfillment_duration = $request->fulfillment_duration;
+        $ukm->preferred_incoterm = $request->preferred_incoterm;
 
         $ukm->save();
 

@@ -107,7 +107,7 @@ class CatalogController extends Controller
                 $ukms = $ukms->where('title', 'LIKE','%'.$request->search.'%');
             }
 
-            $ukms = $ukms->orderBy('title')->paginate(20);
+            $ukms = $ukms->orderBy('title')->paginate(4);
             return view('catalog-ukm', compact('ukms'));
         }
         
