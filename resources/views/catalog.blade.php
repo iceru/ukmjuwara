@@ -90,48 +90,50 @@
             </div>
             <div class="container">
                 <div class="row">
-                    <div class="col-md-3 filter">
+                    <div class="col-md-3 filter" id="filter_container">
                         <h3 class="mb-3">Filter</h3>
-                        <div class="search-ukm">
-                            {{-- <form action="{{ route('search') }}" role="search" id="search_form" action="" method="GET"> --}}
-                            <input type="text" class="form-control" placeholder="Search" type="search" id="search_ukm">
-                            <div class="icon-search">
-                                <i class="fa fa-search" aria-hidden="true"></i>
+                        <div class="filter-desktop-checkbox">
+                            <div class="search-ukm">
+                                {{-- <form action="{{ route('search') }}" role="search" id="search_form" action="" method="GET"> --}}
+                                <input type="text" class="form-control" placeholder="Search" type="search" id="search_ukm">
+                                <div class="icon-search">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </div>
+                                </form>
                             </div>
-                            </form>
-                        </div>
-                        <div class="category-filter mb-4">
-                            <h5 class="mb-2">Kategori Produk</h5>
-                            @foreach ($categories as $category)
-                            <div class="form-check">
-                                <input class="form-check-input category-large" type="checkbox" value="{{ $category->id }}" id="category" name="category[]">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    {{ $category->title }}
+                            <div class="category-filter mb-4">
+                                <h5 class="mb-2">Kategori Produk</h5>
+                                @foreach ($categories as $category)
+                                <div class="form-check">
+                                    <input class="form-check-input category-large" type="checkbox" value="{{ $category->id }}" id="category" name="category[]">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        {{ $category->title }}
+                                </div>
+                                @endforeach
                             </div>
-                            @endforeach
-                        </div>
-                        <div class="location-filter mb-4">
-                            <h5 class="mb-2">Lokasi</h5>
-                            @foreach ($states as $item)
-                            <div class="form-check">
-                                <input class="form-check-input state state-large" type="checkbox" value="{{ $item->state_name }}" id="state" name="state[]">
-                                <label class="form-check-label text-capitalize" for="flexCheckDefault" > @if ($item->state_name == 'DKI JAKARTA') DKI Jakarta @elseif ($item->state_name == 'P A P U A') Papua @else {{ strtolower($item->state_name) }} @endif
+                            <div class="location-filter mb-4">
+                                <h5 class="mb-2">Lokasi</h5>
+                                @foreach ($states as $item)
+                                <div class="form-check">
+                                    <input class="form-check-input state state-large" type="checkbox" value="{{ $item->state_name }}" id="state" name="state[]">
+                                    <label class="form-check-label text-capitalize" for="flexCheckDefault" > @if ($item->state_name == 'DKI JAKARTA') DKI Jakarta @elseif ($item->state_name == 'P A P U A') Papua @else {{ strtolower($item->state_name) }} @endif
+                                </div>
+                                @endforeach
                             </div>
-                            @endforeach
-                        </div>
-                        <div class="owner-gender-filter">
-                            <h5 class="mb-2">Gender Pemilik</h5>
-                            <div class="form-check">
-                                <input class="form-check-input owner" type="checkbox" value="pria" id="owner_gender" name="owner_gender[]">
-                                <label class="form-check-label" for="flexCheckDefault"> Pria
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input owner" type="checkbox" value="wanita" id="owner_gender" name="owner_gender[]">
-                                <label class="form-check-label" for="flexCheckDefault"> Wanita
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input owner" type="checkbox" value="pria-wanita" id="owner_gender" name="owner_gender[]">
-                                <label class="form-check-label" for="flexCheckDefault"> Pria & Wanita
+                            <div class="owner-gender-filter">
+                                <h5 class="mb-2">Gender Pemilik</h5>
+                                <div class="form-check">
+                                    <input class="form-check-input owner-large" type="checkbox" value="pria" id="owner_gender" name="owner_gender[]">
+                                    <label class="form-check-label" for="flexCheckDefault"> Pria
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input owner-large" type="checkbox" value="wanita" id="owner_gender" name="owner_gender[]">
+                                    <label class="form-check-label" for="flexCheckDefault"> Wanita
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input owner-large" type="checkbox" value="pria-wanita" id="owner_gender" name="owner_gender[]">
+                                    <label class="form-check-label" for="flexCheckDefault"> Pria & Wanita
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -159,59 +161,62 @@
                             </button>
                         </div>
                         <h3 class="mb-3">Filter</h3>
-                        <div class="search-ukm">
-                            <form action="{{ route('search') }}" role="search" id="search_form" action="" method="GET">
-                            <input type="text" class="form-control" placeholder="Search" type="search" name="search_query">
-                            <div class="icon-search">
-                                <button type="submit" value="" class="btn">
-                                    <i class="fa fa-search" aria-hidden="true"></i>
-                                </button>
+                        <div class="filter-mobile-checkbox">
+                            <div class="search-ukm">
+                                <form action="{{ route('search') }}" role="search" id="search_form" action="" method="GET">
+                                <input type="text" class="form-control" placeholder="Search" type="search" name="search_query">
+                                <div class="icon-search">
+                                    <button type="submit" value="" class="btn">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                                </form>
                             </div>
-                            </form>
+                            <div class="category-filter mb-3">
+                                <h5 class="mb-2">Kategori</h5>
+                                @foreach ($categories as $category)
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="{{ $category->id }}" id="category" name="category[]">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        {{ $category->title }}
+                                </div>
+                                @endforeach
+                                <div class="show-filter category-more">
+                                    <p>Show More</p>
+                                </div>
+                            </div>
+                            <div class="location-filter mb-3">
+                                <h5 class="mb-2">Lokasi</h5>
+                                @foreach ($states as $item)
+                                <div class="form-check">
+                                    <input class="form-check-input state" type="checkbox" value="{{ $item->state_name }}" id="state" name="state[]">
+                                    <label class="form-check-label text-capitalize" for="flexCheckDefault" > {{ strtolower($item->state_name) }}
+                                </div>
+                                @endforeach
+                                <div class="show-filter location-more">
+                                    <p>Show More</p>
+                                </div>
+                            </div>
+                            <div class="owner-gender-filter mb-3">
+                                <h5 class="mb-2">Gender Pemilik</h5>
+                                <div class="form-check">
+                                    <input class="form-check-input owner" type="checkbox" value="pria" id="owner_gender" name="owner_gender[]">
+                                    <label class="form-check-label" for="flexCheckDefault"> Pria
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input owner" type="checkbox" value="wanita" id="owner_gender" name="owner_gender[]">
+                                    <label class="form-check-label" for="flexCheckDefault"> Wanita
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input owner" type="checkbox" value="pria-wanita" id="owner_gender" name="owner_gender[]">
+                                    <label class="form-check-label" for="flexCheckDefault"> Pria & Wanita
+                                </div>
+                            </div>
+                            
+                            <button type="button" class="btn btn-light" data-bs-dismiss="offcanvas">
+                                Filter
+                            </button>
                         </div>
-                        <div class="category-filter mb-3">
-                            <h5 class="mb-2">Kategori</h5>
-                            @foreach ($categories as $category)
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="{{ $category->id }}" id="category" name="category[]">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    {{ $category->title }}
-                            </div>
-                            @endforeach
-                            <div class="show-filter category-more">
-                                <p>Show More</p>
-                            </div>
-                        </div>
-                        <div class="location-filter mb-3">
-                            <h5 class="mb-2">Lokasi</h5>
-                            @foreach ($states as $item)
-                            <div class="form-check">
-                                <input class="form-check-input state" type="checkbox" value="{{ $item->state_name }}" id="state" name="state[]">
-                                <label class="form-check-label text-capitalize" for="flexCheckDefault" > {{ strtolower($item->state_name) }}
-                            </div>
-                            @endforeach
-                            <div class="show-filter location-more">
-                                <p>Show More</p>
-                            </div>
-                        </div>
-                        <div class="owner-gender-filter mb-3">
-                            <h5 class="mb-2">Gender Pemilik</h5>
-                            <div class="form-check">
-                                <input class="form-check-input owner" type="checkbox" value="pria" id="owner_gender" name="owner_gender[]">
-                                <label class="form-check-label" for="flexCheckDefault"> Pria
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input owner" type="checkbox" value="wanita" id="owner_gender" name="owner_gender[]">
-                                <label class="form-check-label" for="flexCheckDefault"> Wanita
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input owner" type="checkbox" value="pria-wanita" id="owner_gender" name="owner_gender[]">
-                                <label class="form-check-label" for="flexCheckDefault"> Pria & Wanita
-                            </div>
-                        </div>
-                        <button type="button" class="btn btn-light" data-bs-dismiss="offcanvas">
-                            Filter
-                        </button>
                     </div>
                     <div class="col-12 col-md-9 katalog-ukm" id="catalog">
                         @include('catalog-ukm')
@@ -243,94 +248,180 @@
                 ]
             });
             $('.loading-spinner').hide();
-                        
-            $(window).on('hashchange',function(){
-                if (window.location.hash) {
-                    var page = window.location.hash.replace('#', '');
-                    if (page == Number.NaN || page <= 0) {
-                        return false;
-                    } else{
-                        ajaxFilter(page);
-                    }
-                }
-            });
+            desktop = $('.filter-desktop-checkbox');
+            mobile = $('.filter-mobile-checkbox');
 
-            $(document).ready(function(){
-                $(document).on('click','.pagination a',function(event){
-                    event.preventDefault();
-                    $('li').removeClass('active');
-                    $(this).parent('li').addClass('active');
-                    var url = $(this).attr('href');
-                    var page = $(this).attr('href').split('page=')[1];
-                    ajaxFilter(page);
-                });
-            });
-        
-            function get_filter(filter)
-            {
-                var filters = [];
-                var filter_selected = [];
-
-                $('#'+filter+':checked').each(function(){
-                    filters.push($(this).val());
-                    filter_selected.push($(this).next('label').text());
-                });
-
-                var filter_text = filter_selected.join(', ');
-                $('.'+filter+'-selected').html(filter_text);
-
-                if (filter_selected.length > 0) {
-                    $('.'+filter+'-data').removeAttr('hidden')
-                } else {
-                    $('.'+filter+'-data').attr('hidden', 'hidden')
-                }
-
-                return filters;
-            }
-
-            $('input[type="checkbox"], input[type="radio"]').click(function(){
-                ajaxFilter();
-            });
-
-            $('#search_ukm').on('keyup',function(){
-                ajaxFilter()
-            })
-
-            function getData(page) {
-                // body...
-                $.ajax({
-                    url : '?page=' + page,
-                    type : 'get',
-                    datatype : 'html',
-                }).done(function(data){
-                    $('#tag_container').empty().html(data);
-                    location.hash = page;
-                }).fail(function(jqXHR,ajaxOptions,thrownError){
-                    alert('No response from server');
-                });
-            }
+            checkUrlParams();
             
-            function ajaxFilter(page) {
-                var catalog = '{{ $catalog->id }}'
-                var states = get_filter('state');
-                var owner_genders = get_filter('owner_gender');
-                var categories = get_filter('category');
-                var search = $('#search_ukm').val();
-                $('.loading-spinner').show();
-                $('.ukm-content').hide();
+            if($(window).width() > 641) {
+                mobile.detach();
+            } else {
+                desktop.detach();
+            }
+        });
 
-                $.ajax({
-                    url:"/katalog/{{ $catalog->slug }}?page="+page,
-                    type: "GET",
-                    datatype : 'html',
-                    data: {states: states, owner_genders: owner_genders, categories: categories, catalog: catalog, search: search}
-                    }).done( function(results){
-                        $('#catalog').html(results);
-                        $('.ukm-content').show();
-                        location.hash = page;
-                        $('.loading-spinner').hide();
-                })
-            };
+        $(window).on('hashchange',function(){
+            if (window.location.hash) {
+                var page = window.location.hash.replace('#', '');
+                if (page == Number.NaN || page <= 0) {
+                    return false;
+                } else{
+                    ajaxFilter(page);
+                }
+            }
+        });
+
+        $(window).resize(function() {
+            if($(window).width() > 641) {
+                mobile.detach();
+                desktop.appendTo($('#filter_container'))
+            } else {
+                desktop.detach();
+                mobile.appendTo($('.filter-offcanvas'))
+            }
+        });
+
+        $(document).on('click','.pagination a',function(event){
+            event.preventDefault();
+            $('li').removeClass('active');
+            $(this).parent('li').addClass('active');
+            var url = $(this).attr('href');
+            var page = parseInt($(this).attr('href').split('page=')[1])
+            ajaxFilter(page);
+        });
+
+        function checkUrlParams() {
+            var params = (new URL(document.location)).searchParams;
+            var states_params = params.get('states');
+            var owner_genders_params = params.get('owner_genders');
+            var categories_params = params.get('categories');
+            var search_params = params.get('search');
+
+            if (states_params) {
+                state_array = states_params.split(",");
+                state_array.forEach(element => {
+                    $(":checkbox[value='"+element+"']").prop("checked","true");
+                });
+            }
+
+            if (owner_genders_params) {
+                owner_genders_params = owner_genders_params.split(",");
+                owner_genders_params.forEach(element => {
+                    $(":checkbox[value='"+element+"']").prop("checked","true");
+                });
+            }
+
+            if (categories_params) {
+                categories_params = categories_params.split(",");
+                categories_params.forEach(element => {
+                    element = parseInt(element);
+                    $(":checkbox[value="+element+"]").prop("checked","true");
+                });
+            }
+
+            if(search_params) {
+                $('#search_ukm').val(search_params);
+            }
+        }
+
+        function get_filter(filter) {
+            var filters = [];
+            var filter_selected = [];
+
+            $('#'+filter+':checked').each(function(){
+                filters.push($(this).val());
+                filter_selected.push($(this).next('label').text());
+            });
+
+            var filter_text = filter_selected.join(', ');
+            $('.'+filter+'-selected').html(filter_text);
+
+            if (filter_selected.length > 0) {
+                $('.'+filter+'-data').removeAttr('hidden')
+            } else {
+                $('.'+filter+'-data').attr('hidden', 'hidden')
+            }
+            return filters;
+        }
+
+        $('input[type="checkbox"], input[type="radio"]').click(function(){
+            ajaxFilter();
+        });
+
+        $('#search_ukm').on('keyup',function(){
+            ajaxFilter()
+        })
+            
+        function ajaxFilter(page) {
+            var catalog = '{{ $catalog->id }}'
+            states = get_filter('state');
+            owner_genders = get_filter('owner_gender');
+            categories = get_filter('category');
+            var search = $('#search_ukm').val();
+            $('.loading-spinner').show();
+            $('.ukm-content').hide();
+
+            $.ajax({
+                url:"/katalog/{{ $catalog->slug }}?page="+page,
+                type: "GET",
+                datatype : 'html',
+                data: {states: states, owner_genders: owner_genders, categories: categories, catalog: catalog, search: search}
+                }).done( function(results){
+                    $('#catalog').html(results);
+                    $('.ukm-content').show();
+                    $('.loading-spinner').hide();
+
+                    var url = new URL(window.location.href);
+                    var stateObj = {
+                        states: states, owner_genders: owner_genders, categories: categories, catalog: catalog, search: search, page: page
+                    }
+
+                    if(stateObj.states.length > 0 )
+                        url.searchParams.set('states', states)
+                    else 
+                        url.searchParams.delete('states')
+                    if(stateObj.owner_genders.length > 0 )
+                        url.searchParams.set('owner_genders', owner_genders)
+                    else 
+                        url.searchParams.delete('owner_genders')
+                    if(stateObj.categories.length > 0 )
+                        url.searchParams.set('categories', categories)
+                    else 
+                        url.searchParams.delete('categories')
+                    if(stateObj.search !== '' )
+                        url.searchParams.set('search', search)
+                    else 
+                        url.searchParams.delete('search')
+
+                    history.pushState(stateObj, '', url)
+            })
+        };
+
+        window.addEventListener('popstate', function (e) {
+            if (!e.state) {
+                return;
+            }
+            $('input:checkbox').prop('checked',false);
+            e.state.categories.forEach(element => {
+                var data = parseInt(element);
+                $(":checkbox[value="+data+"]").prop("checked","true");
+            });
+
+            e.state.owner_genders.forEach(element => {
+                $(":checkbox[value='"+element+"']").prop("checked","true");
+            });
+
+            e.state.states.forEach(element => {
+                $(":checkbox[value='"+element+"']").prop("checked","true");
+            });
+
+            $('#search_ukm').val(e.state.search);
+            var page = 1;
+
+            if(e.state.page)
+                page = e.state.page
+
+            ajaxFilter(page);
         });
             
     </script>

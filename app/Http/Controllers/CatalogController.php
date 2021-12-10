@@ -85,22 +85,37 @@ class CatalogController extends Controller
         $states = Ukm::where('catalog_id', $catalog->id)->select('state_name')->distinct()->where('state_name', '!=', '')->get();
         $categories = Category::take(6)->get();
 
-        if ($request->ajax()) {
-            $ukms = Ukm::where('catalog_id', $request->catalog);
 
+        if ($request->categories || $request->states || $request->owner_genders || $request->search) {
+            $ukms = Ukm::where('catalog_id', $catalog->id);
             if (isset($request->categories)) {
-                $categoryId = Category::whereIn('id', request('categories'))->pluck('id');
+                if(is_string($request->categories)) {
+                    $categories_array = explode(',', $request->categories);
+                } else {
+                    $categories_array = $request->categories;
+                }
+                $categoryId = Category::whereIn('id', $categories_array)->pluck('id');
                 $ukms = $ukms->whereHas('categories', function($q) use($categoryId) {
                     $q->whereIn('category_id', $categoryId);
                 });
             }
 
             if (isset($request->states)) {
-                $ukms = $ukms->whereIn('state_name', $request->states);
+                if(is_string($request->states)) {
+                    $states_array = explode(',', $request->states);
+                } else {
+                    $states_array = $request->states;
+                }
+                $ukms = $ukms->whereIn('state_name', $states_array);
             }
 
             if (isset($request->owner_genders)) {
-                $ukms = $ukms->whereIn('owner_gender', $request->owner_genders);
+                if(is_string($request->owner_genders)) {
+                    $owner_genders = explode(',', $request->owner_genders);
+                } else {
+                    $owner_genders = $request->owner_genders;
+                }
+                $ukms = $ukms->whereIn('owner_gender', $owner_genders);
             }
 
             if (isset($request->search)) {
@@ -108,7 +123,11 @@ class CatalogController extends Controller
             }
 
             $ukms = $ukms->orderBy('title')->paginate(4);
-            return view('catalog-ukm', compact('ukms'));
+            if($request->ajax()) {
+                return view('catalog-ukm', compact('ukms'));
+            } else {
+                return view('catalog', compact('catalog','ukms', 'bests', 'categories', 'states'));
+            }
         }
         
         return view('catalog', compact('catalog','ukms', 'bests', 'categories', 'states'));
