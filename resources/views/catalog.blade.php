@@ -260,16 +260,16 @@
             }
         });
 
-        $(window).on('hashchange',function(){
-            if (window.location.hash) {
-                var page = window.location.hash.replace('#', '');
-                if (page == Number.NaN || page <= 0) {
-                    return false;
-                } else{
-                    ajaxFilter(page);
-                }
-            }
-        });
+        // $(window).on('hashchange',function(){
+        //     if (window.location.hash) {
+        //         var page = window.location.hash.replace('#', '');
+        //         if (page == Number.NaN || page <= 0) {
+        //             return false;
+        //         } else{
+        //             ajaxFilter(page);
+        //         }
+        //     }
+        // });
 
         $(window).resize(function() {
             if($(window).width() > 641) {
@@ -392,6 +392,10 @@
                         url.searchParams.set('search', search)
                     else 
                         url.searchParams.delete('search')
+                    if(stateObj.page !== 1 )
+                        url.searchParams.set('page', page)
+                    else 
+                        url.searchParams.set('page', 1)
 
                     history.pushState(stateObj, '', url)
             })
