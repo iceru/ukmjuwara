@@ -48,7 +48,7 @@
                                     </div>
                                 @endif
                                 <div class="col-6">
-                                    <div class="desc-item">
+                                    <div class="desc-item last">
                                         <h6 class="mb-2">Lokasi</h6>
                                         @if($ukm->address)
                                             <p class="text-capitalize">{{ $ukm->address }}, {{ $state_name }} </p>
@@ -78,13 +78,21 @@
                                 
                                 @if ($ukm->permission)
                                     <div class="col-6 mb-3">
-                                        <div class="desc-item">
+                                        <div class="desc-item last">
                                             <h6 class="mb-2">Perizinan</h6>
                                             <p>{!! $ukm->permission !!}</p>
                                         </div>
                                     </div>
                                 @endif
 
+                               
+                            </div>
+                        </div>
+                        <div class="description mb-4">
+                            <p>{!! $ukm->description !!}</p>
+                        </div>
+                        <div class="detail-head no-border">
+                            <div class="description row">
                                 @if ($ukm->minimum_order)
                                     <div class="col-12">
                                         <div class="desc-item">
@@ -104,19 +112,12 @@
                                 @endif
                                 @if ($ukm->preferred_incoterm)
                                     <div class="col-12">
-                                        <div class="desc-item last">
-                                            <h6 class="mb-2">Preferred Incoterm</h6>
+                                        <div class="desc-item">
+                                            <h6 class="mb-2">Intecoterm yang diminati</h6>
                                             <p>{!! $ukm->preferred_incoterm !!}</p>
                                         </div>
                                     </div>
                                 @endif
-                            </div>
-                        </div>
-                        <div class="description mb-4">
-                            <p>{!! $ukm->description !!}</p>
-                        </div>
-                        <div class="detail-head no-border">
-                            <div class="description row">
                                 @if ($ukm->achievement)
                                 <div class="col-12">
                                     <div class="desc-item last">
