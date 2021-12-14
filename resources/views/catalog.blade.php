@@ -181,9 +181,6 @@
                                         {{ $category->title }}
                                 </div>
                                 @endforeach
-                                <div class="show-filter category-more">
-                                    <p>Show More</p>
-                                </div>
                             </div>
                             <div class="location-filter mb-3">
                                 <h5 class="mb-2">Lokasi</h5>
@@ -193,9 +190,6 @@
                                     <label class="form-check-label text-capitalize" for="flexCheckDefault" > {{ strtolower($item->state_name) }}
                                 </div>
                                 @endforeach
-                                <div class="show-filter location-more">
-                                    <p>Show More</p>
-                                </div>
                             </div>
                             <div class="owner-gender-filter mb-3">
                                 <h5 class="mb-2">Gender Pemilik</h5>
@@ -365,7 +359,7 @@
                 url:"/katalog/{{ $catalog->slug }}?page="+page,
                 type: "GET",
                 datatype : 'html',
-                data: {states: states, owner_genders: owner_genders, categories: categories, catalog: catalog, search: search}
+                data: {states: states, owner_genders: owner_genders, categories: categories, catalog: catalog, search: search, page: page}
                 }).done( function(results){
                     $('#catalog').html(results);
                     $('.ukm-content').show();
