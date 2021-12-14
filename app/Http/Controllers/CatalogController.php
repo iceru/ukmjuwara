@@ -80,13 +80,13 @@ class CatalogController extends Controller
     public function show($slug, Request $request)
     {
         $catalog = Catalog::with('ukm')->where('slug', $slug)->firstOrFail();
-        $ukms = Ukm::where('catalog_id', $catalog->id)->orderBy('title')->paginate(20);
+        $ukms = Ukm::where('catalog_id', $catalog->id)->orderBy('title')->paginate(16);
         $bests = Ukm::where('catalog_id', $catalog->id)->orderByViews('desc', Period::since('2021-11-18'))->get()->take(8);
         $states = Ukm::where('catalog_id', $catalog->id)->select('state_name')->distinct()->where('state_name', '!=', '')->get();
         $categories = Category::take(6)->get();
 
 
-        if ($request->categories || $request->states || $request->owner_genders || $request->search) {
+        if ($request->categories || $request->states || $request->owner_genders || $request->search || $request->page) {
             $ukms = Ukm::where('catalog_id', $catalog->id);
             if (isset($request->categories)) {
                 if(is_string($request->categories)) {
@@ -122,7 +122,7 @@ class CatalogController extends Controller
                 $ukms = $ukms->where('title', 'LIKE','%'.$request->search.'%');
             }
 
-            $ukms = $ukms->orderBy('title')->paginate(4);
+            $ukms = $ukms->orderBy('title')->paginate(16);
             if($request->ajax()) {
                 return view('catalog-ukm', compact('ukms'));
             } else {

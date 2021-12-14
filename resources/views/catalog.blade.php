@@ -365,7 +365,7 @@
                 url:"/katalog/{{ $catalog->slug }}?page="+page,
                 type: "GET",
                 datatype : 'html',
-                data: {states: states, owner_genders: owner_genders, categories: categories, catalog: catalog, search: search}
+                data: {states: states, owner_genders: owner_genders, categories: categories, catalog: catalog, search: search, page: page}
                 }).done( function(results){
                     $('#catalog').html(results);
                     $('.ukm-content').show();
