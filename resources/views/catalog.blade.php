@@ -95,7 +95,7 @@
                         <div class="filter-desktop-checkbox">
                             <div class="search-ukm">
                                 {{-- <form action="{{ route('search') }}" role="search" id="search_form" action="" method="GET"> --}}
-                                <input type="text" class="form-control" placeholder="Search" type="search" id="search_ukm">
+                                <input type="text" class="form-control search-ukm" placeholder="Search" type="search" name="search-ukm" id="search_ukm">
                                 <div class="icon-search">
                                     <i class="fa fa-search" aria-hidden="true"></i>
                                 </div>
@@ -163,14 +163,7 @@
                         <h3 class="mb-3">Filter</h3>
                         <div class="filter-mobile-checkbox">
                             <div class="search-ukm">
-                                <form action="{{ route('search') }}" role="search" id="search_form" action="" method="GET">
-                                <input type="text" class="form-control" placeholder="Search" type="search" name="search_query">
-                                <div class="icon-search">
-                                    <button type="submit" value="" class="btn">
-                                        <i class="fa fa-search" aria-hidden="true"></i>
-                                    </button>
-                                </div>
-                                </form>
+                                <input type="text" class="form-control search-ukm-mobile" placeholder="Search" type="search" >
                             </div>
                             <div class="category-filter mb-3">
                                 <h5 class="mb-2">Kategori</h5>
@@ -187,7 +180,7 @@
                                 @foreach ($states as $item)
                                 <div class="form-check">
                                     <input class="form-check-input state" type="checkbox" value="{{ $item->state_name }}" id="state" name="state[]">
-                                    <label class="form-check-label text-capitalize" for="flexCheckDefault" > {{ strtolower($item->state_name) }}
+                                    <label class="form-check-label text-capitalize" for="flexCheckDefault" > @if ($item->state_name == 'DKI JAKARTA') DKI Jakarta @elseif ($item->state_name == 'P A P U A') Papua @else {{ strtolower($item->state_name) }} @endif
                                 </div>
                                 @endforeach
                             </div>
@@ -273,6 +266,8 @@
                 desktop.detach();
                 mobile.appendTo($('.filter-offcanvas'))
             }
+            $('#search_ukm').val('');
+            $('.search-ukm-mobile').val('');
         });
 
         $(document).on('click','.pagination a',function(event){
@@ -315,6 +310,7 @@
 
             if(search_params) {
                 $('#search_ukm').val(search_params);
+                $('.search-ukm-mobile').val(search_params);
             }
         }
 
@@ -345,6 +341,10 @@
         $('#search_ukm').on('keyup',function(){
             ajaxFilter()
         })
+
+        $('.search-ukm-mobile').on('keyup',function(){
+            ajaxFilter()
+        })
             
         function ajaxFilter(page) {
             var catalog = '{{ $catalog->id }}'
@@ -352,6 +352,9 @@
             owner_genders = get_filter('owner_gender');
             categories = get_filter('category');
             var search = $('#search_ukm').val();
+            if ($(window).width() < 645) {
+                search = $('.search-ukm-mobile').val();
+            }
             $('.loading-spinner').show();
             $('.ukm-content').hide();
 
@@ -414,6 +417,9 @@
             });
 
             $('#search_ukm').val(e.state.search);
+            if ($(window).width() < 645) {
+                $('.search-ukm-mobile').val(e.state.search);
+            }
             var page = 1;
 
             if(e.state.page)

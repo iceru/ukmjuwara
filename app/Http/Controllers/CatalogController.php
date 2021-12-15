@@ -83,8 +83,10 @@ class CatalogController extends Controller
         $ukms = Ukm::where('catalog_id', $catalog->id)->orderBy('title')->paginate(16);
         $bests = Ukm::where('catalog_id', $catalog->id)->orderByViews('desc', Period::since('2021-11-18'))->get()->take(8);
         $states = Ukm::where('catalog_id', $catalog->id)->select('state_name')->distinct()->where('state_name', '!=', '')->get();
-        $categories = Category::take(6)->get();
-
+        // $categories = Category::with('ukms')->take(6)->get();
+        $categories = Category::whereHas('ukms', function($q) use($catalog) {
+            $q->where('catalog_id', $catalog->id);
+        })->get();
 
         if ($request->categories || $request->states || $request->owner_genders || $request->search || $request->page) {
             $ukms = Ukm::where('catalog_id', $catalog->id);
