@@ -43,7 +43,7 @@
                                     <div class="article-image">
                                         <img src="{{ Storage::url('article-image/'.$article->image) }}" alt="">
                                     </div>
-                                    <h4 class="mb-3 article-title">{{ $article->title }}</h4>
+                                    <h4 class="mb-3 article-title primary-color">{{ $article->title }}</h4>
                                 </a>
                                 <div class="d-flex mb-3 author align-items-center">
                                     <img src="/images/default-user.jpg" class="me-3" width="37" alt="">
@@ -52,7 +52,7 @@
                                 <div class="article-description">
                                     <p >{!! $article->description!!}</p>
                                 </div>
-                                <p class="mt-3">{{  date('d F Y', strtotime($article->created_at )) }} | {{ $article->time_read }} Mins Read</p>
+                                <p class="mt-3 primary-color">{{  date('d F Y', strtotime($article->created_at )) }} | {{ $article->time_read }} Mins Read</p>
                             </div>
                         @endforeach
                     </div>
