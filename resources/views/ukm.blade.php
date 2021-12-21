@@ -41,7 +41,7 @@
                                 </div>
                                 @if ($ukm->capacity)
                                     <div class="col-6">
-                                        <div class="desc-item last">
+                                        <div class="desc-item">
                                             <h6 class="mb-2">Kapasitas Produksi per Bulan</h6>
                                             <p>{!! $ukm->capacity !!}</p>
                                         </div>
