@@ -42,7 +42,7 @@
                                 @if ($ukm->capacity)
                                     <div class="col-6">
                                         <div class="desc-item last">
-                                            <h6 class="mb-2">Kapasitas</h6>
+                                            <h6 class="mb-2">Kapasitas Produksi per Bulan</h6>
                                             <p>{!! $ukm->capacity !!}</p>
                                         </div>
                                     </div>
@@ -79,7 +79,7 @@
                                 @if ($ukm->permission)
                                     <div class="col-6 mb-3">
                                         <div class="desc-item last">
-                                            <h6 class="mb-2">Perizinan</h6>
+                                            <h6 class="mb-2">Perizinan dan Sertifikasi</h6>
                                             <p>{!! $ukm->permission !!}</p>
                                         </div>
                                     </div>
@@ -96,7 +96,7 @@
                                 @if ($ukm->minimum_order)
                                     <div class="col-12">
                                         <div class="desc-item">
-                                            <h6 class="mb-2">Minimum Order Quantity untuk Ekspor
+                                            <h6 class="mb-2"><i>Minimum Order Quantity</i> untuk ekspor
                                             </h6>
                                             <p>{!! $ukm->minimum_order !!}</p>
                                         </div>
