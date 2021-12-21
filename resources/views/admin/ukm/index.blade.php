@@ -249,10 +249,10 @@
                     <td>{!! !str_contains(strtolower($ukm->catalog->title), 'global') ? $ukm->achievement : '-' !!}</td>
                     <td>{{ !str_contains(strtolower($ukm->catalog->title), 'global') ? $ukm->operational_hours.'-'.$ukm->operational_hours_end : '-'  }}</td>
                     <td>{!! str_contains(strtolower($ukm->catalog->title), 'global') ? $ukm->permission : '-' !!}</td>
+                    <td>{{ str_contains(strtolower($ukm->catalog->title), 'global') ? $ukm->capacity : '-' }}</td>
                     <td>{!! str_contains(strtolower($ukm->catalog->title), 'global') ? $ukm->minimum_order : '-' !!}</td>
                     <td>{!! str_contains(strtolower($ukm->catalog->title), 'global') ? $ukm->fulfillment_duration : '-' !!}</td>
                     <td>{!! str_contains(strtolower($ukm->catalog->title), 'global') ? $ukm->preferred_incoterm : '-' !!}</td>
-                    <td>{{ str_contains(strtolower($ukm->catalog->title), 'global') ? $ukm->capacity : '-' }}</td>
 
                     <td><a class="btn btn-primary btn-small d-flex align-items-center justify-content-center mb-2"
                             href="/admin/ukm/edit/{{$ukm->id}}"><i class="fas fa-edit me-1"></i> Edit</a>
