@@ -111,7 +111,6 @@
 
 .supported-by {
     padding: 3rem 0;
-    padding-bottom: 5rem;
 
     .slick-prev:before, .slick-next:before {
         color: lightgray;
@@ -142,7 +141,7 @@
     }
 
     @include breakpoint-down(small){
-        padding: 3rem 2rem;
+        padding: 2rem 0;
 
         .support-title {
             margin-bottom: 1.5rem;
