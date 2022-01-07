@@ -19,11 +19,11 @@
                     <div class="row">
                         @foreach($searchResults->groupByType() as $type => $modelSearchResults)
                         <div class="col-12 col-md-6 result-category">
-                            <h4 class="mb-3 primary-color">{{ ucwords($type) == "Ukms" ? "UKM" : ucwords($type) }}</h4>
+                            <h4 class="mb-3 primary-color">@if (ucwords($type) == "Ukms" ) UKM @elseif (ucwords($type) == "Articles") Berita @else {{ ucwords($type) }} @endif</h4>
                             <div class="row">
                                 @foreach($modelSearchResults as $searchResult)
                                     @if (ucwords($type) == "Ukms")
-                                        <div class="col-12 col-lg-6 col-xl-4 mb-4">
+                                        <div class="col-6 col-xl-4 mb-4">
                                             <a href="{{ route('ukm.show', $searchResult->searchable->slug) }}">
                                                 <div class="ukm">
                                                     <div class="ukm-image">
@@ -47,12 +47,15 @@
                                             </a>
                                         </div>
                                     @else
-                                        <div class="article medium mb-3 col-lg-4">
+                                        <div class="article medium mb-3 col-6 col-lg-4">
                                             <a href="{{ route('article.show', $searchResult->searchable->slug) }}">
                                                 <div class="article-image">
                                                     <img src="{{ Storage::url('article-image/'.$searchResult->searchable->image) }}" alt="">
                                                 </div>
-                                                <h4 class="mb-3 article-title">{{ $searchResult->searchable->title }}</h4>
+                                                <div class="ukm-title">
+                                                    <p class="mb-3 ">{{ $searchResult->searchable->title }}</p>
+                                                </div>
+                                               
                                             </a>
                                         </div>
                                     @endif

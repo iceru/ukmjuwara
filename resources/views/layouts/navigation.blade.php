@@ -74,7 +74,7 @@
     <form action="{{ route('search') }}" role="search" id="search_form" action="" method="GET">
          @csrf
         <input type="search" name="search_query" placeholder="Search">
-        <button type="submit" value="" class="btn">
+        <button type="submit" value="" class="btn btn-search">
             <i class="fa fa-search" aria-hidden="true"></i>
         </button>
     </form>
