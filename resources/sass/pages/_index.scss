@@ -33,6 +33,7 @@
         .mobile {
             display: block;
         } 
+
     }
 
     .cta {
@@ -110,7 +111,8 @@
 }
 
 .supported-by {
-    padding: 3rem 0;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
 
     .slick-prev:before, .slick-next:before {
         color: lightgray;
@@ -141,8 +143,9 @@
     }
 
     @include breakpoint-down(small){
-        padding: 2rem 0;
-
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+        
         .support-title {
             margin-bottom: 1.5rem;
         }
@@ -167,3 +170,13 @@
         }
     }
 }
+
+@include breakpoint-down(small){
+    .container {
+        .slick-arrow {
+            display: none !important;
+        }  
+    }
+}
+
+  
