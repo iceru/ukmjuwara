@@ -22,7 +22,12 @@
                                 <i class="fas fa-map-marked fa-fw"></i>
                             </div>
                             <div class="col-11">
-                                <p>Gedung Lembaga Penyelidikan Ekonomi dan Masyarakat Ruang 118, Kampus UI Salemba, Jl. Salemba Raya No. 4, Jakarta. 10430</p>
+                                <p>
+                                    <b>PT Indonesia Tumbuh Inklusif</b> <br />
+                                    18 Office Park Lt.10 Unit A <br />
+                                    Jl. TB Simatupang No 18
+                                    Jakarta Selatan 12520
+                                </p>
                             </div>
                         </div>
                         <div class="item row align-items-center mb-4">
