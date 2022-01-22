@@ -34,6 +34,7 @@ Route::get('/search', [IndexController::class, 'search'])->name('search');
 
 Route::get('/katalog/{slug}', [CatalogController::class, 'show'])->name('catalog.show');
 Route::get('/katalog/filter', [CatalogController::class, 'filter'])->name('catalog.filter');
+Route::get('/katalog-click/floating-click', [CatalogController::class, 'floating'])->name('catalog.floating');
 Route::get('/ukm/{slug}', [UkmController::class, 'show'])->name('ukm.show');
 
 Route::get('/berita', [ArticleController::class, 'index'])->name('article.index');

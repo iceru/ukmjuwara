@@ -35,6 +35,45 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home"
+                        type="button" role="tab" aria-controls="nav-home" aria-selected="true">Home</button>
+                    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile"
+                        type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</button>
+                    <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact"
+                        type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <table class="table" id="table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Catalog</th>
+                                <th>Category</th>
+                                <th>Clicks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($category_clicks_0 as $category)
+                            <tr>
+                                <td scope="row">{{$loop->iteration}}</td>
+                                <td>{{ $category->catalog->title }}</td>
+                                <td>{{ $category->category->title }}</td>
+                                <td>{{ $category->clicks }}</td>
+                                <td></td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
+                <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+            </div>
+        </div>
         <div class="row ">
             <div class="col-6">
                 <h5 class="mb-3 mt-2">Analytics for the last <span id="timeText"></span></h5>
@@ -56,7 +95,8 @@
                     </div>
                     <div class="col-12 col-lg-7 mb-5">
                         <div class="chart">
-                            <canvas id="top_referrers" height=200 aria-label="Top Referrers 3 Months" role="img"></canvas>
+                            <canvas id="top_referrers" height=200 aria-label="Top Referrers 3 Months"
+                                role="img"></canvas>
                         </div>
                     </div>
                     <div class="col-12">
@@ -76,12 +116,14 @@
                     </div>
                     <div class="col-12 col-lg-7 mb-5">
                         <div class="chart">
-                            <canvas id="top_referrers1" height=200 aria-label="Top Referrers 3 Months" role="img"></canvas>
+                            <canvas id="top_referrers1" height=200 aria-label="Top Referrers 3 Months"
+                                role="img"></canvas>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="chart">
-                            <canvas id="totalViews1" height=200 aria-label="Total Views in 3 Months" role="img"></canvas>
+                            <canvas id="totalViews1" height=200 aria-label="Total Views in 3 Months"
+                                role="img"></canvas>
                         </div>
                     </div>
                 </div>
@@ -96,12 +138,14 @@
                     </div>
                     <div class="col-12 col-lg-7 mb-5">
                         <div class="chart">
-                            <canvas id="top_referrers7" height=200 aria-label="Top Referrers 3 Months" role="img"></canvas>
+                            <canvas id="top_referrers7" height=200 aria-label="Top Referrers 3 Months"
+                                role="img"></canvas>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="chart">
-                            <canvas id="totalViews7" height=200 aria-label="Total Views in 3 Months" role="img"></canvas>
+                            <canvas id="totalViews7" height=200 aria-label="Total Views in 3 Months"
+                                role="img"></canvas>
                         </div>
                     </div>
                 </div>
@@ -110,7 +154,8 @@
         </div>
 
         <div class="mt-4">
-            <a class="btn btn-primary align-items-center" href="https://www.analytics.google.com">
+            <a class="btn btn-primary align-items-center" href="https://analytics.google.com/analytics/web/"
+                target="_blank">
                 Open Google Analytics <i class="fas fa-chart-line ms-2"></i>
             </a>
         </div>
@@ -140,7 +185,6 @@
             var mv3 =  {!!json_encode($mostVisited3)!!}
             var pageTitle3 = [];
             var pageViews3 = [];
-            console.log(mv3);
             mv3.forEach(element => {
                 pageTitle3.push(element.pageTitle.substr(0, 20))
                 pageViews3.push(element.pageViews)
@@ -323,7 +367,6 @@
                 pageViews7.push(element.pageViews)
                 urlMv7.push(element.url)
             });
-            console.log(mv7);
             var ctx7 = document.getElementById("mostviewed7").getContext("2d");
             window.myBar = new Chart(ctx7, {
                 type: 'pie',

@@ -4,7 +4,7 @@
     @endsection
     @section('meta-content')Sebagai komunitas pertama di dunia yang menghadirkan katalog member dalam format Whatsapp. Business Catalog c-commerce s.id/UKMJUWARA dan katalog pada situs www.ukmjuwara.id, kanal ini akan terus memproduksi katalog berkala dan melakukan pengembangan konten dengan menghadirkan variasi tema katalog seperti UKM JUWARA GLOBAL yang berfokus pada peningkatan penetrasi pasar global oleh pelaku UKM Iokal berikut dengan berita-berita sangat relevan dengan kebutuhan UKM untuk meroket.@endsection
 
-    <a href="https://wa.me/c/628118995115" target="_blank">
+    <div id="floating_button">
         <div class="floating-button">
             <div class="row">
                 <div class="col-9">
@@ -16,7 +16,7 @@
                 </div>
             </div>
         </div>
-    </a>
+    </div>
 
     @if($catalog->ukm->count() > 0)
     <div class="catalog">
@@ -315,6 +315,7 @@
         }
 
         function get_filter(filter) {
+            // NOTES: Harus Push nya sesuai di klik pertama. Kalau ga clicks nya bakal ga akurat
             var filters = [];
             var filter_selected = [];
 
@@ -345,6 +346,20 @@
         $('.search-ukm-mobile').on('keyup',function(){
             ajaxFilter()
         })
+
+        $('#floating_button').click(function (e) { 
+            e.preventDefault();
+            var catalog = '{{ $catalog->id }}'
+            window.open('https://wa.me/c/628118995115', '_blank');
+
+            $.ajax({
+                url: '/katalog-click/floating-click',
+                type: 'GET',
+                data: {catalog: catalog}
+            }).done(function(res) {
+                console.log('Click recorded');
+            })
+        });
             
         function ajaxFilter(page) {
             var catalog = '{{ $catalog->id }}'
