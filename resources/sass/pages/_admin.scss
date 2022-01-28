@@ -84,7 +84,27 @@
         }
     }
 
+    .nav-tabs {
+        margin-bottom: 1rem;
+        justify-content: center;
+        border: none;
+
+        .nav-link {
+            border: 1px solid $primary-color;
+            border-radius: 8px;
+            color: $primary-color;
     
+            &:first-child {
+                margin-right: .5rem;
+            }
+    
+            &.active {
+                color: white;
+                background-color: $primary-color;
+                font-weight: bold;
+            }
+        }
+    }
     
 }
 

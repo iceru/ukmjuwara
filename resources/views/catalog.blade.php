@@ -218,7 +218,18 @@
     </div>
     @endif
     <script>
+        var category_filter = [];
+        var state_filter = [];
+        var owner_gender_filter = [];
+
+        var category_texts = [];
+        var state_texts = [];
+        var owner_gender_texts = [];
+
+        var page;
+
         $(document).ready(function(){
+
             $('#ukm_bests').slick({
                 infinite: true,
                 slidesToShow: 4,
@@ -275,7 +286,7 @@
             $('li').removeClass('active');
             $(this).parent('li').addClass('active');
             var url = $(this).attr('href');
-            var page = parseInt($(this).attr('href').split('page=')[1])
+            page = parseInt($(this).attr('href').split('page=')[1])
             ajaxFilter(page);
         });
 
@@ -288,16 +299,24 @@
 
             if (states_params) {
                 state_array = states_params.split(",");
+                window[`state_filter`] = state_array;
                 state_array.forEach(element => {
                     $(":checkbox[value='"+element+"']").prop("checked","true");
+                    window[`state_texts`].push($(`input[type="checkbox"][value='${element}']`).next().first().text().trim());
                 });
+                $('.state-selected').html(state_texts);
+                $('.state-data').removeAttr('hidden')
             }
 
             if (owner_genders_params) {
                 owner_genders_params = owner_genders_params.split(",");
+                window[`owner_gender_filter`] = owner_genders_params;
                 owner_genders_params.forEach(element => {
                     $(":checkbox[value='"+element+"']").prop("checked","true");
+                    window[`owner_gender_texts`].push($(`input[type="checkbox"][value='${element}']`).next().first().text().trim());
                 });
+                $('.owner_gender-selected').html(owner_gender_texts);
+                $('.owner_gender-data').removeAttr('hidden')
             }
 
             if (categories_params) {
@@ -305,7 +324,11 @@
                 categories_params.forEach(element => {
                     element = parseInt(element);
                     $(":checkbox[value="+element+"]").prop("checked","true");
+                    window[`category_filter`].push(element);
+                    window[`category_texts`].push($(`input[type="checkbox"][value='${element}']`).next().first().text().trim());
                 });
+                $('.category-selected').html(category_texts);
+                $('.category-data').removeAttr('hidden')
             }
 
             if(search_params) {
@@ -314,29 +337,43 @@
             }
         }
 
-        function get_filter(filter) {
+        function get_filter(filter, data, text, add) {
             // NOTES: Harus Push nya sesuai di klik pertama. Kalau ga clicks nya bakal ga akurat
-            var filters = [];
-            var filter_selected = [];
+            if (add === 'add') {
+                if(window[`${filter}_filter`].indexOf(data) === -1) {
+                    filter === 'category' ? window[`${filter}_filter`].push(parseInt(data)) : window[`${filter}_filter`].push(data);;
+                    window[`${filter}_texts`].push(text.trim());
+                }
+                ajaxFilter(page, 'record');
 
-            $('#'+filter+':checked').each(function(){
-                filters.push($(this).val());
-                filter_selected.push($(this).next('label').text());
-            });
+            } else {
+                window[`${filter}_filter`] = window[`${filter}_filter`].filter(function(item) {
+                    if(filter === 'category') {
+                        return item !== parseInt(data)
+                    } else {
+                        return item !== data
+                    }
+                })
+                ajaxFilter(page)
+            }
 
-            var filter_text = filter_selected.join(', ');
-            $('.'+filter+'-selected').html(filter_text);
 
-            if (filter_selected.length > 0) {
+            if (window[`${filter}_texts`].length > 0) {
+                var filter_text = window[`${filter}_texts`].join(', ');
+                $('.'+filter+'-selected').html(filter_text);
                 $('.'+filter+'-data').removeAttr('hidden')
             } else {
                 $('.'+filter+'-data').attr('hidden', 'hidden')
             }
-            return filters;
+
         }
 
         $('input[type="checkbox"], input[type="radio"]').click(function(){
-            ajaxFilter();
+            if($(this).prop('checked') == true) {
+                get_filter($(this).attr('id'), $(this).val(), $(this).next('label').text(), 'add');
+            } else {
+                get_filter($(this).attr('id'), $(this).val(), $(this).next('label').text(), 'remove');
+            }
         });
 
         $('#search_ukm').on('keyup',function(){
@@ -361,11 +398,12 @@
             })
         });
             
-        function ajaxFilter(page) {
+        function ajaxFilter(page, record) {
+            debugger
             var catalog = '{{ $catalog->id }}'
-            states = get_filter('state');
-            owner_genders = get_filter('owner_gender');
-            categories = get_filter('category');
+            states = state_filter;
+            owner_genders = owner_gender_filter;
+            categories = category_filter;
             var search = $('#search_ukm').val();
             if ($(window).width() < 645) {
                 search = $('.search-ukm-mobile').val();
@@ -377,12 +415,12 @@
                 url:"/katalog/{{ $catalog->slug }}?page="+page,
                 type: "GET",
                 datatype : 'html',
-                data: {states: states, owner_genders: owner_genders, categories: categories, catalog: catalog, search: search, page: page}
+                data: {states: states, owner_genders: owner_genders, categories: categories, catalog: catalog, search: search, page: page, record: record}
                 }).done( function(results){
                     $('#catalog').html(results);
                     $('.ukm-content').show();
                     $('.loading-spinner').hide();
-
+                    debugger
                     var url = new URL(window.location.href);
                     var stateObj = {
                         states: states, owner_genders: owner_genders, categories: categories, catalog: catalog, search: search, page: page
