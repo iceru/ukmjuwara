@@ -399,7 +399,6 @@
         });
             
         function ajaxFilter(page, record) {
-            debugger
             var catalog = '{{ $catalog->id }}'
             states = state_filter;
             owner_genders = owner_gender_filter;
@@ -420,7 +419,6 @@
                     $('#catalog').html(results);
                     $('.ukm-content').show();
                     $('.loading-spinner').hide();
-                    debugger
                     var url = new URL(window.location.href);
                     var stateObj = {
                         states: states, owner_genders: owner_genders, categories: categories, catalog: catalog, search: search, page: page
