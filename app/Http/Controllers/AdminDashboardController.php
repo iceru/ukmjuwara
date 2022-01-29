@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Analytics;
 use App\Models\Ukm;
+use App\Models\Click;
 use App\Models\Article;
 use App\Models\Catalog;
 use App\Models\Category;
@@ -36,8 +37,32 @@ class AdminDashboardController extends Controller
         $topReferrers1 = Analytics::fetchTopReferrers(Period::months(1), 5);
         $topReferrers7 = Analytics::fetchTopReferrers(Period::days(7), 5);
 
+        $catalogs_data = Catalog::pluck('id')->all();
+        $catalogs_title = Catalog::skip(1)->take(2)->get();
+
+        foreach ($catalogs_data as $key => $value) {
+            ${'category_clicks_'.$key++} = Click::where('type_click', 'categories')->where('catalog_id', $value)->get();
+        }
+        
+        foreach ($catalogs_data as $key => $value) {
+            ${'state_clicks_'.$key++} = Click::where('type_click', 'state')->where('catalog_id', $value)->get();
+        }
+
+        foreach ($catalogs_data as $key => $value) {
+            ${'gender_clicks_'.$key++} = Click::where('type_click', 'gender')->where('catalog_id', $value)->get();
+        }
+
+        foreach ($catalogs_data as $key => $value) {
+            ${'floating_clicks_'.$key++} = Click::where('type_click', 'floating')->where('catalog_id', $value)->get();
+        }
+
+        foreach ($catalogs_data as $key => $value) {
+            ${'ukm_clicks_'.$key++} = Ukm::where('catalog_id', $value)->where('whatsapp_clicks', '>', 0)->where('instagram_clicks', '>', 0)->get();
+        }
+
         return view('admin.dashboard', compact('ukms', 'articles', 'catalogs', 'categories', 'mostVisited1', 'mostVisited3', 'mostVisited7', 'fetchUser3', 'fetchUser1', 'fetchUser7', 'totalVisitors3',
-        'totalVisitors1', 'totalVisitors7', 'topReferrers3', 'topReferrers1', 'topReferrers7'));
+        'totalVisitors1', 'totalVisitors7', 'topReferrers3', 'topReferrers1', 'topReferrers7', 'catalogs_title', 'category_clicks_0', 'category_clicks_1', 
+        'state_clicks_0', 'state_clicks_1', 'gender_clicks_0', 'gender_clicks_1', 'floating_clicks_0', 'floating_clicks_1', 'ukm_clicks_0', 'ukm_clicks_1'));
     }
 
     /**

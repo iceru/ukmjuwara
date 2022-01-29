@@ -34,7 +34,10 @@ Route::get('/search', [IndexController::class, 'search'])->name('search');
 
 Route::get('/katalog/{slug}', [CatalogController::class, 'show'])->name('catalog.show');
 Route::get('/katalog/filter', [CatalogController::class, 'filter'])->name('catalog.filter');
+Route::get('/katalog-click/floating-click', [CatalogController::class, 'floating'])->name('catalog.floating');
 Route::get('/ukm/{slug}', [UkmController::class, 'show'])->name('ukm.show');
+Route::get('/ukm-click/whatsapp-click', [UkmController::class, 'whatsapp'])->name('ukm.whatsapp');
+Route::get('/ukm-click/instagram-click', [UkmController::class, 'instagram'])->name('ukm.instagram');
 
 Route::get('/berita', [ArticleController::class, 'index'])->name('article.index');
 Route::get('/berita/{slug}', [ArticleController::class, 'show'])->name('article.show');

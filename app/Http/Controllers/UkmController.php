@@ -98,6 +98,22 @@ class UkmController extends Controller
         return view('ukm', compact('ukm', 'view', 'city_name', 'sub_name', 'state_name', 'relatedUkms'));
     }
 
+    public function whatsapp(Request $request)
+    {
+        if($request->ajax()) {
+            $ukmIncrement = Ukm::where('id',$request->ukm)->increment('whatsapp_clicks', 1);
+
+            dd(Ukm::where('id', $request->ukm)->first());
+        }
+    }
+
+    public function instagram(Request $request)
+    {
+        if($request->ajax()) {
+            Ukm::where('id',$request->ukm)->increment('instagram_clicks', 1);
+        }
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

@@ -2,3 +2,13 @@ table.dataTable.dtr-inline.collapsed>tbody>tr>td.dtr-control:before, table.dataT
     top: 20px;
     left: -2px;
 }
+
+.dashboard {
+    .dataTables_filter {
+        display: none;
+    }
+
+    .dataTables_info {
+        display: none;
+    }
+}

@@ -130,7 +130,7 @@
                         </div>
                         <div class="mb-4">
                             <div>
-                                <a class="mb-3" href="{{ $ukm->whatsapp }}">
+                                <a class="mb-3 whatsapp-click" href="">
                                     <div class="social whatsapp">
                                         <i class="fab fa-whatsapp fa-fw me-2"></i>
                                         <p>Kontak langsung untuk belanja</p>
@@ -138,7 +138,7 @@
                                 </a>
                             </div>
                             <div>
-                                <a href="{{ $ukm->instagram }}">
+                                <a href="" class="instagram-click">
                                     <div class="social instagram">
                                         <i class="fab fa-instagram fa-fw me-2"></i>
                                         <p>Cari tahu lebih lanjut</p>
@@ -155,27 +155,27 @@
                 <div class="col-12 mb-4">
                     <h3 class="text-center text-uppercase">UKM Lainnya</h3>
                 </div>
-                @foreach ($relatedUkms as $ukm)
+                @foreach ($relatedUkms as $ukmRelated)
                     <div class="col-6 col-md-4 col-xl-3 mb-5">
-                        <a href="{{ route('ukm.show', $ukm->slug) }}">
+                        <a href="{{ route('ukm.show', $ukmRelated->slug) }}">
                             <div class="ukm">
                                 <div class="ukm-image">
                                     <div class="ratio ratio-1x1">
-                                        @foreach ((array)json_decode($ukm->images)[0] as $image)
+                                        @foreach ((array)json_decode($ukmRelated->images)[0] as $image)
                                         <img src="{{ Storage::url('ukm-image/'.$image) }}" alt="">
                                         @endforeach
                                     </div>
                                 </div>
                                 <div class="ukm-wa">
-                                    <a href="{{ $ukm->whatsapp }}">
+                                    <a href="{{ $ukmRelated->whatsapp }}">
                                         <img src="/images/whatsapp.png" alt="">
                                     </a>
                                 </div>
                             </div>
                         </a>
-                        <a href="{{ route('ukm.show', $ukm->slug) }}">
+                        <a href="{{ route('ukm.show', $ukmRelated->slug) }}">
                             <div class="ukm-title mt-2">
-                                <p>{{ $ukm->title }}</p>
+                                <p>{{ $ukmRelated->title }}</p>
                             </div>
                         </a>
                     </div>
@@ -201,5 +201,34 @@
                 focusOnSelect: true
             });
         });
+
+        $('.whatsapp-click').click(function (e) { 
+            e.preventDefault();
+            var ukm = '{{ $ukm->id }}'
+            // window.open('{{ $ukm->whatsapp }}', '_blank');
+
+            $.ajax({
+                url: '/ukm-click/whatsapp-click',
+                type: 'GET',
+                data: {ukm: ukm}
+            }).done(function(res) {
+                console.log('Click recorded');
+            })
+        });
+
+        $('.instagram-click').click(function (e) { 
+            e.preventDefault();
+            var ukm = '{{ $ukm->id }}'
+            window.open('{{ $ukm->instagram }}', '_blank');
+
+            $.ajax({
+                url: '/ukm-click/instagram-click',
+                type: 'GET',
+                data: {ukm: ukm}
+            }).done(function(res) {
+                console.log('Click recorded');
+            })
+        });
+            
     </script>
 </x-app-layout>

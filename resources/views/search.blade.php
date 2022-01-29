@@ -70,8 +70,4 @@
           </div>
         </div>
     </div>
-
-    <script>
-        console.log('{!! $searchResults !!}')
-    </script>
 </x-app-layout>

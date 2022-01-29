@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ukm;
+use App\Models\Click;
 use App\Models\Catalog;
 use App\Models\Category;
 use Illuminate\Support\Str;
@@ -83,7 +84,6 @@ class CatalogController extends Controller
         $ukms = Ukm::where('catalog_id', $catalog->id)->orderBy('title')->paginate(16);
         $bests = Ukm::where('catalog_id', $catalog->id)->orderByViews('desc', Period::since('2021-11-18'))->get()->take(8);
         $states = Ukm::where('catalog_id', $catalog->id)->select('state_name')->distinct()->where('state_name', '!=', '')->get();
-        // $categories = Category::with('ukms')->take(6)->get();
         $categories = Category::whereHas('ukms', function($q) use($catalog) {
             $q->where('catalog_id', $catalog->id);
         })->get();
@@ -100,6 +100,12 @@ class CatalogController extends Controller
                 $ukms = $ukms->whereHas('categories', function($q) use($categoryId) {
                     $q->whereIn('category_id', $categoryId);
                 });
+                if($request->ajax() && $request->record === 'record') {
+                    $click = Click::updateOrCreate(
+                        ['catalog_id' => $catalog->id, 'type_click' => 'categories', 'name_click' => 'category', 'category_id' => array_slice($categories_array, -1)[0]],
+                        ['clicks' => \DB::raw('clicks + 1')]
+                    );
+                }
             }
 
             if (isset($request->states)) {
@@ -109,6 +115,12 @@ class CatalogController extends Controller
                     $states_array = $request->states;
                 }
                 $ukms = $ukms->whereIn('state_name', $states_array);
+                if($request->ajax() && $request->record === 'record') {
+                    $click = Click::updateOrCreate(
+                        ['catalog_id' => $catalog->id, 'type_click' => 'state', 'name_click' => array_slice($states_array, -1)[0]],
+                        ['clicks' => \DB::raw('clicks + 1')]
+                    );
+                }
             }
 
             if (isset($request->owner_genders)) {
@@ -118,6 +130,12 @@ class CatalogController extends Controller
                     $owner_genders = $request->owner_genders;
                 }
                 $ukms = $ukms->whereIn('owner_gender', $owner_genders);
+                if($request->ajax() && $request->record === 'record') {
+                    $click = Click::updateOrCreate(
+                        ['catalog_id' => $catalog->id, 'type_click' => 'gender', 'name_click' => array_slice($owner_genders, -1)[0]],
+                        ['clicks' => \DB::raw('clicks + 1')]
+                    );
+                }
             }
 
             if (isset($request->search)) {
@@ -138,6 +156,15 @@ class CatalogController extends Controller
     public function filter(Request $request)
     {
         
+    }
+
+    public function floating(Request $request)
+    {
+        $click = Click::updateOrCreate(
+            ['catalog_id' => $request->catalog, 'type_click' => 'floating', 'name_click' => 'Katalog Whatsapp UKM Indonesia'],
+            ['clicks' => \DB::raw('clicks + 1')]
+        );
+        return;
     }
 
     /**
