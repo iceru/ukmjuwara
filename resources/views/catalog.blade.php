@@ -344,7 +344,7 @@
                     filter === 'category' ? window[`${filter}_filter`].push(parseInt(data)) : window[`${filter}_filter`].push(data);;
                     window[`${filter}_texts`].push(text.trim());
                 }
-                ajaxFilter(page, 'record');
+                ajaxFilter(page, 'record', filter);
 
             } else {
                 window[`${filter}_filter`] = window[`${filter}_filter`].filter(function(item) {
@@ -398,7 +398,7 @@
             })
         });
             
-        function ajaxFilter(page, record) {
+        function ajaxFilter(page, record, type) {
             var catalog = '{{ $catalog->id }}'
             states = state_filter;
             owner_genders = owner_gender_filter;
@@ -414,7 +414,7 @@
                 url:"/katalog/{{ $catalog->slug }}?page="+page,
                 type: "GET",
                 datatype : 'html',
-                data: {states: states, owner_genders: owner_genders, categories: categories, catalog: catalog, search: search, page: page, record: record}
+                data: {states: states, owner_genders: owner_genders, categories: categories, catalog: catalog, search: search, page: page, record: record, type: type}
                 }).done( function(results){
                     $('#catalog').html(results);
                     $('.ukm-content').show();
