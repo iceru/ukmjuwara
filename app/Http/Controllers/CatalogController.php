@@ -100,7 +100,7 @@ class CatalogController extends Controller
                 $ukms = $ukms->whereHas('categories', function($q) use($categoryId) {
                     $q->whereIn('category_id', $categoryId);
                 });
-                if($request->ajax() && $request->record === 'record') {
+                if($request->ajax() && $request->record === 'record' && $request->type == 'category') {
                     $click = Click::updateOrCreate(
                         ['catalog_id' => $catalog->id, 'type_click' => 'categories', 'name_click' => 'category', 'category_id' => array_slice($categories_array, -1)[0]],
                         ['clicks' => \DB::raw('clicks + 1')]
@@ -115,7 +115,7 @@ class CatalogController extends Controller
                     $states_array = $request->states;
                 }
                 $ukms = $ukms->whereIn('state_name', $states_array);
-                if($request->ajax() && $request->record === 'record') {
+                if($request->ajax() && $request->record === 'record' && $request->type == 'state') {
                     $click = Click::updateOrCreate(
                         ['catalog_id' => $catalog->id, 'type_click' => 'state', 'name_click' => array_slice($states_array, -1)[0]],
                         ['clicks' => \DB::raw('clicks + 1')]
@@ -130,7 +130,7 @@ class CatalogController extends Controller
                     $owner_genders = $request->owner_genders;
                 }
                 $ukms = $ukms->whereIn('owner_gender', $owner_genders);
-                if($request->ajax() && $request->record === 'record') {
+                if($request->ajax() && $request->record === 'record' && $request->type == 'owner_gender') {
                     $click = Click::updateOrCreate(
                         ['catalog_id' => $catalog->id, 'type_click' => 'gender', 'name_click' => array_slice($owner_genders, -1)[0]],
                         ['clicks' => \DB::raw('clicks + 1')]
