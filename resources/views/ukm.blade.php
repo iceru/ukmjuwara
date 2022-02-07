@@ -113,7 +113,7 @@
                                 @if ($ukm->preferred_incoterm)
                                     <div class="col-12">
                                         <div class="desc-item">
-                                            <h6 class="mb-2">Intecoterm yang diminati</h6>
+                                            <h6 class="mb-2">INCOTERM yang diminati</h6>
                                             <p>{!! $ukm->preferred_incoterm !!}</p>
                                         </div>
                                     </div>
@@ -205,7 +205,7 @@
         $('.whatsapp-click').click(function (e) { 
             e.preventDefault();
             var ukm = '{{ $ukm->id }}'
-            // window.open('{{ $ukm->whatsapp }}', '_blank');
+            window.open('{{ $ukm->whatsapp }}', '_blank');
 
             $.ajax({
                 url: '/ukm-click/whatsapp-click',
