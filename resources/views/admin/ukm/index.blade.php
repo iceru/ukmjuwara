@@ -230,7 +230,7 @@
                     <td>{{ $ukm->title }}</td>
                     <td class="description">{!! $ukm->description !!}</td>
                     <td>
-                        @foreach ((array)json_decode($ukm->images) as $item)
+                        @foreach (array_slice((array)json_decode($ukm->images), 0, 1) as $item)
                         <div>
                             <img class="mb-2" src="{{Storage::url('ukm-image/'.$item)}}" alt="Image" width="100"
                                 height="100">
