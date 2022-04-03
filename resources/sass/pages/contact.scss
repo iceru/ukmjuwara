@@ -11,11 +11,11 @@
 
             &:after {
                 position: absolute;
-                content: '';
+                content: "";
                 height: 1px;
                 width: 80%;
                 bottom: 0;
-                background-color: rgba(0,0,0,0.1);
+                background-color: rgba(0, 0, 0, 0.1);
             }
         }
 
@@ -26,7 +26,7 @@
                 margin-bottom: 1rem;
             }
 
-            @include breakpoint-down (small) {
+            @include breakpoint-down(small) {
                 .col-1 {
                     width: 12%;
                 }
@@ -35,20 +35,19 @@
                     width: 87%;
                 }
             }
-        
 
             .item {
-                margin-bottom: .75rem;
+                margin-bottom: 0.75rem;
 
                 i {
-                    padding: .5rem;
+                    padding: 0.5rem;
                     border: 1px solid $primary-color;
                     color: $primary-color;
                     border-radius: 50%;
                     position: relative;
                     width: 2.25rem;
                     height: 2.25rem;
-                    margin-right: .5rem;
+                    margin-right: 0.5rem;
                     margin-top: 6px;
 
                     &:before {
@@ -64,7 +63,7 @@
 }
 
 .social {
-    padding: .75rem 3rem;
+    padding: 0.75rem 3rem;
     border-radius: 2rem;
     color: white;
     display: flex;
@@ -72,7 +71,7 @@
     justify-content: center;
     margin-bottom: 1rem;
 
-    @include breakpoint-down (small) {
+    @include breakpoint-down(small) {
         width: 90vw;
     }
 
@@ -80,37 +79,49 @@
         font-size: 1.5rem;
     }
 
+    &.secondary {
+        background-color: $secondary-color;
+    }
+
     &.instagram {
-        background: linear-gradient(90deg, #405DE6 0%, #5851DB 18.23%, #833AB4 40.62%, #C13584 64.58%, #E1306C 83.85%, #FD1D1D 100%);
+        background: linear-gradient(
+            90deg,
+            #405de6 0%,
+            #5851db 18.23%,
+            #833ab4 40.62%,
+            #c13584 64.58%,
+            #e1306c 83.85%,
+            #fd1d1d 100%
+        );
     }
 
     &.whatsapp {
-        background-color: #075E54;
-        transition: all .2s ease-in;
+        background-color: #075e54;
+        transition: all 0.2s ease-in;
 
         &:hover {
-            background-color: darken($color: #075E54, $amount: 5%);
-            transition: all .2s ease-in;
+            background-color: darken($color: #075e54, $amount: 5%);
+            transition: all 0.2s ease-in;
         }
     }
 
     &.facebook {
         background-color: #4267b2;
-        transition: all .2s ease-in;
+        transition: all 0.2s ease-in;
 
         &:hover {
             background-color: darken($color: #4267b2, $amount: 5%);
-            transition: all .2s ease-in;
+            transition: all 0.2s ease-in;
         }
     }
 
     &.youtube {
-        background-color: #FF0000;
-        transition: all .2s ease-in;
+        background-color: #ff0000;
+        transition: all 0.2s ease-in;
 
         &:hover {
-            background-color: darken($color: #075E54, $amount: 5%);
-            transition: all .2s ease-in;
+            background-color: darken($color: #075e54, $amount: 5%);
+            transition: all 0.2s ease-in;
         }
     }
 }

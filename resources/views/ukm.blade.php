@@ -139,8 +139,8 @@
                             </div>
                             <div>
                                 <a href="" class="instagram-click">
-                                    <div class="social instagram">
-                                        <i class="fab fa-instagram fa-fw me-2"></i>
+                                    <div class="social secondary">
+                                        <i class="fas fa-globe   fa-fw me-2"></i>
                                         <p>Cari tahu lebih lanjut</p>
                                     </div>
                                 </a>
