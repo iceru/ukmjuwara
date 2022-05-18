@@ -33,12 +33,12 @@ class ArticleController extends Controller
             })->take(5)->get();
         }
 
-        if($topTag->first() or $headerTag->first()) {
+        if($topTag->first() and $headerTag->first()) {
             $articles = Article::whereHas('tags', function($query) use($headerTag, $topTag) {
                 $query->where('tag_id', '!=', $headerTag)->where('tag_id', '!=', $topTag);
-            })->paginate(10);
+            })->latest()->paginate(10);
         } else {
-            $articles = Article::paginate(10);
+            $articles = Article::latest()->paginate(10);
         }
 
         return view('articles', compact('articles', 'headerArticle', 'topArticles'));

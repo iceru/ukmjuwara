@@ -35,7 +35,7 @@
         </div>
     </div>
     @if (count($sponsors) > 0)
-    <div class="container supported-by mb-5">
+    <div class="container supported-by mb-3">
         <div class="row">
             <div class="col-12">
                 <div class="support-title">

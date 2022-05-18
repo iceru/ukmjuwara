@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>UKM Juwara</title>
+    <title>#UKMJuWAra</title>
 
     <!-- Styles -->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -61,12 +61,40 @@
 
             tinymce.init({
                 selector: 'textarea',
-                plugins: 'link image imagetools',
+                plugins: 'link image imagetools paste forecolor',
+                paste_as_text: true,
+                toolbar: [
+                    {
+                        name: 'history', items: [ 'undo', 'redo' ]
+                    },
+                    {
+                        name: 'styles', items: [ 'styleselect' ]
+                    },
+                    {
+                        name: 'formatting', items: [ 'bold', 'italic', 'underline']
+                    },
+                    {
+                        name: 'alignment', items: [ 'alignleft', 'aligncenter', 'alignright', 'alignjustify' ]
+                    },
+                    {
+                        name: 'indentation', items: [ 'outdent', 'indent' ]
+                    },
+                    {
+                        name: 'colors', items: ['forecolor']
+                    }
+                ],
                 a11y_advanced_options: true,
                 toolbar_mode: 'floating',
                 tinycomments_mode: 'embedded',
                 tinycomments_author: 'UKM Juwara',
                 height : "350",
+                color_cols: 5,
+                color_map: [
+                    '16857E', 'Primary',
+                    '58C082', 'Secondary',
+                    '000000', 'Black',
+                    'FFFFFF', 'White',
+                ],
                 image_title: true,
                 automatic_uploads: true,
                 images_upload_url: '/upload/image',

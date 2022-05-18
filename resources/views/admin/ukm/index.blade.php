@@ -210,9 +210,9 @@
                     <th>Katalog</th>
                     <th>Kategori</th>
                     <th>Alamat</th>
+                    <th>Views</th>
                     <th>Whatsapp</th>
                     <th>Instagram</th>
-                    <th>Views</th>
                     <th>Capaian</th>
                     <th>Jam Operasional</th>
                     <th>Perizinan</th>
@@ -228,9 +228,9 @@
                 <tr>
                     <td scope="row">{{$loop->iteration}}</td>
                     <td>{{ $ukm->title }}</td>
-                    <td class="description">{!! strlen($ukm->description) > 50 ? substr($ukm->description, 0, 50).'...' : $ukm->description !!}</td>
+                    <td class="description">{!! $ukm->description !!}</td>
                     <td>
-                        @foreach ((array)json_decode($ukm->images) as $item)
+                        @foreach (array_slice((array)json_decode($ukm->images), 0, 1) as $item)
                         <div>
                             <img class="mb-2" src="{{Storage::url('ukm-image/'.$item)}}" alt="Image" width="100"
                                 height="100">
@@ -243,10 +243,10 @@
                         <span>{{ $item->title }}</span>
                         @endforeach</td>
                     <td>{{ $ukm->address.', '.ucwords(strtolower($ukm->city_name)).', '.ucwords(strtolower($ukm->state_name)) }}</td>
+                    <td>{{ views($ukm)->period(\CyrildeWit\EloquentViewable\Support\Period::since('2021-11-18'))->unique()->count(); }}</td>
                     <td>{{ $ukm->whatsapp }}</td>
                     <td>{{ $ukm->instagram }}</td>
-                    <td>{{ views($ukm)->period(\CyrildeWit\EloquentViewable\Support\Period::since('2021-11-18'))->unique()->count(); }}</td>
-                    <td>{!! $ukm->achievement !!}</td>
+                    <td>{!! !str_contains(strtolower($ukm->catalog->title), 'global') ? $ukm->achievement : '-' !!}</td>
                     <td>{{ !str_contains(strtolower($ukm->catalog->title), 'global') ? $ukm->operational_hours.'-'.$ukm->operational_hours_end : '-'  }}</td>
                     <td>{!! str_contains(strtolower($ukm->catalog->title), 'global') ? $ukm->permission : '-' !!}</td>
                     <td>{{ str_contains(strtolower($ukm->catalog->title), 'global') ? $ukm->capacity : '-' }}</td>

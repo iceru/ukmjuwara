@@ -44,15 +44,15 @@
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         @foreach ($catalogs_title as $catalog)
-                            <button class="nav-link {{ $loop->first ?  'active' : '' }}" id="{{ $catalog->slug }}-tab" data-bs-toggle="tab" data-bs-target="#{{ $catalog->slug }}"
-                                type="button" role="tab" aria-controls="{{ $catalog->slug }}" aria-selected="true">{{ $catalog->title }}</button>
+                            <button class="nav-link {{ $loop->first ?  'active' : '' }}" id="category_{{ $catalog->slug }}-tab" data-bs-toggle="tab" data-bs-target="#category_{{ $catalog->slug }}"
+                                type="button" role="tab" aria-controls="category_{{ $catalog->slug }}" aria-selected="true">{{ $catalog->title }}</button>
                         @endforeach
                     </div>
                 </nav>
                 <div class="tab-content" id="nav-tabContent">
                     @foreach ($catalogs_title as $key => $catalog)
-                    <div class="tab-pane fade {{ $loop->first ?  'show active' : '' }}" id="{{ $catalog->slug }}" role="tabpanel" aria-labelledby="{{ $catalog->slug }}-tab">
-                        <table class="table table-clicks" id="table">
+                    <div class="tab-pane fade {{ $loop->first ?  'show active' : '' }}" id="category_{{ $catalog->slug }}" role="tabpanel" aria-labelledby="category_{{ $catalog->slug }}-tab">
+                        <table class="table table-clicks" style="width: 100%" id="table">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -86,7 +86,7 @@
                 <div class="tab-content" id="nav-tabContent">
                     @foreach ($catalogs_title as $key => $catalog)
                     <div class="tab-pane fade {{ $loop->first ?  'show active' : '' }}" id="state_{{ $catalog->slug }}" role="tabpanel" aria-labelledby="state_{{ $catalog->slug }}-tab">
-                        <table class="table table-clicks" id="table">
+                        <table class="table table-clicks" style="width: 100%" id="table">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -120,7 +120,7 @@
                 <div class="tab-content" id="nav-tabContent">
                     @foreach ($catalogs_title as $key => $catalog)
                     <div class="tab-pane fade {{ $loop->first ?  'show active' : '' }}" id="gender_{{ $catalog->slug }}" role="tabpanel" aria-labelledby="gender_{{ $catalog->slug }}-tab">
-                        <table class="table table-clicks" id="table">
+                        <table class="table table-clicks" style="width: 100%" id="table">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -154,7 +154,7 @@
                 <div class="tab-content" id="nav-tabContent">
                     @foreach ($catalogs_title as $key => $catalog)
                     <div class="tab-pane fade {{ $loop->first ?  'show active' : '' }}" id="floating_{{ $catalog->slug }}" role="tabpanel" aria-labelledby="floating_{{ $catalog->slug }}-tab">
-                        <table class="table table-clicks" id="table">
+                        <table class="table table-clicks" style="width: 100%" id="table">
                             <thead>
                                 <tr>
                                     <th>No</th>

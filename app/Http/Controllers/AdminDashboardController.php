@@ -40,24 +40,24 @@ class AdminDashboardController extends Controller
         $catalogs_data = Catalog::pluck('id')->all();
         $catalogs_title = Catalog::skip(1)->take(2)->get();
 
-        foreach ($catalogs_data as $key => $value) {
-            ${'category_clicks_'.$key++} = Click::where('type_click', 'categories')->where('catalog_id', $value)->get();
+        foreach ($catalogs_title as $key => $value) {
+            ${'category_clicks_'.$key++} = Click::where('type_click', 'categories')->where('catalog_id', $value->id)->get();
         }
         
-        foreach ($catalogs_data as $key => $value) {
-            ${'state_clicks_'.$key++} = Click::where('type_click', 'state')->where('catalog_id', $value)->get();
+        foreach ($catalogs_title as $key => $value) {
+            ${'state_clicks_'.$key++} = Click::where('type_click', 'state')->where('catalog_id', $value->id)->get();
         }
 
-        foreach ($catalogs_data as $key => $value) {
-            ${'gender_clicks_'.$key++} = Click::where('type_click', 'gender')->where('catalog_id', $value)->get();
+        foreach ($catalogs_title as $key => $value) {
+            ${'gender_clicks_'.$key++} = Click::where('type_click', 'gender')->where('catalog_id', $value->id)->get();
         }
 
-        foreach ($catalogs_data as $key => $value) {
-            ${'floating_clicks_'.$key++} = Click::where('type_click', 'floating')->where('catalog_id', $value)->get();
+        foreach ($catalogs_title as $key => $value) {
+            ${'floating_clicks_'.$key++} = Click::where('type_click', 'floating')->where('catalog_id', $value->id)->get();
         }
 
-        foreach ($catalogs_data as $key => $value) {
-            ${'ukm_clicks_'.$key++} = Ukm::where('catalog_id', $value)->where('whatsapp_clicks', '>', 0)->where('instagram_clicks', '>', 0)->get();
+        foreach ($catalogs_title as $key => $value) {
+            ${'ukm_clicks_'.$key++} = Ukm::where('catalog_id', $value->id)->where('whatsapp_clicks', '>', 0)->where('instagram_clicks', '>', 0)->get();
         }
 
         return view('admin.dashboard', compact('ukms', 'articles', 'catalogs', 'categories', 'mostVisited1', 'mostVisited3', 'mostVisited7', 'fetchUser3', 'fetchUser1', 'fetchUser7', 'totalVisitors3',

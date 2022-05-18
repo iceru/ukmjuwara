@@ -86,7 +86,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="support-title">
-                            <h3 class="text-center fw-bold">Dipersembahkan oleh</h3>
+                            <h3 class="text-center fw-light">Dipersembahkan oleh</h3>
                         </div>
                         <div id="supported">
                             @foreach ($sponsors as $sponsor)
@@ -98,6 +98,24 @@
                     </div>
                 </div>
             </div>
+            @if (count($sponsors_dukung) > 0)
+            <div class="supported-by">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="support-title">
+                            <h3 class="text-center fw-bold">Didukung oleh</h3>
+                        </div>
+                        <div id="supported_dukung">
+                            @foreach ($sponsors_dukung as $sponsor)
+                                <div>
+                                    <img src="{{ Storage::url('sponsor-image/'.$sponsor->image) }}" alt="{{ $sponsor->title }}">
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
         
             <script>
                 $(document).ready(function(){

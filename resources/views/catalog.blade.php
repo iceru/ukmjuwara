@@ -1,6 +1,6 @@
 <x-app-layout>
     @section('title')
-        UKM Juwara
+        {{ $catalog->title }}
     @endsection
     @section('meta-content')Sebagai komunitas pertama di dunia yang menghadirkan katalog member dalam format Whatsapp. Business Catalog c-commerce s.id/UKMJUWARA dan katalog pada situs www.ukmjuwara.id, kanal ini akan terus memproduksi katalog berkala dan melakukan pengembangan konten dengan menghadirkan variasi tema katalog seperti UKM JUWARA GLOBAL yang berfokus pada peningkatan penetrasi pasar global oleh pelaku UKM Iokal berikut dengan berita-berita sangat relevan dengan kebutuhan UKM untuk meroket.@endsection
 
@@ -258,16 +258,16 @@
             }
         });
 
-        $(window).on('hashchange',function(){
-            if (window.location.hash) {
-                var page = window.location.hash.replace('#', '');
-                if (page == Number.NaN || page <= 0) {
-                    return false;
-                } else{
-                    ajaxFilter(page);
-                }
-            }
-        });
+        // $(window).on('hashchange',function(){
+        //     if (window.location.hash) {
+        //         var page = window.location.hash.replace('#', '');
+        //         if (page == Number.NaN || page <= 0) {
+        //             return false;
+        //         } else{
+        //             ajaxFilter(page);
+        //         }
+        //     }
+        // });
 
         $(window).resize(function() {
             if($(window).width() > 641) {
@@ -440,6 +440,10 @@
                         url.searchParams.set('search', search)
                     else 
                         url.searchParams.delete('search')
+                    if(stateObj.page !== 1 )
+                        url.searchParams.set('page', page)
+                    else 
+                        url.searchParams.set('page', 1)
 
                     history.pushState(stateObj, '', url)
             })

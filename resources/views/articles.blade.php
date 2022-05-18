@@ -67,7 +67,7 @@
                                 <img src="/images/default-user.jpg" class="me-3" width="25" alt="">
                                 <p>{{ $article->author }}</p>
                             </div>
-                            <div class="article-description">
+                            <div class="article-description" style="display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3;">
                                 <p >{!! $article->description!!}</p>
                             </div>
                             <p class="mt-3">{{  date('d F Y', strtotime($article->created_at )) }} | {{ $article->time_read }} Mins Read</p>
@@ -78,22 +78,27 @@
             </div>
         @endif
         <div class="row">
+            <!-- @if ($topArticles->isEmpty())
+            <div class="col-12 mb-5 text-center article-header">
+                <h2>Berita</h2>
+            </div>
+            @endif -->
             @foreach ($articles as $article)
-                <div class="article medium col-md-4 mb-3 mb-lg-4 col-xxl-3">
+                <div class="article medium col-md-4 mb-4 mb-lg-5 col-xxl-3">
                     <a href="{{ route('article.show', $article->slug) }}">
                         <div class="article-image">
                             <img src="{{ Storage::url('article-image/'.$article->image) }}" alt="">
                         </div>
-                        <h4 class="mb-3 article-title">{{ $article->title }}</h4>
+                        <h4 class="mb-3 article-title primary-color">{{ $article->title }}</h4>
                     </a>
                     <div class="d-flex mb-3 author align-items-center">
                         <img src="/images/default-user.jpg" class="me-3" width="37" alt="">
                         <p>{{ $article->author }}</p>
                     </div>
-                    <div class="article-description">
+                    <div class="article-description" style="height:73px">
                         <p >{!! $article->description!!}</p>
                     </div>
-                    <p class="mt-3">{{  date('d F Y', strtotime($article->created_at )) }} | {{ $article->time_read }} Mins Read</p>
+                    <p class="mt-2 primary-color">{{  date('d F Y', strtotime($article->created_at )) }} | {{ $article->time_read }} Mins Read</p>
                 </div>
             @endforeach
             <div class="col-12 mt-3 justify-content-center d-flex">
