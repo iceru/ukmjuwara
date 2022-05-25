@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Ukm;
 use App\Models\Click;
 use App\Models\Catalog;
+use App\Models\Program;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -48,6 +49,7 @@ class CatalogController extends Controller
         $request->validate([
             'title' => 'required',
             'featured' => 'required',
+            'description' => 'required',
             'slug' => 'nullable',
             'link' => 'nullable',
             'image' => 'required|image'
@@ -56,6 +58,7 @@ class CatalogController extends Controller
         $catalog->title = $request->title;        
         $catalog->slug = Str::slug($request->title);
         $catalog->link = $request->link;
+        $catalog->description = $request->description;
         $catalog->featured = $request->featured;
         
         if ($request->hasFile('image')) {
@@ -85,6 +88,9 @@ class CatalogController extends Controller
         $bests = Ukm::where('catalog_id', $catalog->id)->orderByViews('desc', Period::since('2021-11-18'))->get()->take(8);
         $states = Ukm::where('catalog_id', $catalog->id)->select('state_name')->distinct()->where('state_name', '!=', '')->get();
         $categories = Category::whereHas('ukms', function($q) use($catalog) {
+            $q->where('catalog_id', $catalog->id);
+        })->get();
+        $programs = Program::whereHas('ukm', function($q) use($catalog) {
             $q->where('catalog_id', $catalog->id);
         })->get();
 
@@ -146,11 +152,11 @@ class CatalogController extends Controller
             if($request->ajax()) {
                 return view('catalog-ukm', compact('ukms'));
             } else {
-                return view('catalog', compact('catalog','ukms', 'bests', 'categories', 'states'));
+                return view('catalog', compact('catalog','ukms', 'bests', 'categories', 'states', 'programs'));
             }
         }
         
-        return view('catalog', compact('catalog','ukms', 'bests', 'categories', 'states'));
+        return view('catalog', compact('catalog','ukms', 'bests', 'categories', 'states', 'programs'));
     }
 
     public function filter(Request $request)
@@ -196,6 +202,7 @@ class CatalogController extends Controller
             'slug' => 'required',
             'link' => 'nullable',
             'featured' => 'required',
+            'description' => 'required',
             'image' => 'nullable'
         ]);
 
@@ -209,6 +216,7 @@ class CatalogController extends Controller
         $catalog->title = $request->title;
         $catalog->slug = Str::slug($request->title);
         $catalog->link = $request->link;
+        $catalog->description = $request->description;
         $catalog->featured = $request->featured;
 
         $catalog->save();

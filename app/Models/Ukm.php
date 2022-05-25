@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Catalog;
+use App\Models\Program;
 use App\Models\Category;
 use Spatie\Searchable\Searchable;
 use Spatie\Searchable\SearchResult;
@@ -21,6 +22,11 @@ class Ukm extends Model implements Viewable, Searchable
     public function catalog()
     {
         return $this->belongsTo(Catalog::class);
+    }
+
+    public function program()
+    {
+        return $this->belongsTo(Program::class);
     }
 
     public function categories()

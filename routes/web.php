@@ -8,6 +8,7 @@ use App\Http\Controllers\SliderController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\AdminTagController;
 use App\Http\Controllers\AdminUkmController;
@@ -67,6 +68,12 @@ Route::middleware(['auth', 'role:administrator'])->group(function (){
     Route::get('/admin/category/edit/{id}', [CategoryController::class, 'edit'])->name('admin.category.edit');
     Route::post('/admin/category/update', [CategoryController::class, 'update'])->name('admin.category.update');
     Route::get('/admin/category/delete/{id}', [CategoryController::class, 'destroy'])->name('admin.category.destroy');
+
+    Route::get('/admin/program', [ProgramController::class, 'index'])->name('admin.program');
+    Route::post('/admin/program/store', [ProgramController::class, 'store'])->name('admin.program.store');
+    Route::get('/admin/program/edit/{id}', [ProgramController::class, 'edit'])->name('admin.program.edit');
+    Route::post('/admin/program/update', [ProgramController::class, 'update'])->name('admin.program.update');
+    Route::get('/admin/program/delete/{id}', [ProgramController::class, 'destroy'])->name('admin.program.destroy');
 
     Route::get('/admin/ukm', [AdminUkmController::class, 'index'])->name('admin.ukm');
     Route::post('/admin/ukm/store', [AdminUkmController::class, 'store'])->name('admin.ukm.store');

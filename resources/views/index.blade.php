@@ -1,6 +1,6 @@
 <x-app-layout>
     @section('title')
-        UKM Juwara
+        #UKMJuWAra
     @endsection
 
     @section('meta-content')
@@ -11,7 +11,7 @@
         kebutuhan UKM untuk meroket.
     @endsection
     <div class="index">
-        <div class="container-fluid">
+        <div class="container">
             <div class="header-container">
                 <div class="desktop header">
                     @foreach ($sliderDesktop as $slider)

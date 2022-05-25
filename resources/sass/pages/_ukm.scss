@@ -30,7 +30,7 @@
             }
 
             @include breakpoint-down(medium) {
-                
+
                 .slick-prev {
                     left: 5px;
                     z-index: 5;
@@ -42,9 +42,11 @@
                 }
 
             }
-            .slick-list{
-                padding:0 0 0 0 !important;
+
+            .slick-list {
+                padding: 0 0 0 0 !important;
             }
+
             .col-md-7 {
                 .container-ukm {
                     padding-left: 2rem;
@@ -72,7 +74,7 @@
                                 &.last {
                                     padding-bottom: .5rem;
                                 }
-                                
+
                                 h6 {
                                     color: $primary-color;
                                     font-size: 1.1rem;
@@ -85,7 +87,8 @@
                         display: inline-flex;
                         justify-content: center;
                         padding: .75rem 2rem;
-                        min-width: 340px;
+                        margin-right: 1rem;
+                        margin-bottom: 0;
 
                         @include breakpoint-down(medium) {
                             min-width: 100%;
@@ -93,8 +96,21 @@
                     }
                 }
             }
+
+            .description-profile {
+                height: 185px;
+                overflow: hidden;
+
+                &.active {
+                    height: auto;
+                }
+            }
+
+            #read_more {
+                cursor: pointer;
+            }
         }
-    }    
+    }
 }
 
 .categories-text {

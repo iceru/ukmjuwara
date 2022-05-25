@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use App\Models\Ukm;
 use App\Models\Catalog;
+use App\Models\Program;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Validator;
 use Illuminate\Support\Facades\Storage;
 
 class AdminUkmController extends Controller
@@ -23,9 +24,10 @@ class AdminUkmController extends Controller
         $ukms = Ukm::orderBy('created_at', 'desc')->get();
         $catalogs = Catalog::all();
         $categories = Category::all();
+        $programs = Program::all();
         $states = json_decode(file_get_contents('https://ibnux.github.io/data-indonesia/propinsi.json'), true);
 
-        return view('admin.ukm.index', compact('ukms', 'catalogs', 'categories', 'states'));
+        return view('admin.ukm.index', compact('ukms', 'catalogs', 'categories', 'states', 'programs'));
     }
 
     public function getCity(Request $request)
@@ -69,6 +71,7 @@ class AdminUkmController extends Controller
             'image.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'instagram' => 'required',
             'catalog' => 'required',
+            'program' => 'required',
             'categories' => 'nullable',
             'address' => 'required',
             'state' => 'required',
@@ -113,6 +116,7 @@ class AdminUkmController extends Controller
         $ukm->whatsapp = $request->whatsapp;
         $ukm->instagram = $request->instagram;
         $ukm->catalog_id = $request->catalog;
+        $ukm->program_id = $request->program;
         $ukm->address = $request->address;
         $ukm->state = $request->state;
         $ukm->state_name = $request->state_name;
@@ -171,6 +175,7 @@ class AdminUkmController extends Controller
         $ukm = Ukm::findOrFail($id);
         $catalogs = Catalog::all();
         $categories = Category::all();
+        $programs = Program::all();
         $states = json_decode(file_get_contents('https://ibnux.github.io/data-indonesia/propinsi.json'), true);
 
         $categories_array = array();
@@ -179,7 +184,7 @@ class AdminUkmController extends Controller
             array_push($categories_array, $category->title);
         }
 
-        return view('admin.ukm.edit', compact('ukm', 'catalogs', 'categories', 'categories_array', 'states'));
+        return view('admin.ukm.edit', compact('ukm', 'catalogs', 'categories', 'categories_array', 'states', 'programs'));
     }
 
     /**
@@ -203,6 +208,7 @@ class AdminUkmController extends Controller
             'image.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'instagram' => 'required',
             'catalog' => 'required',
+            'program' => 'required',
             'categories' => 'nullable',
             'address' => 'required',
             'state' => 'required',
@@ -241,6 +247,7 @@ class AdminUkmController extends Controller
         $ukm->whatsapp = $request->whatsapp;
         $ukm->instagram = $request->instagram;
         $ukm->catalog_id = $request->catalog;
+        $ukm->program_id = $request->program;
         $ukm->address = $request->address;
         $ukm->state = $request->state;
         $ukm->state_name = $request->state_name;

@@ -2,7 +2,13 @@
     @section('title')
         {{ $catalog->title }}
     @endsection
-    @section('meta-content')Sebagai komunitas pertama di dunia yang menghadirkan katalog member dalam format Whatsapp. Business Catalog c-commerce s.id/UKMJUWARA dan katalog pada situs www.ukmjuwara.id, kanal ini akan terus memproduksi katalog berkala dan melakukan pengembangan konten dengan menghadirkan variasi tema katalog seperti UKM JUWARA GLOBAL yang berfokus pada peningkatan penetrasi pasar global oleh pelaku UKM Iokal berikut dengan berita-berita sangat relevan dengan kebutuhan UKM untuk meroket.@endsection
+    @section('meta-content')
+        Sebagai komunitas pertama di dunia yang menghadirkan katalog member dalam format Whatsapp. Business Catalog
+        c-commerce s.id/UKMJUWARA dan katalog pada situs www.ukmjuwara.id, kanal ini akan terus memproduksi katalog berkala
+        dan melakukan pengembangan konten dengan menghadirkan variasi tema katalog seperti UKM JUWARA GLOBAL yang berfokus
+        pada peningkatan penetrasi pasar global oleh pelaku UKM Iokal berikut dengan berita-berita sangat relevan dengan
+        kebutuhan UKM untuk meroket.
+    @endsection
 
     <div id="floating_button">
         <div class="floating-button">
@@ -18,204 +24,246 @@
         </div>
     </div>
 
-    @if($catalog->ukm->count() > 0)
-    <div class="catalog">
-        <div class="header">
-            <div class="header-image">
-                <div class="image-container ratio1x4">
-                    @if ($catalog->image == '')
-                    <img src="/images/header.png" alt="">
-                    @else
-                    <img src="{{ Storage::url('catalog-image/'.$catalog->image) }}" alt="">
-                    @endif
+    @if ($catalog->ukm->count() > 0)
+        <div class="catalog">
+            <div class="header">
+                <div class="header-image">
+                    <div class="image-container ratio1x4">
+                        @if ($catalog->image == '')
+                            <img src="/images/header.png" alt="">
+                        @else
+                            <img src="{{ Storage::url('catalog-image/' . $catalog->image) }}" alt="">
+                        @endif
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-9">
+                                <h2 class="catalog-title">{{ $catalog->title }}</h2>
+                                <div class="catalog-desc">{!! $catalog->description !!}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="body">
+                <div class="most-viewed">
+                    <div class="container pe-lg-0">
+                        <div class="row">
+                            <div class="col-md-3">
+                            </div>
+                            <div class="col-md-9">
+                                <div class="most-viewed-text">
+                                    <h5 class="mb-3">Trending</h5>
+                                </div>
+                                <div id="ukm_bests">
+                                    @foreach ($bests as $ukm)
+                                        <div>
+                                            <a href="{{ route('ukm.show', $ukm->slug) }}">
+                                                <div class="ukm">
+                                                    <div class="ukm-image">
+                                                        <div class="ratio ratio-1x1">
+                                                            @foreach ((array) json_decode($ukm->images)[0] as $image)
+                                                                <img src="{{ Storage::url('ukm-image/' . $image) }}"
+                                                                    alt="">
+                                                            @endforeach
+                                                        </div>
+                                                    </div>
+                                                    <div class="ukm-wa">
+                                                        <a href="{{ $ukm->whatsapp }}">
+                                                            <img src="/images/whatsapp.png" alt="">
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <a href="{{ route('ukm.show', $ukm->slug) }}">
+                                                <div class="ukm-title mt-3">
+                                                    <h5 title="{{ $ukm->title }}">{{ $ukm->title }}</h5>
+                                                </div>
+                                                <div class="ukm-desc">
+                                                    <small title="{{ $ukm->product }}"
+                                                        class="ellipsis categories-text">
+                                                        @foreach ($ukm->categories as $item)
+                                                            <span>{{ $item->title }}</span>
+                                                        @endforeach
+                                                    </small>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-3"></div>
-                        <div class="col-md-9">
-                            <h2 class="catalog-title">{{ $catalog->title }}</h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-        <div class="body">
-            <div class="most-viewed">
-                <div class="container pe-lg-0">
-                    <div class="row">
-                        <div class="col-md-3">
-                        </div>
-                        <div class="col-md-9">
-                            <div class="most-viewed-text">
-                                <h5 class="mb-3">Banyak Dikunjungi</h5>
-                            </div>
-                            <div id="ukm_bests">
-                                @foreach ($bests as $ukm)
-                                <div>
-                                    <a href="{{ route('ukm.show', $ukm->slug) }}">
-                                        <div class="ukm">
-                                            <div class="ukm-image">
-                                                <div class="ratio ratio-1x1">
-                                                    @foreach ((array)json_decode($ukm->images)[0] as $image)
-                                                    <img src="{{ Storage::url('ukm-image/'.$image) }}" alt="">
-                                                    @endforeach
-                                                </div>
-                                            </div>
-                                            <div class="ukm-wa">
-                                                <a href="{{ $ukm->whatsapp }}">
-                                                    <img src="/images/whatsapp.png" alt="">
-                                                </a>
-                                            </div>
+                        <div class="col-md-3 filter" id="filter_container">
+                            <h3 class="mb-3">Filter</h3>
+                            <div class="filter-desktop-checkbox">
+                                <div class="search-ukm">
+                                    {{-- <form action="{{ route('search') }}" role="search" id="search_form" action="" method="GET"> --}}
+                                    <input type="text" class="form-control search-ukm" placeholder="Search"
+                                        type="search" name="search-ukm" id="search_ukm">
+                                    <div class="icon-search">
+                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                    </div>
+                                    </form>
+                                </div>
+                                <div class="category-filter mb-4">
+                                    <h5 class="mb-2">Kategori Produk</h5>
+                                    @foreach ($categories as $category)
+                                        <div class="form-check">
+                                            <input class="form-check-input category-large" type="checkbox"
+                                                value="{{ $category->id }}" id="category" name="category[]">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                {{ $category->title }}
                                         </div>
-                                    </a>
-                                    <a href="{{ route('ukm.show', $ukm->slug) }}">
-                                        <div class="ukm-title mt-3">
-                                            <h5 title="{{ $ukm->title }}">{{ $ukm->title }}</h5>
+                                    @endforeach
+                                </div>
+                                <div class="category-filter mb-4">
+                                    <h5 class="mb-2">Asal Program</h5>
+                                    @foreach ($programs as $program)
+                                        <div class="form-check">
+                                            <input class="form-check-input category-large" type="checkbox"
+                                                value="{{ $program->id }}" id="category" name="category[]">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                {{ $program->title }}
                                         </div>
-                                        <div class="ukm-desc">
-                                            <small title="{{ $ukm->product }}" class="ellipsis categories-text">
-                                                @foreach ($ukm->categories as $item)
-                                                    <span>{{ $item->title }}</span>
-                                                @endforeach
-                                            </small>
+                                    @endforeach
+                                </div>
+                                <div class="location-filter mb-4">
+                                    <h5 class="mb-2">Lokasi</h5>
+                                    @foreach ($states as $item)
+                                        <div class="form-check">
+                                            <input class="form-check-input state state-large" type="checkbox"
+                                                value="{{ $item->state_name }}" id="state" name="state[]">
+                                            <label class="form-check-label text-capitalize" for="flexCheckDefault">
+                                                @if ($item->state_name == 'DKI JAKARTA')
+                                                    DKI Jakarta
+                                                @elseif ($item->state_name == 'P A P U A')
+                                                    Papua
+                                                @else
+                                                    {{ strtolower($item->state_name) }}
+                                                @endif
                                         </div>
-                                    </a>
+                                    @endforeach
                                 </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-3 filter" id="filter_container">
-                        <h3 class="mb-3">Filter</h3>
-                        <div class="filter-desktop-checkbox">
-                            <div class="search-ukm">
-                                {{-- <form action="{{ route('search') }}" role="search" id="search_form" action="" method="GET"> --}}
-                                <input type="text" class="form-control search-ukm" placeholder="Search" type="search" name="search-ukm" id="search_ukm">
-                                <div class="icon-search">
-                                    <i class="fa fa-search" aria-hidden="true"></i>
-                                </div>
-                                </form>
-                            </div>
-                            <div class="category-filter mb-4">
-                                <h5 class="mb-2">Kategori Produk</h5>
-                                @foreach ($categories as $category)
-                                <div class="form-check">
-                                    <input class="form-check-input category-large" type="checkbox" value="{{ $category->id }}" id="category" name="category[]">
-                                    <label class="form-check-label" for="flexCheckDefault">
-                                        {{ $category->title }}
-                                </div>
-                                @endforeach
-                            </div>
-                            <div class="location-filter mb-4">
-                                <h5 class="mb-2">Lokasi</h5>
-                                @foreach ($states as $item)
-                                <div class="form-check">
-                                    <input class="form-check-input state state-large" type="checkbox" value="{{ $item->state_name }}" id="state" name="state[]">
-                                    <label class="form-check-label text-capitalize" for="flexCheckDefault" > @if ($item->state_name == 'DKI JAKARTA') DKI Jakarta @elseif ($item->state_name == 'P A P U A') Papua @else {{ strtolower($item->state_name) }} @endif
-                                </div>
-                                @endforeach
-                            </div>
-                            <div class="owner-gender-filter">
-                                <h5 class="mb-2">Gender Pemilik</h5>
-                                <div class="form-check">
-                                    <input class="form-check-input owner-large" type="checkbox" value="pria" id="owner_gender" name="owner_gender[]">
-                                    <label class="form-check-label" for="flexCheckDefault"> Pria
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input owner-large" type="checkbox" value="wanita" id="owner_gender" name="owner_gender[]">
-                                    <label class="form-check-label" for="flexCheckDefault"> Wanita
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input owner-large" type="checkbox" value="pria-wanita" id="owner_gender" name="owner_gender[]">
-                                    <label class="form-check-label" for="flexCheckDefault"> Pria & Wanita
+                                <div class="owner-gender-filter">
+                                    <h5 class="mb-2">Gender Pemilik</h5>
+                                    <div class="form-check">
+                                        <input class="form-check-input owner-large" type="checkbox" value="pria"
+                                            id="owner_gender" name="owner_gender[]">
+                                        <label class="form-check-label" for="flexCheckDefault"> Pria
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input owner-large" type="checkbox" value="wanita"
+                                            id="owner_gender" name="owner_gender[]">
+                                        <label class="form-check-label" for="flexCheckDefault"> Wanita
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input owner-large" type="checkbox" value="pria-wanita"
+                                            id="owner_gender" name="owner_gender[]">
+                                        <label class="form-check-label" for="flexCheckDefault"> Pria & Wanita
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-12 mt-3 mb-2 d-block d-lg-none">
-                        <div class="mb-3">
-                            <a class="filter-mobile mb-3" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-                                <i class="fas fa-filter" style="font-size: 1rem"></i>&nbsp;Filter
-                            </a>
+                        <div class="col-12 mt-3 mb-2 d-block d-lg-none">
+                            <div class="mb-3">
+                                <a class="filter-mobile mb-3" data-bs-toggle="offcanvas" href="#offcanvasExample"
+                                    role="button" aria-controls="offcanvasExample">
+                                    <i class="fas fa-filter" style="font-size: 1rem"></i>&nbsp;Filter
+                                </a>
+                            </div>
+                            <div class="mb-2 category-data" hidden>
+                                <b>Kategori: </b> <span class="category-selected"></span>
+                            </div>
+                            <div class="mb-2 state-data" hidden>
+                                <b>Lokasi: </b> <span class="state-selected text-capitalize"></span>
+                            </div>
+                            <div class="mb-2 owner_gender-data" hidden>
+                                <b>Gender Pemilik: </b> <span class="owner_gender-selected"></span>
+                            </div>
                         </div>
-                        <div class="mb-2 category-data" hidden>
-                            <b>Kategori: </b> <span class="category-selected"></span>
-                        </div>
-                        <div class="mb-2 state-data" hidden>
-                            <b>Lokasi: </b> <span class="state-selected text-capitalize"></span>
-                        </div>
-                        <div class="mb-2 owner_gender-data" hidden>
-                            <b>Gender Pemilik: </b> <span class="owner_gender-selected"></span>
-                        </div>
-                    </div>
 
-                    <div class="offcanvas filter-offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-                        <div class="d-flex justify-content-end">
-                            <button type="button" class="btn button-close" data-bs-dismiss="offcanvas">
-                                <i class="fa fa-times" aria-hidden="true"></i>
-                            </button>
+                        <div class="offcanvas filter-offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample"
+                            aria-labelledby="offcanvasExampleLabel">
+                            <div class="d-flex justify-content-end">
+                                <button type="button" class="btn button-close" data-bs-dismiss="offcanvas">
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                            <h3 class="mb-3">Filter</h3>
+                            <div class="filter-mobile-checkbox">
+                                <div class="search-ukm">
+                                    <input type="text" class="form-control search-ukm-mobile" placeholder="Search"
+                                        type="search">
+                                </div>
+                                <div class="category-filter mb-3">
+                                    <h5 class="mb-2">Kategori</h5>
+                                    @foreach ($categories as $category)
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox"
+                                                value="{{ $category->id }}" id="category" name="category[]">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                {{ $category->title }}
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <div class="location-filter mb-3">
+                                    <h5 class="mb-2">Lokasi</h5>
+                                    @foreach ($states as $item)
+                                        <div class="form-check">
+                                            <input class="form-check-input state" type="checkbox"
+                                                value="{{ $item->state_name }}" id="state" name="state[]">
+                                            <label class="form-check-label text-capitalize" for="flexCheckDefault">
+                                                @if ($item->state_name == 'DKI JAKARTA')
+                                                    DKI Jakarta
+                                                @elseif ($item->state_name == 'P A P U A')
+                                                    Papua
+                                                @else
+                                                    {{ strtolower($item->state_name) }}
+                                                @endif
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <div class="owner-gender-filter mb-3">
+                                    <h5 class="mb-2">Gender Pemilik</h5>
+                                    <div class="form-check">
+                                        <input class="form-check-input owner" type="checkbox" value="pria"
+                                            id="owner_gender" name="owner_gender[]">
+                                        <label class="form-check-label" for="flexCheckDefault"> Pria
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input owner" type="checkbox" value="wanita"
+                                            id="owner_gender" name="owner_gender[]">
+                                        <label class="form-check-label" for="flexCheckDefault"> Wanita
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input owner" type="checkbox" value="pria-wanita"
+                                            id="owner_gender" name="owner_gender[]">
+                                        <label class="form-check-label" for="flexCheckDefault"> Pria & Wanita
+                                    </div>
+                                </div>
+
+                                <button type="button" class="btn btn-light" data-bs-dismiss="offcanvas">
+                                    Filter
+                                </button>
+                            </div>
                         </div>
-                        <h3 class="mb-3">Filter</h3>
-                        <div class="filter-mobile-checkbox">
-                            <div class="search-ukm">
-                                <input type="text" class="form-control search-ukm-mobile" placeholder="Search" type="search" >
-                            </div>
-                            <div class="category-filter mb-3">
-                                <h5 class="mb-2">Kategori</h5>
-                                @foreach ($categories as $category)
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="{{ $category->id }}" id="category" name="category[]">
-                                    <label class="form-check-label" for="flexCheckDefault">
-                                        {{ $category->title }}
-                                </div>
-                                @endforeach
-                            </div>
-                            <div class="location-filter mb-3">
-                                <h5 class="mb-2">Lokasi</h5>
-                                @foreach ($states as $item)
-                                <div class="form-check">
-                                    <input class="form-check-input state" type="checkbox" value="{{ $item->state_name }}" id="state" name="state[]">
-                                    <label class="form-check-label text-capitalize" for="flexCheckDefault" > @if ($item->state_name == 'DKI JAKARTA') DKI Jakarta @elseif ($item->state_name == 'P A P U A') Papua @else {{ strtolower($item->state_name) }} @endif
-                                </div>
-                                @endforeach
-                            </div>
-                            <div class="owner-gender-filter mb-3">
-                                <h5 class="mb-2">Gender Pemilik</h5>
-                                <div class="form-check">
-                                    <input class="form-check-input owner" type="checkbox" value="pria" id="owner_gender" name="owner_gender[]">
-                                    <label class="form-check-label" for="flexCheckDefault"> Pria
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input owner" type="checkbox" value="wanita" id="owner_gender" name="owner_gender[]">
-                                    <label class="form-check-label" for="flexCheckDefault"> Wanita
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input owner" type="checkbox" value="pria-wanita" id="owner_gender" name="owner_gender[]">
-                                    <label class="form-check-label" for="flexCheckDefault"> Pria & Wanita
-                                </div>
-                            </div>
-                            
-                            <button type="button" class="btn btn-light" data-bs-dismiss="offcanvas">
-                                Filter
-                            </button>
+                        <div class="col-12 col-md-9 katalog-ukm" id="catalog">
+                            @include('catalog-ukm')
                         </div>
-                    </div>
-                    <div class="col-12 col-md-9 katalog-ukm" id="catalog">
-                        @include('catalog-ukm')
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     @else
-    <div class="d-flex justify-content-center p-5">
-        <h1 class="primary-color">Coming Soon!</h1>
-    </div>
+        <div class="d-flex justify-content-center p-5">
+            <h1 class="primary-color">Coming Soon!</h1>
+        </div>
     @endif
     <script>
         var category_filter = [];
@@ -228,7 +276,7 @@
 
         var page;
 
-        $(document).ready(function(){
+        $(document).ready(function() {
 
             $('#ukm_bests').slick({
                 infinite: true,
@@ -236,22 +284,20 @@
                 slidesToScroll: 1,
                 autoplay: true,
                 autoplaySpeed: 3000,
-                responsive: [
-                    {
-                        breakpoint: 567,
-                        settings: {
-                            slidesToShow: 2
-                        }
-                    },
-                ]
+                responsive: [{
+                    breakpoint: 567,
+                    settings: {
+                        slidesToShow: 2
+                    }
+                }, ]
             });
             $('.loading-spinner').hide();
             desktop = $('.filter-desktop-checkbox');
             mobile = $('.filter-mobile-checkbox');
 
             checkUrlParams();
-            
-            if($(window).width() > 641) {
+
+            if ($(window).width() > 641) {
                 mobile.detach();
             } else {
                 desktop.detach();
@@ -270,7 +316,7 @@
         // });
 
         $(window).resize(function() {
-            if($(window).width() > 641) {
+            if ($(window).width() > 641) {
                 mobile.detach();
                 desktop.appendTo($('#filter_container'))
             } else {
@@ -281,7 +327,7 @@
             $('.search-ukm-mobile').val('');
         });
 
-        $(document).on('click','.pagination a',function(event){
+        $(document).on('click', '.pagination a', function(event) {
             event.preventDefault();
             $('li').removeClass('active');
             $(this).parent('li').addClass('active');
@@ -301,8 +347,9 @@
                 state_array = states_params.split(",");
                 window[`state_filter`] = state_array;
                 state_array.forEach(element => {
-                    $(":checkbox[value='"+element+"']").prop("checked","true");
-                    window[`state_texts`].push($(`input[type="checkbox"][value='${element}']`).next().first().text().trim());
+                    $(":checkbox[value='" + element + "']").prop("checked", "true");
+                    window[`state_texts`].push($(`input[type="checkbox"][value='${element}']`).next().first().text()
+                        .trim());
                 });
                 $('.state-selected').html(state_texts);
                 $('.state-data').removeAttr('hidden')
@@ -312,8 +359,9 @@
                 owner_genders_params = owner_genders_params.split(",");
                 window[`owner_gender_filter`] = owner_genders_params;
                 owner_genders_params.forEach(element => {
-                    $(":checkbox[value='"+element+"']").prop("checked","true");
-                    window[`owner_gender_texts`].push($(`input[type="checkbox"][value='${element}']`).next().first().text().trim());
+                    $(":checkbox[value='" + element + "']").prop("checked", "true");
+                    window[`owner_gender_texts`].push($(`input[type="checkbox"][value='${element}']`).next().first()
+                        .text().trim());
                 });
                 $('.owner_gender-selected').html(owner_gender_texts);
                 $('.owner_gender-data').removeAttr('hidden')
@@ -323,15 +371,16 @@
                 categories_params = categories_params.split(",");
                 categories_params.forEach(element => {
                     element = parseInt(element);
-                    $(":checkbox[value="+element+"]").prop("checked","true");
+                    $(":checkbox[value=" + element + "]").prop("checked", "true");
                     window[`category_filter`].push(element);
-                    window[`category_texts`].push($(`input[type="checkbox"][value='${element}']`).next().first().text().trim());
+                    window[`category_texts`].push($(`input[type="checkbox"][value='${element}']`).next().first()
+                        .text().trim());
                 });
                 $('.category-selected').html(category_texts);
                 $('.category-data').removeAttr('hidden')
             }
 
-            if(search_params) {
+            if (search_params) {
                 $('#search_ukm').val(search_params);
                 $('.search-ukm-mobile').val(search_params);
             }
@@ -340,15 +389,16 @@
         function get_filter(filter, data, text, add) {
             // NOTES: Harus Push nya sesuai di klik pertama. Kalau ga clicks nya bakal ga akurat
             if (add === 'add') {
-                if(window[`${filter}_filter`].indexOf(data) === -1) {
-                    filter === 'category' ? window[`${filter}_filter`].push(parseInt(data)) : window[`${filter}_filter`].push(data);;
+                if (window[`${filter}_filter`].indexOf(data) === -1) {
+                    filter === 'category' ? window[`${filter}_filter`].push(parseInt(data)) : window[`${filter}_filter`]
+                        .push(data);;
                     window[`${filter}_texts`].push(text.trim());
                 }
                 ajaxFilter(page, 'record', filter);
 
             } else {
                 window[`${filter}_filter`] = window[`${filter}_filter`].filter(function(item) {
-                    if(filter === 'category') {
+                    if (filter === 'category') {
                         return item !== parseInt(data)
                     } else {
                         return item !== data
@@ -360,31 +410,31 @@
 
             if (window[`${filter}_texts`].length > 0) {
                 var filter_text = window[`${filter}_texts`].join(', ');
-                $('.'+filter+'-selected').html(filter_text);
-                $('.'+filter+'-data').removeAttr('hidden')
+                $('.' + filter + '-selected').html(filter_text);
+                $('.' + filter + '-data').removeAttr('hidden')
             } else {
-                $('.'+filter+'-data').attr('hidden', 'hidden')
+                $('.' + filter + '-data').attr('hidden', 'hidden')
             }
 
         }
 
-        $('input[type="checkbox"], input[type="radio"]').click(function(){
-            if($(this).prop('checked') == true) {
+        $('input[type="checkbox"], input[type="radio"]').click(function() {
+            if ($(this).prop('checked') == true) {
                 get_filter($(this).attr('id'), $(this).val(), $(this).next('label').text(), 'add');
             } else {
                 get_filter($(this).attr('id'), $(this).val(), $(this).next('label').text(), 'remove');
             }
         });
 
-        $('#search_ukm').on('keyup',function(){
+        $('#search_ukm').on('keyup', function() {
             ajaxFilter()
         })
 
-        $('.search-ukm-mobile').on('keyup',function(){
+        $('.search-ukm-mobile').on('keyup', function() {
             ajaxFilter()
         })
 
-        $('#floating_button').click(function (e) { 
+        $('#floating_button').click(function(e) {
             e.preventDefault();
             var catalog = '{{ $catalog->id }}'
             window.open('https://wa.me/c/628118995115', '_blank');
@@ -392,12 +442,14 @@
             $.ajax({
                 url: '/katalog-click/floating-click',
                 type: 'GET',
-                data: {catalog: catalog}
+                data: {
+                    catalog: catalog
+                }
             }).done(function(res) {
                 console.log('Click recorded');
             })
         });
-            
+
         function ajaxFilter(page, record, type) {
             var catalog = '{{ $catalog->id }}'
             states = state_filter;
@@ -411,60 +463,74 @@
             $('.ukm-content').hide();
 
             $.ajax({
-                url:"/katalog/{{ $catalog->slug }}?page="+page,
+                url: "/katalog/{{ $catalog->slug }}?page=" + page,
                 type: "GET",
-                datatype : 'html',
-                data: {states: states, owner_genders: owner_genders, categories: categories, catalog: catalog, search: search, page: page, record: record, type: type}
-                }).done( function(results){
-                    $('#catalog').html(results);
-                    $('.ukm-content').show();
-                    $('.loading-spinner').hide();
-                    var url = new URL(window.location.href);
-                    var stateObj = {
-                        states: states, owner_genders: owner_genders, categories: categories, catalog: catalog, search: search, page: page
-                    }
+                datatype: 'html',
+                data: {
+                    states: states,
+                    owner_genders: owner_genders,
+                    categories: categories,
+                    catalog: catalog,
+                    search: search,
+                    page: page,
+                    record: record,
+                    type: type
+                }
+            }).done(function(results) {
+                $('#catalog').html(results);
+                $('.ukm-content').show();
+                $('.loading-spinner').hide();
+                var url = new URL(window.location.href);
+                var stateObj = {
+                    states: states,
+                    owner_genders: owner_genders,
+                    categories: categories,
+                    catalog: catalog,
+                    search: search,
+                    page: page
+                }
 
-                    if(stateObj.states.length > 0 )
-                        url.searchParams.set('states', states)
-                    else 
-                        url.searchParams.delete('states')
-                    if(stateObj.owner_genders.length > 0 )
-                        url.searchParams.set('owner_genders', owner_genders)
-                    else 
-                        url.searchParams.delete('owner_genders')
-                    if(stateObj.categories.length > 0 )
-                        url.searchParams.set('categories', categories)
-                    else 
-                        url.searchParams.delete('categories')
-                    if(stateObj.search !== '' )
-                        url.searchParams.set('search', search)
-                    else 
-                        url.searchParams.delete('search')
-                    if(stateObj.page !== 1 )
-                        url.searchParams.set('page', page)
-                    else 
-                        url.searchParams.set('page', 1)
+                if (stateObj.states.length > 0)
+                    url.searchParams.set('states', states)
+                else
+                    url.searchParams.delete('states')
+                if (stateObj.owner_genders.length > 0)
+                    url.searchParams.set('owner_genders', owner_genders)
+                else
+                    url.searchParams.delete('owner_genders')
+                if (stateObj.categories.length > 0)
+                    url.searchParams.set('categories', categories)
+                else
+                    url.searchParams.delete('categories')
+                if (stateObj.search !== '')
+                    url.searchParams.set('search', search)
+                else
+                    url.searchParams.delete('search')
+                if (stateObj.page !== 1)
+                    url.searchParams.set('page', page)
+                else
+                    url.searchParams.set('page', 1)
 
-                    history.pushState(stateObj, '', url)
+                history.pushState(stateObj, '', url)
             })
         };
 
-        window.addEventListener('popstate', function (e) {
+        window.addEventListener('popstate', function(e) {
             if (!e.state) {
                 return;
             }
-            $('input:checkbox').prop('checked',false);
+            $('input:checkbox').prop('checked', false);
             e.state.categories.forEach(element => {
                 var data = parseInt(element);
-                $(":checkbox[value="+data+"]").prop("checked","true");
+                $(":checkbox[value=" + data + "]").prop("checked", "true");
             });
 
             e.state.owner_genders.forEach(element => {
-                $(":checkbox[value='"+element+"']").prop("checked","true");
+                $(":checkbox[value='" + element + "']").prop("checked", "true");
             });
 
             e.state.states.forEach(element => {
-                $(":checkbox[value='"+element+"']").prop("checked","true");
+                $(":checkbox[value='" + element + "']").prop("checked", "true");
             });
 
             $('#search_ukm').val(e.state.search);
@@ -473,11 +539,10 @@
             }
             var page = 1;
 
-            if(e.state.page)
+            if (e.state.page)
                 page = e.state.page
 
             ajaxFilter(page);
         });
-            
     </script>
 </x-app-layout>

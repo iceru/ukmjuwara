@@ -20,14 +20,20 @@
                 transform: translate(-50%, -50%);
                 color: white;
 
-                .catalog-title {
+                .catalog-title,
+                .catalog-desc {
                     padding-left: .75rem;
                 }
+
 
                 @include breakpoint(medium) {
                     .catalog-title {
                         padding-left: 1rem;
                         font-size: 2.5rem;
+                    }
+
+                    .catalog-desc {
+                        padding-left: 1rem;
                     }
                 }
 

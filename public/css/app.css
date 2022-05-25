@@ -11002,6 +11002,7 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before, table
   justify-content: center;
   padding: 0.5rem 1rem;
   position: relative;
+  font-weight: bold;
 }
 .index .list-category .title:after {
   content: "";
@@ -11068,7 +11069,7 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before, table
      object-fit: contain;
 }
 .index .list-category .items .item p {
-  font-size: 14px;
+  font-size: 12px;
   text-transform: uppercase;
 }
 .index .best:not(:last-child) {
@@ -11491,13 +11492,17 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before, table
   transform: translate(-50%, -50%);
   color: white;
 }
-.catalog .header .header-image .container .catalog-title {
+.catalog .header .header-image .container .catalog-title,
+.catalog .header .header-image .container .catalog-desc {
   padding-left: 0.75rem;
 }
 @media (min-width: 768px) {
   .catalog .header .header-image .container .catalog-title {
     padding-left: 1rem;
     font-size: 2.5rem;
+  }
+  .catalog .header .header-image .container .catalog-desc {
+    padding-left: 1rem;
   }
 }
 .catalog .header .header-image:after {
@@ -12098,12 +12103,23 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before, table
   display: inline-flex;
   justify-content: center;
   padding: 0.75rem 2rem;
-  min-width: 340px;
+  margin-right: 1rem;
+  margin-bottom: 0;
 }
 @media (max-width: 768px) {
   .ukm-page .container .main-product .col-md-7 .container-ukm .social {
     min-width: 100%;
   }
+}
+.ukm-page .container .main-product .description-profile {
+  height: 185px;
+  overflow: hidden;
+}
+.ukm-page .container .main-product .description-profile.active {
+  height: auto;
+}
+.ukm-page .container .main-product #read_more {
+  cursor: pointer;
 }
 
 .categories-text span:not(:last-child):after {
@@ -12121,7 +12137,7 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before, table
 }
 @media (min-width: 768px) {
   #nav .navbar {
-    padding: 20px 0.75rem;
+    padding: 12px 0.75rem;
   }
 }
 #nav .navbar .logo {
@@ -12157,6 +12173,7 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before, table
   text-transform: uppercase;
   font-family: "DIN Next LT", sans-serif;
   font-weight: 500;
+  font-size: 14px;
 }
 #nav .navbar ul.navigation li.nav-item a.nav-link:hover {
   border-bottom: 1px solid #fff;

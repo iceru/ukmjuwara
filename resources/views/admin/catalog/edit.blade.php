@@ -2,29 +2,36 @@
     <div class="admin-content">
         <h4>Katalog UKM</h4>
         @if (count($errors) > 0)
-        <div class="alert alert-danger">
-          <strong>Sorry !</strong> There were some problems with your input.<br><br>
-          <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-          </ul>
-        </div>
+            <div class="alert alert-danger">
+                <strong>Sorry !</strong> There were some problems with your input.<br><br>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
         @endif
-    
-        @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
+
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
         @endif
-        <form action="{{ route('admin.catalog.update') }}" enctype="multipart/form-data" method="POST" class="mt-4 mb-5">
+        <form action="{{ route('admin.catalog.update') }}" enctype="multipart/form-data" method="POST"
+            class="mt-4 mb-5">
             @csrf
-            <input type="hidden" name="id" value="{{$catalog->id}}">
+            <input type="hidden" name="id" value="{{ $catalog->id }}">
 
             <div class="row mb-3">
                 <label for="title" class="col-12 col-md-2 col-form-label">Title</label>
                 <div class="col-12 col-md-10">
                     <input type="text" class="form-control" value="{{ $catalog->title }}" id="title" name="title">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="description" class="col-12 col-md-2 col-form-label">Description</label>
+                <div class="col-12 col-md-10">
+                    <textarea class="form-control" name="description" id="description" rows="3">{{ $catalog->description }}</textarea>
                 </div>
             </div>
             <div class="row mb-3" hidden>
@@ -38,14 +45,16 @@
                 <div class="col-12 col-md-10">
                     <input type="text" class="form-control" value="{{ $catalog->link }}" id="link" name="link">
                     <p class="form-text text-muted">
-                        Link harus lengkap, contoh: https://google.com. <strong>Diisi jika katalog hanya berupa link</strong>
+                        Link harus lengkap, contoh: https://google.com. <strong>Diisi jika katalog hanya berupa
+                            link</strong>
                     </p>
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="image" class="col-12 col-md-2 col-form-label">Image</label>
                 <div class="col-12 col-md-10">
-                    <img src="{{ Storage::url('catalog-image/'.$catalog->image) }}" alt="image" class="mb-3" width="200">
+                    <img src="{{ Storage::url('catalog-image/' . $catalog->image) }}" alt="image"
+                        class="mb-3" width="200">
                     <input type="file" class="form-control" id="image" name="image">
                     <p class="form-text text-muted">
                         Image tidak perlu di input kembali jika tidak ingin diganti
@@ -76,7 +85,7 @@
         $(document).ready(function() {
             $('#table').DataTable();
 
-            $(".btn-success").click(function(){
+            $(".btn-success").click(function() {
                 var html = $(".clone").html();
                 $(".clone").after(html);
             });
