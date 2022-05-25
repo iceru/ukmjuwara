@@ -39,9 +39,17 @@ class CategoryController extends Controller
         $category = new Category;
 
         $request->validate([
+            'image' => 'required|image',
             'title' => 'required',
         ]);
 
+        if ($request->hasFile('image')) {
+            $extension = $request->file('image')->getClientOriginalExtension();
+            $filename = $request->title.'_'.time().'.'.$extension;
+            $path = $request->image->storeAs('public/category-image', $filename);
+        }
+
+        $category->image = $filename;
         $category->title = $request->title;
         $category->save();
 
@@ -84,8 +92,16 @@ class CategoryController extends Controller
         $category = Category::find($request->id);
 
         $request->validate([
-            'title' => 'required'
+            'title' => 'required',
+            'image' => 'nullable'
         ]);
+
+        if ($request->hasFile('image')) {
+            $extension = $request->file('image')->getClientOriginalExtension();
+            $filename = $request->title.'_'.time().'.'.$extension;
+            $path = $request->image->storeAs('public/category-image', $filename);
+            $category->image = $filename;
+        }
 
         $category->title = $request->title;
         $category->save();

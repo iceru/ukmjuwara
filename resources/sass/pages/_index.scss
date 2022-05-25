@@ -1,6 +1,201 @@
+.index {
+    background-color: #EAE8E9;
+    padding: 2rem;
+
+    .container-fluid {
+        padding: 0;
+    }
+
+    .content {
+        background-color: white;
+        padding: 1rem;
+
+        &.primary {
+            background-color: $primary-color;
+            color: white;
+
+            a {
+                color: white;
+            }
+        }
+    }
+
+    .list-category {
+        display: flex;
+        margin: -1rem -1rem 1rem -1rem;
+
+        .title {
+            background-color: $secondary-color;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: .5rem 1rem;
+            position: relative;
+
+            &:after {
+                content: '';
+                position: absolute;
+                top: 50%;
+                right: -20px;
+                transform: translateY(-50%);
+                width: 0;
+                height: 0;
+                border-top: 20px solid transparent;
+                border-bottom: 20px solid transparent;
+                border-left: 20px solid $secondary-color;
+                z-index: 2;
+            }
+        }
+
+        .slick-track {
+            align-items: center;
+            display: flex;
+        }
+
+        .items {
+            display: flex;
+            align-items: center;
+            background-color: $primary-color;
+            padding: .5rem 1.75rem;
+            min-width: calc(100% - 110px);
+
+            .slick-prev {
+                display: none !important;
+            }
+
+            .slick-next {
+                right: 8px;
+
+                &::before {
+                    opacity: 1;
+                }
+
+                &:after {
+                    background-color: white;
+                    position: absolute;
+                    content: '';
+                    width: 15px;
+                    height: 15px;
+                    border-radius: 50%;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    z-index: -1;
+                }
+            }
+
+            .item {
+                display: flex;
+                align-items: center;
+                background-color: white;
+                border-radius: 60px;
+                padding: .5rem;
+                color: $primary-color;
+                font-family: "DIN Next LT", sans-serif;
+                margin: 0 .25rem;
+                font-weight: 300;
+                min-height: 58px;
+
+                img {
+                    width: 30px;
+                    height: 30px;
+                    margin-right: .5rem;
+                    object-fit: contain;
+                }
+
+                p {
+                    font-size: 14px;
+                    text-transform: uppercase;
+                }
+            }
+        }
+    }
+
+    .best {
+        &:not(:last-child) {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid lightgray;
+        }
+
+        .best-title {
+            font-family: "DIN Next LT", sans-serif;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            font-size: 22px;
+            color: $primary-color;
+            text-transform: uppercase;
+
+            span {
+                font-weight: 500;
+            }
+        }
+
+        .slick-slide {
+            margin: 0 .5rem;
+        }
+    }
+
+    .article {
+        .title {
+            font-weight: 700;
+            font-size: 22px;
+        }
+
+        .items {
+            margin: 0 -1rem;
+        }
+
+        .see-all {
+            font-family: "DIN Next LT", sans-serif;
+            font-weight: 300;
+            display: flex;
+            align-items: center;
+
+            i {
+                margin-left: .5rem;
+            }
+        }
+
+        .article-item {
+            align-items: center;
+            margin: 0 1rem;
+
+            .col-4 {
+                padding-left: 0;
+            }
+
+            &:not(:last-child) {
+                border-bottom: 3px solid #045D57;
+                padding-bottom: 1rem;
+                margin-bottom: 1rem;
+            }
+
+            .article-title {
+                font-weight: bold;
+                font-size: 20px;
+            }
+        }
+    }
+}
+
 .header-container {
     position: relative;
     width: 100%;
+    margin-bottom: 1rem;
+
+    .slick-list,
+    .slick-track,
+    .slick-slide {
+        height: 50vh;
+    }
+
+    .image-container {
+        img {
+            height: 50vh;
+        }
+    }
 
     .slick-prev {
         z-index: 30;
@@ -12,7 +207,8 @@
         right: 20px;
     }
 
-    .slick-prev, .slick-next {
+    .slick-prev,
+    .slick-next {
         &:before {
             color: white;
         }
@@ -30,9 +226,10 @@
         .desktop {
             display: none;
         }
+
         .mobile {
             display: block;
-        } 
+        }
 
     }
 
@@ -89,7 +286,7 @@
         }
     }
 
-    
+
 
     @include breakpoint-down(small) {
         .image-container.ratio2halfx1 {
@@ -114,38 +311,21 @@
     padding-top: 3rem;
     padding-bottom: 3rem;
 
-    .slick-prev:before, .slick-next:before {
+    .slick-prev:before,
+    .slick-next:before {
         color: lightgray;
     }
-    
+
     .support-title {
-        padding-bottom: 1rem;
-        margin-bottom: 3rem;
-        display: flex;
-        justify-content: center;
-        color: grey;
-
-        h5 {
-            position: relative;
-            display: inline-block;
-
-            &:after {
-                position: absolute;
-                content: '';
-                height: 1px;
-                width: 80%;
-                bottom: -1rem;
-                left: 50%;
-                transform: translateX(-50%);
-                background-color: rgba(0,0,0,0.1);
-            }
-        }
+        margin-bottom: 1rem;
+        color: $primary-color;
+        text-align: left;
     }
 
-    @include breakpoint-down(small){
+    @include breakpoint-down(small) {
         padding-top: 2rem;
         padding-bottom: 2rem;
-        
+
         .support-title {
             margin-bottom: 1.5rem;
         }
@@ -171,12 +351,10 @@
     }
 }
 
-@include breakpoint-down(small){
+@include breakpoint-down(small) {
     .container {
         .slick-arrow {
             display: none !important;
-        }  
+        }
     }
 }
-
-  

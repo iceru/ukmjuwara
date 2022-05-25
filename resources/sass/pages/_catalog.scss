@@ -1,6 +1,7 @@
 .catalog {
     .header {
         position: relative;
+
         .header-image {
             width: 100%;
             position: relative;
@@ -16,9 +17,9 @@
                 position: absolute;
                 bottom: 5px;
                 left: 50%;
-                transform: translate(-50%, -50%); 
+                transform: translate(-50%, -50%);
                 color: white;
-    
+
                 .catalog-title {
                     padding-left: .75rem;
                 }
@@ -32,9 +33,9 @@
 
             }
 
-            
+
             &:after {
-                width:100%;
+                width: 100%;
                 height: 100%;
                 background-color: rgba($primary-color, 0.4);
             }
@@ -68,7 +69,8 @@
                 right: -20px;
             }
 
-            .slick-prev, .slick-next {
+            .slick-prev,
+            .slick-next {
                 &:before {
                     color: white;
                 }
@@ -91,7 +93,7 @@
                 // }
 
                 .most-viewed-text {
-                    > div {
+                    >div {
                         padding: 0;
                     }
                 }
@@ -111,7 +113,7 @@
                         }
                     }
                 }
-    
+
             }
 
             .ukm {
@@ -120,7 +122,7 @@
         }
 
         .katalog-ukm {
-            padding: 2rem 0 2rem 2rem; 
+            padding: 2rem 0 2rem 2rem;
 
             @include breakpoint-down(medium) {
                 padding: 1rem;
@@ -128,7 +130,9 @@
         }
 
         #ukm_bests {
-            .ukm-title, .ukm-desc {
+
+            .ukm-title,
+            .ukm-desc {
                 color: white;
             }
         }
@@ -184,6 +188,7 @@
         .filter-offcanvas {
             overflow-y: auto;
         }
+
         .search-ukm {
             position: relative;
             margin-bottom: 2rem;
@@ -227,34 +232,6 @@
     }
 }
 
-
-        
-.ukm {
-    border-radius: 1rem;
-    background-position: center;
-    background-size: cover;
-    background-color: $grey;
-    box-shadow: 3px 2px 7px rgb(0, 0, 0, 0.2);
-    position: relative;
-
-    .ukm-image {
-        img {
-            object-fit: cover;
-            border-radius: 1rem;
-            object-position: center;
-        }
-    }
-
-    .ukm-wa {
-        position: absolute;
-        bottom: 8px;
-        right: 8px;
-
-        img {
-            width: 35px;
-        }
-    }
-}
 
 .ukm-title {
     overflow: hidden;
@@ -304,7 +281,7 @@
     box-shadow: 0 0 10px rgba(black, 0.3);
     font-size: .9rem;
 
-    .col-3  {
+    .col-3 {
         display: flex;
         align-items: center;
     }
@@ -322,6 +299,6 @@
         img {
             width: 30px;
         }
-    
+
     }
 }

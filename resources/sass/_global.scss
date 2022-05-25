@@ -1,0 +1,26 @@
+.ukm {
+    border-radius: 1rem;
+    background-position: center;
+    background-size: cover;
+    background-color: $grey;
+    box-shadow: 3px 2px 7px rgb(0, 0, 0, 0.2);
+    position: relative;
+
+    .ukm-image {
+        img {
+            object-fit: cover;
+            border-radius: 1rem;
+            object-position: center;
+        }
+    }
+
+    .ukm-wa {
+        position: absolute;
+        bottom: 8px;
+        right: 8px;
+
+        img {
+            width: 35px;
+        }
+    }
+}

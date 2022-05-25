@@ -2,6 +2,7 @@
 
 @import 'variables';
 @import 'override';
+@import 'global';
 @import 'pages/index';
 @import 'pages/login';
 @import 'pages/admin';
@@ -17,12 +18,18 @@
 @import 'base/font';
 
 
-body, html {
+body,
+html {
     font-family: 'Roboto', sans-serif;
     color: grey;
 }
 
-h1,h2,h3,h4,h5,h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: 'DIN Next LT', sans-serif;
     font-weight: 500;
 }
