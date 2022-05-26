@@ -94,7 +94,7 @@ class CatalogController extends Controller
             $q->where('catalog_id', $catalog->id);
         })->get();
 
-        if ($request->categories || $request->states || $request->owner_genders || $request->search || $request->page) {
+        if ($request->categories || $request->states || $request->owner_genders || $request->search || $request->page || $request->programs) {
             $ukms = Ukm::where('catalog_id', $catalog->id);
             if (isset($request->categories)) {
                 if(is_string($request->categories)) {
@@ -112,6 +112,18 @@ class CatalogController extends Controller
                         ['clicks' => \DB::raw('clicks + 1')]
                     );
                 }
+            }
+
+            if (isset($request->programs)) {
+                if(is_string($request->programs)) {
+                    $programs_array = explode(',', $request->programs);
+                } else {
+                    $programs_array = $request->programs;
+                }
+                $programId = Program::whereIn('id', $programs_array)->pluck('id');
+                $ukms = $ukms->whereHas('program', function($q) use($programId) {
+                    $q->whereIn('program_id', $programId);
+                });
             }
 
             if (isset($request->states)) {

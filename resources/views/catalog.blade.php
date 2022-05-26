@@ -126,8 +126,8 @@
                                     <h5 class="mb-2">Asal Program</h5>
                                     @foreach ($programs as $program)
                                         <div class="form-check">
-                                            <input class="form-check-input category-large" type="checkbox"
-                                                value="{{ $program->id }}" id="category" name="category[]">
+                                            <input class="form-check-input program-large" type="checkbox"
+                                                value="{{ $program->id }}" id="program" name="program[]">
                                             <label class="form-check-label" for="flexCheckDefault">
                                                 {{ $program->title }}
                                         </div>
@@ -212,6 +212,18 @@
                                         </div>
                                     @endforeach
                                 </div>
+
+                                <div class="category-filter mb-3">
+                                    <h5 class="mb-2">Asal Program</h5>
+                                    @foreach ($programs as $program)
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox"
+                                                value="{{ $program->id }}" id="program" name="program[]">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                {{ $program->title }}
+                                        </div>
+                                    @endforeach
+                                </div>
                                 <div class="location-filter mb-3">
                                     <h5 class="mb-2">Lokasi</h5>
                                     @foreach ($states as $item)
@@ -269,10 +281,12 @@
         var category_filter = [];
         var state_filter = [];
         var owner_gender_filter = [];
+        var program_filter = [];
 
         var category_texts = [];
         var state_texts = [];
         var owner_gender_texts = [];
+        var program_texts = [];
 
         var page;
 
@@ -342,6 +356,7 @@
             var owner_genders_params = params.get('owner_genders');
             var categories_params = params.get('categories');
             var search_params = params.get('search');
+            var programs_params = params.get('programs');
 
             if (states_params) {
                 state_array = states_params.split(",");
@@ -378,6 +393,19 @@
                 });
                 $('.category-selected').html(category_texts);
                 $('.category-data').removeAttr('hidden')
+            }
+
+            if (programs_params) {
+                programs_params = programs_params.split(",");
+                programs_params.forEach(element => {
+                    element = parseInt(element);
+                    $(":checkbox[value=" + element + "]").prop("checked", "true");
+                    window[`program_filter`].push(element);
+                    window[`program_texts`].push($(`input[type="checkbox"][value='${element}']`).next().first()
+                        .text().trim());
+                });
+                $('.program-selected').html(category_texts);
+                $('.program-data').removeAttr('hidden')
             }
 
             if (search_params) {
@@ -453,6 +481,7 @@
         function ajaxFilter(page, record, type) {
             var catalog = '{{ $catalog->id }}'
             states = state_filter;
+            programs = program_filter;
             owner_genders = owner_gender_filter;
             categories = category_filter;
             var search = $('#search_ukm').val();
@@ -472,6 +501,7 @@
                     categories: categories,
                     catalog: catalog,
                     search: search,
+                    programs: programs,
                     page: page,
                     record: record,
                     type: type
@@ -487,6 +517,7 @@
                     categories: categories,
                     catalog: catalog,
                     search: search,
+                    programs: programs,
                     page: page
                 }
 
@@ -506,6 +537,10 @@
                     url.searchParams.set('search', search)
                 else
                     url.searchParams.delete('search')
+                if (stateObj.programs.length > 0)
+                    url.searchParams.set('programs', programs)
+                else
+                    url.searchParams.delete('programs')
                 if (stateObj.page !== 1)
                     url.searchParams.set('page', page)
                 else
@@ -521,6 +556,11 @@
             }
             $('input:checkbox').prop('checked', false);
             e.state.categories.forEach(element => {
+                var data = parseInt(element);
+                $(":checkbox[value=" + data + "]").prop("checked", "true");
+            });
+
+            e.state.programs.forEach(element => {
                 var data = parseInt(element);
                 $(":checkbox[value=" + data + "]").prop("checked", "true");
             });

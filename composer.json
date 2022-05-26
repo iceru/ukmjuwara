@@ -18,6 +18,7 @@
         "santigarcor/laratrust": "^6.3",
         "spatie/laravel-analytics": "4.0.1",
         "spatie/laravel-searchable": "^1.10",
+        "yajra/laravel-disqus": "^1.2",
         "yurtesen/geonames": "dev-master"
     },
     "require-dev": {
