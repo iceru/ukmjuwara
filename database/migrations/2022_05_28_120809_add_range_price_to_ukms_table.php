@@ -14,7 +14,7 @@ class AddRangePriceToUkmsTable extends Migration
     public function up()
     {
         Schema::table('ukms', function (Blueprint $table) {
-            //
+            $table->integer('price_range');
         });
     }
 
@@ -26,7 +26,7 @@ class AddRangePriceToUkmsTable extends Migration
     public function down()
     {
         Schema::table('ukms', function (Blueprint $table) {
-            //
+            $table->dropColumn('price_range');
         });
     }
 }

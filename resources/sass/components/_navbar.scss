@@ -149,6 +149,8 @@
 
 .nav-search {
     padding-bottom: 1rem;
+    position: relative;
+    z-index: 5;
 
     .container {
         display: flex;
