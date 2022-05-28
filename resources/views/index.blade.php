@@ -133,7 +133,7 @@
                 </div>
             </div>
             <div class="row mb-4 ">
-                <div class="col-12 col-lg-6">
+                <div class="col-12 col-lg-6  mb-3 mb-lg-0">
                     <div class="content primary article mb-0">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <div class="title">
@@ -167,12 +167,12 @@
                 </div>
                 <div class="col-12 col-lg-6 cta-section">
                     <div class="row">
-                        <div class="col-12 col-lg-5 pe-0">
+                        <div class="col-12 col-lg-5 pe-lg-0">
                             <div class="cta-img">
                                 <img src="/images/header tentang kami.jpg" alt="">
                             </div>
                         </div>
-                        <div class="col-12 col-lg-7 ps-0">
+                        <div class="col-12 col-lg-7 ps-lg-0">
                             <div class="cta-text">
                                 <div class="cta-title">
                                     <img src="" alt="">
@@ -253,8 +253,9 @@
                     settings: {
                         slidesToShow: 2
                     }
-                }]
+                }, ]
             });
+
             $('#ukm_bests').slick({
                 infinite: true,
                 slidesToShow: 6,
@@ -264,10 +265,11 @@
                 responsive: [{
                     breakpoint: 567,
                     settings: {
-                        slidesToShow: 3
+                        slidesToShow: 2
                     }
                 }, ]
             });
+
             $('#ukm_bests_global').slick({
                 infinite: true,
                 slidesToShow: 6,
@@ -277,16 +279,23 @@
                 responsive: [{
                     breakpoint: 567,
                     settings: {
-                        slidesToShow: 3
+                        slidesToShow: 2
                     }
                 }, ]
             });
+
             $('#categories').slick({
                 infinite: true,
                 slidesToShow: 5,
                 slidesToScroll: 1,
                 autoplay: true,
                 autoplaySpeed: 3000,
+                responsive: [{
+                    breakpoint: 567,
+                    settings: {
+                        slidesToShow: 1
+                    }
+                }, ]
             });
             $('#supported_dukung').slick({
                 infinite: true,
