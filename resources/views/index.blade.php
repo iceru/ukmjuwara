@@ -132,9 +132,9 @@
                     </div>
                 </div>
             </div>
-            <div class="row mb-4">
+            <div class="row mb-4 ">
                 <div class="col-12 col-lg-6">
-                    <div class="content primary article">
+                    <div class="content primary article mb-0">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <div class="title">
                                 Berita Terbaru
@@ -165,10 +165,25 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-lg-6">
+                <div class="col-12 col-lg-6 cta-section">
                     <div class="row">
-                        <div class="col-12 col-lg-4">
-                            <img src="" alt="">
+                        <div class="col-12 col-lg-5 pe-0">
+                            <div class="cta-img">
+                                <img src="/images/header tentang kami.jpg" alt="">
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-7 ps-0">
+                            <div class="cta-text">
+                                <div class="cta-title">
+                                    <img src="" alt="">
+                                    <div>
+                                        <h3>KATALOG #UKMJuWAra adalah</h3>
+                                    </div>
+                                </div>
+                                <p>Katalog digital banayk brand lokal terpilih dari berbagai wilayah Indonesia oleh
+                                    ukmindonesia.id</p>
+                                <a href="">Baca Selengkapnya</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -229,7 +244,7 @@
         $(document).ready(function() {
             $('#supported').slick({
                 infinite: true,
-                slidesToShow: 4,
+                slidesToShow: 3,
                 slidesToScroll: 1,
                 autoplay: true,
                 autoplaySpeed: 4000,
@@ -275,7 +290,7 @@
             });
             $('#supported_dukung').slick({
                 infinite: true,
-                slidesToShow: 4,
+                slidesToShow: 3,
                 slidesToScroll: 1,
                 autoplay: true,
                 autoplaySpeed: 4000,

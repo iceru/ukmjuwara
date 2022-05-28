@@ -10838,7 +10838,17 @@ main {
     min-height: 70vh;
   }
 }
-h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
+h1, .h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
   margin-bottom: 0;
 }
 
@@ -10867,7 +10877,7 @@ ul {
 }
 
 .container-padding {
-  padding-top: 5rem;
+  padding-top: 1rem;
   padding-bottom: 5rem;
 }
 @media (max-width: 567px) {
@@ -10888,7 +10898,8 @@ a:hover {
   transition: all 0.2s ease-in;
 }
 
-.slick-prev:before, .slick-next:before {
+.slick-prev:before,
+.slick-next:before {
   color: #58C082;
 }
 
@@ -10974,7 +10985,9 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before, table
 
 .index {
   background-color: #EAE8E9;
-  padding: 2rem;
+  padding: 0 2rem;
+  margin-top: -5rem;
+  padding-top: 5rem;
 }
 .index .container-fluid, .index .container-sm, .index .container-md, .index .container-lg, .index .container-xl, .index .container-xxl {
   padding: 0;
@@ -10982,6 +10995,7 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before, table
 .index .content {
   background-color: white;
   padding: 1rem;
+  margin-bottom: 2rem;
 }
 .index .content.primary {
   background-color: #16857E;
@@ -11077,6 +11091,15 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before, table
   padding-bottom: 2rem;
   border-bottom: 1px solid lightgray;
 }
+.index .best .ukm-sliders {
+  padding: 0 1rem;
+}
+.index .best .ukm-sliders .slick-prev {
+  left: -8px;
+}
+.index .best .ukm-sliders .slick-next {
+  right: -8px;
+}
 .index .best .best-title {
   font-family: "DIN Next LT", sans-serif;
   font-weight: 300;
@@ -11122,6 +11145,36 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before, table
 .index .article .article-item .article-title {
   font-weight: bold;
   font-size: 20px;
+}
+.index .cta-section > .row {
+  height: 100%;
+}
+.index .cta-section .cta-img {
+  height: 100%;
+}
+.index .cta-section .cta-img img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.index .cta-section .cta-text {
+  background-color: #16857E;
+  color: white;
+  padding: 2rem;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.index .cta-section .cta-text .cta-title {
+  display: flex;
+  margin-bottom: 1.5rem;
+}
+.index .cta-section .cta-text a {
+  margin-top: 1rem;
+  color: white;
+  display: block;
 }
 
 .header-container {
@@ -11232,7 +11285,13 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before, table
 }
 .supported-by .slick-prev:before,
 .supported-by .slick-next:before {
-  color: lightgray;
+  color: #16857E;
+}
+.supported-by .slick-prev {
+  left: -8px;
+}
+.supported-by .slick-next {
+  right: -8px;
 }
 .supported-by .support-title {
   margin-bottom: 1rem;
@@ -12099,12 +12158,16 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before, table
   color: #16857E;
   font-size: 1.1rem;
 }
+.ukm-page .container .main-product .col-md-7 .container-ukm .socials {
+  display: flex;
+  flex-wrap: wrap;
+}
 .ukm-page .container .main-product .col-md-7 .container-ukm .social {
   display: inline-flex;
   justify-content: center;
   padding: 0.75rem 2rem;
   margin-right: 1rem;
-  margin-bottom: 0;
+  margin-bottom: 1rem;
 }
 @media (max-width: 768px) {
   .ukm-page .container .main-product .col-md-7 .container-ukm .social {
@@ -12130,6 +12193,8 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before, table
 
 #nav {
   background-color: #16857E;
+  position: relative;
+  z-index: 3;
 }
 #nav .navbar {
   align-items: center;
@@ -12149,7 +12214,7 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before, table
   margin-bottom: 0;
 }
 #nav .navbar ul.navigation li.nav-item {
-  padding: 0 2rem;
+  padding: 0 1.5rem;
   position: relative;
 }
 #nav .navbar ul.navigation li.nav-item:after {
@@ -12172,7 +12237,7 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before, table
   border-bottom: 1px solid #16857E;
   text-transform: uppercase;
   font-family: "DIN Next LT", sans-serif;
-  font-weight: 500;
+  font-weight: 300;
   font-size: 14px;
 }
 #nav .navbar ul.navigation li.nav-item a.nav-link:hover {
@@ -12238,6 +12303,31 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before, table
 .navigation-admin .hamburger img {
   height: 20px;
   width: auto;
+}
+
+.nav-search {
+  padding-bottom: 1rem;
+}
+.nav-search .container {
+  display: flex;
+  justify-content: flex-end;
+}
+.nav-search .container .search-content {
+  background-color: #58C082;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+}
+.nav-search .container .search-content .text {
+  color: white;
+  margin-right: 0.5rem;
+}
+.nav-search .container .search-content .form-control {
+  border-radius: 80px;
+}
+.nav-search .container .search-content .fa-search {
+  color: #16857E;
+  font-size: 20px;
 }
 
 .footer {

@@ -63,7 +63,7 @@
                                 </div>
                                 @if (!str_contains(strtolower($ukm->catalog->title), 'global'))
                                     <div class="col-6">
-                                        <div class="desc-item last">
+                                        <div class="desc-item">
                                             <h6 class="mb-2">Kategori</h6>
                                             <p class="categories-text">
                                                 @foreach ($ukm->categories as $item)
@@ -105,7 +105,7 @@
 
                             </div>
                         </div>
-                        <div class="my-4 d-flex">
+                        <div class="my-4 mb-2 socials">
                             <div>
                                 <a class="mb-3 whatsapp-click" href="">
                                     <div class="social whatsapp">
@@ -177,7 +177,7 @@
                     <h3 class="text-center text-uppercase">UKM Lainnya</h3>
                 </div>
                 @foreach ($relatedUkms as $ukmRelated)
-                    <div class="col-6 col-md-4 col-xl-3 mb-5">
+                    <div class="col-6 col-md-4 col-lg-3 mb-5">
                         <a href="{{ route('ukm.show', $ukmRelated->slug) }}">
                             <div class="ukm">
                                 <div class="ukm-image">

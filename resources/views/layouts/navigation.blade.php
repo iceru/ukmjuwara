@@ -11,22 +11,24 @@
         </a>
         <div class="d-flex align-items-center">
             <ul class="navigation d-none d-lg-flex">
+                @foreach ($catalogs->slice(1, 2) as $catalog)
+                    <li class="nav-item"><a class="nav-link"
+                            @if ($catalog->link) target="_blank" @endif
+                            href="{{ $catalog->link ? $catalog->link : route('catalog.show', $catalog->slug) }}">{{ str_replace('#UKMJuWAra ', '', $catalog->title) }}</a>
+                    </li>
+                @endforeach
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('about') }}">Tentang Kami</a>
                 </li>
-                <li class="nav-item dropdown">
+                {{-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         Katalog
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        @foreach ($catalogs as $catalog)
-                        <li><a class="dropdown-item" @if($catalog->link) target="_blank" @endif
-                                href="{{ $catalog->link ? $catalog->link : route('catalog.show', $catalog->slug) }}">{{ $catalog->title }}</a>
-                        </li>
-                        @endforeach
+
                     </ul>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('article.index') }}">Berita</a>
                 </li>
@@ -34,45 +36,58 @@
                     <a class="nav-link" href="{{ route('contact') }}">Kemitraan</a>
                 </li>
             </ul>
-            <div class="search">
-                <i class="fa fa-search" id="search_btn" aria-hidden="true"></i>
-            </div>
         </div>
     </div>
-
     <script>
         const $dropdown = $(".dropdown");
         const $dropdownToggle = $(".dropdown-toggle");
         const $dropdownMenu = $(".dropdown-menu");
         const showClass = "show";
-        
+
         $(window).on("load resize", function() {
-        if (this.matchMedia("(min-width: 768px)").matches) {
-            $dropdown.hover(
-            function() {
-                const $this = $(this);
-                $this.addClass(showClass);
-                $this.find($dropdownToggle).attr("aria-expanded", "true");
-                $this.find($dropdownMenu).addClass(showClass);
-            },
-            function() {
-                const $this = $(this);
-                $this.removeClass(showClass);
-                $this.find($dropdownToggle).attr("aria-expanded", "false");
-                $this.find($dropdownMenu).removeClass(showClass);
+            if (this.matchMedia("(min-width: 768px)").matches) {
+                $dropdown.hover(
+                    function() {
+                        const $this = $(this);
+                        $this.addClass(showClass);
+                        $this.find($dropdownToggle).attr("aria-expanded", "true");
+                        $this.find($dropdownMenu).addClass(showClass);
+                    },
+                    function() {
+                        const $this = $(this);
+                        $this.removeClass(showClass);
+                        $this.find($dropdownToggle).attr("aria-expanded", "false");
+                        $this.find($dropdownMenu).removeClass(showClass);
+                    }
+                );
+            } else {
+                $dropdown.off("mouseenter mouseleave");
             }
-            );
-        } else {
-            $dropdown.off("mouseenter mouseleave");
-        }
         });
     </script>
 </nav>
+<div class="nav-search">
+    <div class="container">
+        <div class="search-content">
+            <div class="text">
+                Cari #UKMJuWAra
+            </div>
+            <form action="{{ route('search') }}" role="search" id="search_form" action="" method="GET">
+                @csrf
+                <input type="search" class="form-control" name="search_query">
+            </form>
+            <button type="submit" value="" class="btn btn-search">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
 
 <div id="search">
     <div class="close"><i class="fa fa-times" aria-hidden="true"></i></div>
     <form action="{{ route('search') }}" role="search" id="search_form" action="" method="GET">
-         @csrf
+        @csrf
         <input type="search" name="search_query" placeholder="Search">
         <button type="submit" value="" class="btn btn-search">
             <i class="fa fa-search" aria-hidden="true"></i>
@@ -101,10 +116,10 @@
                     <div class="collapse" id="katalog">
                         <ul class="child-menu">
                             @foreach ($catalogs as $catalog)
-                            <li>
-                                <a
-                                    href="{{ $catalog->link ? $catalog->link : route('catalog.show', $catalog->slug) }}">{{ $catalog->title }}</a>
-                            </li>
+                                <li>
+                                    <a
+                                        href="{{ $catalog->link ? $catalog->link : route('catalog.show', $catalog->slug) }}">{{ $catalog->title }}</a>
+                                </li>
                             @endforeach
                         </ul>
                     </div>
@@ -121,14 +136,13 @@
 </div>
 
 <script>
-    $(document).ready(function(){
-        $('#search_btn').on('click', function(event) {    
+    $(document).ready(function() {
+        $('#search_btn').on('click', function(event) {
             $('#search').addClass('open');
             $('#search > form > input[type="search"]').focus();
-        });            
+        });
         $('#search .close').on('click', function(event) {
             $('#search').removeClass('open');
-        });            
+        });
     });
-
 </script>

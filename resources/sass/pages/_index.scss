@@ -1,6 +1,8 @@
 .index {
     background-color: #EAE8E9;
-    padding: 2rem;
+    padding: 0 2rem;
+    margin-top: -5rem;
+    padding-top: 5rem;
 
     .container-fluid {
         padding: 0;
@@ -9,6 +11,7 @@
     .content {
         background-color: white;
         padding: 1rem;
+        margin-bottom: 2rem;
 
         &.primary {
             background-color: $primary-color;
@@ -120,6 +123,18 @@
             border-bottom: 1px solid lightgray;
         }
 
+        .ukm-sliders {
+            padding: 0 1rem;
+
+            .slick-prev {
+                left: -8px;
+            }
+
+            .slick-next {
+                right: -8px;
+            }
+        }
+
         .best-title {
             font-family: "DIN Next LT", sans-serif;
             font-weight: 300;
@@ -176,6 +191,44 @@
             .article-title {
                 font-weight: bold;
                 font-size: 20px;
+            }
+        }
+    }
+
+
+    .cta-section {
+        >.row {
+            height: 100%;
+        }
+
+        .cta-img {
+            height: 100%;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        .cta-text {
+            background-color: $primary-color;
+            color: white;
+            padding: 2rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            .cta-title {
+                display: flex;
+                margin-bottom: 1.5rem;
+            }
+
+            a {
+                margin-top: 1rem;
+                color: white;
+                display: block;
             }
         }
     }
@@ -314,7 +367,15 @@
 
     .slick-prev:before,
     .slick-next:before {
-        color: lightgray;
+        color: $primary-color;
+    }
+
+    .slick-prev {
+        left: -8px;
+    }
+
+    .slick-next {
+        right: -8px;
     }
 
     .support-title {
