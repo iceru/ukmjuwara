@@ -39,21 +39,21 @@
                             <h1 class="mb-4 primary-color">{{ $ukm->title }}</h1>
                             <div class="row description">
 
-                                <div class="col-6">
+                                <div class="col-12 col-lg-6">
                                     <div class="desc-item">
                                         <h6 class="mb-2">Produk</h6>
                                         <p>{{ $ukm->product }}</p>
                                     </div>
                                 </div>
                                 @if ($ukm->capacity)
-                                    <div class="col-6">
+                                    <div class="col-12 col-lg-6">
                                         <div class="desc-item">
                                             <h6 class="mb-2">Kapasitas Produksi per Bulan</h6>
                                             <p>{!! $ukm->capacity !!}</p>
                                         </div>
                                     </div>
                                 @endif
-                                <div class="col-6">
+                                <div class="col-12 col-lg-6">
                                     <div class="desc-item">
                                         <h6 class="mb-2">Lokasi</h6>
                                         @if ($ukm->address)
@@ -62,7 +62,7 @@
                                     </div>
                                 </div>
                                 @if (!str_contains(strtolower($ukm->catalog->title), 'global'))
-                                    <div class="col-6">
+                                    <div class="col-12 col-lg-6">
                                         <div class="desc-item">
                                             <h6 class="mb-2">Kategori</h6>
                                             <p class="categories-text">
@@ -75,7 +75,7 @@
                                 @endif
 
                                 @if ($ukm->operational_hours && $ukm->operational_hours_end)
-                                    <div class="col-6">
+                                    <div class="col-12 col-lg-6">
                                         <div class="desc-item last">
                                             <h6 class="mb-2">Jam Operasional</h6>
                                             <p>{{ $ukm->operational_hours }} - {{ $ukm->operational_hours_end }}
@@ -85,7 +85,7 @@
                                 @endif
 
                                 @if ($ukm->permission)
-                                    <div class="col-6 mb-3">
+                                    <div class="col-12 col-lg-6 mb-0 mb-lg-3">
                                         <div class="desc-item last">
                                             <h6 class="mb-2">Perizinan dan Sertifikasi</h6>
                                             <p>{!! $ukm->permission !!}</p>
@@ -94,7 +94,7 @@
                                 @endif
 
                                 @if ($ukm->program_id)
-                                    <div class="col-6 mb-3">
+                                    <div class="col-12 col-lg-6 mb-3">
                                         <div class="desc-item last">
                                             <h6 class="mb-2">Asal Program</h6>
                                             <p>{{ $ukm->program->title }}</p>
