@@ -1,12 +1,15 @@
 .article-detail {
     padding-bottom: 3rem;
+    margin-top: -5rem;
 
     .article {
         &.header-article {
             margin-bottom: 0;
+
             &:before {
                 background: linear-gradient(transparent 0%, rgba($primary-color, 0.8) 70%);
             }
+
             .article-content {
                 bottom: 4rem;
 

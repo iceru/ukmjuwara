@@ -11093,9 +11093,15 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before, table
   text-transform: uppercase;
 }
 .index .best:not(:last-child) {
-  margin-bottom: 2rem;
-  padding-bottom: 2rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
   border-bottom: 1px solid lightgray;
+}
+.index .best .best-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
 }
 @media (min-width: 992px) {
   .index .best .ukm-sliders {
@@ -11111,7 +11117,6 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before, table
 .index .best .best-title {
   font-family: "DIN Next LT", sans-serif;
   font-weight: 300;
-  margin-bottom: 1rem;
   font-size: 22px;
   color: #16857E;
   text-transform: uppercase;
@@ -11183,6 +11188,8 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before, table
   margin-top: 1rem;
   color: white;
   display: block;
+  font-size: small;
+  font-weight: bold;
 }
 
 .header-container {
@@ -11896,6 +11903,7 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before, table
 
 .article-detail {
   padding-bottom: 3rem;
+  margin-top: -5rem;
 }
 .article-detail .article.header-article {
   margin-bottom: 0;
@@ -12168,9 +12176,8 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before, table
   padding-left: 1rem;
   padding-bottom: 1.5rem;
   border-left: 2px solid #58C082;
-  height: 100%;
 }
-.ukm-page .container .main-product .col-md-7 .container-ukm .detail-head .description .desc-item.last {
+.ukm-page .container .main-product .col-md-7 .container-ukm .detail-head .description .desc-item:last-child {
   padding-bottom: 0.5rem;
 }
 .ukm-page .container .main-product .col-md-7 .container-ukm .detail-head .description .desc-item h6, .ukm-page .container .main-product .col-md-7 .container-ukm .detail-head .description .desc-item .h6 {

@@ -123,9 +123,16 @@
 
     .best {
         &:not(:last-child) {
-            margin-bottom: 2rem;
-            padding-bottom: 2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
             border-bottom: 1px solid lightgray;
+        }
+
+        .best-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
         }
 
         .ukm-sliders {
@@ -145,7 +152,6 @@
         .best-title {
             font-family: "DIN Next LT", sans-serif;
             font-weight: 300;
-            margin-bottom: 1rem;
             font-size: 22px;
             color: $primary-color;
             text-transform: uppercase;
@@ -236,6 +242,8 @@
                 margin-top: 1rem;
                 color: white;
                 display: block;
+                font-size: small;
+                font-weight: bold;
             }
         }
     }

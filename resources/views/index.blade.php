@@ -54,8 +54,15 @@
                     </div>
                 </div>
                 <div class="best">
-                    <div class="best-title">
-                        Trending <span>Go Digital</span>
+                    <div class="best-header">
+                        <div class="best-title">
+                            Trending <span>Go Digital</span>
+                        </div>
+                        <div>
+                            <a href="#" class="see-more">
+                                Lihat Semua
+                            </a>
+                        </div>
                     </div>
                     <div id="ukm_bests" class="ukm-sliders">
                         @foreach ($bests as $ukm)
@@ -93,8 +100,15 @@
                     </div>
                 </div>
                 <div class="best">
-                    <div class="best-title">
-                        Trending <span>Go Global</span>
+                    <div class="best-header">
+                        <div class="best-title">
+                            Trending <span>Go Global</span>
+                        </div>
+                        <div>
+                            <a href="#" class="see-more">
+                                Lihat Semua
+                            </a>
+                        </div>
                     </div>
                     <div id="ukm_bests_global" class="ukm-sliders">
                         @foreach ($bests_global as $ukm)
@@ -147,12 +161,12 @@
                         <div class="items">
                             @foreach ($articles as $article)
                                 <div class="row article-item">
-                                    <div class="col-4 ">
+                                    <div class="col-3 ">
                                         <div class="article-image">
                                             <img src="{{ Storage::url('article-image/' . $article->image) }}" alt="">
                                         </div>
                                     </div>
-                                    <div class="col-8">
+                                    <div class="col-9">
                                         <div class="article-title">
                                             <p>{!! $article->title !!}</p>
                                         </div>
