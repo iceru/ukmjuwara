@@ -202,7 +202,21 @@
                         name="address">
                 </div>
             </div>
-
+            <div class="row mb-3">
+                <label for="instagram" class="col-12 col-md-2 col-form-label">Rentang Harga Produk</label>
+                <div class="col-12 col-md-10">
+                    <div class="row">
+                        <div class="col-12 col-lg-6">
+                            <input type="text" class="form-control" value="{{ old('min_price') }}" id="min_price"
+                                name="min_price" placeholder="Harga Minimum" value="{{ $ukm->min_price }}">
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <input type="text" class="form-control" value="{{ old('max_price') }}" id="max_price"
+                                name="max_price" placeholder="Harga Maksimum" value="{{ $ukm->max_price }}">
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row mb-3">
                 <label for="catalog" class="col-12 col-md-2 col-form-label">Provinsi</label>
                 <div class="col-12 col-md-10">

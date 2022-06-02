@@ -76,6 +76,8 @@ class AdminUkmController extends Controller
             'address' => 'required',
             'state' => 'required',
             'city' => 'required',
+            'min_price' => 'required',
+            'max_price' => 'required',
             'subDistrict' => 'required',
             'city_name'=> 'required',
             'owner_gender'=> 'required',
@@ -132,6 +134,8 @@ class AdminUkmController extends Controller
         $ukm->minimum_order = $request->minimum_order;
         $ukm->fulfillment_duration = $request->fulfillment_duration;
         $ukm->preferred_incoterm = $request->preferred_incoterm;
+        $ukm->max_price = $request->max_price;
+        $ukm->min_price = $request->min_price;
 
         $ukm->save();
 
@@ -263,6 +267,8 @@ class AdminUkmController extends Controller
         $ukm->minimum_order = $request->minimum_order;
         $ukm->fulfillment_duration = $request->fulfillment_duration;
         $ukm->preferred_incoterm = $request->preferred_incoterm;
+        $ukm->min_price = $request->min_price;
+        $ukm->max_price = $request->max_price;
 
         $ukm->save();
 

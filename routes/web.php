@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CtaController;
 use App\Http\Controllers\UkmController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\IndexController;
@@ -94,6 +95,12 @@ Route::middleware(['auth', 'role:administrator'])->group(function (){
     Route::get('/admin/slider/edit/{id}', [SliderController::class, 'edit'])->name('admin.slider.edit');
     Route::post('/admin/slider/update', [SliderController::class, 'update'])->name('admin.slider.update');
     Route::get('/admin/slider/delete/{id}', [SliderController::class, 'destroy'])->name('admin.slider.destroy');
+
+    Route::get('/admin/cta', [CtaController::class, 'index'])->name('admin.cta');
+    Route::post('/admin/cta/store', [CtaController::class, 'store'])->name('admin.cta.store');
+    Route::get('/admin/cta/edit/{id}', [CtaController::class, 'edit'])->name('admin.cta.edit');
+    Route::post('/admin/cta/update', [CtaController::class, 'update'])->name('admin.cta.update');
+    Route::get('/admin/cta/delete/{id}', [CtaController::class, 'destroy'])->name('admin.cta.destroy');
 
     Route::get('/admin/sponsor', [SponsorController::class, 'index'])->name('admin.sponsor');
     Route::post('/admin/sponsor/store', [SponsorController::class, 'store'])->name('admin.sponsor.store');

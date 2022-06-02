@@ -193,6 +193,21 @@
                 </div>
             </div>
             <div class="row mb-3">
+                <label for="instagram" class="col-12 col-md-2 col-form-label">Rentang Harga Produk</label>
+                <div class="col-12 col-md-10">
+                    <div class="row">
+                        <div class="col-12 col-lg-6">
+                            <input type="text" class="form-control" value="{{ old('min_price') }}" id="min_price"
+                                name="min_price" placeholder="Harga Minimum">
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <input type="text" class="form-control" value="{{ old('max_price') }}" id="max_price"
+                                name="max_price" placeholder="Harga Maksimum">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
                 <label for="catalog" class="col-12 col-md-2 col-form-label">Provinsi</label>
                 <div class="col-12 col-md-10">
                     <select class="form-select" name="state" id="state">
@@ -252,6 +267,7 @@
                     <th>Minimum Order Quantity untuk Ekspor</th>
                     <th>Durasi masa tunggu pemenuhan pesanan</th>
                     <th>Preferred Incoterm</th>
+                    <th>Harga Minimum - Maksimum</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -292,6 +308,7 @@
                         <td>{!! str_contains(strtolower($ukm->catalog->title), 'global') ? $ukm->minimum_order : '-' !!}</td>
                         <td>{!! str_contains(strtolower($ukm->catalog->title), 'global') ? $ukm->fulfillment_duration : '-' !!}</td>
                         <td>{!! str_contains(strtolower($ukm->catalog->title), 'global') ? $ukm->preferred_incoterm : '-' !!}</td>
+                        <td>Rp{{ $ukm->min_price }} - Rp{{ $ukm->max_price }}</td>
 
                         <td><a class="btn btn-primary btn-small d-flex align-items-center justify-content-center mb-2"
                                 href="/admin/ukm/edit/{{ $ukm->id }}"><i class="fas fa-edit me-1"></i> Edit</a>

@@ -249,12 +249,12 @@
     .slick-list,
     .slick-track,
     .slick-slide {
-        height: 50vh;
+        height: 30vh;
     }
 
     .image-container {
         img {
-            height: 50vh;
+            height: 30vh;
         }
     }
 
@@ -350,9 +350,6 @@
 
 
     @include breakpoint-down(small) {
-        .image-container.ratio2halfx1 {
-            padding-top: 100%;
-        }
 
         .cta {
             flex-direction: column;
@@ -386,9 +383,21 @@
     }
 
     .support-title {
-        margin-bottom: 1rem;
+        margin-bottom: 1.5rem;
         color: $primary-color;
-        text-align: left;
+        text-align: center;
+        position: relative;
+
+        &::after {
+            content: '';
+            bottom: -12px;
+            width: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 2px;
+            position: absolute;
+            background-color: lightgray;
+        }
     }
 
     @include breakpoint-down(small) {

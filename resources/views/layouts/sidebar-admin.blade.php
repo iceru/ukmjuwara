@@ -52,6 +52,10 @@
             <li class="{{ request()->is('admin/sponsor') ? 'active' : '' }}"><i class="fa fa-building fa-fw"></i>
                 &nbsp; Sponsor</li>
         </a>
+        <a href="{{ route('admin.cta') }}">
+            <li class="{{ request()->is('admin/cta') ? 'active' : '' }}"><i class="fa fa-hand-pointer fa-fw"></i>
+                &nbsp; Home CTA</li>
+        </a>
         <form method="POST" action="{{ route('logout') }}">
             @csrf
             <a href="{{ route('logout') }}" onclick="event.preventDefault();
