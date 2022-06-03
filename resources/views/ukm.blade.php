@@ -190,6 +190,12 @@
                     </div>
                 @endforeach
             </div>
+
+            <div class="row">
+                <div class="col-12">
+                    @include('components.disqus')
+                </div>
+            </div>
         </div>
     </div>
 

@@ -22,6 +22,8 @@
         gtag('config', 'UA-206865884-3');
     </script>
 
+    <x-tagmanager-head />
+
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
@@ -49,6 +51,7 @@
 </head>
 
 <body class="font-sans antialiased">
+    <x-tagmanager-body />
     <div class="min-h-screen bg-gray-100">
         @include('layouts.navigation', ['catalogs' => \App\Models\Catalog::all()])
 

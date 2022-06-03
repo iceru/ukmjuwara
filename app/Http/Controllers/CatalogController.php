@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Label84\TagManager\Facades\TagManager;
 use CyrildeWit\EloquentViewable\Support\Period;
 
 class CatalogController extends Controller
@@ -93,6 +94,8 @@ class CatalogController extends Controller
         $programs = Program::whereHas('ukm', function($q) use($catalog) {
             $q->where('catalog_id', $catalog->id);
         })->get();
+
+        TagManager::push(['catalog_click' => 'Catalog Click '.$catalog->title]);
 
         $max_price = Ukm::where('catalog_id', $catalog->id)->max('max_price');
         $min_price = Ukm::where('catalog_id', $catalog->id)->min('min_price');
