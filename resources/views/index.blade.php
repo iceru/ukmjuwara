@@ -59,7 +59,7 @@
                             Trending <span>Go Digital</span>
                         </div>
                         <div>
-                            <a href="#" class="see-more">
+                            <a href="/katalog/ukmjuwara-go-digital" class="see-more">
                                 Lihat Semua
                             </a>
                         </div>
@@ -105,7 +105,7 @@
                             Trending <span>Go Global</span>
                         </div>
                         <div>
-                            <a href="#" class="see-more">
+                            <a href="/katalog/ukmjuwara-go-global" class="see-more">
                                 Lihat Semua
                             </a>
                         </div>
@@ -183,7 +183,7 @@
                     <div class="row">
                         <div class="col-12 col-lg-5 pe-lg-0">
                             <div class="cta-img">
-                                <img src="/images/header tentang kami.jpg" alt="">
+                                <img src="{{ Storage::url('cta-image/' . $cta->image) }}" alt="">
                             </div>
                         </div>
                         <div class="col-12 col-lg-7 ps-lg-0">
@@ -191,11 +191,10 @@
                                 <div class="cta-title">
                                     <img src="" alt="">
                                     <div>
-                                        <h3>KATALOG #UKMJuWAra adalah</h3>
+                                        <h3>{{ $cta->title }}</h3>
                                     </div>
                                 </div>
-                                <p>Katalog digital banayk brand lokal terpilih dari berbagai wilayah Indonesia oleh
-                                    ukmindonesia.id</p>
+                                <p>{!! $cta->description !!}</p>
                                 <a href="">Baca Selengkapnya</a>
                             </div>
                         </div>

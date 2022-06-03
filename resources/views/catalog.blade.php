@@ -122,7 +122,7 @@
                                         </div>
                                     @endforeach
                                 </div>
-                                <div class="category-filter mb-4">
+                                <div class="program-filter mb-4">
                                     <h5 class="mb-2">Asal Program</h5>
                                     @foreach ($programs as $program)
                                         <div class="form-check">
@@ -133,6 +133,41 @@
                                         </div>
                                     @endforeach
                                 </div>
+                                <div class="range-filter mb-4">
+                                    <h5 class="mb-2">Rentang Harga</h5>
+                                    <div class="row ">
+                                        <div class="col-6">
+                                            <label for="min_amount">Harga Min.</label>
+                                            <input class="form-control" type="text" id="min_amount">
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="max_amount">Harga Max.</label>
+                                            <input class="form-control" type="text" id="max_amount">
+                                        </div>
+                                        <div class="col-12 mt-3">
+
+                                            <div id="slider-range"></div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <script>
+                                    $(function() {
+                                        $("#slider-range").slider({
+                                            range: true,
+                                            step: 10000,
+                                            min: {{ $min_price }},
+                                            max: {{ $max_price }},
+                                            values: [{{ $min_price }}, {{ $max_price }}],
+                                            slide: function(event, ui) {
+                                                $("#min_amount").val(ui.values[0]);
+                                                $("#max_amount").val(ui.values[1]);
+                                            }
+                                        });
+                                        $("#min_amount").val($("#slider-range").slider("values", 0));
+                                        $("#max_amount").val($("#slider-range").slider("values", 1));
+                                    });
+                                </script>
                                 <div class="location-filter mb-4">
                                     <h5 class="mb-2">Lokasi</h5>
                                     @foreach ($states as $item)
@@ -418,15 +453,16 @@
             // NOTES: Harus Push nya sesuai di klik pertama. Kalau ga clicks nya bakal ga akurat
             if (add === 'add') {
                 if (window[`${filter}_filter`].indexOf(data) === -1) {
-                    filter === 'category' ? window[`${filter}_filter`].push(parseInt(data)) : window[`${filter}_filter`]
-                        .push(data);;
+                    filter === 'category' || filter === 'program' ? window[`${filter}_filter`].push(parseInt(data)) :
+                        window[`${filter}_filter`]
+                        .push(data);
                     window[`${filter}_texts`].push(text.trim());
                 }
                 ajaxFilter(page, 'record', filter);
 
             } else {
                 window[`${filter}_filter`] = window[`${filter}_filter`].filter(function(item) {
-                    if (filter === 'category') {
+                    if (filter === 'category' || filter === 'program') {
                         return item !== parseInt(data)
                     } else {
                         return item !== data

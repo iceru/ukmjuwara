@@ -19,7 +19,7 @@
             </div>
         @endif
 
-        <form action="{{ route('admin.category.store') }}" enctype="multipart/form-data" method="POST"
+        <form action="{{ route('admin.cta.store') }}" enctype="multipart/form-data" method="POST"
             class="mt-4 mb-5">
             @csrf
             <div class="row mb-3">
@@ -76,7 +76,7 @@
 
                         <td>
                             @if ($cta->image)
-                                <img class="mb-2" src="{{ Storage::url('category-image/' . $cta->image) }}"
+                                <img class="mb-2" src="{{ Storage::url('cta-image/' . $cta->image) }}"
                                     alt="Image" width="60">
                             @else
                                 -
@@ -84,10 +84,10 @@
                         </td>
 
                         <td><a class="btn btn-primary btn-small d-flex align-items-center justify-content-center mb-2"
-                                href="{{ route('admin.category.edit', $cta->id) }}"><i class="fas fa-edit me-1"></i>
+                                href="{{ route('admin.cta.edit', $cta->id) }}"><i class="fas fa-edit me-1"></i>
                                 Edit</a>
                             <a class="btn btn-danger btn-small d-flex align-items-center justify-content-center"
-                                href="/admin/category/delete/{{ $cta->id }}"
+                                href="/admin/cta/delete/{{ $cta->id }}"
                                 onclick="return confirm('Hapus data ini?')"><i class="fa fa-trash me-1"
                                     aria-hidden="true"></i> Delete</a>
                         </td>

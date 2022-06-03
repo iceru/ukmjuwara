@@ -75,7 +75,7 @@ class CtaController extends Controller
      * @param  \App\Models\Cta  $cta
      * @return \Illuminate\Http\Response
      */
-    public function edit(Cta $cta)
+    public function edit($id)
     {
         $cta = Cta::find($id);
 

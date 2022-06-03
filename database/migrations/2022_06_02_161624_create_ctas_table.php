@@ -16,8 +16,9 @@ class CreateCtasTable extends Migration
         Schema::create('ctas', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('ímage');
+            $table->text('image');
             $table->text('description');
+            $table->string('link')->nullable();
             $table->timestamps();
         });
     }

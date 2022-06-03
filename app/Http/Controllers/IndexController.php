@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cta;
 use App\Models\Ukm;
 use App\Models\Slider;
 use App\Models\Article;
@@ -32,8 +33,9 @@ class IndexController extends Controller
         $bests = Ukm::where('catalog_id', $catalogDigital->id)->orderByViews('desc', Period::since('2021-11-18'))->get()->take(8);
         $bests_global = Ukm::where('catalog_id', $catalogGlobal->id)->orderByViews('desc', Period::since('2021-11-18'))->get()->take(8);
         $articles = Article::get()->take(2);
+        $cta = Cta::first();
         
-        return view('index', compact('sliderDesktop', 'sliderMobile', 'featured', 'sponsors', 'sponsors_dukung', 'bests', 'categories', 'bests_global', 'articles'));
+        return view('index', compact('sliderDesktop', 'sliderMobile', 'featured', 'sponsors', 'sponsors_dukung', 'bests', 'categories', 'bests_global', 'articles', 'cta'));
     }
 
     public function search(Request $request)

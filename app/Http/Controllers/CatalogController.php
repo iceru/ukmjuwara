@@ -94,7 +94,10 @@ class CatalogController extends Controller
             $q->where('catalog_id', $catalog->id);
         })->get();
 
-        if ($request->categories || $request->states || $request->owner_genders || $request->search || $request->page || $request->programs) {
+        $max_price = Ukm::where('catalog_id', $catalog->id)->max('max_price');
+        $min_price = Ukm::where('catalog_id', $catalog->id)->min('min_price');
+
+        if ($request->categories || $request->states || $request->owner_genders || $request->search || $request->page || $request->programs || $request->price_range) {
             $ukms = Ukm::where('catalog_id', $catalog->id);
             if (isset($request->categories)) {
                 if(is_string($request->categories)) {
@@ -164,16 +167,11 @@ class CatalogController extends Controller
             if($request->ajax()) {
                 return view('catalog-ukm', compact('ukms'));
             } else {
-                return view('catalog', compact('catalog','ukms', 'bests', 'categories', 'states', 'programs'));
+                return view('catalog', compact('catalog','ukms', 'bests', 'categories', 'states', 'programs', 'max_price', 'min_price'));
             }
         }
         
-        return view('catalog', compact('catalog','ukms', 'bests', 'categories', 'states', 'programs'));
-    }
-
-    public function filter(Request $request)
-    {
-        
+        return view('catalog', compact('catalog','ukms', 'bests', 'categories', 'states', 'programs', 'max_price', 'min_price'));
     }
 
     public function floating(Request $request)
