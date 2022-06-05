@@ -73,6 +73,10 @@
             padding: .5rem 1.75rem;
             min-width: calc(100% - 110px);
 
+            @include breakpoint-down(medium) {
+                padding: .5rem .75rem;
+            }
+
             .slick-prev {
                 display: none !important;
             }
@@ -270,12 +274,12 @@
     .slick-list,
     .slick-track,
     .slick-slide {
-        height: 18vh;
+        height: 28vh;
     }
 
     .image-container {
         img {
-            height: 18vh;
+            height: 28vh;
         }
     }
 
@@ -304,13 +308,25 @@
         display: none;
     }
 
-    @include breakpoint-down(small) {
+    @include breakpoint-down(medium) {
         .desktop {
             display: none;
         }
 
         .mobile {
             display: block;
+        }
+
+        .slick-list,
+        .slick-track,
+        .slick-slide {
+            height: 18vh;
+        }
+
+        .image-container {
+            img {
+                height: 18vh;
+            }
         }
 
     }
