@@ -138,11 +138,11 @@
                                     <div class="row ">
                                         <div class="col-6">
                                             <label for="min_amount">Harga Min.</label>
-                                            <input class="form-control" type="text" id="min_amount">
+                                            <input class="form-control min_amount" type="text" id="min_amount">
                                         </div>
                                         <div class="col-6">
                                             <label for="max_amount">Harga Max.</label>
-                                            <input class="form-control" type="text" id="max_amount">
+                                            <input class="form-control max_amount" type="text" id="max_amount">
                                         </div>
                                         <div class="col-12 mt-3">
 
@@ -151,7 +151,6 @@
                                     </div>
 
                                 </div>
-                                <script></script>
                                 <div class="location-filter mb-4">
                                     <h5 class="mb-2">Lokasi</h5>
                                     @foreach ($states as $item)
@@ -232,7 +231,7 @@
                                     @endforeach
                                 </div>
 
-                                <div class="category-filter mb-3">
+                                <div class="program-filter mb-3">
                                     <h5 class="mb-2">Asal Program</h5>
                                     @foreach ($programs as $program)
                                         <div class="form-check">
@@ -242,6 +241,24 @@
                                                 {{ $program->title }}
                                         </div>
                                     @endforeach
+                                </div>
+                                <div class="range-filter mb-4">
+                                    <h5 class="mb-2">Rentang Harga</h5>
+                                    <div class="row ">
+                                        <div class="col-6">
+                                            <label for="min_amount">Harga Min.</label>
+                                            <input class="form-control min_amount" type="text" id="min_amount">
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="max_amount">Harga Max.</label>
+                                            <input class="form-control max_amount" type="text" id="max_amount">
+                                        </div>
+                                        <div class="col-12 mt-3">
+
+                                            <div id="slider-range-mobile"></div>
+                                        </div>
+                                    </div>
+
                                 </div>
                                 <div class="location-filter mb-3">
                                     <h5 class="mb-2">Lokasi</h5>
@@ -356,8 +373,8 @@
                 max: {{ $max_price }},
                 values: [{{ $min_price }}, {{ $max_price }}],
                 slide: debounce(function(event, ui) {
-                    $("#min_amount").val(ui.values[0]);
-                    $("#max_amount").val(ui.values[1]);
+                    $(".min_amount").val(ui.values[0]);
+                    $(".max_amount").val(ui.values[1]);
 
                     price_range.min_price = ui.values[0];
                     price_range.max_price = ui.values[1];
@@ -366,8 +383,26 @@
                 }, 700)
             });
 
-            $("#min_amount").val($("#slider-range").slider("values", 0));
-            $("#max_amount").val($("#slider-range").slider("values", 1));
+
+            $("#slider-range-mobile").slider({
+                range: true,
+                step: 10000,
+                min: {{ $min_price }},
+                max: {{ $max_price }},
+                values: [{{ $min_price }}, {{ $max_price }}],
+                slide: debounce(function(event, ui) {
+                    $(".min_amount").val(ui.values[0]);
+                    $(".max_amount").val(ui.values[1]);
+
+                    price_range.min_price = ui.values[0];
+                    price_range.max_price = ui.values[1];
+
+                    ajaxFilter();
+                }, 700)
+            });
+
+            $(".min_amount").val($("#slider-range").slider("values", 0));
+            $(".max_amount").val($("#slider-range").slider("values", 1));
 
             checkUrlParams();
 
@@ -417,6 +452,8 @@
             var categories_params = params.get('categories');
             var search_params = params.get('search');
             var programs_params = params.get('programs');
+            var min_price_params = params.get('min_price');
+            var max_price_params = params.get('max_price');
 
             if (states_params) {
                 state_array = states_params.split(",");
@@ -471,6 +508,19 @@
             if (search_params) {
                 $('#search_ukm').val(search_params);
                 $('.search-ukm-mobile').val(search_params);
+            }
+
+            console.log(min_price_params);
+            console.log(max_price_params);
+            if (min_price_params) {
+                $('.min_price').val(min_price_params);
+                price_range.min_price = min_price_params;
+            }
+
+            if (max_price_params) {
+                $('.max_price').val(max_price_params);
+                price_range.max_price = max_price_params;
+                ajaxFilter();
             }
         }
 
@@ -584,7 +634,9 @@
                     catalog: catalog,
                     search: search,
                     programs: programs,
-                    page: page
+                    page: page,
+                    min_price: min_price,
+                    max_price: max_price,
                 }
 
                 if (stateObj.states.length > 0)
@@ -611,6 +663,14 @@
                     url.searchParams.set('page', page)
                 else
                     url.searchParams.set('page', 1)
+                if (stateObj.min_price !== "")
+                    url.searchParams.set('min_price', min_price)
+                else
+                    url.searchParams.delete('min_price')
+                if (stateObj.max_price !== "")
+                    url.searchParams.set('max_price', max_price)
+                else
+                    url.searchParams.delete('max_price')
 
                 history.pushState(stateObj, '', url)
             })
