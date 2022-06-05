@@ -157,6 +157,16 @@
             }
         }
 
+        .range-filter {
+            label {
+                font-size: 0.9rem;
+            }
+
+            .form-control {
+                font-size: 0.9rem;
+            }
+        }
+
         .filter-mobile {
             background-color: $secondary-color;
             color: white;
