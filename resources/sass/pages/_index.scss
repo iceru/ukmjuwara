@@ -42,6 +42,10 @@
             position: relative;
             font-weight: bold;
 
+            @include breakpoint-down(medium) {
+                display: none;
+            }
+
             &:after {
                 content: '';
                 position: absolute;
@@ -115,6 +119,15 @@
 
                 p {
                     font-size: 12px;
+                    text-transform: uppercase;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    width: 125px;
+                }
+
+                small {
+                    font-size: 10px;
                     text-transform: uppercase;
                 }
             }
@@ -257,12 +270,12 @@
     .slick-list,
     .slick-track,
     .slick-slide {
-        height: 30vh;
+        height: 18vh;
     }
 
     .image-container {
         img {
-            height: 30vh;
+            height: 18vh;
         }
     }
 

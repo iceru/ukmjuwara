@@ -106,10 +106,7 @@
         <h1>#UKMJuWAra</h1>
         <div class="list-menu">
             <ul>
-                <li>
-                    <a href="{{ route('about') }}">Tentang Kami</a>
-                </li>
-                <li>
+                {{-- <li>
                     <a data-bs-toggle="collapse" href="#katalog" role="button" aria-expanded="false"
                         aria-controls="katalog">Katalog &nbsp; <span><i class="fa fa-caret-down"
                                 aria-hidden="true"></i></span></a>
@@ -123,6 +120,14 @@
                             @endforeach
                         </ul>
                     </div>
+                </li> --}}
+                @foreach ($catalogs->slice(1, 2) as $catalog)
+                    <li><a @if ($catalog->link) target="_blank" @endif
+                            href="{{ $catalog->link ? $catalog->link : route('catalog.show', $catalog->slug) }}">{{ str_replace('#UKMJuWAra ', '', $catalog->title) }}</a>
+                    </li>
+                @endforeach
+                <li>
+                    <a href="{{ route('about') }}">Tentang Kami</a>
                 </li>
                 <li>
                     <a href="{{ route('article.index') }}">Berita</a>
