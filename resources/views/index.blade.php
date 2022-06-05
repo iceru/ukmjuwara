@@ -170,83 +170,7 @@
                     </div>
                 </div>
 
-                <div class="offcanvas filter-offcanvas offcanvas-start" tabindex="-1" id="offcanvas_global"
-                    aria-labelledby="offcanvas_globalLabel">
-                    <div class="d-flex justify-content-end">
-                        <button type="button" class="btn button-close" data-bs-dismiss="offcanvas">
-                            <i class="fa fa-times" aria-hidden="true"></i>
-                        </button>
-                    </div>
-                    <h3 class="mb-3">Filter</h3>
-                    <div class="filter-mobile-checkbox">
-                        <div class="search-ukm">
-                            <input type="text" class="form-control search-ukm-mobile" placeholder="Search"
-                                type="search">
-                        </div>
-                        <div class="category-filter mb-3">
-                            <h5 class="mb-2">Kategori</h5>
-                            @foreach ($categories_global as $category)
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="{{ $category->id }}"
-                                        id="category" name="category[]">
-                                    <label class="form-check-label" for="flexCheckDefault">
-                                        {{ $category->title }}
-                                </div>
-                            @endforeach
-                        </div>
 
-                        <div class="category-filter mb-3">
-                            <h5 class="mb-2">Asal Program</h5>
-                            @foreach ($programs_global as $program)
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="{{ $program->id }}"
-                                        id="program" name="program[]">
-                                    <label class="form-check-label" for="flexCheckDefault">
-                                        {{ $program->title }}
-                                </div>
-                            @endforeach
-                        </div>
-                        <div class="location-filter mb-3">
-                            <h5 class="mb-2">Lokasi</h5>
-                            @foreach ($states_global as $item)
-                                <div class="form-check">
-                                    <input class="form-check-input state" type="checkbox"
-                                        value="{{ $item->state_name }}" id="state" name="state[]">
-                                    <label class="form-check-label text-capitalize" for="flexCheckDefault">
-                                        @if ($item->state_name == 'DKI JAKARTA')
-                                            DKI Jakarta
-                                        @elseif ($item->state_name == 'P A P U A')
-                                            Papua
-                                        @else
-                                            {{ strtolower($item->state_name) }}
-                                        @endif
-                                </div>
-                            @endforeach
-                        </div>
-                        <div class="owner-gender-filter mb-3">
-                            <h5 class="mb-2">Gender Pemilik</h5>
-                            <div class="form-check">
-                                <input class="form-check-input owner" type="checkbox" value="pria" id="owner_gender"
-                                    name="owner_gender[]">
-                                <label class="form-check-label" for="flexCheckDefault"> Pria
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input owner" type="checkbox" value="wanita" id="owner_gender"
-                                    name="owner_gender[]">
-                                <label class="form-check-label" for="flexCheckDefault"> Wanita
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input owner" type="checkbox" value="pria-wanita"
-                                    id="owner_gender" name="owner_gender[]">
-                                <label class="form-check-label" for="flexCheckDefault"> Pria & Wanita
-                            </div>
-                        </div>
-
-                        <button type="button" class="btn btn-light" data-bs-dismiss="offcanvas">
-                            Filter
-                        </button>
-                    </div>
-                </div>
             </div>
             <div class="row mb-4 ">
                 <div class="col-12 col-lg-6  mb-3 mb-lg-0">
@@ -351,6 +275,82 @@
                             </div>
                         </div>
                     @endif
+                </div>
+            </div>
+            <div class="offcanvas filter-offcanvas offcanvas-start" tabindex="-1" id="offcanvas_global"
+                aria-labelledby="offcanvas_globalLabel">
+                <div class="d-flex justify-content-end">
+                    <button type="button" class="btn button-close" data-bs-dismiss="offcanvas">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <h3 class="mb-3">Filter</h3>
+                <div class="filter-mobile-checkbox">
+                    <div class="search-ukm">
+                        <input type="text" class="form-control search-ukm-mobile" placeholder="Search" type="search">
+                    </div>
+                    <div class="category-filter mb-3">
+                        <h5 class="mb-2">Kategori</h5>
+                        @foreach ($categories_global as $category)
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="{{ $category->id }}"
+                                    id="category" name="category[]">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    {{ $category->title }}
+                            </div>
+                        @endforeach
+                    </div>
+
+                    <div class="category-filter mb-3">
+                        <h5 class="mb-2">Asal Program</h5>
+                        @foreach ($programs_global as $program)
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="{{ $program->id }}"
+                                    id="program" name="program[]">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    {{ $program->title }}
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="location-filter mb-3">
+                        <h5 class="mb-2">Lokasi</h5>
+                        @foreach ($states_global as $item)
+                            <div class="form-check">
+                                <input class="form-check-input state" type="checkbox" value="{{ $item->state_name }}"
+                                    id="state" name="state[]">
+                                <label class="form-check-label text-capitalize" for="flexCheckDefault">
+                                    @if ($item->state_name == 'DKI JAKARTA')
+                                        DKI Jakarta
+                                    @elseif ($item->state_name == 'P A P U A')
+                                        Papua
+                                    @else
+                                        {{ strtolower($item->state_name) }}
+                                    @endif
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="owner-gender-filter mb-3">
+                        <h5 class="mb-2">Gender Pemilik</h5>
+                        <div class="form-check">
+                            <input class="form-check-input owner" type="checkbox" value="pria" id="owner_gender"
+                                name="owner_gender[]">
+                            <label class="form-check-label" for="flexCheckDefault"> Pria
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input owner" type="checkbox" value="wanita" id="owner_gender"
+                                name="owner_gender[]">
+                            <label class="form-check-label" for="flexCheckDefault"> Wanita
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input owner" type="checkbox" value="pria-wanita" id="owner_gender"
+                                name="owner_gender[]">
+                            <label class="form-check-label" for="flexCheckDefault"> Pria & Wanita
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-light" data-bs-dismiss="offcanvas">
+                        Filter
+                    </button>
                 </div>
             </div>
         </div>
