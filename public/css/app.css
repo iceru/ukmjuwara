@@ -11074,7 +11074,7 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before, table
   align-items: center;
   background-color: white;
   border-radius: 60px;
-  padding: 0.5rem;
+  padding: 0.25rem 0.75rem;
   color: #16857E;
   font-family: "DIN Next LT", sans-serif;
   margin: 0 0.25rem;

@@ -100,8 +100,11 @@ class CatalogController extends Controller
         $max_price = Ukm::where('catalog_id', $catalog->id)->max('max_price');
         $min_price = Ukm::where('catalog_id', $catalog->id)->min('min_price');
 
-        if ($request->categories || $request->states || $request->owner_genders || $request->search || $request->page || $request->programs || $request->price_range) {
+        if ($request->categories || $request->states || $request->owner_genders || $request->search || $request->page || $request->programs || $request->min_price || $request->max_price) {
             $ukms = Ukm::where('catalog_id', $catalog->id);
+            if(isset($request->min_price) || isset($request->max_price)) {
+                $ukms = $ukms->where('min_price', '>=', $request->min_price)->where('max_price', '<=', $request->max_price); 
+            }
             if (isset($request->categories)) {
                 if(is_string($request->categories)) {
                     $categories_array = explode(',', $request->categories);

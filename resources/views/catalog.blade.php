@@ -151,23 +151,7 @@
                                     </div>
 
                                 </div>
-                                <script>
-                                    $(function() {
-                                        $("#slider-range").slider({
-                                            range: true,
-                                            step: 10000,
-                                            min: {{ $min_price }},
-                                            max: {{ $max_price }},
-                                            values: [{{ $min_price }}, {{ $max_price }}],
-                                            slide: function(event, ui) {
-                                                $("#min_amount").val(ui.values[0]);
-                                                $("#max_amount").val(ui.values[1]);
-                                            }
-                                        });
-                                        $("#min_amount").val($("#slider-range").slider("values", 0));
-                                        $("#max_amount").val($("#slider-range").slider("values", 1));
-                                    });
-                                </script>
+                                <script></script>
                                 <div class="location-filter mb-4">
                                     <h5 class="mb-2">Lokasi</h5>
                                     @foreach ($states as $item)
@@ -317,6 +301,10 @@
         var state_filter = [];
         var owner_gender_filter = [];
         var program_filter = [];
+        var price_range = {
+            min_price: 0,
+            max_price: 0,
+        };
 
         var category_texts = [];
         var state_texts = [];
@@ -343,6 +331,43 @@
             $('.loading-spinner').hide();
             desktop = $('.filter-desktop-checkbox');
             mobile = $('.filter-mobile-checkbox');
+
+            function debounce(func, wait, immediate) {
+                var timeout;
+                return function() {
+                    var context = this,
+                        args = arguments;
+                    var later = function() {
+                        timeout = null;
+                        if (!immediate) func.apply(context, args);
+                    };
+                    var callNow = immediate && !timeout;
+                    clearTimeout(timeout);
+                    timeout = setTimeout(later, wait);
+                    if (callNow) func.apply(context, args);
+                };
+            };
+
+
+            $("#slider-range").slider({
+                range: true,
+                step: 10000,
+                min: {{ $min_price }},
+                max: {{ $max_price }},
+                values: [{{ $min_price }}, {{ $max_price }}],
+                slide: debounce(function(event, ui) {
+                    $("#min_amount").val(ui.values[0]);
+                    $("#max_amount").val(ui.values[1]);
+
+                    price_range.min_price = ui.values[0];
+                    price_range.max_price = ui.values[1];
+
+                    ajaxFilter();
+                }, 700)
+            });
+
+            $("#min_amount").val($("#slider-range").slider("values", 0));
+            $("#max_amount").val($("#slider-range").slider("values", 1));
 
             checkUrlParams();
 
@@ -520,6 +545,9 @@
             programs = program_filter;
             owner_genders = owner_gender_filter;
             categories = category_filter;
+            min_price = price_range.min_price;
+            max_price = price_range.max_price;
+
             var search = $('#search_ukm').val();
             if ($(window).width() < 645) {
                 search = $('.search-ukm-mobile').val();
@@ -540,7 +568,9 @@
                     programs: programs,
                     page: page,
                     record: record,
-                    type: type
+                    type: type,
+                    min_price: min_price,
+                    max_price: max_price,
                 }
             }).done(function(results) {
                 $('#catalog').html(results);
