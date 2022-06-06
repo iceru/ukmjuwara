@@ -164,7 +164,7 @@
                                     </div>
                                 </div>
                                 <p>{!! $cta->description !!}</p>
-                                <a href="">Baca Selengkapnya</a>
+                                <a href="/tentang-kami">Baca Selengkapnya</a>
                             </div>
                         </div>
                     </div>
