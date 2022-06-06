@@ -79,48 +79,17 @@
                             Trending <span>Go Digital</span>
                         </div>
                         <div class="actions d-flex">
-                            {{-- <div class="filter-btn me-3">
-                                <a id="filter_global" data-bs-toggle="offcanvas" href="#offcanvas_global" role="button"
-                                    aria-controls="offcanvas_global">Filter</a>
-                            </div> --}}
+                            <div class="filter-btn me-3">
+                                <a id="filter_global" data-bs-toggle="offcanvas" href="#offcanvas_digital" role="button"
+                                    aria-controls="offcanvas_digital">Filter</a>
+                            </div>
                             <a href="/katalog/ukmjuwara-go-digital" class="see-more">
                                 Lihat Semua
                             </a>
                         </div>
                     </div>
-                    <div id="ukm_bests" class="ukm-sliders">
-                        @foreach ($bests as $ukm)
-                            <div>
-                                <a href="{{ route('ukm.show', $ukm->slug) }}">
-                                    <div class="ukm">
-                                        <div class="ukm-image">
-                                            <div class="ratio ratio-1x1">
-                                                @foreach ((array) json_decode($ukm->images)[0] as $image)
-                                                    <img src="{{ Storage::url('ukm-image/' . $image) }}" alt="">
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                        <div class="ukm-wa">
-                                            <a href="{{ $ukm->whatsapp }}">
-                                                <img src="/images/whatsapp.png" alt="">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="{{ route('ukm.show', $ukm->slug) }}">
-                                    <div class="ukm-title mt-3">
-                                        <h5 title="{{ $ukm->title }}">{{ $ukm->title }}</h5>
-                                    </div>
-                                    <div class="ukm-desc">
-                                        <small title="{{ $ukm->product }}" class="ellipsis categories-text">
-                                            @foreach ($ukm->categories as $item)
-                                                <span>{{ $item->title }}</span>
-                                            @endforeach
-                                        </small>
-                                    </div>
-                                </a>
-                            </div>
-                        @endforeach
+                    <div id="catalog-{{ $catalogDigital->id }}">
+                        @include('index-digital')
                     </div>
                 </div>
                 <div class="best">
@@ -128,45 +97,18 @@
                         <div class="best-title">
                             Trending <span>Go Global</span>
                         </div>
-                        <div>
+                        <div class="actions d-flex">
+                            <div class="filter-btn me-3">
+                                <a id="filter_global" data-bs-toggle="offcanvas" href="#offcanvas_global" role="button"
+                                    aria-controls="offcanvas_global">Filter</a>
+                            </div>
                             <a href="/katalog/ukmjuwara-go-global" class="see-more">
                                 Lihat Semua
                             </a>
                         </div>
                     </div>
-                    <div id="ukm_bests_global" class="ukm-sliders">
-                        @foreach ($bests_global as $ukm)
-                            <div>
-                                <a href="{{ route('ukm.show', $ukm->slug) }}">
-                                    <div class="ukm">
-                                        <div class="ukm-image">
-                                            <div class="ratio ratio-1x1">
-                                                @foreach ((array) json_decode($ukm->images)[0] as $image)
-                                                    <img src="{{ Storage::url('ukm-image/' . $image) }}" alt="">
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                        <div class="ukm-wa">
-                                            <a href="{{ $ukm->whatsapp }}">
-                                                <img src="/images/whatsapp.png" alt="">
-                                            </a>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="{{ route('ukm.show', $ukm->slug) }}">
-                                    <div class="ukm-title mt-3">
-                                        <h5 title="{{ $ukm->title }}">{{ $ukm->title }}</h5>
-                                    </div>
-                                    <div class="ukm-desc">
-                                        <small title="{{ $ukm->product }}" class="ellipsis categories-text">
-                                            @foreach ($ukm->categories as $item)
-                                                <span>{{ $item->title }}</span>
-                                            @endforeach
-                                        </small>
-                                    </div>
-                                </a>
-                            </div>
-                        @endforeach
+                    <div id="catalog-{{ $catalogGlobal->id }}">
+                        @include('index-global')
                     </div>
                 </div>
 
@@ -277,21 +219,22 @@
                     @endif
                 </div>
             </div>
-            <div class="offcanvas filter-offcanvas offcanvas-start" tabindex="-1" id="offcanvas_global"
+            <div class="offcanvas filter-offcanvas offcanvas-start" tabindex="-1" id="offcanvas_digital"
                 aria-labelledby="offcanvas_globalLabel">
                 <div class="d-flex justify-content-end">
                     <button type="button" class="btn button-close" data-bs-dismiss="offcanvas">
                         <i class="fa fa-times" aria-hidden="true"></i>
                     </button>
                 </div>
-                <h3 class="mb-3">Filter</h3>
+                <h3 class="mb-3">Filter Go Digital</h3>
                 <div class="filter-mobile-checkbox">
-                    <div class="search-ukm">
-                        <input type="text" class="form-control search-ukm-mobile" placeholder="Search" type="search">
+                    <div class="search-ukm mb-3">
+                        <input type="text" class="form-control search-ukm-mobile" id="search" placeholder="Search"
+                            type="search">
                     </div>
                     <div class="category-filter mb-3">
                         <h5 class="mb-2">Kategori</h5>
-                        @foreach ($categories_global as $category)
+                        @foreach ($categories_digital as $category)
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="{{ $category->id }}"
                                     id="category" name="category[]">
@@ -303,7 +246,7 @@
 
                     <div class="category-filter mb-3">
                         <h5 class="mb-2">Asal Program</h5>
-                        @foreach ($programs_global as $program)
+                        @foreach ($programs_digital as $program)
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="{{ $program->id }}"
                                     id="program" name="program[]">
@@ -312,9 +255,27 @@
                             </div>
                         @endforeach
                     </div>
+                    <div class="range-filter mb-3">
+                        <h5 class="mb-2">Rentang Harga</h5>
+                        <div class="row ">
+                            <div class="col-6">
+                                <label for="min_amount">Harga Min.</label>
+                                <input class="form-control min_amount" type="text" id="min_amount">
+                            </div>
+                            <div class="col-6">
+                                <label for="max_amount">Harga Max.</label>
+                                <input class="form-control max_amount" type="text" id="max_amount">
+                            </div>
+                            <div class="col-12 mt-3">
+
+                                <div id="slider-range-digital"></div>
+                            </div>
+                        </div>
+
+                    </div>
                     <div class="location-filter mb-3">
                         <h5 class="mb-2">Lokasi</h5>
-                        @foreach ($states_global as $item)
+                        @foreach ($states_digital as $item)
                             <div class="form-check">
                                 <input class="form-check-input state" type="checkbox" value="{{ $item->state_name }}"
                                     id="state" name="state[]">
@@ -353,10 +314,125 @@
                     </button>
                 </div>
             </div>
+            <div class="offcanvas filter-offcanvas offcanvas-start" tabindex="-1" id="offcanvas_global"
+                aria-labelledby="offcanvas_globalLabel">
+                <div class="d-flex justify-content-end">
+                    <button type="button" class="btn button-close" data-bs-dismiss="offcanvas">
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <h3 class="mb-3">Filter Go Global</h3>
+                <div class="filter-mobile-checkbox">
+                    <div class="search-ukm mb-3">
+                        <input type="text" class="form-control search-ukm-mobile" name="search_global"
+                            placeholder="Search" type="search">
+                    </div>
+                    <div class="category-filter mb-3">
+                        <h5 class="mb-2">Kategori</h5>
+                        @foreach ($categories_global as $category)
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="{{ $category->id }}"
+                                    id="category_global" name="category_global[]">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    {{ $category->title }}
+                            </div>
+                        @endforeach
+                    </div>
+
+                    <div class="category-filter mb-3">
+                        <h5 class="mb-2">Asal Program</h5>
+                        @foreach ($programs_global as $program)
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="{{ $program->id }}"
+                                    id="program_global" name="program_global[]">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    {{ $program->title }}
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="range-filter mb-3">
+                        <h5 class="mb-2">Rentang Harga</h5>
+                        <div class="row ">
+                            <div class="col-6">
+                                <label for="min_amount">Harga Min.</label>
+                                <input class="form-control min_amount_global" type="text" id="min_amount">
+                            </div>
+                            <div class="col-6">
+                                <label for="max_amount">Harga Max.</label>
+                                <input class="form-control max_amount_global" type="text" id="max_amount">
+                            </div>
+                            <div class="col-12 mt-3">
+
+                                <div id="slider-range-global"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="location-filter mb-3">
+                        <h5 class="mb-2">Lokasi</h5>
+                        @foreach ($states_global as $item)
+                            <div class="form-check">
+                                <input class="form-check-input state" type="checkbox"
+                                    value="{{ $item->state_name }}" id="state" name="state_global[]">
+                                <label class="form-check-label text-capitalize" for="flexCheckDefault">
+                                    @if ($item->state_name == 'DKI JAKARTA')
+                                        DKI Jakarta
+                                    @elseif ($item->state_name == 'P A P U A')
+                                        Papua
+                                    @else
+                                        {{ strtolower($item->state_name) }}
+                                    @endif
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="owner-gender-filter mb-3">
+                        <h5 class="mb-2">Gender Pemilik</h5>
+                        <div class="form-check">
+                            <input class="form-check-input owner" type="checkbox" value="pria" id="owner_gender_global"
+                                name="owner_gender_global[]">
+                            <label class="form-check-label" for="flexCheckDefault"> Pria
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input owner" type="checkbox" value="wanita"
+                                id="owner_gender_global" name="owner_gender_global[]">
+                            <label class="form-check-label" for="flexCheckDefault"> Wanita
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input owner" type="checkbox" value="pria-wanita"
+                                id="owner_gender_global" name="owner_gender_global[]">
+                            <label class="form-check-label" for="flexCheckDefault"> Pria & Wanita
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-light" data-bs-dismiss="offcanvas">
+                        Filter
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
     <script>
+        var category_filter = [];
+        var state_filter = [];
+        var owner_gender_filter = [];
+        var program_filter = [];
+        var min_price = null;
+        var max_price = null;
+
+        var category_global_filter = [];
+        var state_global_filter = [];
+        var owner_gender_global_filter = [];
+        var program_global_filter = [];
+        var min_price_global = null;
+        var max_price_global = null;
+
+        var params = {
+            record: '',
+            type: '',
+            catalog_id: '',
+        }
+
         $(document).ready(function() {
             $('#supported').slick({
                 infinite: true,
@@ -371,35 +447,6 @@
                     }
                 }, ]
             });
-
-            $('#ukm_bests').slick({
-                infinite: true,
-                slidesToShow: 6,
-                slidesToScroll: 1,
-                autoplay: true,
-                autoplaySpeed: 3000,
-                responsive: [{
-                    breakpoint: 567,
-                    settings: {
-                        slidesToShow: 2
-                    }
-                }, ]
-            });
-
-            $('#ukm_bests_global').slick({
-                infinite: true,
-                slidesToShow: 6,
-                slidesToScroll: 1,
-                autoplay: true,
-                autoplaySpeed: 3000,
-                responsive: [{
-                    breakpoint: 567,
-                    settings: {
-                        slidesToShow: 2
-                    }
-                }, ]
-            });
-
             $('#categories').slick({
                 infinite: true,
                 slidesToShow: 5,
@@ -434,6 +481,166 @@
                 pauseOnFocus: false,
             });
 
+            function debounce(func, wait, immediate) {
+                var timeout;
+                return function() {
+                    var context = this,
+                        args = arguments;
+                    var later = function() {
+                        timeout = null;
+                        if (!immediate) func.apply(context, args);
+                    };
+                    var callNow = immediate && !timeout;
+                    clearTimeout(timeout);
+                    timeout = setTimeout(later, wait);
+                    if (callNow) func.apply(context, args);
+                };
+            };
+
+            $("#slider-range-digital").slider({
+                range: true,
+                step: 10000,
+                min: {{ $min_price_digital }},
+                max: {{ $max_price_digital }},
+                values: [{{ $min_price_digital }}, {{ $max_price_digital }}],
+                slide: debounce(function(event, ui) {
+                    $(".min_amount").val(ui.values[0]);
+                    $(".max_amount").val(ui.values[1]);
+
+                    min_price = ui.values[0];
+                    max_price = ui.values[1];
+
+                    params = {
+                        record: '',
+                        type: '',
+                        catalog_id: 'catalogDigital'
+                    }
+
+                    ajaxFilter(params);
+                }, 700)
+            });
+
+            $(".min_amount").val($("#slider-range-digital").slider("values", 0));
+            $(".max_amount").val($("#slider-range-digital").slider("values", 1));
+
+            $("#slider-range-global").slider({
+                range: true,
+                step: 10000,
+                min: {{ $min_price_global }},
+                max: {{ $max_price_global }},
+                values: [{{ $min_price_global }}, {{ $max_price_global }}],
+                slide: debounce(function(event, ui) {
+                    $(".min_amount_global").val(ui.values[0]);
+                    $(".max_amount_global").val(ui.values[1]);
+
+                    min_price_global = ui.values[0];
+                    max_price_global = ui.values[1];
+                    params = {
+                        record: '',
+                        type: '',
+                        catalog_id: 'catalogGlobal'
+                    }
+
+                    ajaxFilter(params);
+                }, 700)
+            });
+
+            $(".min_amount_global").val($("#slider-range-global").slider("values", 0));
+            $(".max_amount_global").val($("#slider-range-global").slider("values", 1));
         });
+
+        function get_filter(filter, data, text, add) {
+            const catalog_id = filter.includes('global') ? 'catalogGlobal' : 'catalogDigital';
+            // NOTES: Harus Push nya sesuai di klik pertama. Kalau ga clicks nya bakal ga akurat
+            if (add === 'add') {
+                if (window[`${filter}_filter`].indexOf(data) === -1) {
+                    filter === 'category' || filter === 'program' ? window[`${filter}_filter`].push(parseInt(data)) :
+                        window[`${filter}_filter`]
+                        .push(data);
+                }
+                params = {
+                    record: 'record',
+                    type: filter,
+                    catalog_id: catalog_id
+                }
+                ajaxFilter(params);
+
+            } else {
+                window[`${filter}_filter`] = window[`${filter}_filter`].filter(function(item) {
+                    if (filter === 'category' || filter === 'program') {
+                        return item !== parseInt(data)
+                    } else {
+                        return item !== data
+                    }
+                })
+                params = {
+                    record: '',
+                    type: '',
+                    catalog_id: catalog_id
+                }
+                ajaxFilter(params)
+            }
+
+        }
+
+        $('input[type="checkbox"], input[type="radio"]').click(function() {
+            if ($(this).prop('checked') == true) {
+                get_filter($(this).attr('id'), $(this).val(), $(this).next('label').text(), 'add');
+            } else {
+                get_filter($(this).attr('id'), $(this).val(), $(this).next('label').text(), 'remove');
+            }
+        });
+
+        function ajaxFilter(params) {
+            var catalog = params.catalog_id === 'catalogGlobal' ? `{{ $catalogGlobal->id }}` :
+                `{{ $catalogDigital->id }}`
+            states = state_filter;
+            programs = program_filter;
+            owner_genders = owner_gender_filter;
+            categories = category_filter;
+            min_price = min_price;
+            max_price = max_price;
+
+            states_global = state_global_filter;
+            programs_global = program_global_filter;
+            owner_genders_global = owner_gender_global_filter;
+            categories_global = category_global_filter;
+            min_price_global = min_price_global;
+            max_price_global = max_price_global;
+
+            var search = $('#search').val();
+            var search_global = $('#search_global').val();
+
+
+            $('.loading-spinner').show();
+            $('.ukm-content').hide();
+
+            $.ajax({
+                url: "/",
+                type: "GET",
+                datatype: 'html',
+                data: {
+                    states: states,
+                    catalog: catalog,
+                    owner_genders: owner_genders,
+                    categories: categories,
+                    search: search,
+                    programs: programs,
+                    record: params.record,
+                    type: params.type,
+                    min_price: min_price,
+                    max_price: max_price,
+                    states_global: states_global,
+                    owner_genders_global: owner_genders_global,
+                    categories_global: categories_global,
+                    search_global: search_global,
+                    programs_global: programs_global,
+                    min_price_global: min_price_global,
+                    max_price_global: max_price_global,
+                }
+            }).done(function(results) {
+                $('#catalog-' + catalog).html(results);
+            })
+        };
     </script>
 </x-app-layout>

@@ -510,8 +510,6 @@
                 $('.search-ukm-mobile').val(search_params);
             }
 
-            console.log(min_price_params);
-            console.log(max_price_params);
             if (min_price_params) {
                 $('.min_price').val(min_price_params);
                 price_range.min_price = min_price_params;
