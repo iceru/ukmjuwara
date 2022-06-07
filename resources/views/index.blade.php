@@ -115,7 +115,7 @@
 
             </div>
             <div class="row mb-4 ">
-                <div class="col-12 col-lg-6  mb-3 mb-lg-0">
+                <div class="col-12 col-lg-6  mb-4 mb-lg-0">
                     <div class="content primary article mb-0">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <div class="title">
@@ -128,7 +128,7 @@
                         </div>
                         <div class="items">
                             @foreach ($articles as $article)
-                                <div class="row article-item">
+                                <a href="/berita/{{ $article->slug }}" class="row article-item">
                                     <div class="col-4 col-lg-3 ">
                                         <div class="article-image">
                                             <img src="{{ Storage::url('article-image/' . $article->image) }}" alt="">
@@ -142,7 +142,7 @@
                                             {{ date('d F Y', strtotime($article->created_at)) }}
                                             | {{ $article->time_read }} Mins Read</p>
                                     </div>
-                                </div>
+                                </a>
                             @endforeach
                         </div>
                     </div>

@@ -119,10 +119,14 @@
         .list-menu {
             li {
                 padding: .5rem 0;
+                margin-bottom: .5rem;
 
                 a {
                     color: white;
-                    font-size: 20px;
+                    font-size: 18px;
+                    text-transform: uppercase;
+                    font-family: "DIN Next LT", sans-serif;
+                    font-weight: 300;
                 }
             }
 

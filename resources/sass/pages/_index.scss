@@ -32,6 +32,7 @@
         display: flex;
         margin: -1rem -1rem 1rem -1rem;
 
+
         .title {
             background-color: $secondary-color;
             color: white;
@@ -41,10 +42,6 @@
             padding: .5rem 1rem;
             position: relative;
             font-weight: bold;
-
-            @include breakpoint-down(medium) {
-                display: none;
-            }
 
             &:after {
                 content: '';
@@ -127,8 +124,40 @@
                 }
 
                 small {
-                    font-size: 11px;
+                    font-size: 10px;
                     text-transform: uppercase;
+                    color: $secondary-color;
+                }
+            }
+        }
+
+
+
+        @include breakpoint-down(medium) {
+            display: block;
+
+            .title {
+                width: 100%;
+                padding: 1rem;
+                font-size: 1.25rem;
+
+                &::after {
+                    display: none;
+                }
+            }
+
+            .items {
+                .item {
+
+                    p {
+                        font-size: 12px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 2;
+                        -webkit-box-orient: vertical;
+                        width: 94px;
+                    }
                 }
             }
         }
@@ -167,6 +196,16 @@
 
             .slick-next {
                 right: -8px;
+            }
+
+            @include breakpoint-down(medium) {
+                .slick-prev {
+                    left: -14px;
+                }
+
+                .slick-next {
+                    right: -14px;
+                }
             }
         }
 
@@ -243,6 +282,8 @@
                 height: 100%;
                 object-fit: cover;
             }
+
+
         }
 
         .cta-text {
@@ -265,6 +306,20 @@
                 display: block;
                 font-size: small;
                 font-weight: bold;
+            }
+        }
+
+        @include breakpoint-down(medium) {
+            .cta-img {
+                height: 200px;
+            }
+
+            .cta-text {
+                padding: 1rem;
+
+                .cta-title {
+                    margin-bottom: 1rem;
+                }
             }
         }
     }
@@ -461,19 +516,15 @@
         object-fit: contain;
         object-position: center;
         padding: 0 30px;
+
+        @include breakpoint-down(medium) {
+            height: 100px;
+        }
     }
 
     @include breakpoint(medium) {
         img {
             height: 80px;
-        }
-    }
-}
-
-@include breakpoint-down(small) {
-    .container {
-        .slick-arrow {
-            display: none !important;
         }
     }
 }
