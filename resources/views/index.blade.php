@@ -50,7 +50,8 @@
                     </div>
                     <div class="items" id="categories">
                         @foreach ($categories_digital as $category)
-                            <div class="item">
+                            <a href="/katalog/ukmjuwara-go-digital?categories={{ $category->id }}"
+                                class="item">
                                 <div class="logo">
                                     <img src="{{ Storage::url('category-image/' . $category->image) }}">
                                 </div>
@@ -58,10 +59,11 @@
                                     <small>GO DIGITAL</small>
                                     <p>{{ $category->title }}</p>
                                 </div>
-                            </div>
+                            </a>
                         @endforeach
                         @foreach ($categories_global as $category)
-                            <div class="item">
+                            <a href="/katalog/ukmjuwara-go-global?categories={{ $category->id }}"
+                                class="item">
                                 <div class="logo">
                                     <img src="{{ Storage::url('category-image/' . $category->image) }}">
                                 </div>
@@ -69,7 +71,7 @@
                                     <small>GO GLOBAL</small>
                                     <p>{{ $category->title }}</p>
                                 </div>
-                            </div>
+                            </a>
                         @endforeach
                     </div>
                 </div>
