@@ -320,7 +320,7 @@
         var program_filter = [];
         var price_range = {
             min_price: 0,
-            max_price: 0,
+            max_price: {{ $max_price }},
         };
 
         var category_texts = [];
@@ -381,6 +381,25 @@
 
                     ajaxFilter();
                 }, 700)
+            });
+
+            $(".min_amount").change(function() {
+                $("#slider-range-mobile").slider("values", 0, parseInt(this.value));
+                $("#slider-range").slider("values", 0, parseInt(this.value));
+                price_range.min_price = parseInt(this.value);
+
+                ajaxFilter()
+            });
+
+            $(".max_amount").change(function() {
+                if (parseInt(this.value) > price_range.min_price) {
+                    $("#slider-range-mobile").slider("values", 1, parseInt(this.value));
+                    $("#slider-range").slider("values", 1, parseInt(this.value));
+                    price_range.max_price = parseInt(this.value);
+
+                    ajaxFilter()
+                }
+                return
             });
 
 
@@ -511,13 +530,18 @@
             }
 
             if (min_price_params) {
-                $('.min_price').val(min_price_params);
-                price_range.min_price = min_price_params;
+                debugger
+                $('.min_amount').val(parseInt(min_price_params));
+                $("#slider-range-mobile").slider("values", 0, parseInt(min_price_params));
+                $("#slider-range").slider("values", 0, parseInt(min_price_params));
+                price_range.min_price = parseInt(min_price_params);
             }
 
             if (max_price_params) {
-                $('.max_price').val(max_price_params);
-                price_range.max_price = max_price_params;
+                $('.max_amount').val(parseInt(max_price_params));
+                $("#slider-range-mobile").slider("values", 1, parseInt(max_price_params));
+                $("#slider-range").slider("values", 1, parseInt(max_price_params));
+                price_range.max_price = parseInt(max_price_params);
                 ajaxFilter();
             }
         }

@@ -3,6 +3,6 @@
         <img src="/images/hamburger.png" alt="">
     </div>
     <div class="logo">
-        <h4>#UKMJuWAra</h4>
+        <h4>UKMJuWAra</h4>
     </div>
 </div>

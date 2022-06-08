@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12 mb-2 mb-lg-3">
-                <h3>#UKMJuWAra</h3>
+                <h3>UKMJuWAra</h3>
             </div>
             <div class="col-12 col-md-5">
                 <div class="footer-item">
@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div class="col-12 col-md-5">
-               <div class="footer-item">
+                <div class="footer-item">
                     <ul>
                         <li>
                             <a href="{{ route('about') }}">Tentang Kami</a>
@@ -34,7 +34,7 @@
                             <a href="{{ route('contact') }}">Kemitraan</a>
                         </li>
                     </ul>
-               </div>
+                </div>
             </div>
             {{-- <div class="col-12 col-md-3">
                 <div class="footer-item">
@@ -51,9 +51,12 @@
             <div class="col-12 col-md-1">
                 <div class="footer-item social-icons">
                     <div class="d-flex" style="font-size: 1.75rem">
-                        <a href="https://www.instagram.com/ukmindonesiaid" target="_blank"><i class="fab fa-instagram me-2" aria-hidden="true"></i></a>
-                        <a href="https://www.facebook.com/ukmindonesia.org/" target="_blank"><i class="fab fa-facebook me-2" aria-hidden="true"></i></a>
-                        <a href="https://www.youtube.com/channel/UCWcTn1tlRbqifDA3uY67Sfw" target="_blank"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+                        <a href="https://www.instagram.com/ukmindonesiaid" target="_blank"><i
+                                class="fab fa-instagram me-2" aria-hidden="true"></i></a>
+                        <a href="https://www.facebook.com/ukmindonesia.org/" target="_blank"><i
+                                class="fab fa-facebook me-2" aria-hidden="true"></i></a>
+                        <a href="https://www.youtube.com/channel/UCWcTn1tlRbqifDA3uY67Sfw" target="_blank"><i
+                                class="fab fa-youtube" aria-hidden="true"></i></a>
                     </div>
                 </div>
             </div>
@@ -63,5 +66,5 @@
 
 
 <div class="col-12 text-center copyright">
-    <i class="fa fa-copyright" aria-hidden="true"></i> Copyright  {{ now()->year }} | #UKMJuWAra
+    <i class="fa fa-copyright" aria-hidden="true"></i> Copyright {{ now()->year }} | UKMJuWAra
 </div>

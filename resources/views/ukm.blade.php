@@ -155,6 +155,19 @@
 
                             </div>
                         </div>
+
+                        @if ($ukm->sliders)
+                            <div class="ukm-sliders" id="ukm_sliders">
+                                @foreach ((array) json_decode($ukm->sliders) as $slider)
+                                    <div>
+                                        <div class="image-container ratio16x9">
+                                            <img src="{{ Storage::url('ukm-sliders/' . $slider) }}"
+                                                alt="{{ $ukm->title }}">
+                                        </div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -207,7 +220,6 @@
                 slidesToScroll: 1,
                 asNavFor: '#carousel'
             });
-
             $('#carousel').slick({
                 infinite: true,
                 slidesToShow: 4,
@@ -215,6 +227,13 @@
                 asNavFor: '#sliders',
                 focusOnSelect: true
             });
+
+            $('#ukm_sliders').slick({
+                infinite: true,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+            });
+
         });
 
         $('.whatsapp-click').click(function(e) {

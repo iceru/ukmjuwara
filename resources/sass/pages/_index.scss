@@ -102,31 +102,32 @@
             .item {
                 display: flex;
                 align-items: center;
-                background-color: white;
-                border-radius: 60px;
-                padding: .25rem .75rem;
+                padding: .25rem 1rem;
+                border-right: 1px solid white;
                 color: $primary-color;
                 font-family: "DIN Next LT", sans-serif;
                 margin: 0 .25rem;
                 font-weight: 300;
-                min-height: 71px;
+                color: white;
+                margin: 0;
 
                 img {
                     width: 30px;
                     height: 30px;
                     margin-right: .5rem;
                     object-fit: contain;
+                    filter: brightness(0) invert(1);
                 }
 
                 p {
                     font-size: 13px;
+                    font-weight: 500;
                     text-transform: uppercase;
                 }
 
                 small {
                     font-size: 10px;
                     text-transform: uppercase;
-                    color: $secondary-color;
                 }
             }
         }
@@ -138,8 +139,6 @@
 
             .title {
                 width: 100%;
-                padding: 1rem;
-                font-size: 1.25rem;
 
                 &::after {
                     display: none;
@@ -151,12 +150,6 @@
 
                     p {
                         font-size: 12px;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        display: -webkit-box;
-                        -webkit-line-clamp: 2;
-                        -webkit-box-orient: vertical;
-                        width: 94px;
                     }
                 }
             }
@@ -180,7 +173,12 @@
                 display: block;
 
                 .best-title {
-                    margin-bottom: .25rem;
+                    margin-bottom: 0;
+                    font-size: 18px;
+                }
+
+                .actions {
+                    font-size: 14px;
                 }
             }
         }
@@ -228,8 +226,9 @@
 
     .article {
         .title {
-            font-weight: 700;
             font-size: 22px;
+            font-family: "DIN Next LT", sans-serif;
+            font-weight: 500;
         }
 
         .items {
@@ -263,9 +262,34 @@
 
             .article-title {
                 font-weight: bold;
-                font-size: 20px;
+                font-size: 18px;
+            }
+
+            .article-info {
+                font-size: 14px;
             }
         }
+
+        @include breakpoint-down(medium) {
+            .title {
+                font-size: 18px;
+            }
+
+            .see-all {
+                font-size: 14px;
+            }
+
+            .article-item {
+                .article-title {
+                    font-size: 1rem;
+                }
+
+                .article-info {
+                    font-size: 12px;
+                }
+            }
+        }
+
     }
 
 
@@ -305,7 +329,8 @@
                 color: white;
                 display: block;
                 font-size: small;
-                font-weight: bold;
+                font-family: "DIN Next LT", sans-serif;
+                font-weight: 500;
             }
         }
 

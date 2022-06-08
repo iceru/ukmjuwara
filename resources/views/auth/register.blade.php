@@ -1,5 +1,5 @@
 <x-guest-layout>
-    
+
     <div class="login">
         <div class="container g-0">
             <div class="row g-0">
@@ -8,18 +8,18 @@
                         <div class="alert alert-danger mb-3">
                             <strong>Sorry !</strong> There were some problems with your input.<br><br>
                             <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
                             </ul>
                         </div>
                     @endif
-                    <h3 class="login-text">#UKMJuWAra</h3>
+                    <h3 class="login-text">UKMJuWAra</h3>
                     <div class="login-card">
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
                             <div class="mb-4">
-                                <label class="form-label" for="name" class="form-label" >Name</label>
+                                <label class="form-label" for="name" class="form-label">Name</label>
                                 <input type="text" class="form-control" id="name" required autofocus name="name"
                                     :value="old('email')">
                             </div>
@@ -28,25 +28,25 @@
                                 <input type="email" class="form-control" id="email" required autofocus name="email"
                                     :value="old('email')">
                             </div>
-    
+
                             <div class="form-group mb-4">
                                 <label class="form-label" for="password">Password</label>
                                 <input class="form-control" id="password" type="password" name="password" required
                                     autocomplete="current-password">
                             </div>
-    
+
                             <div class="form-group">
                                 <label class="form-label" for="password_confirmation">Confirm Password</label>
-                                <input class="form-control" id="password_confirmation" type="password" name="password_confirmation" required
-                                    autocomplete="current-password">
+                                <input class="form-control" id="password_confirmation" type="password"
+                                    name="password_confirmation" required autocomplete="current-password">
                             </div>
-    
+
                             <div class="flex items-center justify-end mt-3 mb-3">
                                 <a href="{{ route('login') }}">
                                     Already Registered?
                                 </a>
                             </div>
-    
+
                             <button class="btn btn-primary" type="submit">Register</button>
                         </form>
                     </div>

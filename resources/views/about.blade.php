@@ -1,6 +1,6 @@
 <x-app-layout>
     @section('title')
-    Tentang Kami
+        Tentang Kami
     @endsection
 
     <div class="about">
@@ -10,7 +10,8 @@
                     <div class="about-text">
                         <h3>Tentang Kami</h3>
                     </div>
-                    <p class="fw-normal">UMKM merupakan tulang punggung perekonomian Indonesia. Dengan jumlah sekitar 64
+                    <p class="fw-normal">UMKM merupakan tulang punggung perekonomian Indonesia. Dengan jumlah
+                        sekitar 64
                         juta unit, UMKM telah berkontribusi terhadap Pendapatan Domestik Bruto sekitar 60%, dan menyerap
                         tenaga kerja sekitar 97%. Tetapi sayangnya, struktur UMKM di Indonesia masih sangat didominasi
                         oleh Usaha Mikro, yaitu sekitar 98,7% dari total UMKM ( berdasarkan kriteria UU No.20/2008).
@@ -72,7 +73,7 @@
                             <br><br>
                             Semula, katalog ini dikemas dalam pendekatan Conversation Commerce atau c-commerce sehingga
                             dapat memberi kenyamanan bagi konsumen dan calon mitra UKM terpilih dalam melihat, memilih,
-                            dan berinteraksi dengan para #UKMJuWAra melalui situs katalog digital di s.id/ukmjuwara dan
+                            dan berinteraksi dengan para UKMJuWAra melalui situs katalog digital di s.id/ukmjuwara dan
                             Katalog WhatsApp Business s.id/UKMJUWARA yang terhubung langsung dengan chat Whatsapp
                             Business dan akun media sosial UMKM terpilih, untuk menghadirkan pengalaman interaksi yang
                             lebih akrab dan personal. Menurut WhatsApp Inc, program ini membuat ukmindonesia.id sebagai
@@ -144,10 +145,10 @@
                         dalam ranah spesifik di ruang lingkup promosi. Kami bangga karena prakarsa katalog ini merupakan
                         buah karya kolaboratif dengan semua member peserta program UKM JuWAra, dengan Whatsapp Inc, yang
                         turut didukung oleh Kementerian Koperasi dan UKM RI, APINDO UMKM AKADEMI, dan pihak lainnya yang
-                        membantu mengamplifikasi kampanye #UKMJuWAra untuk #banggabuatanindonesia ini.
+                        membantu mengamplifikasi kampanye UKMJuWAra untuk #banggabuatanindonesia ini.
                         <br><br>
                     </p>
-                    <h4 class="text-center">Temukan #UKMJuWAra kamu disini! </h4>
+                    <h4 class="text-center">Temukan UKMJuWAra kamu disini! </h4>
 
                 </div>
             </div>

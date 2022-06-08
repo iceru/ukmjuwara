@@ -160,23 +160,20 @@
                 <label for="minimum_order" class="col-12 col-md-2 col-form-label">Minimum Order Quantity untuk
                     Ekspor</label>
                 <div class="col-12 col-md-10">
-                    <textarea type="text" class="form-control" id="minimum_order"
-                        name="minimum_order">{{ $ukm->minimum_order }}</textarea>
+                    <textarea type="text" class="form-control" id="minimum_order" name="minimum_order">{{ $ukm->minimum_order }}</textarea>
                 </div>
             </div>
             <div class="row mb-3 global">
                 <label for="fulfillment_duration" class="col-12 col-md-2 col-form-label">Durasi masa tunggu pemenuhan
                     pesanan</label>
                 <div class="col-12 col-md-10">
-                    <textarea type="text" class="form-control" id="fulfillment_duration"
-                        name="fulfillment_duration">{{ $ukm->fulfillment_duration }}</textarea>
+                    <textarea type="text" class="form-control" id="fulfillment_duration" name="fulfillment_duration">{{ $ukm->fulfillment_duration }}</textarea>
                 </div>
             </div>
             <div class="row mb-3 global">
                 <label for="preferred_incoterm" class="col-12 col-md-2 col-form-label">Preferred Incoterm</label>
                 <div class="col-12 col-md-10">
-                    <textarea type="text" class="form-control" id="preferred_incoterm"
-                        name="preferred_incoterm">{{ $ukm->preferred_incoterm }}</textarea>
+                    <textarea type="text" class="form-control" id="preferred_incoterm" name="preferred_incoterm">{{ $ukm->preferred_incoterm }}</textarea>
                 </div>
             </div>
             <div class="row mb-3">
@@ -207,12 +204,12 @@
                 <div class="col-12 col-md-10">
                     <div class="row">
                         <div class="col-12 col-lg-6">
-                            <input type="text" class="form-control" value="{{ old('min_price') }}" id="min_price"
-                                name="min_price" placeholder="Harga Minimum" value="{{ $ukm->min_price }}">
+                            <input type="text" class="form-control" id="min_price" name="min_price"
+                                placeholder="Harga Minimum" value="{{ $ukm->min_price }}">
                         </div>
                         <div class="col-12 col-lg-6">
-                            <input type="text" class="form-control" value="{{ old('max_price') }}" id="max_price"
-                                name="max_price" placeholder="Harga Maksimum" value="{{ $ukm->max_price }}">
+                            <input type="text" class="form-control" id="max_price" name="max_price"
+                                placeholder="Harga Maksimum" value="{{ $ukm->max_price }}">
                         </div>
                     </div>
                 </div>
@@ -249,6 +246,13 @@
                     <select class="form-select" name="subDistrict" id="subDistrict">
                         <option disabled selected>Pilih Kecamatan</option>
                     </select>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label for="catalog" class="col-12 col-md-2 col-form-label">Sliders UKM</label>
+                <div class="col-12 col-md-10">
+                    <input type="file" class="form-control" multiple name="sliders[]" accept="image/*">
                 </div>
             </div>
 

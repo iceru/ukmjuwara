@@ -69,6 +69,8 @@ class AdminUkmController extends Controller
             'whatsapp' => 'required',
             'image' => 'required',
             'image.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'sliders' => 'nullable',
+            'sliders.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'instagram' => 'required',
             'catalog' => 'required',
             'program' => 'required',
@@ -76,8 +78,8 @@ class AdminUkmController extends Controller
             'address' => 'required',
             'state' => 'required',
             'city' => 'required',
-            'min_price' => 'required',
-            'max_price' => 'required',
+            'min_price' => 'nullable',
+            'max_price' => 'nullable',
             'subDistrict' => 'required',
             'city_name'=> 'required',
             'owner_gender'=> 'required',
@@ -109,6 +111,19 @@ class AdminUkmController extends Controller
                 $data[] = $filename;
             }
         }
+
+        if($request->hasFile('sliders')) {
+            $sliders = $request->file('sliders');
+
+            foreach($sliders as $slider) {
+                $name = $slider->getClientOriginalName();
+                $filename = $request->title.'_'.time().'.'.$name;
+                $path = $slider->storeAs('public/ukm-sliders', $filename);
+                $dataSliders[] = $filename;
+            }
+        }
+
+        $ukm->sliders = json_encode($dataSliders);
         $ukm->images=json_encode($data);
 
         $ukm->title = $request->title;
@@ -228,6 +243,8 @@ class AdminUkmController extends Controller
             'minimum_order' => 'nullable',
             'fulfillment_duration' => 'nullable',
             'preferred_incoterm' => 'nullable',
+            'min_price' => 'nullable',
+            'max_price' => 'nullable',
         ]);
 
         if ($request->hasFile('image')) {
@@ -242,6 +259,22 @@ class AdminUkmController extends Controller
             }
 
             $ukm->images=json_encode($data);
+        }
+
+        if($request->hasFile('sliders')) {
+            $sliders = $request->file('sliders');
+            $dataSliders = [];
+
+            foreach($sliders as $slider) {
+                $name = $slider->getClientOriginalName();
+                $filename = $request->title.'_'.time().'.'.$name;
+                $path = $slider->storeAs('public/ukm-sliders', $filename);
+                $dataSliders[] = $filename;
+            }
+
+            if(count($dataSliders) > 0) {
+                $ukm->sliders = json_encode($dataSliders);
+            }
         }
 
         $ukm->title = $request->title;

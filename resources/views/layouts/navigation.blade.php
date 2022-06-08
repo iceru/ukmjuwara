@@ -6,7 +6,7 @@
         </a>
         <a href="{{ route('index') }}">
             <div class="logo">
-                <h3>#UKMJuWAra</h3>
+                <h3>UKMJuWAra</h3>
             </div>
         </a>
         <div class="d-flex align-items-center">
@@ -70,7 +70,7 @@
     <div class="container">
         <div class="search-content">
             <div class="text">
-                Cari #UKMJuWAra
+                Cari UKMJuWAra
             </div>
             <form action="{{ route('search') }}" role="search" id="search_form" action="" method="GET">
                 @csrf
@@ -103,7 +103,7 @@
         </button>
     </div>
     <div class="menu-overlay">
-        <h1>#UKMJuWAra</h1>
+        <h1>UKMJuWAra</h1>
         <div class="list-menu">
             <ul>
                 {{-- <li>

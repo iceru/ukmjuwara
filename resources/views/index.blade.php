@@ -1,6 +1,6 @@
 <x-app-layout>
     @section('title')
-        #UKMJuWAra
+        UKMJuWAra
     @endsection
 
     @section('meta-content')
@@ -138,7 +138,7 @@
                                         <div class="article-title">
                                             <p>{!! $article->title !!}</p>
                                         </div>
-                                        <p class="mt-2">
+                                        <p class="mt-2 article-info">
                                             {{ date('d F Y', strtotime($article->created_at)) }}
                                             | {{ $article->time_read }} Mins Read</p>
                                     </div>
@@ -418,14 +418,14 @@
         var owner_gender_filter = [];
         var program_filter = [];
         var min_price = null;
-        var max_price = null;
+        var max_price = {{ $max_price_digital }};
 
         var category_global_filter = [];
         var state_global_filter = [];
         var owner_gender_global_filter = [];
         var program_global_filter = [];
         var min_price_global = null;
-        var max_price_global = null;
+        var max_price_global = {{ $max_price_global }};
 
         var params = {
             record: '',
@@ -451,6 +451,7 @@
                 infinite: true,
                 slidesToShow: 5,
                 slidesToScroll: 1,
+                variableWidth: true,
                 autoplay: true,
                 autoplaySpeed: 3000,
                 responsive: [{
@@ -510,18 +511,34 @@
                     min_price = ui.values[0];
                     max_price = ui.values[1];
 
-                    params = {
-                        record: '',
-                        type: '',
-                        catalog_id: 'catalogDigital'
-                    }
-
+                    params.catalog_id = 'catalogDigital'
                     ajaxFilter(params);
                 }, 700)
             });
 
             $(".min_amount").val($("#slider-range-digital").slider("values", 0));
             $(".max_amount").val($("#slider-range-digital").slider("values", 1));
+
+
+            $(".min_amount").change(function() {
+                $("#slider-range-digital").slider("values", 0, parseInt(this.value));
+                min_price = parseInt(this.value);
+
+                params.catalog_id = 'catalogDigital'
+                ajaxFilter(params)
+            });
+
+            $(".max_amount").change(function() {
+                if (parseInt(this.value) > min_price) {
+                    $("#slider-range-digital").slider("values", 1, parseInt(this.value));
+                    max_price = parseInt(this.value);
+                    min_price = min_price ? min_price : 0;
+
+                    params.catalog_id = 'catalogDigital'
+                    ajaxFilter(params)
+                }
+                return
+            });
 
             $("#slider-range-global").slider({
                 range: true,
@@ -547,6 +564,26 @@
 
             $(".min_amount_global").val($("#slider-range-global").slider("values", 0));
             $(".max_amount_global").val($("#slider-range-global").slider("values", 1));
+        });
+
+        $(".min_amount_global").change(function() {
+            $("#slider-range-global").slider("values", 0, parseInt(this.value));
+            min_price_global = parseInt(this.value);
+
+            params.catalog_id = 'catalogGlobal'
+            ajaxFilter(params)
+        });
+
+        $(".max_amount_global").change(function() {
+            if (parseInt(this.value) > min_price_global) {
+                $("#slider-range-global").slider("values", 1, parseInt(this.value));
+                max_price_global = parseInt(this.value);
+                min_price_global = min_price_global ? min_price_global : 0;
+
+                params.catalog_id = 'catalogGlobal'
+                ajaxFilter(params)
+            }
+            return
         });
 
         function get_filter(filter, data, text, add) {

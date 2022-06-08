@@ -234,6 +234,15 @@
                     </select>
                 </div>
             </div>
+            <div class="row mb-3">
+                <label for="catalog" class="col-12 col-md-2 col-form-label">Sliders UKM</label>
+                <div class="col-12 col-md-10">
+                    <input type="file" class="form-control" multiple name="sliders[]" accept="image/*">
+                    <p class="form-text text-muted">
+                        Data gambar bisa di upload lebih dari 1 files
+                    </p>
+                </div>
+            </div>
             <div class="mb-3 row">
                 <div class="col-12 col-md-2"></div>
                 <div class="col-12 col-md-10">
@@ -265,6 +274,7 @@
                     <th>Durasi masa tunggu pemenuhan pesanan</th>
                     <th>Preferred Incoterm</th>
                     <th>Harga Minimum - Maksimum</th>
+                    <th>Sliders</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -278,7 +288,7 @@
                             @foreach (array_slice((array) json_decode($ukm->images), 0, 1) as $item)
                                 <div>
                                     <img class="mb-2" src="{{ Storage::url('ukm-image/' . $item) }}"
-                                        alt="Image" width="100" height="100">
+                                        alt="Image" width="100" height="100" loading='lazy'>
                                 </div>
                             @endforeach
                         </td>
@@ -306,6 +316,16 @@
                         <td>{!! str_contains(strtolower($ukm->catalog->title), 'global') ? $ukm->fulfillment_duration : '-' !!}</td>
                         <td>{!! str_contains(strtolower($ukm->catalog->title), 'global') ? $ukm->preferred_incoterm : '-' !!}</td>
                         <td>Rp{{ $ukm->min_price }} - Rp{{ $ukm->max_price }}</td>
+                        <td>
+                            <div class="d-flex">
+                                @foreach (array_slice((array) json_decode($ukm->sliders), 0, 2) as $item)
+                                    <div>
+                                        <img class="mb-2" src="{{ Storage::url('ukm-sliders/' . $item) }}"
+                                            alt="Image" width="100" height="100" loading='lazy'>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </td>
 
                         <td><a class="btn btn-warning btn-small d-flex align-items-center justify-content-center mb-2"
                                 href="/ukm/{{ $ukm->slug }}" target="_blank"><i class="fas fa-eye me-1"
