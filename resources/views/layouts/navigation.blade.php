@@ -72,13 +72,14 @@
             <div class="text">
                 Cari UKMJuWAra
             </div>
-            <form action="{{ route('search') }}" role="search" id="search_form" action="" method="GET">
+            <form action="{{ route('search') }}" role="search" id="search_form" class="d-flex" action=""
+                method="GET">
                 @csrf
                 <input type="search" class="form-control" name="search_query">
+                <button type="submit" value="" class="btn btn-search">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
             </form>
-            <button type="submit" value="" class="btn btn-search">
-                <i class="fa fa-search" aria-hidden="true"></i>
-            </button>
         </div>
     </div>
 </div>

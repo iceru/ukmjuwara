@@ -419,14 +419,14 @@
         var state_filter = [];
         var owner_gender_filter = [];
         var program_filter = [];
-        var min_price = null;
+        var min_price = 0;
         var max_price = {{ $max_price_digital }};
 
         var category_global_filter = [];
         var state_global_filter = [];
         var owner_gender_global_filter = [];
         var program_global_filter = [];
-        var min_price_global = null;
+        var min_price_global = 0;
         var max_price_global = {{ $max_price_global }};
 
         var params = {
