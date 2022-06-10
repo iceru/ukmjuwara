@@ -309,7 +309,7 @@
                 display: none;
             }
 
-            @include breakpoint-down(small) {
+            @include breakpoint-down(large) {
                 &.desktop {
                     display: none;
                 }
@@ -357,10 +357,6 @@
         }
 
         @include breakpoint-down(medium) {
-            .cta-img {
-                height: 200px;
-            }
-
             .cta-text {
                 padding: 1rem;
 
