@@ -47,6 +47,13 @@
                 </div>
             </div>
 
+            <div class="row mb-3">
+                <label for="image" class="col-12 col-md-2 col-form-label">Image Mobile</label>
+                <div class="col-12 col-md-10">
+                    <input type="file" class="form-control" id="image_mobile" name="image_mobile"></input>
+                </div>
+            </div>
+
             <div class="mb-3 row">
                 <div class="col-12 col-md-2"></div>
                 <div class="col-12 col-md-10">
@@ -63,6 +70,7 @@
                     <th>Description</th>
                     <th>Link</th>
                     <th>Image</th>
+                    <th>Image Mobile</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -78,6 +86,15 @@
                             @if ($cta->image)
                                 <img class="mb-2" src="{{ Storage::url('cta-image/' . $cta->image) }}"
                                     alt="Image" width="60">
+                            @else
+                                -
+                            @endif
+                        </td>
+                        <td>
+                            @if ($cta->image_mobile)
+                                <img class="mb-2"
+                                    src="{{ Storage::url('cta-image/' . $cta->image_mobile) }}" alt="Image"
+                                    width="60">
                             @else
                                 -
                             @endif
