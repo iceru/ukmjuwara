@@ -149,7 +149,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-lg-6 cta-section">
+               @if($cta)
+               <div class="col-12 col-lg-6 cta-section">
                     <div class="row">
                         <div class="col-12 col-lg-5 pe-lg-0">
                             <div class="cta-img">
@@ -171,6 +172,7 @@
                         </div>
                     </div>
                 </div>
+               @endif
             </div>
             <div class="row">
                 <div class="col-12 col-lg-6">
