@@ -153,9 +153,15 @@
                <div class="col-12 col-lg-6 cta-section">
                     <div class="row">
                         <div class="col-12 col-lg-5 pe-lg-0">
-                            <div class="cta-img">
+                            <div class="cta-img desktop">
                                 <a href="{{ $cta->link }}">
                                     <img src="{{ Storage::url('cta-image/' . $cta->image) }}" alt="">
+                                </a>
+                            </div>
+
+                            <div class="cta-img mobile">
+                                <a href="{{ $cta->link }}">
+                                    <img src="{{ Storage::url('cta-image/' . $cta->image_mobile) }}" alt="">
                                 </a>
                             </div>
                         </div>
