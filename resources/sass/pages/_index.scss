@@ -309,13 +309,17 @@
                 display: none;
             }
 
-            @include breakpoint-down(medium) {
+            @include breakpoint-down(small) {
                 &.desktop {
                     display: none;
                 }
 
                 &.mobile {
                     display: block;
+
+                    img {
+                        object-position: bottom;
+                    }
                 }
             }
 
