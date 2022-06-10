@@ -301,6 +301,24 @@
         .cta-img {
             height: 100%;
 
+            &.desktop {
+                display: block;
+            }
+
+            &.mobile {
+                display: none;
+            }
+
+            @include breakpoint-down(medium) {
+                &.desktop {
+                    display: none;
+                }
+
+                &.mobile {
+                    display: block;
+                }
+            }
+
             img {
                 width: 100%;
                 height: 100%;
