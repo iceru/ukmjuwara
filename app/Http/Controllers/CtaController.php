@@ -40,6 +40,7 @@ class CtaController extends Controller
 
         $request->validate([
             'image' => 'required|image',
+            'image_mobile' => 'required|image',
             'title' => 'required',
         ]);
 
@@ -48,8 +49,16 @@ class CtaController extends Controller
             $filename = $request->title.'_'.time().'.'.$extension;
             $path = $request->image->storeAs('public/cta-image', $filename);
         }
-
         $cta->image = $filename;
+
+        if ($request->hasFile('image_mobile')) {
+            $extension = $request->file('image_mobile')->getClientOriginalExtension();
+            $filename_mobile = 'mobileCta__'.time().'.'.$extension;
+            $path = $request->image_mobile->storeAs('public/cta-image', $filename_mobile);
+        }
+
+        $cta->image_mobile = $filename_mobile;
+
         $cta->title = $request->title;
         $cta->link = $request->link;
         $cta->description = $request->description;
@@ -97,6 +106,7 @@ class CtaController extends Controller
             'title' => 'required',
             'link' => 'required',
             'description' => 'required',
+            'image_mobile' => 'nullable',
             'image' => 'nullable'
         ]);
 
@@ -105,6 +115,13 @@ class CtaController extends Controller
             $filename = $request->title.'_'.time().'.'.$extension;
             $path = $request->image->storeAs('public/cta-image', $filename);
             $cta->image = $filename;
+        }
+
+        if ($request->hasFile('image_mobile')) {
+            $extension = $request->file('image_mobile')->getClientOriginalExtension();
+            $filename_mobile = 'mobileCta_'.time().'.'.$extension;
+            $path = $request->image_mobile->storeAs('public/cta-image', $filename_mobile);
+            $cta->image_mobile = $filename_mobile;
         }
 
         $cta->title = $request->title;

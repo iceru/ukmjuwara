@@ -45,8 +45,8 @@
                 <label for="image" class="col-12 col-md-2 col-form-label">Image</label>
                 <div class="col-12 col-md-10 edit-image">
                     @if ($cta->image)
-                        <img src="{{ Storage::url('category-image/' . $cta->image) }}" alt="image"
-                            class="mb-3" width="200">
+                        <img src="{{ Storage::url('cta-image/' . $cta->image) }}" alt="image" class="mb-3"
+                            width="200">
                     @endif
                     <input type="file" class="form-control" id="image" name="image"></input>
                     @if ($cta->image)
@@ -58,6 +58,22 @@
                 </div>
             </div>
 
+            <div class="row mb-3">
+                <label for="image" class="col-12 col-md-2 col-form-label">Image Mobile</label>
+                <div class="col-12 col-md-10 edit-image">
+                    @if ($cta->image_mobile)
+                        <img src="{{ Storage::url('cta-image/' . $cta->image_mobile) }}" alt="{{ $cta->title }}"
+                            class="mb-3" width="200">
+                    @endif
+                    <input type="file" class="form-control" id="image_mobile" name="image_mobile"></input>
+                    @if ($cta->image_mobile)
+                        <p class="form-text text-muted">
+                            Image tidak perlu di input kembali jika tidak ingin diganti
+                        </p>
+                    @endif
+
+                </div>
+            </div>
 
             <div class="mb-3 row">
                 <div class="col-12 col-md-2"></div>
