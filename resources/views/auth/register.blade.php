@@ -6,7 +6,7 @@
                 <div class="col-12 col-md-6 login-content">
                     @if (count($errors) > 0)
                         <div class="alert alert-danger mb-3">
-                            <strong>Sorry !</strong> There were some problems with your input.<br><br>
+                            Terdapat Masalah Pada Input Data<br><br>
                             <ul>
                                 @foreach ($errors->all() as $error)
                                     <li>{{ $error }}</li>

@@ -2,23 +2,24 @@
     <div class="admin-content">
         <h4>Artikel</h4>
         @if (count($errors) > 0)
-        <div class="alert alert-danger mt-3">
-          <strong>Sorry !</strong> There were some problems with your input.<br><br>
-          <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-          </ul>
-        </div>
-        @endif
-    
-        @if(session('success'))
-        <div class="alert alert-success mt-3">
-            {{ session('success') }}
-        </div>
+            <div class="alert alert-danger mt-3">
+                Terdapat Masalah Pada Input Data<br><br>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
         @endif
 
-        <form action="{{ route('admin.article.update') }}" enctype="multipart/form-data" method="POST" class="mt-4 mb-5">
+        @if (session('success'))
+            <div class="alert alert-success mt-3">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        <form action="{{ route('admin.article.update') }}" enctype="multipart/form-data" method="POST"
+            class="mt-4 mb-5">
             @csrf
             <input type="text" name="id" value="{{ $article->id }}" hidden readonly>
             <div class="row mb-3">
@@ -36,7 +37,8 @@
             <div class="row mb-3">
                 <label for="image" class="col-12 col-md-2 col-form-label">Featured Image</label>
                 <div class="col-12 col-md-10">
-                    <img src="{{ Storage::url('article-image/'.$article->image) }}" alt="image" class="mb-3" width="200">
+                    <img src="{{ Storage::url('article-image/' . $article->image) }}" alt="image" class="mb-3"
+                        width="200">
                     <input type="file" class="form-control" id="image" name="image"></input>
                     <p class="form-text text-muted">
                         Image tidak perlu di input kembali jika tidak ingin diganti
@@ -48,7 +50,8 @@
                 <div class="col-12 col-md-10">
                     <select class="form-select" name="author" id="author">
                         @foreach (App\Models\User::all() as $user)
-                            <option {{old('author') == $user->name ? 'selected' : ''}} value="{{ $user->name }}">{{ $user->name }}</option>
+                            <option {{ old('author') == $user->name ? 'selected' : '' }} value="{{ $user->name }}">
+                                {{ $user->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -56,13 +59,15 @@
             <div class="row mb-3">
                 <label for="time_read" class="col-12 col-md-2 col-form-label">Read Time</label>
                 <div class="col-12 col-md-10">
-                    <input type="number" value="{{ $article->time_read }}" class="form-control" id="time_read" name="time_read">
+                    <input type="number" value="{{ $article->time_read }}" class="form-control" id="time_read"
+                        name="time_read">
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="tags" class="col-12 col-md-2 col-form-label">Tags</label>
                 <div class="col-12 col-md-10">
-                    <input type="text" value="@foreach ($article->tags as $tag){{$tag->tag_name}} @endforeach"  class="form-control" id="tags" name="tags">
+                    <input type="text" value="@foreach ($article->tags as $tag) {{ $tag->tag_name }} @endforeach"
+                        class="form-control" id="tags" name="tags">
                     <p class="form-text text-muted">
                         (Tag dipisah dengan spasi, contoh: tag1 tag2 tag3)
                     </p>
@@ -78,7 +83,7 @@
     </div>
     <script>
         $(document).ready(function() {
-            $(".btn-success").click(function(){
+            $(".btn-success").click(function() {
                 var html = $(".clone").html();
                 $(".clone").after(html);
             });
