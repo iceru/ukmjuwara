@@ -3,7 +3,7 @@
         <h4>UKM</h4>
         @if (count($errors) > 0)
             <div class="alert alert-danger mt-3">
-                <strong>Sorry !</strong> There were some problems with your input.<br><br>
+                Terdapat Masalah Pada Input Data<br><br>
                 <ul>
                     @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
