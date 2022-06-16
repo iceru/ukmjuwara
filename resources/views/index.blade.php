@@ -133,7 +133,7 @@
                                 <a href="/berita/{{ $article->slug }}" class="row article-item">
                                     <div class="col-4 col-lg-3 ">
                                         <div class="article-image">
-                                            <img src="{ Storage::url('article-image/' . $article->image) }}" alt="">
+                                            <img src="{{ Storage::url('article-image/' . $article->image) }}" alt="">
                                         </div>
                                     </div>
                                     <div class="col-8 col-lg-9">
