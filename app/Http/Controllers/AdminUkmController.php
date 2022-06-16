@@ -121,9 +121,9 @@ class AdminUkmController extends Controller
                 $path = $slider->storeAs('public/ukm-sliders', $filename);
                 $dataSliders[] = $filename;
             }
+            $ukm->sliders = json_encode($dataSliders);
         }
 
-        $ukm->sliders = json_encode($dataSliders);
         $ukm->images=json_encode($data);
 
         $ukm->title = $request->title;
