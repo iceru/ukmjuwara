@@ -11,6 +11,11 @@
         kebutuhan UKM untuk meroket.
     @endsection
     <div class="index">
+
+        <div class="loading">
+            <div class="spinner-border" role="status">
+            </div>
+        </div>
         <div class="container">
             <div class="header-container">
                 <div class="desktop header">
@@ -18,8 +23,7 @@
                         <div>
                             <div class="image-container ratio2halfx1">
                                 <a href="{{ $slider->link }}">
-                                    <img class="image"
-                                        src="{{ Storage::url('slider-image/' . $slider->image) }}"
+                                    <img class="image" src="{{ Storage::url('slider-image/' . $slider->image) }}"
                                         alt="{{ $slider->title }}">
                                 </a>
 
@@ -32,8 +36,7 @@
                         <div>
                             <div class="image-container ratio2halfx1">
                                 <a href="{{ $slider->link }}">
-                                    <img class="image"
-                                        src="{{ Storage::url('slider-image/' . $slider->image) }}"
+                                    <img class="image" src="{{ Storage::url('slider-image/' . $slider->image) }}"
                                         alt="{{ $slider->title }}">
                                 </a>
 
@@ -50,8 +53,7 @@
                     </div>
                     <div class="items" id="categories">
                         @foreach ($categories_digital as $category)
-                            <a href="/katalog/ukmjuwara-go-digital?categories={{ $category->id }}"
-                                class="item">
+                            <a href="/katalog/ukmjuwara-go-digital?categories={{ $category->id }}" class="item">
                                 <div class="logo">
                                     <img src="{{ Storage::url('category-image/' . $category->image) }}">
                                 </div>
@@ -62,8 +64,7 @@
                             </a>
                         @endforeach
                         @foreach ($categories_global as $category)
-                            <a href="/katalog/ukmjuwara-go-global?categories={{ $category->id }}"
-                                class="item">
+                            <a href="/katalog/ukmjuwara-go-global?categories={{ $category->id }}" class="item">
                                 <div class="logo">
                                     <img src="{{ Storage::url('category-image/' . $category->image) }}">
                                 </div>
@@ -82,8 +83,8 @@
                         </div>
                         <div class="actions d-flex">
                             <div class="filter-btn me-3">
-                                <a id="filter_global" data-bs-toggle="offcanvas" href="#offcanvas_digital" role="button"
-                                    aria-controls="offcanvas_digital">Filter</a>
+                                <a id="filter_global" data-bs-toggle="offcanvas" href="#offcanvas_digital"
+                                    role="button" aria-controls="offcanvas_digital">Filter</a>
                             </div>
                             <a href="/katalog/ukmjuwara-go-digital" class="see-more">
                                 Lihat Semua
@@ -118,7 +119,7 @@
             </div>
             <div class="row mb-4 ">
                 <div class="col-12 col-lg-6  mb-4 mb-lg-0">
-                    <div class="content primary article mb-0">
+                    <div class="content third article mb-0">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <div class="title">
                                 Berita Terbaru
@@ -133,7 +134,8 @@
                                 <a href="/berita/{{ $article->slug }}" class="row article-item">
                                     <div class="col-4 col-lg-3 ">
                                         <div class="article-image">
-                                            <img src="{{ Storage::url('article-image/' . $article->image) }}" alt="">
+                                            <img src="{{ Storage::url('article-image/' . $article->image) }}"
+                                                alt="">
                                         </div>
                                     </div>
                                     <div class="col-8 col-lg-9">
@@ -149,38 +151,39 @@
                         </div>
                     </div>
                 </div>
-               @if($cta)
-               <div class="col-12 col-lg-6 cta-section">
-                    <div class="row">
-                        <div class="col-12 col-lg-5 pe-lg-0">
-                            <div class="cta-img desktop">
-                                <a href="{{ $cta->link }}">
-                                    <img src="{{ Storage::url('cta-image/' . $cta->image) }}" alt="">
-                                </a>
-                            </div>
-
-                            <div class="cta-img mobile">
-                                <a href="{{ $cta->link }}">
-                                    <div class="image-container ratio16x9">
-                                        <img src="{{ Storage::url('cta-image/' . $cta->image_mobile) }}" alt="">
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-12 col-lg-7 ps-lg-0">
-                            <div class="cta-text">
-                                <div class="cta-title">
-                                    <div>
-                                        <h3>{{ $cta->title }}</h3>
-                                    </div>
+                @if ($cta)
+                    <div class="col-12 col-lg-6 cta-section">
+                        <div class="row">
+                            <div class="col-12 col-lg-5 pe-lg-0">
+                                <div class="cta-img desktop">
+                                    <a href="{{ $cta->link }}">
+                                        <img src="{{ Storage::url('cta-image/' . $cta->image) }}" alt="">
+                                    </a>
                                 </div>
-                                <p>{!! $cta->description !!}</p>
-                                <a href="/tentang-kami">Baca Selengkapnya</a>
+
+                                <div class="cta-img mobile">
+                                    <a href="{{ $cta->link }}">
+                                        <div class="image-container ratio16x9">
+                                            <img src="{{ Storage::url('cta-image/' . $cta->image_mobile) }}"
+                                                alt="">
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-7 ps-lg-0">
+                                <div class="cta-text">
+                                    <div class="cta-title">
+                                        <div>
+                                            <h3>{{ $cta->title }}</h3>
+                                        </div>
+                                    </div>
+                                    <p>{!! $cta->description !!}</p>
+                                    <a href="/tentang-kami">Baca Selengkapnya</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-               @endif
+                @endif
             </div>
             <div class="row">
                 <div class="col-12 col-lg-6">
@@ -241,8 +244,8 @@
                 <h3 class="mb-3">Filter Go Digital</h3>
                 <div class="filter-mobile-checkbox">
                     <div class="search-ukm mb-3">
-                        <input type="text" class="form-control search-ukm-mobile" id="search" placeholder="Search"
-                            type="search">
+                        <input type="text" class="form-control search-ukm-mobile" id="search"
+                            placeholder="Search" type="search">
                     </div>
                     <div class="category-filter mb-3">
                         <h5 class="mb-2">Kategori</h5>
@@ -289,8 +292,8 @@
                         <h5 class="mb-2">Lokasi</h5>
                         @foreach ($states_digital as $item)
                             <div class="form-check">
-                                <input class="form-check-input state" type="checkbox" value="{{ $item->state_name }}"
-                                    id="state" name="state[]">
+                                <input class="form-check-input state" type="checkbox"
+                                    value="{{ $item->state_name }}" id="state" name="state[]">
                                 <label class="form-check-label text-capitalize" for="flexCheckDefault">
                                     @if ($item->state_name == 'DKI JAKARTA')
                                         DKI Jakarta
@@ -315,8 +318,8 @@
                             <label class="form-check-label" for="flexCheckDefault"> Wanita
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input owner" type="checkbox" value="pria-wanita" id="owner_gender"
-                                name="owner_gender[]">
+                            <input class="form-check-input owner" type="checkbox" value="pria-wanita"
+                                id="owner_gender" name="owner_gender[]">
                             <label class="form-check-label" for="flexCheckDefault"> Pria & Wanita
                         </div>
                     </div>
@@ -400,8 +403,8 @@
                     <div class="owner-gender-filter mb-3">
                         <h5 class="mb-2">Gender Pemilik</h5>
                         <div class="form-check">
-                            <input class="form-check-input owner" type="checkbox" value="pria" id="owner_gender_global"
-                                name="owner_gender_global[]">
+                            <input class="form-check-input owner" type="checkbox" value="pria"
+                                id="owner_gender_global" name="owner_gender_global[]">
                             <label class="form-check-label" for="flexCheckDefault"> Pria
                         </div>
                         <div class="form-check">
@@ -444,6 +447,10 @@
             type: '',
             catalog_id: '',
         }
+        $("body").css({
+            overflow: "hidden",
+            height: "100%"
+        });
 
         $(document).ready(function() {
             $('#supported').slick({
@@ -493,6 +500,14 @@
                 pauseOnHover: false,
                 pauseOnFocus: false,
             });
+
+            if ($('#supported').hasClass('slick-initialized')) {
+                $('.loading').fadeOut(1000);
+                $("body").css({
+                    overflow: "auto",
+                    height: "auto"
+                });
+            };
 
             function debounce(func, wait, immediate) {
                 var timeout;

@@ -1,11 +1,17 @@
 #nav {
-    background-color: $primary-color;
+    background-color: $third-color;
     position: relative;
     z-index: 3;
 
     .navbar {
         align-items: center;
         padding: 1rem .75rem;
+
+        .logo {
+            img {
+                width: 160px;
+            }
+        }
 
         @include breakpoint(medium) {
             padding: 12px .75rem;
@@ -49,7 +55,7 @@
                     color: white;
                     transition: all .2s ease-in;
                     padding: .5rem 0;
-                    border-bottom: 1px solid $primary-color;
+                    border-bottom: 1px solid $third-color;
                     text-transform: uppercase;
                     font-family: 'DIN Next LT', sans-serif;
                     font-weight: 300;

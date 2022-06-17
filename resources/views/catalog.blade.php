@@ -39,7 +39,10 @@
                         <div class="row">
                             <div class="col-md-3"></div>
                             <div class="col-md-9">
-                                <h2 class="catalog-title">{{ $catalog->title }}</h2>
+                                <div class="catalog-title">
+                                    <img src="/images/logo-white.png" alt="" />
+                                    <h2>{{ str_replace('#UKMJuWAra', '', $catalog->title) }}</h2>
+                                </div>
                                 <div class="catalog-desc">{!! $catalog->description !!}</div>
                             </div>
                         </div>
@@ -181,8 +184,8 @@
                                         <label class="form-check-label" for="flexCheckDefault"> Wanita
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input owner-large" type="checkbox" value="pria-wanita"
-                                            id="owner_gender" name="owner_gender[]">
+                                        <input class="form-check-input owner-large" type="checkbox"
+                                            value="pria-wanita" id="owner_gender" name="owner_gender[]">
                                         <label class="form-check-label" for="flexCheckDefault"> Pria & Wanita
                                     </div>
                                 </div>

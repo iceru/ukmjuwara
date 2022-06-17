@@ -27,11 +27,28 @@
                     padding-left: .75rem;
                 }
 
+                .catalog-title {
+                    display: flex;
+                    align-items: center;
+                    margin-bottom: .5rem;
+
+                    img {
+                        width: 180px;
+                        margin-top: -11px;
+                        margin-right: .75rem;
+                    }
+                }
+
 
                 @include breakpoint(medium) {
                     .catalog-title {
                         padding-left: 1rem;
                         font-size: 2.5rem;
+
+                        img {
+                            width: 220px;
+                            margin-top: -9px;
+                        }
                     }
 
                     .catalog-desc {

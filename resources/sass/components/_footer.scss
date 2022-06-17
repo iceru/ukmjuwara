@@ -22,7 +22,7 @@
         .example::-webkit-scrollbar {
             display: none;
         }
-        
+
         .example {
             -ms-overflow-style: none;
             scrollbar-width: none;
@@ -31,10 +31,10 @@
         .col-12 .footer-item {
             padding: 1rem 0;
             position: relative;
-            border-top: 1px solid rgba(255,255,255,0.4);
+            border-top: 1px solid rgba(255, 255, 255, 0.4);
         }
 
-        .col-12:nth-child(2) .footer-item{
+        .col-12:nth-child(2) .footer-item {
             border-top: none;
             padding-right: 0;
         }
@@ -42,10 +42,12 @@
 
     ul {
         margin-bottom: 0;
+
         li {
             margin-bottom: .5rem;
         }
     }
+
     a {
         color: $background;
     }
@@ -53,7 +55,7 @@
 }
 
 .copyright {
-    background-color: $primary-color;
+    background-color: $third-color;
     color: white;
     font-size: .9rem;
     padding: .75rem 0;

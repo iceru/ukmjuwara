@@ -6,14 +6,13 @@
         </a>
         <a href="{{ route('index') }}">
             <div class="logo">
-                <h3>UKMJuWAra</h3>
+                <img src="/images/logo-white.png" alt="">
             </div>
         </a>
         <div class="d-flex align-items-center">
             <ul class="navigation d-none d-lg-flex">
                 @foreach ($catalogs->slice(1, 2) as $catalog)
-                    <li class="nav-item"><a class="nav-link"
-                            @if ($catalog->link) target="_blank" @endif
+                    <li class="nav-item"><a class="nav-link" @if ($catalog->link) target="_blank" @endif
                             href="{{ $catalog->link ? $catalog->link : route('catalog.show', $catalog->slug) }}">{{ str_replace('#UKMJuWAra ', '', $catalog->title) }}</a>
                     </li>
                 @endforeach

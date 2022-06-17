@@ -18,13 +18,13 @@
             </div>
         @endif
 
-        <form action="{{ route('admin.ukm.store') }}" enctype="multipart/form-data" method="POST"
-            class="mt-4 mb-5">
+        <form action="{{ route('admin.ukm.store') }}" enctype="multipart/form-data" method="POST" class="mt-4 mb-5">
             @csrf
             <div class="row mb-3">
                 <label for="title" class="col-12 col-md-2 col-form-label">Nama UKM</label>
                 <div class="col-12 col-md-10">
-                    <input type="text" class="form-control" value="{{ old('title') }}" id="title" name="title">
+                    <input type="text" class="form-control" value="{{ old('title') }}" id="title"
+                        name="title">
                 </div>
             </div>
             <div class="row mb-3">
@@ -97,6 +97,7 @@
                 <div class="col-12 col-md-10">
                     <select class="form-select" name="program" id="program">
                         <option disabled selected>Pilih Asal Program</option>
+                        <option value="">-</option>
                         @foreach ($programs as $program)
                             <option {{ old('program') == $program->id ? 'selected' : '' }}
                                 value="{{ $program->id }}">{{ $program->title }}</option>
@@ -112,7 +113,8 @@
                         <option {{ old('owner_gender') == 'pria' ? 'selected' : '' }} value="pria">Pria</option>
                         <option {{ old('owner_gender') == 'wanita' ? 'selected' : '' }} value="wanita">Wanita
                         </option>
-                        <option {{ old('owner_gender') == 'pria-wanita' ? 'selected' : '' }} value="pria-wanita">Pria
+                        <option {{ old('owner_gender') == 'pria-wanita' ? 'selected' : '' }} value="pria-wanita">
+                            Pria
                             & Wanita</option>
                     </select>
                 </div>
@@ -194,12 +196,12 @@
                 <div class="col-12 col-md-10">
                     <div class="row">
                         <div class="col-12 col-lg-6">
-                            <input type="text" class="form-control" value="{{ old('min_price') }}" id="min_price"
-                                name="min_price" placeholder="Harga Minimum">
+                            <input type="text" class="form-control" value="{{ old('min_price') }}"
+                                id="min_price" name="min_price" placeholder="Harga Minimum">
                         </div>
                         <div class="col-12 col-lg-6">
-                            <input type="text" class="form-control" value="{{ old('max_price') }}" id="max_price"
-                                name="max_price" placeholder="Harga Maksimum">
+                            <input type="text" class="form-control" value="{{ old('max_price') }}"
+                                id="max_price" name="max_price" placeholder="Harga Maksimum">
                         </div>
                     </div>
                 </div>
