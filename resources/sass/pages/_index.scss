@@ -18,6 +18,12 @@
     margin-top: -5rem;
     padding-top: 5rem;
 
+    .reset-filter {
+        color: white;
+        text-decoration: underline;
+        display: block;
+    }
+
     @include breakpoint-down(small) {
         padding: 0;
         padding-top: 5rem;

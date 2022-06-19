@@ -104,6 +104,7 @@
                     <div class="row">
                         <div class="col-md-3 filter" id="filter_container">
                             <h3 class="mb-3">Filter</h3>
+
                             <div class="filter-desktop-checkbox">
                                 <div class="search-ukm">
                                     {{-- <form action="{{ route('search') }}" role="search" id="search_form" action="" method="GET"> --}}
@@ -114,6 +115,9 @@
                                     </div>
                                     </form>
                                 </div>
+                                <a href='#' class="reset-filter global mb-2">
+                                    Reset Filter
+                                </a>
                                 <div class="category-filter mb-4">
                                     <h5 class="mb-2">Kategori Produk</h5>
                                     @foreach ($categories as $category)
@@ -333,6 +337,32 @@
 
         var page;
 
+        $('.reset-filter').click(function(e) {
+            e.preventDefault();
+            $('input[type=checkbox]').prop('checked', false);
+
+            $(".min_amount").val(0);
+            $(".max_amount").val({{ $max_price }});
+            $("#slider-range").slider("values", 0, 0);
+            $("#slider-range").slider("values", 1, {{ $max_price }});
+
+            category_filter = [];
+            state_filter = [];
+            owner_gender_filter = [];
+            program_filter = [];
+            price_range = {
+                min_price: 0,
+                max_price: {{ $max_price }},
+            }
+
+            category_texts = [];
+            state_texts = [];
+            owner_gender_texts = [];
+            program_texts = [];
+
+            ajaxFilter();
+        });
+
         $(document).ready(function() {
 
             $('#ukm_bests').slick({
@@ -533,7 +563,6 @@
             }
 
             if (min_price_params) {
-                debugger
                 $('.min_amount').val(parseInt(min_price_params));
                 $("#slider-range-mobile").slider("values", 0, parseInt(min_price_params));
                 $("#slider-range").slider("values", 0, parseInt(min_price_params));
@@ -660,10 +689,9 @@
                     search: search,
                     programs: programs,
                     page: page,
-                    min_price: min_price,
-                    max_price: max_price,
+                    min_price: price_range.min_price,
+                    max_price: price_range.max_price,
                 }
-
                 if (stateObj.states.length > 0)
                     url.searchParams.set('states', states)
                 else

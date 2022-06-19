@@ -126,7 +126,7 @@ class IndexController extends Controller
             }
 
             if(!isset($request->categories) && !isset($request->programs) && !isset($request->states) && !isset($request->owner_genders) 
-            && !isset($request->search) && (!isset($request->min_price)) 
+            && !isset($request->search) && (!isset($request->min_price) || (int)$request->min_price === 0) 
             && (!isset($request->max_price) || (int)$request->max_price === $max_price_digital) ) {
                 $bests_digital = Ukm::where('catalog_id', $catalogDigital->id)->orderByViews('desc', Period::since('2021-11-18'))->get()->take(8);
             } else {
