@@ -242,11 +242,14 @@
                     </button>
                 </div>
                 <h3 class="mb-3">Filter Go Digital</h3>
-                <div class="filter-mobile-checkbox">
+                <div class="filter-mobile-checkbox filter-digital">
                     <div class="search-ukm mb-3">
                         <input type="text" class="form-control search-ukm-mobile" id="search"
                             placeholder="Search" type="search">
                     </div>
+                    <a href='#' class="reset-filter digital mb-2">
+                        Reset Filter
+                    </a>
                     <div class="category-filter mb-3">
                         <h5 class="mb-2">Kategori</h5>
                         @foreach ($categories_digital as $category)
@@ -337,11 +340,14 @@
                     </button>
                 </div>
                 <h3 class="mb-3">Filter Go Global</h3>
-                <div class="filter-mobile-checkbox">
+                <div class="filter-mobile-checkbox filter-global">
                     <div class="search-ukm mb-3">
                         <input type="text" class="form-control search-ukm-mobile" name="search_global"
                             placeholder="Search" type="search">
                     </div>
+                    <a href='#' class="reset-filter global mb-2">
+                        Reset Filter
+                    </a>
                     <div class="category-filter mb-3">
                         <h5 class="mb-2">Kategori</h5>
                         @foreach ($categories_global as $category)
@@ -450,6 +456,43 @@
         $("body").css({
             overflow: "hidden",
             height: "100%"
+        });
+
+        $('.reset-filter.global').click(function(e) {
+            e.preventDefault();
+            $('.filter-global input[type=checkbox]').prop('checked', false);
+
+            $(".min_amount_global").val(0);
+            $(".max_amount_global").val({{ $max_price_global }});
+            $("#slider-range-global").slider("values", 0, 0);
+            $("#slider-range-global").slider("values", 1, {{ $max_price_global }});
+
+            category_global_filter = [];
+            state_global_filter = [];
+            owner_gender_global_filter = [];
+            program_global_filter = [];
+            min_price_global = 0;
+            max_price_global = {{ $max_price_global }};
+
+            ajaxFilter(params);
+        });
+
+        $('.reset-filter.digital').click(function(e) {
+            e.preventDefault();
+            $('.filter-digital input[type=checkbox]').prop('checked', false);
+
+            $(".min_amount_digital").val(0);
+            $(".max_amount_digitall").val({{ $max_price_digital }});
+            $("#slider-range-digital").slider("values", 0, 0);
+            $("#slider-range-digital").slider("values", 1, {{ $max_price_digital }});
+
+            category_filter = [];
+            state_filter = [];
+            owner_gender_filter = [];
+            program_filter = [];
+            min_price = 0;
+            max_price = {{ $max_price_digital }};
+            ajaxFilter(params);
         });
 
         $(document).ready(function() {
