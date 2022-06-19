@@ -40,7 +40,7 @@
                             <div class="col-md-3"></div>
                             <div class="col-md-9">
                                 <div class="catalog-title">
-                                    <img src="/images/logo-white.png" alt="" />
+                                    <img style="filter: brightness(0) invert(1)" src="/images/logo-primary.png" alt="">
                                     <h2>{{ str_replace('#UKMJuWAra', '', $catalog->title) }}</h2>
                                 </div>
                                 <div class="catalog-desc">{!! $catalog->description !!}</div>
