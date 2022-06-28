@@ -10,18 +10,21 @@
                     <div class="about-text">
                         <h3>Tentang Kami</h3>
                     </div>
-                    <p class="fw-normal">UMKM merupakan tulang punggung perekonomian Indonesia. Dengan jumlah
-                        sekitar 64
-                        juta unit, UMKM telah berkontribusi terhadap Pendapatan Domestik Bruto sekitar 60%, dan menyerap
-                        tenaga kerja sekitar 97%. Tetapi sayangnya, struktur UMKM di Indonesia masih sangat didominasi
-                        oleh Usaha Mikro, yaitu sekitar 98,7% dari total UMKM ( berdasarkan kriteria UU No.20/2008).
+                    <p class="fw-normal">
+                        Akses pasar, akses modal, dan akses terhadap mentor bisnis yang sesuai, adalah sumbatan-sumbatan
+                        yang membuat banyak bisnis skala Mikro, Kecil, dan Menengah mandeg. Bagaimana tidak, sudah lewat
+                        satu dekade, struktur UMKM kita tidak mengalami perubahan.
                         <br><br>
-                        Bahkan, berdasarkan kriteria yang baru menurut PP No.7/2021, dimana pelaku Usaha Mikro ada usaha
-                        dengan pendapatan atau omzet sampai dengan Rp2 milyar per tahun, maka proporsi unit Usaha Mikro
-                        di Indonesia menjadi 99,6%! Adapun proporsi Usaha Kecil menjadi 0,3% dan Usaha Menengah 0,07%.
-                        Dari data ini, artinya hanya 3 dari 1000 unit Usaha di Indonesia yang omsetnya diantara Rp2 - 15
-                        milyar per tahun (Usaha Kecil); dan hanya 7 dari 10.000 yang omsetnya di antara Rp15 - 50 milyar
-                        per tahun (Usaha Menengah).
+                        Jika menggunakan kriteria baru menurut Peraturan Pemerintah no.7/2021 tentang UMKM, Usaha Ultra
+                        Mikro (omset tahunan di bawah Rp300 juta), yaitu sekitar 98.7%. Sementara pelaku Usaha Mikro
+                        (Rp300 juta - Rp 2 miliar per tahun) sekitar 0.9%, Usaha Kecil 0.3% (Rp 2-15 miliar), dan Usaha
+                        Menengah hanya 0.07% (Rp15-50 miliar).
+                        <br><br>
+                        Meyakini hukum ekonomi bahwa peran informasi sangat krusial dalam menentukan efektivitas
+                        mekanisme pasar dalam menggiring sumber daya berupa produk dan layanan ke alokasi yang tepat
+                        guna, kami mengembangkan ukmindonesia.id untuk memudahkan akses informasi perizinan,
+                        pengetahuan, dan ragam kesempatan bagi bagi komunitas UMKM yang ingin naik kelas, sejak 2017
+                        lalu.
                     </p>
                 </div>
             </div>
@@ -34,17 +37,18 @@
         <div class="container section-2">
             <div class="row">
                 <div class="col-12 col-md-7 mb-3 mb-md-0">
-                    <p> Potret ini tidak banyak berubah sejak 10 tahun terakhir. Padahal, untuk membangun basis
-                        perekonomian yang lebih kokoh, kita sangat memerlukan lebih banyak unit usaha atau unit bisnis
-                        yang bisa menjadi Usaha Kecil dan Menengah. Sebagai contoh, di Uni Eropa, jumlah Usaha Kecil di
-                        sana adalah sekitar 6 dari 100 unit bisnis (5,8%), dan Usaha Menengah sekitar 9 dari 1000 bisnis
-                        (0,9%). Bagaimana caranya agar kita bisa membantu akselerasi kenaikan skala bisnis Usaha Mikro
-                        dan Kecil kita, agar lebih banyak yang bisa menjadi Usaha Kecil dan Usaha Menengah, atau bahkan
-                        menjadi Usaha Besar? <br><br>
-                        Peningkatan produktivitas UMKM tentunya tidak lepas dari akses pasar dan akses modal. Perluasan
-                        akses pasar dapat dilakukan dengan lebih cepat dan murah dengan Go Digital. Hal inilah yang
-                        membuat pemerintah, Kementerian Koperasi dan UKM RI, mencanangkan target agar setidaknya 30 juta
-                        pelaku UMKM di Indonesia dapat Go Digital sampai dengan 2030 nanti.
+                    <p>Sejalan dengan waktu, kami mempelajari bahwa di tengah banyaknya pihak yang ingin memberi
+                        dukungan bagi UMKM, ada masalah atau kesulitan dalam menemukan pelaku usaha atau minimal
+                        kandidat peserta program yang sesuai. Disisi lain, pelaku UMKM yang punya semangat tumbuh juga
+                        kesulitan menemukan jaringan atau akses yang sesuai untuk mendukung pengembangan usahanya,
+                        khususnya yang terkait dengan akses pasar, modal, dan mentor tadi.
+                        <br><br>
+                        Inilah yang menjadi alasan lahirnya gagasan mengembangkan program Katalog Bisnis UMKM
+                        www.ukmjuwara.id, yaitu untuk menata dan menyajikan tebaran informasi di internet, agar UMKM
+                        unggul yang memiliki semangat maju bisa lebih dipromosikan dan mudah ditemukan oleh para pihak
+                        yang memiliki sumber daya untuk memberi dukungan, baik dari pihak Pemerintah, perusahaan,
+                        akademisi, media, dan NGO.
+
                     </p>
                 </div>
                 <div class="col-12 col-md-5">
@@ -64,21 +68,18 @@
                     </div>
                     <div class="col-12 col-md-7">
                         <p>
-                            Dalam masa sulit seperti pandemi Covid19 ini, sesungguhnya urgensitas UMKM untuk Go Digital
-                            menjadi semakin mendesak karena physical distancing. Hal inilah yang melatarbelakangi
-                            prakarsa
-                            program Katalog UKM JuWAra pada tahun 2020 dan terus dilanjutkan hingga tahun ini, dan
-                            semoga
-                            sampai ke depannya.
+                            Pada awalnya bisnis UMKM di katalog ini dipilih dari alumni program Pelatihan Go Digital dan
+                            ScaleUp dan Pelatihan UMKM Bersiap Go Global bersama WhatsApp yang menyelesaikan seluruh
+                            tugas praktek termasuk menyelesaikan seluruh modul online yang menjadi prasyarat wajib untuk
+                            dikurasi. Sehingga, keunikan dari daftar bisnis yang ada di katalog ini adalah yang karakter
+                            kewirausahaan dan pola pikir maju yang sudah terkurasi.
                             <br><br>
-                            Semula, katalog ini dikemas dalam pendekatan Conversation Commerce atau c-commerce sehingga
-                            dapat memberi kenyamanan bagi konsumen dan calon mitra UKM terpilih dalam melihat, memilih,
-                            dan berinteraksi dengan para UKMJuWAra melalui situs katalog digital di s.id/ukmjuwara dan
-                            Katalog WhatsApp Business s.id/UKMJUWARA yang terhubung langsung dengan chat Whatsapp
-                            Business dan akun media sosial UMKM terpilih, untuk menghadirkan pengalaman interaksi yang
-                            lebih akrab dan personal. Menurut WhatsApp Inc, program ini membuat ukmindonesia.id sebagai
-                            pelopor atau penggerak komunitas pertama yang mengoptimalkan penggunaan fitur Katalog
-                            WhatsApp Business untuk mempromosikan bisnis anggotanya. <br><br>
+                            Kami juga membuka ruang bagi mitra-mitra komunitas atau Institusi lain untuk memberi
+                            rekomendasi UKMJuWAra yang akan dikurasi performa usahanya serta diwajibkan untuk
+                            menyelesaikan keseluruhan modul online yang telah kami sediakan. Ini adalah komponen penting
+                            untuk membangun Katalog UKMJuWAra sebagai aquarium para wirausaha yang punya semangat maju,
+                            yang tercermin dari keinginannya untuk terus belajar.
+                            <br><br>
                         </p>
 
                     </div>
@@ -92,26 +93,24 @@
             <div class="row">
                 <div class="col-12 mb-4">
                     <p class="mb-3">
+                        Sebagai persembahan Indonesia Tumbuh Inklusif (ukmindonesia.id) dan WhatsApp, website katalog
+                        UKM JUWARA dikembangkan dengan pemisahan berdasarkan orientasi pengembangan usaha yaitu Katalog
+                        Go Digital dan Katalog Go Global serta dilengkapi dengan fitur filter berdasarkan lokasi,
+                        kategori produk, gender pemilik, filter harga, dan juga asal program, untuk menghadirkan
+                        kenyamanan pencarian agar pengunjung serta mempermudah navigasi kepentingan atau tujuan
+                        kunjungannya.
+                        Narasi tentang profil umum masing-masing bisnis juga disediakan dalam bahasa inggris bagi
+                        kalangan calon mitra internasional. Ke depan, kami akan menambah kategori terkait orientasi
+                        pengembangan usaha lainnya, misalnya Go Sustainable, Go Social Impact, dan sebagainya, agar
+                        dapat semakin memudahkan interaksi dan menemukan calon mitra yang cocok.
+                        <br><br>
 
-                        Kami menyadari bahwa spektrum program pendukung pemasaran amatlah luas - yaitu dari dari
-                        perbaikan desain produk (termasuk kemasan), strategi penentuan harga, promosi, dan sampai
-                        perluasan akses atau kanal penjualan (distribusi). Sehingga program ini dirancang khusus
-                        untuk meningkatkan exposure atau promosi produk-produk UKM Unggul dari jaringan komunitas
-                        ukmindonesia.id. Hal ini yang kemudian membuat indikator utama yang dimonitor untuk mengukur
-                        kesuksesan program ini adalah jumlah reach publikasi, jumlah visit (klik) ke katalog, jumlah
-                        klik ke masing-masing link produk UMKM peserta, peningkatan jumlah chat, peningkatan jumlah
-                        kontak calon konsumen, dan peningkatan jumlah follower media sosial masing-masing peserta.
-                        Adapun indikator berupa jumlah order juga ikut kami monitor untuk melihat dampak program
-                        promosi ini dalam meningkatkan order ke peserta, khususnya selama periode promosi
-                        berlangsung. <br> <br>
-                        Hasil capaian dari program Katalog 100 UKM JuWAra 2020 telah kami tuangkan ke dalam
-                        Laporan dampak ukmindonesia.id 2020 yang dapat diunduh disini. <br><br>
-                        Sejalan dengan perkembangan program dan akan terus bertambahnya jumlah UMKM yang terpilih dan
-                        dipromosikan, program katalog digital UKM JuWAra kini disajikan melalui situs www.UKMJuWAra.id.
-                        Kanal ini akan terus memproduksi katalog berkala dan melakukan pengembangan konten dengan
-                        menghadirkan variasi tema katalog seperti UKM JuWAra GLOBAL yang berfokus pada promosi UMKM yang
-                        sudah sudah Go Digital dan memiliki produk dengan sertifikasi resmi sehingga memiliki kualitas
-                        proses dan mutu produk yang terjamin, sehingga siap untuk melakukan penetrasi pasar global.
+                        Dengan turut didukung oleh Kementerian Koperasi dan UKM RI, Kementerian Perdagangan, APINDO UMKM
+                        Akademi, dan IBAN, dan ID Seed, kami mengundang lebih banyak pihak untuk bergabung ke dalam
+                        ekosistem pendukung pelaku UKM JuWAra kita. Mereka yang ada di katalog ini adalah bisnis-bisnis
+                        yang dapat menjadi inspirasi atau role model bahwa walau bisnis masih skala UMKM, bukan berarti
+                        gak bisa keren, kan?
+
                     </p>
                 </div>
                 <div class="col-12 col-md-6 mb-3 mb-md-0">
@@ -141,14 +140,22 @@
 
                 <div class="col-12 mt-4">
                     <p>
-                        Akhir kata, inilah kontribusi kecil kami untuk mendukung akselerasi UMKM naik kelas, khususnya
-                        dalam ranah spesifik di ruang lingkup promosi. Kami bangga karena prakarsa katalog ini merupakan
-                        buah karya kolaboratif dengan semua member peserta program UKM JuWAra, dengan Whatsapp Inc, yang
-                        turut didukung oleh Kementerian Koperasi dan UKM RI, APINDO UMKM AKADEMI, dan pihak lainnya yang
-                        membantu mengamplifikasi kampanye UKMJuWAra untuk #banggabuatanindonesia ini.
+                        Mari promosikan dan dukung merek-merek dan bisnis lokal kita yang sudah terbukti memiliki
+                        semangat belajar dan maju, dan produknya terbukti telah memiliki basis segmen konsumen tertentu.
+                        Kalau bukan kita yang gotong royong dan sinergikan dukungan, siapa lagi?
                         <br><br>
+                        Jika Anda ingin bermitra terkait program business matching akses modal, akses pasar, sponsorship
+                        biaya sertifikasi, pendampingan/konsultasi persiapan menuju sertifikasi, program mentoring, atau
+                        bahkan sekedar ingin memberi kami masukan, mari mulai langkah bersama untuk menenun kolaborasi
+                        dengan mengirimkan surel ke info@ukmindonesia.id.
+                        <br><br>
+                        Salam kolaborasi!<br>
+                        Dewi Meisari Haryanti<br>
+                        Chief Editor, ukmindonesia.id<br>
+                        #saatnyaUKMnaikkelas<br>
+                        #UKMjuWAra<br>
+
                     </p>
-                    <h4 class="text-center">Temukan UKMJuWAra kamu disini! </h4>
 
                 </div>
             </div>
