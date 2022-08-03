@@ -85,8 +85,7 @@
                                                     <h5 title="{{ $ukm->title }}">{{ $ukm->title }}</h5>
                                                 </div>
                                                 <div class="ukm-desc">
-                                                    <small title="{{ $ukm->product }}"
-                                                        class="ellipsis categories-text">
+                                                    <small title="{{ $ukm->product }}" class="ellipsis categories-text">
                                                         @foreach ($ukm->categories as $item)
                                                             <span>{{ $item->title }}</span>
                                                         @endforeach
@@ -458,7 +457,7 @@
 
             checkUrlParams();
 
-            if ($(window).width() > 641) {
+            if ($(window).width() > 992) {
                 mobile.detach();
             } else {
                 desktop.detach();
@@ -477,7 +476,7 @@
         // });
 
         $(window).resize(function() {
-            if ($(window).width() > 641) {
+            if ($(window).width() > 992) {
                 mobile.detach();
                 desktop.appendTo($('#filter_container'))
             } else {
