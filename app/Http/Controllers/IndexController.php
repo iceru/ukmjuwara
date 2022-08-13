@@ -32,6 +32,9 @@ class IndexController extends Controller
         $articles = Article::get()->take(2);
         $cta = Cta::first();
 
+        $bests_all = Ukm::orderByViews('desc', Period::since('2021-11-18'))->get()->take(8);
+
+
         $catalogDigital = Catalog::with('ukm')->where('slug', 'ukmjuwara-go-digital')->firstOrFail();
         $bests_digital = Ukm::where('catalog_id', $catalogDigital->id)->orderByViews('desc', Period::since('2021-11-18'))->get()->take(8);
         $categories_digital = Category::whereHas('ukms', function($q) use($catalogDigital) {
@@ -216,7 +219,7 @@ class IndexController extends Controller
         }
         
         return view('index', compact('sliderDesktop', 'sliderMobile', 'featured', 'sponsors', 'sponsors_dukung', 
-        'bests_digital', 'categories_digital', 'categories_global', 'programs_global', 'states_global', 
+        'bests_digital', 'bests_all', 'categories_digital', 'categories_global', 'programs_global', 'states_global', 
         'bests_global', 'articles', 'cta', 'catalogGlobal', 'programs_digital', 'states_digital', 'catalogDigital', 'min_price_digital',
         'max_price_digital', 'min_price_global', 'max_price_global'));
     }

@@ -34,6 +34,7 @@ Route::get('/kemitraan', [ContactController::class, 'index'])->name('contact');
 
 Route::get('/search', [IndexController::class, 'search'])->name('search');
 
+Route::get('/katalog/semua-brand', [CatalogController::class, 'showAll'])->name('catalog.showAll');
 Route::get('/katalog/{slug}', [CatalogController::class, 'show'])->name('catalog.show');
 Route::get('/katalog/filter', [CatalogController::class, 'filter'])->name('catalog.filter');
 Route::get('/katalog-click/floating-click', [CatalogController::class, 'floating'])->name('catalog.floating');
@@ -43,10 +44,6 @@ Route::get('/ukm-click/instagram-click', [UkmController::class, 'instagram'])->n
 
 Route::get('/berita', [ArticleController::class, 'index'])->name('article.index');
 Route::get('/berita/{slug}', [ArticleController::class, 'show'])->name('article.show');
-
-// Route::get('/dashboard', function () {
-//     return view('admin.dashboard');
-// })->middleware(['auth'])->name('dashboard');
 
 Route::middleware(['auth', 'role:administrator'])->group(function (){
     Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.dashboard');

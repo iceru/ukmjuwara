@@ -1,6 +1,6 @@
 <x-app-layout>
     @section('title')
-        {{ $catalog->title }}
+        Semua Brand
     @endsection
     @section('meta-content')
         Sebagai komunitas pertama di dunia yang menghadirkan katalog member dalam format Whatsapp. Business Catalog
@@ -23,8 +23,7 @@
             </div>
         </div>
     </div>
-
-    @if ($catalog->ukm->count() > 0)
+    @if ($ukms->count() > 0)
         <div class="catalog">
             <div class="header">
                 <div class="header-image">
@@ -119,14 +118,28 @@
                                 </a>
                                 <div class="category-filter mb-4">
                                     <h5 class="mb-2">Kategori Produk</h5>
-                                    @foreach ($categories as $category)
-                                        <div class="form-check">
-                                            <input class="form-check-input category-large" type="checkbox"
-                                                value="{{ $category->id }}" id="category" name="category[]">
-                                            <label class="form-check-label" for="flexCheckDefault">
-                                                {{ $category->title }}
-                                        </div>
-                                    @endforeach
+                                    <div class="mb-3">
+                                        <p class="fw-bold mb-1">Go Digital</p>
+                                        @foreach ($categories_digital as $category)
+                                            <div class="form-check">
+                                                <input class="form-check-input category-large" type="checkbox"
+                                                    value="{{ $category->id }}" id="category" name="category[]">
+                                                <label class="form-check-label" for="flexCheckDefault">
+                                                    {{ $category->title }}
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <div>
+                                        <p class="fw-bold mb-1">Go Global</p>
+                                        @foreach ($categories_global as $category)
+                                            <div class="form-check">
+                                                <input class="form-check-input category-large" type="checkbox"
+                                                    value="{{ $category->id }}" id="category" name="category[]">
+                                                <label class="form-check-label" for="flexCheckDefault">
+                                                    {{ $category->title }}
+                                            </div>
+                                        @endforeach
+                                    </div>
                                 </div>
                                 <div class="program-filter mb-4">
                                     <h5 class="mb-2">Asal Program</h5>
@@ -203,9 +216,6 @@
                             </div>
                             <div class="mb-2 category-data" hidden>
                                 <b>Kategori: </b> <span class="category-selected"></span>
-                            </div>
-                            <div class="mb-2 program-data" hidden>
-                                <b>Program: </b> <span class="program-selected"></span>
                             </div>
                             <div class="mb-2 state-data" hidden>
                                 <b>Lokasi: </b> <span class="state-selected text-capitalize"></span>
@@ -310,11 +320,8 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="col-12 col-md-9 katalog-ukm">
-                            <p class="mb-3 filter-count">Ditemukan {{ $catalog->ukm->count() }} brand</p>
-                            <div id="catalog">
-                                @include('catalog-ukm')
-                            </div>
+                        <div class="col-12 col-md-9 katalog-ukm" id="catalog">
+                            @include('catalog-ukm')
                         </div>
                     </div>
                 </div>
@@ -384,8 +391,6 @@
                 }, ]
             });
             $('.loading-spinner').hide();
-            $('.filter-count').hide();
-
             desktop = $('.filter-desktop-checkbox');
             mobile = $('.filter-mobile-checkbox');
 
@@ -524,10 +529,6 @@
                 });
                 $('.state-selected').html(state_texts);
                 $('.state-data').removeAttr('hidden')
-            } else {
-                state_texts = []
-                $('.state-selected').html('');
-                $('.state-data').attr('hidden')
             }
 
             if (owner_genders_params) {
@@ -540,10 +541,6 @@
                 });
                 $('.owner_gender-selected').html(owner_gender_texts);
                 $('.owner_gender-data').removeAttr('hidden')
-            } else {
-                owner_gender_texts = []
-                $('.owner_gender-selected').html('');
-                $('.owner_gender-data').attr('hidden')
             }
 
             if (categories_params) {
@@ -557,10 +554,6 @@
                 });
                 $('.category-selected').html(category_texts);
                 $('.category-data').removeAttr('hidden')
-            } else {
-                category_texts = []
-                $('.category-selected').html('');
-                $('.category-data').attr('hidden')
             }
 
             if (programs_params) {
@@ -572,12 +565,8 @@
                     window[`program_texts`].push($(`input[type="checkbox"][value='${element}']`).next().first()
                         .text().trim());
                 });
-                $('.program-selected').html(program_texts);
+                $('.program-selected').html(category_texts);
                 $('.program-data').removeAttr('hidden')
-            } else {
-                program_texts = []
-                $('.program-selected').html('');
-                $('.program-data').attr('hidden')
             }
 
             if (search_params) {
@@ -683,7 +672,7 @@
             $('.ukm-content').hide();
 
             $.ajax({
-                url: "/katalog/{{ $catalog->slug }}?page=" + page,
+                url: "/katalog/semua-brand?page=" + page,
                 type: "GET",
                 datatype: 'html',
                 data: {
@@ -702,7 +691,6 @@
             }).done(function(results) {
                 $('#catalog').html(results);
                 $('.ukm-content').show();
-                $('.filter-count').show();
                 $('.loading-spinner').hide();
                 var url = new URL(window.location.href);
                 var stateObj = {
@@ -716,50 +704,26 @@
                     min_price: price_range.min_price,
                     max_price: price_range.max_price,
                 }
-                if (stateObj.states.length > 0) {
+                if (stateObj.states.length > 0)
                     url.searchParams.set('states', states)
-                    $('.state-selected').html(state_texts);
-                    $('.state-data').removeAttr('hidden')
-                } else {
+                else
                     url.searchParams.delete('states')
-                    state_texts = []
-                    $('.state-selected').html('');
-                    $('.state-data').attr('hidden', 'hidden')
-                }
-                if (stateObj.owner_genders.length > 0) {
-                    $('.owner_gender-selected').html(owner_genders_texts);
-                    $('.owner_gender-data').removeAttr('hidden')
+                if (stateObj.owner_genders.length > 0)
                     url.searchParams.set('owner_genders', owner_genders)
-                } else {
+                else
                     url.searchParams.delete('owner_genders')
-                    owner_genders_texts = []
-                    $('.owner_gender-selected').html('');
-                    $('.owner_gender-data').attr('hidden', 'hidden')
-                }
-                if (stateObj.categories.length > 0) {
+                if (stateObj.categories.length > 0)
                     url.searchParams.set('categories', categories)
-                    $('.category-selected').html(categories_texts);
-                    $('.category-data').removeAttr('hidden')
-                } else {
+                else
                     url.searchParams.delete('categories')
-                    categories_texts = []
-                    $('.category-selected').html('');
-                    $('.category-data').attr('hidden', 'hidden')
-                }
                 if (stateObj.search !== '')
                     url.searchParams.set('search', search)
                 else
                     url.searchParams.delete('search')
-                if (stateObj.programs.length > 0) {
-                    $('.program-selected').html(categories_texts);
-                    $('.program-data').removeAttr('hidden')
+                if (stateObj.programs.length > 0)
                     url.searchParams.set('programs', programs)
-                } else {
+                else
                     url.searchParams.delete('programs')
-                    program_texts = []
-                    $('.program-selected').html('');
-                    $('.program-data').attr('hidden', 'hidden')
-                }
                 if (stateObj.page !== 1)
                     url.searchParams.set('page', page)
                 else
