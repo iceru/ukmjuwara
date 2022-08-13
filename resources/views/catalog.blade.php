@@ -465,7 +465,7 @@
 
             checkUrlParams();
 
-            if ($(window).width() > 641) {
+            if ($(window).width() > 992) {
                 mobile.detach();
             } else {
                 desktop.detach();
@@ -484,7 +484,7 @@
         // });
 
         $(window).resize(function() {
-            if ($(window).width() > 641) {
+            if ($(window).width() > 992) {
                 mobile.detach();
                 desktop.appendTo($('#filter_container'))
             } else {
