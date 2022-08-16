@@ -232,6 +232,12 @@ class CatalogController extends Controller
                 $ukms = UKM::whereHas('program', function($q) use($programId) {
                     $q->whereIn('program_id', $programId);
                 });
+                if($request->ajax() && $request->record === 'record' && $request->type == 'program') {
+                    $click = Click::updateOrCreate(
+                        ['catalog_id' => $catalog->id, 'type_click' => 'program', 'name_click' => array_slice($programs_array, -1)[0]],
+                        ['clicks' => \DB::raw('clicks + 1')]
+                    );
+                }
             }
 
             if (isset($request->states)) {

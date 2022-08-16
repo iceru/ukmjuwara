@@ -78,7 +78,7 @@
                 </div>
                 <div class="best">
                     <div class="best-header">
-                        <a href="/katalog/ukmjuwara-go-digital" class="best-title">
+                        <a href="/katalog/semua-brand" class="best-title">
                             Semua <span>Brand</span>
                         </a>
                         <div class="actions d-flex">
