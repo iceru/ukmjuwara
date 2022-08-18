@@ -8,7 +8,7 @@
 
     <title>@yield('title')</title>
     <meta name="description" content="@yield('meta-content')">
-
+    @include('googletagmanager::head')
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-206865884-3"></script>
     <script>
@@ -21,8 +21,6 @@
 
         gtag('config', 'UA-206865884-3');
     </script>
-
-    <x-tagmanager-head />
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
@@ -53,10 +51,9 @@
 </head>
 
 <body class="font-sans antialiased">
-    <x-tagmanager-body />
     <div class="min-h-screen bg-gray-100">
         @include('layouts.navigation', ['catalogs' => \App\Models\Catalog::all()])
-
+        @include('googletagmanager::body')
         <!-- Page Content -->
         <main>
             {{ $slot }}

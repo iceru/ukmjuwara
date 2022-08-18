@@ -44,33 +44,38 @@
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         @foreach ($catalogs_title as $catalog)
-                            <button class="nav-link {{ $loop->first ?  'active' : '' }}" id="category_{{ $catalog->slug }}-tab" data-bs-toggle="tab" data-bs-target="#category_{{ $catalog->slug }}"
-                                type="button" role="tab" aria-controls="category_{{ $catalog->slug }}" aria-selected="true">{{ $catalog->title }}</button>
+                            <button class="nav-link {{ $loop->first ? 'active' : '' }}"
+                                id="category_{{ $catalog->slug }}-tab" data-bs-toggle="tab"
+                                data-bs-target="#category_{{ $catalog->slug }}" type="button" role="tab"
+                                aria-controls="category_{{ $catalog->slug }}"
+                                aria-selected="true">{{ $catalog->title }}</button>
                         @endforeach
                     </div>
                 </nav>
                 <div class="tab-content" id="nav-tabContent">
                     @foreach ($catalogs_title as $key => $catalog)
-                    <div class="tab-pane fade {{ $loop->first ?  'show active' : '' }}" id="category_{{ $catalog->slug }}" role="tabpanel" aria-labelledby="category_{{ $catalog->slug }}-tab">
-                        <table class="table table-clicks" style="width: 100%" id="table">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Category</th>
-                                    <th>Clicks</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (${'category_clicks_'.$key} as $category)
-                                <tr>
-                                    <td scope="row">{{$loop->iteration}}</td>
-                                    <td>{{ $category->category->title }}</td>
-                                    <td>{{ $category->clicks }}</td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                        <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}"
+                            id="category_{{ $catalog->slug }}" role="tabpanel"
+                            aria-labelledby="category_{{ $catalog->slug }}-tab">
+                            <table class="table table-clicks" style="width: 100%" id="table">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Category</th>
+                                        <th>Clicks</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (${'category_clicks_' . $key} as $category)
+                                        <tr>
+                                            <td scope="row">{{ $loop->iteration }}</td>
+                                            <td>{{ $category->category->title }}</td>
+                                            <td>{{ $category->clicks }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     @endforeach
                 </div>
             </div>
@@ -78,33 +83,38 @@
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         @foreach ($catalogs_title as $catalog)
-                            <button class="nav-link {{ $loop->first ?  'active' : '' }}" id="state_{{ $catalog->slug }}-tab" data-bs-toggle="tab" data-bs-target="#state_{{ $catalog->slug }}"
-                                type="button" role="tab" aria-controls="state_{{ $catalog->slug }}" aria-selected="true">{{ $catalog->title }}</button>
+                            <button class="nav-link {{ $loop->first ? 'active' : '' }}"
+                                id="category_{{ $catalog->slug }}-tab" data-bs-toggle="tab"
+                                data-bs-target="#program_{{ $catalog->slug }}" type="button" role="tab"
+                                aria-controls="program_{{ $catalog->slug }}"
+                                aria-selected="true">{{ $catalog->title }}</button>
                         @endforeach
                     </div>
                 </nav>
                 <div class="tab-content" id="nav-tabContent">
                     @foreach ($catalogs_title as $key => $catalog)
-                    <div class="tab-pane fade {{ $loop->first ?  'show active' : '' }}" id="state_{{ $catalog->slug }}" role="tabpanel" aria-labelledby="state_{{ $catalog->slug }}-tab">
-                        <table class="table table-clicks" style="width: 100%" id="table">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Category</th>
-                                    <th>Clicks</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (${'state_clicks_'.$key} as $state)
-                                <tr>
-                                    <td scope="row">{{$loop->iteration}}</td>
-                                    <td>{{ $state->name_click }}</td>
-                                    <td>{{ $state->clicks }}</td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                        <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}"
+                            id="program_{{ $catalog->slug }}" role="tabpanel"
+                            aria-labelledby="program_{{ $catalog->slug }}-tab">
+                            <table class="table table-clicks" style="width: 100%" id="table">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Program</th>
+                                        <th>Clicks</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (${'program_clicks_' . $key} as $program)
+                                        <tr>
+                                            <td scope="row">{{ $loop->iteration }}</td>
+                                            <td>{{ $program->program->title }}</td>
+                                            <td>{{ $program->clicks }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     @endforeach
                 </div>
             </div>
@@ -112,33 +122,38 @@
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         @foreach ($catalogs_title as $catalog)
-                            <button class="nav-link {{ $loop->first ?  'active' : '' }}" id="gender_{{ $catalog->slug }}-tab" data-bs-toggle="tab" data-bs-target="#gender_{{ $catalog->slug }}"
-                                type="button" role="tab" aria-controls="gender_{{ $catalog->slug }}" aria-selected="true">{{ $catalog->title }}</button>
+                            <button class="nav-link {{ $loop->first ? 'active' : '' }}"
+                                id="state_{{ $catalog->slug }}-tab" data-bs-toggle="tab"
+                                data-bs-target="#state_{{ $catalog->slug }}" type="button" role="tab"
+                                aria-controls="state_{{ $catalog->slug }}"
+                                aria-selected="true">{{ $catalog->title }}</button>
                         @endforeach
                     </div>
                 </nav>
                 <div class="tab-content" id="nav-tabContent">
                     @foreach ($catalogs_title as $key => $catalog)
-                    <div class="tab-pane fade {{ $loop->first ?  'show active' : '' }}" id="gender_{{ $catalog->slug }}" role="tabpanel" aria-labelledby="gender_{{ $catalog->slug }}-tab">
-                        <table class="table table-clicks" style="width: 100%" id="table">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Category</th>
-                                    <th>Clicks</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (${'gender_clicks_'.$key} as $gender)
-                                <tr>
-                                    <td scope="row">{{$loop->iteration}}</td>
-                                    <td>{{ $gender->name_click == 'pria-wanita' ? 'Pria dan Wanita' : ucwords($gender->name_click) }}</td>
-                                    <td>{{ $gender->clicks }}</td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                        <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}"
+                            id="state_{{ $catalog->slug }}" role="tabpanel"
+                            aria-labelledby="state_{{ $catalog->slug }}-tab">
+                            <table class="table table-clicks" style="width: 100%" id="table">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Lokasi</th>
+                                        <th>Clicks</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (${'state_clicks_' . $key} as $state)
+                                        <tr>
+                                            <td scope="row">{{ $loop->iteration }}</td>
+                                            <td>{{ $state->name_click }}</td>
+                                            <td>{{ $state->clicks }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     @endforeach
                 </div>
             </div>
@@ -146,33 +161,78 @@
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         @foreach ($catalogs_title as $catalog)
-                            <button class="nav-link {{ $loop->first ?  'active' : '' }}" id="floating_{{ $catalog->slug }}-tab" data-bs-toggle="tab" data-bs-target="#floating_{{ $catalog->slug }}"
-                                type="button" role="tab" aria-controls="floating_{{ $catalog->slug }}" aria-selected="true">{{ $catalog->title }}</button>
+                            <button class="nav-link {{ $loop->first ? 'active' : '' }}"
+                                id="gender_{{ $catalog->slug }}-tab" data-bs-toggle="tab"
+                                data-bs-target="#gender_{{ $catalog->slug }}" type="button" role="tab"
+                                aria-controls="gender_{{ $catalog->slug }}"
+                                aria-selected="true">{{ $catalog->title }}</button>
                         @endforeach
                     </div>
                 </nav>
                 <div class="tab-content" id="nav-tabContent">
                     @foreach ($catalogs_title as $key => $catalog)
-                    <div class="tab-pane fade {{ $loop->first ?  'show active' : '' }}" id="floating_{{ $catalog->slug }}" role="tabpanel" aria-labelledby="floating_{{ $catalog->slug }}-tab">
-                        <table class="table table-clicks" style="width: 100%" id="table">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Category</th>
-                                    <th>Clicks</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (${'floating_clicks_'.$key} as $floating)
-                                <tr>
-                                    <td scope="row">{{$loop->iteration}}</td>
-                                    <td>{{ $floating->name_click }}</td>
-                                    <td>{{ $floating->clicks }}</td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                        <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}"
+                            id="gender_{{ $catalog->slug }}" role="tabpanel"
+                            aria-labelledby="gender_{{ $catalog->slug }}-tab">
+                            <table class="table table-clicks" style="width: 100%" id="table">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Gender Pemilik</th>
+                                        <th>Clicks</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (${'gender_clicks_' . $key} as $gender)
+                                        <tr>
+                                            <td scope="row">{{ $loop->iteration }}</td>
+                                            <td>{{ $gender->name_click == 'pria-wanita' ? 'Pria dan Wanita' : ucwords($gender->name_click) }}
+                                            </td>
+                                            <td>{{ $gender->clicks }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+            <div class="col-12 col-lg-6 mb-5">
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        @foreach ($catalogs_title as $catalog)
+                            <button class="nav-link {{ $loop->first ? 'active' : '' }}"
+                                id="floating_{{ $catalog->slug }}-tab" data-bs-toggle="tab"
+                                data-bs-target="#floating_{{ $catalog->slug }}" type="button" role="tab"
+                                aria-controls="floating_{{ $catalog->slug }}"
+                                aria-selected="true">{{ $catalog->title }}</button>
+                        @endforeach
                     </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    @foreach ($catalogs_title as $key => $catalog)
+                        <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}"
+                            id="floating_{{ $catalog->slug }}" role="tabpanel"
+                            aria-labelledby="floating_{{ $catalog->slug }}-tab">
+                            <table class="table table-clicks" style="width: 100%" id="table">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Category</th>
+                                        <th>Clicks</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (${'floating_clicks_' . $key} as $floating)
+                                        <tr>
+                                            <td scope="row">{{ $loop->iteration }}</td>
+                                            <td>{{ $floating->name_click }}</td>
+                                            <td>{{ $floating->clicks }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     @endforeach
                 </div>
             </div>
@@ -181,35 +241,40 @@
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         @foreach ($catalogs_title as $catalog)
-                            <button class="nav-link {{ $loop->first ?  'active' : '' }}" id="floating_{{ $catalog->slug }}-tab" data-bs-toggle="tab" data-bs-target="#floating_{{ $catalog->slug }}"
-                                type="button" role="tab" aria-controls="floating_{{ $catalog->slug }}" aria-selected="true">{{ $catalog->title }}</button>
+                            <button class="nav-link {{ $loop->first ? 'active' : '' }}"
+                                id="floating_{{ $catalog->slug }}-tab" data-bs-toggle="tab"
+                                data-bs-target="#floating_{{ $catalog->slug }}" type="button" role="tab"
+                                aria-controls="floating_{{ $catalog->slug }}"
+                                aria-selected="true">{{ $catalog->title }}</button>
                         @endforeach
                     </div>
                 </nav>
                 <div class="tab-content" id="nav-tabContent">
                     @foreach ($catalogs_title as $key => $catalog)
-                    <div class="tab-pane fade {{ $loop->first ?  'show active' : '' }}" id="floating_{{ $catalog->slug }}" role="tabpanel" aria-labelledby="floating_{{ $catalog->slug }}-tab">
-                        <table class="table table-clicks" id="table">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>UKM</th>
-                                    <th>Whatsapp Clicks</th>
-                                    <th>Instagram Clicks</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (${'ukm_clicks_'.$key} as $ukm_clicks)
-                                <tr>
-                                    <td scope="row">{{$loop->iteration}}</td>
-                                    <td>{{ $ukm_clicks->title }}</td>
-                                    <td>{{ $ukm_clicks->whatsapp_clicks }}</td>
-                                    <td>{{ $ukm_clicks->instagram_clicks }}</td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+                        <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}"
+                            id="floating_{{ $catalog->slug }}" role="tabpanel"
+                            aria-labelledby="floating_{{ $catalog->slug }}-tab">
+                            <table class="table table-clicks" id="table">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>UKM</th>
+                                        <th>Whatsapp Clicks</th>
+                                        <th>Instagram Clicks</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (${'ukm_clicks_' . $key} as $ukm_clicks)
+                                        <tr>
+                                            <td scope="row">{{ $loop->iteration }}</td>
+                                            <td>{{ $ukm_clicks->title }}</td>
+                                            <td>{{ $ukm_clicks->whatsapp_clicks }}</td>
+                                            <td>{{ $ukm_clicks->instagram_clicks }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     @endforeach
                 </div>
             </div>
@@ -230,7 +295,8 @@
                 <div class="row align-items-center">
                     <div class="col-12 col-lg-5 mb-5">
                         <div class="chart">
-                            <canvas id="mostviewed" height=200 aria-label="Most Views 3 Months" role="img"></canvas>
+                            <canvas id="mostviewed" height=200 aria-label="Most Views 3 Months"
+                                role="img"></canvas>
                         </div>
                     </div>
                     <div class="col-12 col-lg-7 mb-5">
@@ -241,7 +307,8 @@
                     </div>
                     <div class="col-12">
                         <div class="chart">
-                            <canvas id="totalViews" height=200 aria-label="Total Views in 3 Months" role="img"></canvas>
+                            <canvas id="totalViews" height=200 aria-label="Total Views in 3 Months"
+                                role="img"></canvas>
                         </div>
                     </div>
                 </div>
@@ -251,7 +318,8 @@
                 <div class="row align-items-center">
                     <div class="col-12 col-lg-5 mb-5">
                         <div class="chart">
-                            <canvas id="mostviewed1" height=200 aria-label="Most Views 3 Months" role="img"></canvas>
+                            <canvas id="mostviewed1" height=200 aria-label="Most Views 3 Months"
+                                role="img"></canvas>
                         </div>
                     </div>
                     <div class="col-12 col-lg-7 mb-5">
@@ -273,7 +341,8 @@
                 <div class="row align-items-center">
                     <div class="col-12 col-lg-5 mb-5">
                         <div class="chart">
-                            <canvas id="mostviewed7" height=200 aria-label="Most Views 3 Months" role="img"></canvas>
+                            <canvas id="mostviewed7" height=200 aria-label="Most Views 3 Months"
+                                role="img"></canvas>
                         </div>
                     </div>
                     <div class="col-12 col-lg-7 mb-5">
@@ -302,20 +371,20 @@
     </div>
 
     <script>
-        $(document).ready(function () {
-            $(".form-select").change(function(){
-                $(this).find("option:selected").each(function(){
+        $(document).ready(function() {
+            $(".form-select").change(function() {
+                $(this).find("option:selected").each(function() {
                     var optionValue = $(this).attr("value");
-                    if(optionValue){
+                    if (optionValue) {
                         $(".charts").not("." + optionValue).hide();
                         $("." + optionValue).show();
                         $("#timeText").html($(this).text())
-                    } else{
+                    } else {
                         $(".box").hide();
                     }
                 });
             }).change();
-            
+
             $('.table-clicks').DataTable({
                 responsive: true
             });
@@ -326,7 +395,7 @@
             var pink = '#f186b0';
 
             //3 Months
-            var mv3 =  {!!json_encode($mostVisited3)!!}
+            var mv3 = {!! json_encode($mostVisited3) !!}
             var pageTitle3 = [];
             var pageViews3 = [];
             mv3.forEach(element => {
@@ -339,10 +408,10 @@
                 data: {
                     labels: pageTitle3,
                     datasets: [{
-                    label: 'Total Views',
-                    backgroundColor: [primary,secondary, blue, 'lightgrey', pink],
-                    data: pageViews3
-                }]
+                        label: 'Total Views',
+                        backgroundColor: [primary, secondary, blue, 'lightgrey', pink],
+                        data: pageViews3
+                    }]
                 },
                 options: {
                     responsive: true,
@@ -353,7 +422,7 @@
                 }
             });
 
-            var tr3 =  {!!json_encode($topReferrers3)!!}
+            var tr3 = {!! json_encode($topReferrers3) !!}
             var url3 = [];
             var pageViews3 = [];
             tr3.forEach(element => {
@@ -367,7 +436,7 @@
                     labels: url3,
                     datasets: [{
                         label: 'Total Referrers',
-                        backgroundColor: [primary,secondary, blue, 'lightgrey', pink],
+                        backgroundColor: [primary, secondary, blue, 'lightgrey', pink],
                         data: pageViews3
                     }]
                 },
@@ -387,7 +456,7 @@
                 }
             });
 
-            var tv3 =  {!!json_encode($totalVisitors1)!!}
+            var tv3 = {!! json_encode($totalVisitors1) !!}
             var date3 = [];
             var pageViews3 = [];
             tv3.forEach(element => {
@@ -414,7 +483,7 @@
                 }
             });
 
-            var mv1 =  {!!json_encode($mostVisited1)!!}
+            var mv1 = {!! json_encode($mostVisited1) !!}
             var pageTitle1 = [];
             var pageViews1 = [];
             mv1.forEach(element => {
@@ -428,7 +497,7 @@
                     labels: pageTitle1,
                     datasets: [{
                         label: 'Total Views',
-                        backgroundColor: [primary,secondary, blue, 'lightgrey', pink],
+                        backgroundColor: [primary, secondary, blue, 'lightgrey', pink],
                         data: pageViews1
                     }]
                 },
@@ -441,7 +510,7 @@
                 }
             });
 
-            var tr1 =  {!!json_encode($topReferrers1)!!}
+            var tr1 = {!! json_encode($topReferrers1) !!}
             var url1 = [];
             var pageViews1 = [];
             tr1.forEach(element => {
@@ -455,7 +524,7 @@
                     labels: url1,
                     datasets: [{
                         label: 'Total Referrers',
-                        backgroundColor: [primary,secondary, blue, 'lightgrey', pink],
+                        backgroundColor: [primary, secondary, blue, 'lightgrey', pink],
                         data: pageViews1
                     }]
                 },
@@ -475,7 +544,7 @@
                 }
             });
 
-            var tv1 =  {!!json_encode($totalVisitors1)!!}
+            var tv1 = {!! json_encode($totalVisitors1) !!}
             var date1 = [];
             var pageViews1 = [];
             tv1.forEach(element => {
@@ -502,7 +571,7 @@
                 }
             });
 
-            var mv7 =  {!!json_encode($mostVisited7)!!}
+            var mv7 = {!! json_encode($mostVisited7) !!}
             var pageTitle7 = [];
             var pageViews7 = [];
             var urlMv7 = [];
@@ -517,10 +586,10 @@
                 data: {
                     labels: pageTitle7,
                     datasets: [{
-                    label: 'Total Views',
-                    backgroundColor: [primary,secondary, blue, 'lightgrey', pink],
-                    data: pageViews7
-                }]
+                        label: 'Total Views',
+                        backgroundColor: [primary, secondary, blue, 'lightgrey', pink],
+                        data: pageViews7
+                    }]
                 },
                 options: {
                     responsive: true,
@@ -531,7 +600,7 @@
                 }
             });
 
-            var tr7 =  {!!json_encode($topReferrers7)!!}
+            var tr7 = {!! json_encode($topReferrers7) !!}
             var url7 = [];
             var pageViews7 = [];
             tr7.forEach(element => {
@@ -545,7 +614,7 @@
                     labels: url7,
                     datasets: [{
                         label: 'Total Referrers',
-                        backgroundColor: [primary,secondary, blue, 'lightgrey', pink],
+                        backgroundColor: [primary, secondary, blue, 'lightgrey', pink],
                         data: pageViews7
                     }]
                 },
@@ -565,7 +634,7 @@
                 }
             });
 
-            var tv7 =  {!!json_encode($totalVisitors7)!!}
+            var tv7 = {!! json_encode($totalVisitors7) !!}
             var date7 = [];
             var pageViews7 = [];
             tv7.forEach(element => {

@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
-use Label84\TagManager\Facades\TagManager;
+use GoogleTagManager;
 use CyrildeWit\EloquentViewable\Support\Period;
 
 class CatalogController extends Controller
@@ -94,8 +94,7 @@ class CatalogController extends Controller
         $programs = Program::whereHas('ukm', function($q) use($catalog) {
             $q->where('catalog_id', $catalog->id);
         })->get();
-
-        TagManager::push(['catalog_click' => 'Catalog Click '.$catalog->title]);
+        GoogleTagManager::set('page', $catalog->id);
 
         $max_price = Ukm::where('catalog_id', $catalog->id)->max('max_price');
         $min_price = Ukm::where('catalog_id', $catalog->id)->min('min_price');
@@ -115,12 +114,13 @@ class CatalogController extends Controller
                 $ukms = $ukms->whereHas('categories', function($q) use($categoryId) {
                     $q->whereIn('category_id', $categoryId);
                 });
-                if($request->ajax() && $request->record === 'record' && $request->type == 'category') {
-                    $click = Click::updateOrCreate(
-                        ['catalog_id' => $catalog->id, 'type_click' => 'categories', 'name_click' => 'category', 'category_id' => array_slice($categories_array, -1)[0]],
-                        ['clicks' => \DB::raw('clicks + 1')]
-                    );
-                }
+                GoogleTagManager::set('click', 'category');
+                GoogleTagManager::set('category_id', array_slice($categories_array, -1)[0]);
+                // if($request->ajax() && $request->record === 'record' && $request->type == 'category') {
+                //     Click::updateOrCreate(
+                //         ['catalog_id' => $catalog->id, 'type_click' => 'categories', 'name_click' => 'category', 'category_id' => array_slice($categories_array, -1)[0], 'clicks' => 1],
+                //     );
+                // }
             }
 
             if (isset($request->programs)) {
@@ -133,6 +133,11 @@ class CatalogController extends Controller
                 $ukms = $ukms->whereHas('program', function($q) use($programId) {
                     $q->whereIn('program_id', $programId);
                 });
+                if($request->ajax() && $request->record === 'record' && $request->type == 'program') {
+                    Click::create(
+                        ['catalog_id' => $catalog->id, 'type_click' => 'program',  'name_click' => 'program', 'program_id' => array_slice($programs_array, -1)[0], 'clicks' => 1],
+                    );
+                }
             }
 
             if (isset($request->states)) {
@@ -145,7 +150,7 @@ class CatalogController extends Controller
                 if($request->ajax() && $request->record === 'record' && $request->type == 'state') {
                     $click = Click::updateOrCreate(
                         ['catalog_id' => $catalog->id, 'type_click' => 'state', 'name_click' => array_slice($states_array, -1)[0]],
-                        ['clicks' => \DB::raw('clicks + 1')]
+
                     );
                 }
             }
@@ -160,7 +165,7 @@ class CatalogController extends Controller
                 if($request->ajax() && $request->record === 'record' && $request->type == 'owner_gender') {
                     $click = Click::updateOrCreate(
                         ['catalog_id' => $catalog->id, 'type_click' => 'gender', 'name_click' => array_slice($owner_genders, -1)[0]],
-                        ['clicks' => \DB::raw('clicks + 1')]
+
                     );
                 }
             }
@@ -217,7 +222,7 @@ class CatalogController extends Controller
                 if($request->ajax() && $request->record === 'record' && $request->type == 'category') {
                     $click = Click::updateOrCreate(
                         ['catalog_id' => $catalog->id, 'type_click' => 'categories', 'name_click' => 'category', 'category_id' => array_slice($categories_array, -1)[0]],
-                        ['clicks' => \DB::raw('clicks + 1')]
+
                     );
                 }
             }
@@ -234,9 +239,10 @@ class CatalogController extends Controller
                 });
                 if($request->ajax() && $request->record === 'record' && $request->type == 'program') {
                     $click = Click::updateOrCreate(
-                        ['catalog_id' => $catalog->id, 'type_click' => 'program', 'name_click' => array_slice($programs_array, -1)[0]],
-                        ['clicks' => \DB::raw('clicks + 1')]
+                        ['catalog_id' => $catalog->id, 'type_click' => 'program',  'name_click' => 'program', 'program_id' => array_slice($programs_array, -1)[0]],
+
                     );
+                    dd($click);
                 }
             }
 
@@ -250,7 +256,7 @@ class CatalogController extends Controller
                 if($request->ajax() && $request->record === 'record' && $request->type == 'state') {
                     $click = Click::updateOrCreate(
                         ['catalog_id' => $catalog->id, 'type_click' => 'state', 'name_click' => array_slice($states_array, -1)[0]],
-                        ['clicks' => \DB::raw('clicks + 1')]
+
                     );
                 }
             }
@@ -265,7 +271,7 @@ class CatalogController extends Controller
                 if($request->ajax() && $request->record === 'record' && $request->type == 'owner_gender') {
                     $click = Click::updateOrCreate(
                         ['catalog_id' => $catalog->id, 'type_click' => 'gender', 'name_click' => array_slice($owner_genders, -1)[0]],
-                        ['clicks' => \DB::raw('clicks + 1')]
+
                     );
                 }
             }

@@ -10,6 +10,7 @@ use App\Models\Catalog;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Spatie\Analytics\Period;
+use Illuminate\Support\Facades\DB;
 
 class AdminDashboardController extends Controller
 {
@@ -60,9 +61,21 @@ class AdminDashboardController extends Controller
             ${'ukm_clicks_'.$key++} = Ukm::where('catalog_id', $value->id)->where('whatsapp_clicks', '>', 0)->where('instagram_clicks', '>', 0)->get();
         }
 
+        foreach ($catalogs_title as $key => $value) {
+            ${'program_clicks_'.$key++} = DB::table('clicks')
+                 ->select('program_id', DB::raw('count(*) as total'))
+                 ->where('catalog_id', $value->id)
+                 ->where('type_click', 'program')
+                 ->groupBy('program_id')
+                 ->get();
+        }
+
+        dd($program_clicks_0);
+
         return view('admin.dashboard', compact('ukms', 'articles', 'catalogs', 'categories', 'mostVisited1', 'mostVisited3', 'mostVisited7', 'fetchUser3', 'fetchUser1', 'fetchUser7', 'totalVisitors3',
         'totalVisitors1', 'totalVisitors7', 'topReferrers3', 'topReferrers1', 'topReferrers7', 'catalogs_title', 'category_clicks_0', 'category_clicks_1', 
-        'state_clicks_0', 'state_clicks_1', 'gender_clicks_0', 'gender_clicks_1', 'floating_clicks_0', 'floating_clicks_1', 'ukm_clicks_0', 'ukm_clicks_1'));
+        'state_clicks_0', 'state_clicks_1', 'gender_clicks_0', 'gender_clicks_1', 'floating_clicks_0', 'floating_clicks_1', 'ukm_clicks_0', 'ukm_clicks_1', 
+        'program_clicks_0', 'program_clicks_1'));
     }
 
     /**
