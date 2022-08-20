@@ -48,24 +48,41 @@ class AdminDashboardController extends Controller
 
         $catalogs_title = Catalog::skip(1)->take(2)->get();
 
+        $count_total = 'count(*) as total';
+
         foreach ($catalogs_title as $key => $value) {
-            ${'category_clicks_'.$key++} = Click::where('type_click', 'categories')->where('catalog_id', $value->id)
-            ->groupBy('category_id')->select('category_id', DB::raw('count(*) as total'))->get();
+            ${'category_'.$key} = Click::where('type_click', 'categories')->where('catalog_id', $value->id)
+            ->groupBy('category_id')->select('category_id', DB::raw('count(*) as total'))->orderBy('category_id')->get()->toArray();
+
+            ${'clicks_'.$key} = Click::where('type_click', 'categories')->where('catalog_id', $value->id)
+            ->where('created_at', '<=', '2022-08-15 00:00:00')->orderBy('category_id')->get()->toArray();
+
+            ${'category_clicks_'.$key} = collect();
+
+            for ($index = 0 ; $index < count(${'category_'.$key}); $index ++) {
+                ${'total_counts_'.$index} = array('category_id' => ${'category_'.$key}[$index]['category_id'], 
+                'total' => ${'clicks_'.$key}[$index]['clicks']+${'category_'.$key}[$index]['total']);
+                
+                ${'category_clicks_'.$key}->push(${'total_counts_'.$index});
+            }
+
+            $key++;
         }
+
         
         foreach ($catalogs_title as $key => $value) {
             ${'state_clicks_'.$key++} = Click::where('type_click', 'state')->where('catalog_id', $value->id)
-            ->groupBy('name_click')->select('name_click', DB::raw('count(*) as total'))->get();
+            ->groupBy('name_click')->select('name_click', DB::raw($count_total))->get();
         }
 
         foreach ($catalogs_title as $key => $value) {
             ${'gender_clicks_'.$key++} = Click::where('type_click', 'gender')->where('catalog_id', $value->id)
-            ->groupBy('name_click')->select('name_click', DB::raw('count(*) as total'))->get();
+            ->groupBy('name_click')->select('name_click', DB::raw($count_total))->get();
         }
 
         foreach ($catalogs_title as $key => $value) {
             ${'floating_clicks_'.$key++} = Click::where('type_click', 'floating')->where('catalog_id', $value->id)
-            ->groupBy('name_click')->select('name_click', DB::raw('count(*) as total'))->get();
+            ->groupBy('name_click')->select('name_click', DB::raw($count_total))->get();
         }
 
         foreach ($catalogs_title as $key => $value) {
@@ -73,32 +90,35 @@ class AdminDashboardController extends Controller
         }
 
         foreach ($catalogs_title as $key => $value) {
-            ${'program_clicks_'.$key++} = Click::where('type_click', 'program')->where('catalog_id', $value->id)->groupBy('program_id')->select('program_id', DB::raw('count(*) as total'))->get();
+            ${'program_clicks_'.$key++} = Click::where('type_click', 'program')->where('catalog_id', $value->id)->groupBy('program_id')->select('program_id', DB::raw($count_total))->get();
         }
 
         if($request->ajax() && $request->start_date != '' && $request->end_date != '') {
+            $startdate = \DateTime::createFromFormat('Y-m-d H:i:s', $request->start_date)->format('Y-m-d');
+            $enddate = \DateTime::createFromFormat('Y-m-d H:i:s', $request->end_date)->format('Y-m-d');
+            
             foreach ($catalogs_title as $key => $value) {
                 ${'category_clicks_'.$key++} = Click::where('type_click', 'categories')->where('catalog_id', $value->id)
                 ->whereBetween('created_at', [$request->start_date, $request->end_date])->groupBy('category_id')
-                ->select('category_id', DB::raw('count(*) as total'))->get();
+                ->select('category_id', DB::raw($count_total))->get();
             }
             
             foreach ($catalogs_title as $key => $value) {
                 ${'state_clicks_'.$key++} = Click::where('type_click', 'state')->where('catalog_id', $value->id)
                 ->whereBetween('created_at', [$request->start_date, $request->end_date])
-                ->groupBy('name_click')->select('name_click', DB::raw('count(*) as total'))->get();
+                ->groupBy('name_click')->select('name_click', DB::raw($count_total))->get();
             }
     
             foreach ($catalogs_title as $key => $value) {
                 ${'gender_clicks_'.$key++} = Click::where('type_click', 'gender')->where('catalog_id', $value->id)
                 ->whereBetween('created_at', [$request->start_date, $request->end_date])
-                ->groupBy('name_click')->select('name_click', DB::raw('count(*) as total'))->get();
+                ->groupBy('name_click')->select('name_click', DB::raw($count_total))->get();
             }
     
             foreach ($catalogs_title as $key => $value) {
                 ${'floating_clicks_'.$key++} = Click::where('type_click', 'floating')->where('catalog_id', $value->id)
                 ->whereBetween('created_at', [$request->start_date, $request->end_date])
-                ->groupBy('name_click')->select('name_click', DB::raw('count(*) as total'))->get();
+                ->groupBy('name_click')->select('name_click', DB::raw($count_total))->get();
             }
     
             foreach ($catalogs_title as $key => $value) {
@@ -108,11 +128,8 @@ class AdminDashboardController extends Controller
             foreach ($catalogs_title as $key => $value) {
                 ${'program_clicks_'.$key++} = Click::where('type_click', 'program')->where('catalog_id', $value->id)
                 ->whereBetween('created_at', [$request->start_date, $request->end_date])
-                ->groupBy('program_id')->select('program_id', DB::raw('count(*) as total'))->get();
+                ->groupBy('program_id')->select('program_id', DB::raw($count_total))->get();
             }
-
-            $startdate = \DateTime::createFromFormat('Y-m-d H:i:s', $request->start_date)->format('Y-m-d');
-            $enddate = \DateTime::createFromFormat('Y-m-d H:i:s', $request->end_date)->format('Y-m-d');
 
             $totalVisitors = Analytics::fetchTotalVisitorsAndPageViews(Period::create(new DateTime($startdate), new DateTime($enddate)));
             $mostVisited = Analytics::fetchMostVisitedPages(Period::create(new DateTime($startdate), new DateTime($enddate)), 10);

@@ -1,3 +1,4 @@
+<div class="loading"></div>
 <div class="row mb-5">
     <div class="col-12 col-lg-6 mb-5">
         <nav>
@@ -26,8 +27,8 @@
                             @foreach (${'category_clicks_' . $key} as $category)
                                 <tr>
                                     <td scope="row">{{ $loop->iteration }}</td>
-                                    <td>{{ $category->category->title }}</td>
-                                    <td>{{ $category->total }}</td>
+                                    <td>{{ $category['category_id'] }}</td>
+                                    <td>{{ $category['total'] }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

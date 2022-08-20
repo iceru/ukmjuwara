@@ -86,6 +86,8 @@
             userDevicesChart();
             userCountryChart();
             totalVistorsChart();
+
+            $('.loading').hide();
         });
 
         function userDevicesChart() {
@@ -207,34 +209,44 @@
         }
 
         $('#filterClick').click(function(e) {
-            var start_date =
-                `${$.datepicker.formatDate("yy-mm-dd", new Date($('#start_date').val()))} 00:00:00`;
-            var end_date =
-                `${$.datepicker.formatDate("yy-mm-dd", new Date($('#end_date').val()))} 23:59:59`;
             e.preventDefault();
-            $.ajax({
-                type: "GET",
-                url: "/admin",
-                data: {
-                    start_date,
-                    end_date
-                },
-                success: function(response) {
-                    $('.table-clicks').DataTable().clear().destroy();
-                    window.myTotalVisitors.destroy();
-                    window.myUserCountry.destroy();
-                    window.myUserDevices.destroy();
+            var startValue = $('#start_date').val();
+            var endValue = $('#end_date').val();
 
-                    $('#dashboard_click').html(response);
+            if (startValue && endValue) {
+                var start_date =
+                    `${$.datepicker.formatDate("yy-mm-dd", new Date(startValue))} 00:00:00`;
+                var end_date =
+                    `${$.datepicker.formatDate("yy-mm-dd", new Date(endValue))} 23:59:59`;
+                $('.loading').fadeIn();
+                $.ajax({
+                    type: "GET",
+                    url: "/admin",
+                    data: {
+                        start_date,
+                        end_date
+                    },
+                    success: function(response) {
+                        window.myTotalVisitors.destroy();
+                        window.myUserCountry.destroy();
+                        window.myUserDevices.destroy();
 
-                    userDevicesChart();
-                    userCountryChart();
-                    totalVistorsChart();
-                    $('.table-clicks').DataTable({
-                        responsive: true,
-                    })
-                }
-            });
+                        $('#dashboard_click').html(response);
+
+                        userDevicesChart();
+                        userCountryChart();
+                        totalVistorsChart();
+                        $('.table-clicks').DataTable({
+                            responsive: true,
+                        })
+                        $('.loading').fadeOut();
+                    }
+                });
+            } else {
+                alert('Tanggal belum diinput')
+            }
+
+
         });
     </script>
 </x-admin-layout>

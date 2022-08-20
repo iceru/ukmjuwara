@@ -11596,6 +11596,19 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before, table
 .dashboard .page-link {
   color: #16857E;
 }
+.dashboard #dashboard_click {
+  position: relative;
+}
+.dashboard #dashboard_click .loading {
+  background-color: rgba(255, 255, 255, 0.9);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+.dashboard .form-control[readonly] {
+  background-color: white;
+  width: 150px;
+}
 .dashboard .page-item.active .page-link {
   background-color: #16857E;
   border-color: #16857E;
