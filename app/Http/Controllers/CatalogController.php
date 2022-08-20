@@ -94,10 +94,12 @@ class CatalogController extends Controller
         $programs = Program::whereHas('ukm', function($q) use($catalog) {
             $q->where('catalog_id', $catalog->id);
         })->get();
-        GoogleTagManager::set('page', $catalog->id);
 
         $max_price = Ukm::where('catalog_id', $catalog->id)->max('max_price');
         $min_price = Ukm::where('catalog_id', $catalog->id)->min('min_price');
+
+        $totalUkms = count(Ukm::where('catalog_id', $catalog->id)->get());
+        $oriTotalUkms = count(Ukm::where('catalog_id', $catalog->id)->get());
 
         if ($request->categories || $request->states || $request->owner_genders || $request->search || $request->page || $request->programs || $request->min_price || $request->max_price) {
             $ukms = Ukm::where('catalog_id', $catalog->id);
@@ -114,13 +116,11 @@ class CatalogController extends Controller
                 $ukms = $ukms->whereHas('categories', function($q) use($categoryId) {
                     $q->whereIn('category_id', $categoryId);
                 });
-                GoogleTagManager::set('click', 'category');
-                GoogleTagManager::set('category_id', array_slice($categories_array, -1)[0]);
-                // if($request->ajax() && $request->record === 'record' && $request->type == 'category') {
-                //     Click::updateOrCreate(
-                //         ['catalog_id' => $catalog->id, 'type_click' => 'categories', 'name_click' => 'category', 'category_id' => array_slice($categories_array, -1)[0], 'clicks' => 1],
-                //     );
-                // }
+                if($request->ajax() && $request->record === 'record' && $request->type == 'category') {
+                    Click::create(
+                        ['catalog_id' => $catalog->id, 'type_click' => 'categories', 'name_click' => 'category', 'category_id' => array_slice($categories_array, -1)[0], 'clicks' => 1],
+                    );
+                }
             }
 
             if (isset($request->programs)) {
@@ -135,7 +135,7 @@ class CatalogController extends Controller
                 });
                 if($request->ajax() && $request->record === 'record' && $request->type == 'program') {
                     Click::create(
-                        ['catalog_id' => $catalog->id, 'type_click' => 'program',  'name_click' => 'program', 'program_id' => array_slice($programs_array, -1)[0], 'clicks' => 1],
+                        ['catalog_id' => $catalog->id, 'type_click' => 'program',  'name_click' => 'program', 'program_id' => array_slice($programs_array, -1)[0], 'clicks' => 1]
                     );
                 }
             }
@@ -148,9 +148,8 @@ class CatalogController extends Controller
                 }
                 $ukms = $ukms->whereIn('state_name', $states_array);
                 if($request->ajax() && $request->record === 'record' && $request->type == 'state') {
-                    $click = Click::updateOrCreate(
-                        ['catalog_id' => $catalog->id, 'type_click' => 'state', 'name_click' => array_slice($states_array, -1)[0]],
-
+                    Click::create(
+                        ['catalog_id' => $catalog->id, 'type_click' => 'state', 'name_click' => array_slice($states_array, -1)[0], 'clicks' => 1],
                     );
                 }
             }
@@ -163,8 +162,8 @@ class CatalogController extends Controller
                 }
                 $ukms = $ukms->whereIn('owner_gender', $owner_genders);
                 if($request->ajax() && $request->record === 'record' && $request->type == 'owner_gender') {
-                    $click = Click::updateOrCreate(
-                        ['catalog_id' => $catalog->id, 'type_click' => 'gender', 'name_click' => array_slice($owner_genders, -1)[0]],
+                    Click::create(
+                        ['catalog_id' => $catalog->id, 'type_click' => 'gender', 'name_click' => array_slice($owner_genders, -1)[0], 'clicks' => 1],
 
                     );
                 }
@@ -174,15 +173,16 @@ class CatalogController extends Controller
                 $ukms = $ukms->where('title', 'LIKE','%'.$request->search.'%');
             }
 
+            $totalUkms = count($ukms->get());
             $ukms = $ukms->orderBy('title')->paginate(16);
             if($request->ajax()) {
-                return view('catalog-ukm', compact('ukms'));
+                return view('catalog-ukm', compact('ukms', 'totalUkms', 'oriTotalUkms'));
             } else {
-                return view('catalog', compact('catalog','ukms', 'bests', 'categories', 'states', 'programs', 'max_price', 'min_price'));
+                return view('catalog', compact('catalog','ukms', 'bests', 'categories', 'states', 'programs', 'max_price', 'min_price', 'totalUkms', 'oriTotalUkms'));
             }
         }
         
-        return view('catalog', compact('catalog','ukms', 'bests', 'categories', 'states', 'programs', 'max_price', 'min_price'));
+        return view('catalog', compact('catalog','ukms', 'bests', 'categories', 'states', 'programs', 'max_price', 'min_price', 'totalUkms', 'oriTotalUkms'));
     }
 
     public function showAll(Request $request)
@@ -203,7 +203,8 @@ class CatalogController extends Controller
 
         $max_price = Ukm::max('max_price');
         $min_price = Ukm::min('min_price');
-
+        $totalUkms = count(Ukm::where('catalog_id', $catalog->id)->get());
+        $oriTotalUkms = count(Ukm::where('catalog_id', $catalog->id)->get());
             
         if ($request->categories || $request->states || $request->owner_genders || $request->search || $request->page || $request->programs || $request->min_price || $request->max_price) {
             if(isset($request->min_price) || isset($request->max_price)) {
@@ -220,9 +221,8 @@ class CatalogController extends Controller
                     $q->whereIn('category_id', $categoryId);
                 });
                 if($request->ajax() && $request->record === 'record' && $request->type == 'category') {
-                    $click = Click::updateOrCreate(
+                    Click::create(
                         ['catalog_id' => $catalog->id, 'type_click' => 'categories', 'name_click' => 'category', 'category_id' => array_slice($categories_array, -1)[0]],
-
                     );
                 }
             }
@@ -238,7 +238,7 @@ class CatalogController extends Controller
                     $q->whereIn('program_id', $programId);
                 });
                 if($request->ajax() && $request->record === 'record' && $request->type == 'program') {
-                    $click = Click::updateOrCreate(
+                    Click::create(
                         ['catalog_id' => $catalog->id, 'type_click' => 'program',  'name_click' => 'program', 'program_id' => array_slice($programs_array, -1)[0]],
 
                     );
@@ -254,7 +254,7 @@ class CatalogController extends Controller
                 }
                 $ukms = UKM::whereIn('state_name', $states_array);
                 if($request->ajax() && $request->record === 'record' && $request->type == 'state') {
-                    $click = Click::updateOrCreate(
+                    Click::create(
                         ['catalog_id' => $catalog->id, 'type_click' => 'state', 'name_click' => array_slice($states_array, -1)[0]],
 
                     );
@@ -269,7 +269,7 @@ class CatalogController extends Controller
                 }
                 $ukms = UKM::whereIn('owner_gender', $owner_genders);
                 if($request->ajax() && $request->record === 'record' && $request->type == 'owner_gender') {
-                    $click = Click::updateOrCreate(
+                    Click::create(
                         ['catalog_id' => $catalog->id, 'type_click' => 'gender', 'name_click' => array_slice($owner_genders, -1)[0]],
 
                     );
@@ -280,6 +280,9 @@ class CatalogController extends Controller
                 $ukms = UKM::where('title', 'LIKE','%'.$request->search.'%');
             }
 
+            $totalUkms = count($ukms->get());
+            $ukms = $ukms->orderBy('title')->paginate(16);
+
             if ($ukms) {
                 $ukms = $ukms->orderBy('title')->paginate(16);
             } else {
@@ -287,19 +290,19 @@ class CatalogController extends Controller
             }
 
             if($request->ajax()) {
-                return view('catalog-ukm', compact('ukms'));
+                return view('catalog-ukm', compact('ukms', 'totalUkms', 'oriTotalUkms'));
             } else {
-                return view('catalog-all', compact('catalog','ukms', 'bests', 'categories', 'states', 'categories_global', 'categories_digital', 'programs', 'max_price', 'min_price'));
+                return view('catalog-all', compact('catalog', 'totalUkms', 'oriTotalUkms', 'ukms', 'bests', 'categories', 'states', 'categories_global', 'categories_digital', 'programs', 'max_price', 'min_price'));
             }
         } 
 
-        return view('catalog-all', compact('catalogs','catalog', 'categories_global', 'categories_digital', 'ukms', 'bests', 'categories', 'states', 'programs', 'max_price', 'min_price'));
+        return view('catalog-all', compact('catalogs','catalog', 'totalUkms', 'oriTotalUkms', 'categories_global', 'categories_digital', 'ukms', 'bests', 'categories', 'states', 'programs', 'max_price', 'min_price'));
     }
 
 
     public function floating(Request $request)
     {
-        $click = Click::updateOrCreate(
+        Click::create(
             ['catalog_id' => $request->catalog, 'type_click' => 'floating', 'name_click' => 'Katalog Whatsapp UKM Indonesia'],
             ['clicks' => \DB::raw('clicks + 1')]
         );

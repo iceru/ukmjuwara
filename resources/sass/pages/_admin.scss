@@ -8,11 +8,12 @@
         align-items: center;
         padding: 1.5rem 0;
         margin-bottom: 1.5rem;
-        border-bottom: 1px solid rgba(255,255,255, 0.3);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 
         h5 {
             font-weight: 500;
         }
+
         p {
             font-weight: 200;
             margin: 0;
@@ -27,7 +28,7 @@
             margin-right: 0.75rem;
         }
     }
-    
+
     a {
         color: white;
 
@@ -35,7 +36,7 @@
             padding: 0.5rem 0;
             margin-bottom: .5rem;
             border-bottom: 1px solid $primary-color;
-    
+
             // &.active {
             //     border-bottom: 1px solid white;
             // }
@@ -62,10 +63,24 @@
             opacity: 1;
         }
     }
-    
+
 }
 
 .dashboard {
+    .page-link {
+        color: $primary-color;
+    }
+
+    .page-item.active .page-link {
+        background-color: $primary-color;
+        border-color: $primary-color;
+    }
+
+    .btn-primary {
+        background-color: $primary-color;
+        border-color: $primary-color;
+    }
+
     .stat-number {
         background-color: $primary-color;
         color: white;
@@ -74,10 +89,12 @@
 
         .icon {
             margin-bottom: .5rem;
+
             span {
                 font-size: 18px;
                 font-weight: 500;
             }
+
             i {
                 margin-right: .5rem;
             }
@@ -93,11 +110,11 @@
             border: 1px solid $primary-color;
             border-radius: 8px;
             color: $primary-color;
-    
+
             &:first-child {
                 margin-right: .5rem;
             }
-    
+
             &.active {
                 color: white;
                 background-color: $primary-color;
@@ -105,7 +122,7 @@
             }
         }
     }
-    
+
 }
 
 .administrator {
@@ -128,6 +145,7 @@
 
 .admin-content {
     padding: 1.5rem;
+
     @include breakpoint-down(medium) {
         padding: 1rem 0;
 
@@ -143,17 +161,21 @@
     .chart {
         padding: 2rem;
     }
+
     form {
-        .btn-check:focus + .btn-primary, .btn-primary:focus, .btn-primary:hover {
+
+        .btn-check:focus+.btn-primary,
+        .btn-primary:focus,
+        .btn-primary:hover {
             background-color: lighten($color: $primary-color, $amount: 10%);
             border-color: lighten($color: $primary-color, $amount: 10%);
             box-shadow: 0 0 0 0.25rem rgba($primary-color, 0.3);
         }
-    
+
         .btn-primary {
             background-color: $primary-color;
             border-color: $primary-color;
-    
+
             &:hover {
                 box-shadow: none;
             }
@@ -177,17 +199,20 @@
                 -webkit-line-clamp: 3;
                 -webkit-box-orient: vertical;
             }
+
             p:not(:first-child) {
                 display: none;
             }
         }
     }
 
-    .table, .edit-image {
+    .table,
+    .edit-image {
         img {
             object-fit: cover;
             object-position: center;
         }
+
         &.contain {
             img {
                 object-fit: contain;

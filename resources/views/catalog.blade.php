@@ -311,7 +311,6 @@
                             </div>
                         </div>
                         <div class="col-12 col-md-9 katalog-ukm">
-                            <p class="mb-3 filter-count">Ditemukan {{ $catalog->ukm->count() }} brand</p>
                             <div id="catalog">
                                 @include('catalog-ukm')
                             </div>
@@ -727,22 +726,22 @@
                     $('.state-data').attr('hidden', 'hidden')
                 }
                 if (stateObj.owner_genders.length > 0) {
-                    $('.owner_gender-selected').html(owner_genders_texts);
+                    $('.owner_gender-selected').html(owner_gender_texts);
                     $('.owner_gender-data').removeAttr('hidden')
                     url.searchParams.set('owner_genders', owner_genders)
                 } else {
                     url.searchParams.delete('owner_genders')
-                    owner_genders_texts = []
+                    owner_gender_texts = []
                     $('.owner_gender-selected').html('');
                     $('.owner_gender-data').attr('hidden', 'hidden')
                 }
                 if (stateObj.categories.length > 0) {
                     url.searchParams.set('categories', categories)
-                    $('.category-selected').html(categories_texts);
+                    $('.category-selected').html(category_texts);
                     $('.category-data').removeAttr('hidden')
                 } else {
                     url.searchParams.delete('categories')
-                    categories_texts = []
+                    category_texts = []
                     $('.category-selected').html('');
                     $('.category-data').attr('hidden', 'hidden')
                 }
@@ -751,7 +750,7 @@
                 else
                     url.searchParams.delete('search')
                 if (stateObj.programs.length > 0) {
-                    $('.program-selected').html(categories_texts);
+                    $('.program-selected').html(category_texts);
                     $('.program-data').removeAttr('hidden')
                     url.searchParams.set('programs', programs)
                 } else {

@@ -11593,6 +11593,17 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before, table
   }
 }
 
+.dashboard .page-link {
+  color: #16857E;
+}
+.dashboard .page-item.active .page-link {
+  background-color: #16857E;
+  border-color: #16857E;
+}
+.dashboard .btn-primary {
+  background-color: #16857E;
+  border-color: #16857E;
+}
 .dashboard .stat-number {
   background-color: #16857E;
   color: white;
@@ -11662,7 +11673,9 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before, table
 .admin-content .chart {
   padding: 2rem;
 }
-.admin-content form .btn-check:focus + .btn-primary, .admin-content form .btn-primary:focus, .admin-content form .btn-primary:hover {
+.admin-content form .btn-check:focus + .btn-primary,
+.admin-content form .btn-primary:focus,
+.admin-content form .btn-primary:hover {
   background-color: #1db1a7;
   border-color: #1db1a7;
   box-shadow: 0 0 0 0.25rem rgba(22, 133, 126, 0.3);
@@ -11687,13 +11700,15 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before, table
 .admin-content .table .description p:not(:first-child) {
   display: none;
 }
-.admin-content .table img, .admin-content .edit-image img {
+.admin-content .table img,
+.admin-content .edit-image img {
   -o-object-fit: cover;
      object-fit: cover;
   -o-object-position: center;
      object-position: center;
 }
-.admin-content .table.contain img, .admin-content .edit-image.contain img {
+.admin-content .table.contain img,
+.admin-content .edit-image.contain img {
   -o-object-fit: contain;
      object-fit: contain;
 }
