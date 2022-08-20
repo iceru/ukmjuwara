@@ -27,7 +27,7 @@
                             @foreach (${'category_clicks_' . $key} as $category)
                                 <tr>
                                     <td scope="row">{{ $loop->iteration }}</td>
-                                    <td>{{ $category['category_id'] }}</td>
+                                    <td>{{ $category['category']['title'] }}</td>
                                     <td>{{ $category['total'] }}</td>
                                 </tr>
                             @endforeach
@@ -100,8 +100,8 @@
                             @foreach (${'state_clicks_' . $key} as $state)
                                 <tr>
                                     <td scope="row">{{ $loop->iteration }}</td>
-                                    <td>{{ $state->name_click }}</td>
-                                    <td>{{ $state->total }}</td>
+                                    <td>{{ $state['title'] }}</td>
+                                    <td>{{ $state['total'] }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -137,9 +137,9 @@
                             @foreach (${'gender_clicks_' . $key} as $gender)
                                 <tr>
                                     <td scope="row">{{ $loop->iteration }}</td>
-                                    <td>{{ $gender->name_click == 'pria-wanita' ? 'Pria dan Wanita' : ucwords($gender->name_click) }}
+                                    <td>{{ $gender['title'] == 'pria-wanita' ? 'Pria dan Wanita' : ucwords($gender['title']) }}
                                     </td>
-                                    <td>{{ $gender->total }}</td>
+                                    <td>{{ $gender['total'] }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -176,8 +176,8 @@
                             @foreach (${'floating_clicks_' . $key} as $floating)
                                 <tr>
                                     <td scope="row">{{ $loop->iteration }}</td>
-                                    <td>{{ $floating->name_click }}</td>
-                                    <td>{{ $floating->total }}</td>
+                                    <td>{{ $floating['title'] }}</td>
+                                    <td>{{ $floating['total'] }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

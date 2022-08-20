@@ -51,8 +51,8 @@ class AdminDashboardController extends Controller
         $count_total = 'count(*) as total';
 
         foreach ($catalogs_title as $key => $value) {
-            ${'category_'.$key} = Click::where('type_click', 'categories')->where('catalog_id', $value->id)
-            ->groupBy('category_id')->select('category_id', DB::raw('count(*) as total'))->orderBy('category_id')->get()->toArray();
+            ${'category_'.$key} = Click::with('category')->where('type_click', 'categories')->where('catalog_id', $value->id)
+            ->groupBy('category_id')->select('category_id', DB::raw($count_total))->orderBy('category_id')->get()->toArray();
 
             ${'clicks_'.$key} = Click::where('type_click', 'categories')->where('catalog_id', $value->id)
             ->where('created_at', '<=', '2022-08-15 00:00:00')->orderBy('category_id')->get()->toArray();
@@ -61,6 +61,7 @@ class AdminDashboardController extends Controller
 
             for ($index = 0 ; $index < count(${'category_'.$key}); $index ++) {
                 ${'total_counts_'.$index} = array('category_id' => ${'category_'.$key}[$index]['category_id'], 
+                'category' => ${'category_'.$key}[$index]['category'],
                 'total' => ${'clicks_'.$key}[$index]['clicks']+${'category_'.$key}[$index]['total']);
                 
                 ${'category_clicks_'.$key}->push(${'total_counts_'.$index});
@@ -68,21 +69,63 @@ class AdminDashboardController extends Controller
 
             $key++;
         }
-
         
         foreach ($catalogs_title as $key => $value) {
-            ${'state_clicks_'.$key++} = Click::where('type_click', 'state')->where('catalog_id', $value->id)
-            ->groupBy('name_click')->select('name_click', DB::raw($count_total))->get();
+            ${'state_'.$key} = Click::where('type_click', 'state')->where('catalog_id', $value->id)
+            ->groupBy('name_click')->select('name_click', DB::raw($count_total))->orderBy('name_click')->get()->toArray();
+
+            ${'state_count_'.$key} = Click::where('type_click', 'state')->where('catalog_id', $value->id)
+            ->where('created_at', '<=', '2022-08-15 00:00:00')->orderBy('name_click')->get()->toArray();
+
+            ${'state_clicks_'.$key} = collect();
+
+            for ($index = 0 ; $index < count(${'state_'.$key}); $index ++) {
+                ${'total_counts_'.$index} = array('title' => ${'state_'.$key}[$index]['name_click'],
+                'total' => ${'state_count_'.$key}[$index]['clicks']+${'state_'.$key}[$index]['total']);
+                
+                ${'state_clicks_'.$key}->push(${'total_counts_'.$index});
+            }
+
+            $key++;
         }
 
         foreach ($catalogs_title as $key => $value) {
-            ${'gender_clicks_'.$key++} = Click::where('type_click', 'gender')->where('catalog_id', $value->id)
-            ->groupBy('name_click')->select('name_click', DB::raw($count_total))->get();
+            ${'gender_'.$key} = Click::where('type_click', 'gender')->where('catalog_id', $value->id)
+            ->groupBy('name_click')->select('name_click', DB::raw($count_total))->get()->toArray();
+
+            ${'gender_count_'.$key} = Click::where('type_click', 'gender')->where('catalog_id', $value->id)
+            ->where('created_at', '<=', '2022-08-15 00:00:00')->orderBy('name_click')->get()->toArray();
+
+            ${'gender_clicks_'.$key} = collect();
+
+            for ($index = 0 ; $index < count(${'gender_'.$key}); $index ++) {
+                ${'total_counts_'.$index} = array('title' => ${'gender_'.$key}[$index]['name_click'],
+                'total' => ${'gender_count_'.$key}[$index]['clicks']+${'gender_'.$key}[$index]['total']);
+                
+                ${'gender_clicks_'.$key}->push(${'total_counts_'.$index});
+            }
+
+            $key++;
         }
 
         foreach ($catalogs_title as $key => $value) {
-            ${'floating_clicks_'.$key++} = Click::where('type_click', 'floating')->where('catalog_id', $value->id)
-            ->groupBy('name_click')->select('name_click', DB::raw($count_total))->get();
+            ${'floating_'.$key} = Click::where('type_click', 'floating')->where('catalog_id', $value->id)
+            ->groupBy('name_click')->select('name_click', DB::raw($count_total))->get()->toArray();
+
+            
+            ${'floating_count'.$key} = Click::where('type_click', 'floating')->where('catalog_id', $value->id)
+            ->where('created_at', '<=', '2022-08-15 00:00:00')->orderBy('name_click')->get()->toArray();
+
+            ${'floating_clicks_'.$key} = collect();
+
+            for ($index = 0 ; $index < count(${'floating_'.$key}); $index ++) {
+                ${'total_counts_'.$index} = array('title' => ${'floating_'.$key}[$index]['name_click'],
+                'total' => ${'floating_count'.$key}[$index]['clicks']+${'floating_'.$key}[$index]['total']);
+                
+                ${'floating_clicks_'.$key}->push(${'total_counts_'.$index});
+            }
+
+            $key++;
         }
 
         foreach ($catalogs_title as $key => $value) {
@@ -97,30 +140,114 @@ class AdminDashboardController extends Controller
             $startdate = \DateTime::createFromFormat('Y-m-d H:i:s', $request->start_date)->format('Y-m-d');
             $enddate = \DateTime::createFromFormat('Y-m-d H:i:s', $request->end_date)->format('Y-m-d');
             
-            foreach ($catalogs_title as $key => $value) {
-                ${'category_clicks_'.$key++} = Click::where('type_click', 'categories')->where('catalog_id', $value->id)
-                ->whereBetween('created_at', [$request->start_date, $request->end_date])->groupBy('category_id')
-                ->select('category_id', DB::raw($count_total))->get();
+            if(new DateTime($startdate) >= new DateTime('2022-08-18')) {
+                foreach ($catalogs_title as $key => $value) {
+                    ${'category_clicks_'.$key++} = Click::with('category')->where('type_click', 'categories')->where('catalog_id', $value->id)
+                    ->whereBetween('created_at', [$request->start_date, $request->end_date])->groupBy('category_id')
+                    ->select('category_id', DB::raw($count_total))->get();
+                }
+                
+                foreach ($catalogs_title as $key => $value) {
+                    ${'state_clicks_'.$key++} = Click::where('type_click', 'state')->where('catalog_id', $value->id)
+                    ->whereBetween('created_at', [$request->start_date, $request->end_date])
+                    ->groupBy('name_click')->select('name_click as title', DB::raw($count_total))->get();
+                }
+        
+                foreach ($catalogs_title as $key => $value) {
+                    ${'gender_clicks_'.$key++} = Click::where('type_click', 'gender')->where('catalog_id', $value->id)
+                    ->whereBetween('created_at', [$request->start_date, $request->end_date])
+                    ->groupBy('name_click')->select('name_click as title', DB::raw($count_total))->get();
+                }
+        
+                foreach ($catalogs_title as $key => $value) {
+                    ${'floating_clicks_'.$key++} = Click::where('type_click', 'floating')->where('catalog_id', $value->id)
+                    ->whereBetween('created_at', [$request->start_date, $request->end_date])
+                    ->groupBy('name_click')->select('name_click as title', DB::raw($count_total))->get();
+                }
+            } else {
+                foreach ($catalogs_title as $key => $value) {
+                    ${'category_'.$key} = Click::with('category')->where('type_click', 'categories')->where('catalog_id', $value->id)
+                    ->whereBetween('created_at', [$request->start_date, $request->end_date])
+                    ->groupBy('category_id')->select('category_id', DB::raw($count_total))->orderBy('category_id')->get()->toArray();
+        
+                    ${'clicks_'.$key} = Click::where('type_click', 'categories')->where('catalog_id', $value->id)
+                    ->where('created_at', '<=', '2022-08-15 00:00:00')->orderBy('category_id')->get()->toArray();
+        
+                    ${'category_clicks_'.$key} = collect();
+        
+                    for ($index = 0 ; $index < count(${'category_'.$key}); $index ++) {
+                        ${'total_counts_'.$index} = array('category_id' => ${'category_'.$key}[$index]['category_id'], 
+                        'category' => ${'category_'.$key}[$index]['category'],
+                        'total' => ${'clicks_'.$key}[$index]['clicks']+${'category_'.$key}[$index]['total']);
+                        
+                        ${'category_clicks_'.$key}->push(${'total_counts_'.$index});
+                    }
+        
+                    $key++;
+                }
+                
+                foreach ($catalogs_title as $key => $value) {
+                    ${'state_'.$key} = Click::where('type_click', 'state')->where('catalog_id', $value->id)
+                    ->whereBetween('created_at', [$request->start_date, $request->end_date])
+                    ->groupBy('name_click')->select('name_click', DB::raw($count_total))->orderBy('name_click')->get()->toArray();
+        
+                    ${'state_count_'.$key} = Click::where('type_click', 'state')->where('catalog_id', $value->id)
+                    ->where('created_at', '<=', '2022-08-15 00:00:00')->orderBy('name_click')->get()->toArray();
+        
+                    ${'state_clicks_'.$key} = collect();
+        
+                    for ($index = 0 ; $index < count(${'state_'.$key}); $index ++) {
+                        ${'total_counts_'.$index} = array('title' => ${'state_'.$key}[$index]['name_click'],
+                        'total' => ${'state_count_'.$key}[$index]['clicks']+${'state_'.$key}[$index]['total']);
+                        
+                        ${'state_clicks_'.$key}->push(${'total_counts_'.$index});
+                    }
+        
+                    $key++;
+                }
+        
+                foreach ($catalogs_title as $key => $value) {
+                    ${'gender_'.$key} = Click::where('type_click', 'gender')->where('catalog_id', $value->id)
+                    ->whereBetween('created_at', [$request->start_date, $request->end_date])
+                    ->groupBy('name_click')->select('name_click', DB::raw($count_total))->get()->toArray();
+        
+                    ${'gender_count_'.$key} = Click::where('type_click', 'gender')->where('catalog_id', $value->id)
+                    ->where('created_at', '<=', '2022-08-15 00:00:00')->orderBy('name_click')->get()->toArray();
+        
+                    ${'gender_clicks_'.$key} = collect();
+        
+                    for ($index = 0 ; $index < count(${'gender_'.$key}); $index ++) {
+                        ${'total_counts_'.$index} = array('title' => ${'gender_'.$key}[$index]['name_click'],
+                        'total' => ${'gender_count_'.$key}[$index]['clicks']+${'gender_'.$key}[$index]['total']);
+                        
+                        ${'gender_clicks_'.$key}->push(${'total_counts_'.$index});
+                    }
+        
+                    $key++;
+                }
+        
+                foreach ($catalogs_title as $key => $value) {
+                    ${'floating_'.$key} = Click::where('type_click', 'floating')->where('catalog_id', $value->id)
+                    ->whereBetween('created_at', [$request->start_date, $request->end_date])
+                    ->groupBy('name_click')->select('name_click', DB::raw($count_total))->get()->toArray();
+        
+                    
+                    ${'floating_count'.$key} = Click::where('type_click', 'floating')->where('catalog_id', $value->id)
+                    ->where('created_at', '<=', '2022-08-15 00:00:00')->orderBy('name_click')->get()->toArray();
+        
+                    ${'floating_clicks_'.$key} = collect();
+        
+                    for ($index = 0 ; $index < count(${'floating_'.$key}); $index ++) {
+                        ${'total_counts_'.$index} = array('title' => ${'floating_'.$key}[$index]['name_click'],
+                        'total' => ${'floating_count'.$key}[$index]['clicks']+${'floating_'.$key}[$index]['total']);
+                        
+                        ${'floating_clicks_'.$key}->push(${'total_counts_'.$index});
+                    }
+        
+                    $key++;
+                }
             }
             
-            foreach ($catalogs_title as $key => $value) {
-                ${'state_clicks_'.$key++} = Click::where('type_click', 'state')->where('catalog_id', $value->id)
-                ->whereBetween('created_at', [$request->start_date, $request->end_date])
-                ->groupBy('name_click')->select('name_click', DB::raw($count_total))->get();
-            }
-    
-            foreach ($catalogs_title as $key => $value) {
-                ${'gender_clicks_'.$key++} = Click::where('type_click', 'gender')->where('catalog_id', $value->id)
-                ->whereBetween('created_at', [$request->start_date, $request->end_date])
-                ->groupBy('name_click')->select('name_click', DB::raw($count_total))->get();
-            }
-    
-            foreach ($catalogs_title as $key => $value) {
-                ${'floating_clicks_'.$key++} = Click::where('type_click', 'floating')->where('catalog_id', $value->id)
-                ->whereBetween('created_at', [$request->start_date, $request->end_date])
-                ->groupBy('name_click')->select('name_click', DB::raw($count_total))->get();
-            }
-    
             foreach ($catalogs_title as $key => $value) {
                 ${'ukm_clicks_'.$key++} = Ukm::where('catalog_id', $value->id)->where('whatsapp_clicks', '>', 0)->where('instagram_clicks', '>', 0)->get();
             }
