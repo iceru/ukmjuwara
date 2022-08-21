@@ -156,12 +156,12 @@
                             </div>
                         </div>
 
-                        @if ($ukm->sliders)
+                        @if ($sliders)
                             <div class="ukm-sliders" id="ukm_sliders">
-                                @foreach ((array) json_decode($ukm->sliders) as $slider)
+                                @foreach ($sliders as $slider)
                                     <div>
                                         <div class="image-container ratio16x9">
-                                            <img src="{{ Storage::url('ukm-sliders/' . $slider) }}"
+                                            <img src="{{ Storage::url('ukm-slider/' . $slider->image) }}"
                                                 alt="{{ $ukm->title }}">
                                         </div>
                                     </div>

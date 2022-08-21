@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ukm;
+use App\Models\UkmSlider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cookie;
@@ -92,18 +93,18 @@ class UkmController extends Controller
         views($ukm)
         ->cooldown(10)
         ->record();
+
+        $sliders = UkmSlider::where('ukm_id', $ukm->id)->get();
         
         $view = views($ukm)->count();
     
-        return view('ukm', compact('ukm', 'view', 'city_name', 'sub_name', 'state_name', 'relatedUkms'));
+        return view('ukm', compact('ukm', 'view', 'city_name', 'sub_name', 'state_name', 'relatedUkms', 'sliders'));
     }
 
     public function whatsapp(Request $request)
     {
         if($request->ajax()) {
-            $ukmIncrement = Ukm::where('id',$request->ukm)->increment('whatsapp_clicks', 1);
-
-            dd(Ukm::where('id', $request->ukm)->first());
+            Ukm::where('id',$request->ukm)->increment('whatsapp_clicks', 1);
         }
     }
 

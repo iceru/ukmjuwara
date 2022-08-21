@@ -14,6 +14,7 @@ use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\AdminTagController;
 use App\Http\Controllers\AdminUkmController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\UkmSlidersController;
 use App\Http\Controllers\AdminArticleController;
 use App\Http\Controllers\AdminDashboardController;
 
@@ -93,6 +94,13 @@ Route::middleware(['auth', 'role:administrator'])->group(function (){
     Route::get('/admin/slider/edit/{id}', [SliderController::class, 'edit'])->name('admin.slider.edit');
     Route::post('/admin/slider/update', [SliderController::class, 'update'])->name('admin.slider.update');
     Route::get('/admin/slider/delete/{id}', [SliderController::class, 'destroy'])->name('admin.slider.destroy');
+
+    Route::get('/admin/ukm-sliders', [UkmSlidersController::class, 'index'])->name('admin.ukm-sliders');
+    Route::get('/admin/ukm-sliders/show/{id}', [UkmSlidersController::class, 'show'])->name('admin.ukm-sliders.show');
+    Route::post('/admin/ukm-sliders/store', [UkmSlidersController::class, 'store'])->name('admin.ukm-sliders.store');
+    Route::get('/admin/ukm-sliders/edit/{id}', [UkmSlidersController::class, 'edit'])->name('admin.ukm-sliders.edit');
+    Route::post('/admin/ukm-sliders/update', [UkmSlidersController::class, 'update'])->name('admin.ukm-sliders.update');
+    Route::get('/admin/ukm-sliders/delete/{id}', [UkmSlidersController::class, 'destroy'])->name('admin.ukm-sliders.destroy');
 
     Route::get('/admin/cta', [CtaController::class, 'index'])->name('admin.cta');
     Route::post('/admin/cta/store', [CtaController::class, 'store'])->name('admin.cta.store');

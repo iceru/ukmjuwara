@@ -7,6 +7,7 @@ use App\Models\Ukm;
 use App\Models\Catalog;
 use App\Models\Program;
 use App\Models\Category;
+use App\Models\UkmSlider;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -26,8 +27,9 @@ class AdminUkmController extends Controller
         $categories = Category::all();
         $programs = Program::all();
         $states = json_decode(file_get_contents('https://ibnux.github.io/data-indonesia/propinsi.json'), true);
+        $sliders = UkmSlider::all();
 
-        return view('admin.ukm.index', compact('ukms', 'catalogs', 'categories', 'states', 'programs'));
+        return view('admin.ukm.index', compact('ukms', 'catalogs', 'categories', 'states', 'programs', 'sliders'));
     }
 
     public function getCity(Request $request)
@@ -180,7 +182,7 @@ class AdminUkmController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**

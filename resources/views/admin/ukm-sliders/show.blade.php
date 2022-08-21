@@ -1,6 +1,6 @@
 <x-admin-layout>
     <div class="admin-content">
-        <h4>Sponsor</h4>
+        <h4>Slider Images</h4>
         @if (count($errors) > 0)
             <div class="alert alert-danger mt-3">
                 Terdapat Masalah Pada Input Data<br><br>
@@ -18,37 +18,29 @@
             </div>
         @endif
 
-        <form action="{{ route('admin.sponsor.store') }}" enctype="multipart/form-data" method="POST" class="mt-4 mb-5">
+        <form action="{{ route('admin.ukm-sliders.store') }}" enctype="multipart/form-data" method="POST"
+            class="mt-4 mb-5">
             @csrf
-            <div class="row mb-3">
-                <label for="title" class="col-12 col-md-2 col-form-label">Title</label>
-                <div class="col-12 col-md-10">
-                    <input type="text" class="form-control" id="title" name="title">
-                </div>
-            </div>
             <div class="row mb-3">
                 <label for="link" class="col-12 col-md-2 col-form-label">Link</label>
                 <div class="col-12 col-md-10">
                     <input type="text" class="form-control" id="link" name="link">
-                    <p class="form-text text-muted">
-                        Opsional
-                    </p>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label for="image" class="col-12 col-md-2 col-form-label">Tipe</label>
-                <div class="col-12 col-md-10">
-                    <select class="form-select" name="type" id="type">
-                        <option disabled selected>Pilih Tipe</option>
-                        <option value="dipersembahkan">Dipersembahkan Oleh</option>
-                        <option value="didukung">Didukung Oleh</option>
-                    </select>
                 </div>
             </div>
             <div class="row mb-3">
                 <label for="image" class="col-12 col-md-2 col-form-label">Image</label>
                 <div class="col-12 col-md-10">
                     <input type="file" class="form-control" id="image" name="image"></input>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="ukm" class="col-12 col-md-2 col-form-label">UKM</label>
+                <div class="col-12 col-md-10">
+                    <select class="form-select" name="ukm" id="dselect">
+                        <option value={{ $ukm->id }}>{{ $ukm->title }}</option>
+                    </select>
+                </div>
+                <div class="mb-3">
                 </div>
             </div>
             <div class="mb-3 row">
@@ -59,30 +51,30 @@
             </div>
         </form>
 
-        <table class="table contain" id="table">
+        <table class="table" id="table">
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>Title</th>
                     <th>Link</th>
-                    <th>Tipe</th>
                     <th>Image</th>
+                    <th>UKM</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($sponsors as $sponsor)
+                @foreach ($sliders as $slider)
                     <tr>
                         <td scope="row">{{ $loop->iteration }}</td>
-                        <td>{{ $sponsor->title }}</td>
-                        <td>{{ $sponsor->link }}</td>
-                        <td class="text-capitalize">{{ $sponsor->type }}</td>
-                        <td><img class="mb-2" src="{{ Storage::url('sponsor-image/' . $sponsor->image) }}"
-                                alt="Image" width="70" height="70"></td>
+                        <td>{{ $slider->link }}</td>
+                        <td><img class="mb-2" src="{{ Storage::url('ukm-slider/' . $slider->image) }}" alt="Image"
+                                width="250"></td>
+                        <td>{{ $slider->ukm->title }}</td>
+
                         <td><a class="btn btn-primary btn-small d-flex align-items-center justify-content-center mb-2"
-                                href="/admin/sponsor/edit/{{ $sponsor->id }}"><i class="fas fa-edit me-1"></i> Edit</a>
+                                href="/admin/ukm-sliders/edit/{{ $slider->id }}"><i class="fas fa-edit me-1"></i>
+                                Edit</a>
                             <a class="btn btn-danger btn-small d-flex align-items-center justify-content-center"
-                                href="/admin/sponsor/delete/{{ $sponsor->id }}"
+                                href="/admin/ukm-sliders/delete/{{ $slider->id }}"
                                 onclick="return confirm('Hapus data ini?')"><i class="fa fa-trash me-1"
                                     aria-hidden="true"></i> Delete</a>
                         </td>
@@ -95,8 +87,14 @@
     <script>
         $(document).ready(function() {
             $('#table').DataTable({
-                responsive: true
+                responsive: true,
             });
+
+            const config = {
+                search: true
+            }
+
+            dselect(document.querySelector('#dselect'), config)
 
             $(".btn-success").click(function() {
                 var html = $(".clone").html();

@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Catalog;
 use App\Models\Program;
 use App\Models\Category;
+use App\Models\UkmSlider;
 use Spatie\Searchable\Searchable;
 use Spatie\Searchable\SearchResult;
 use Illuminate\Database\Eloquent\Model;
@@ -32,6 +33,11 @@ class Ukm extends Model implements Viewable, Searchable
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'ukm_category', 'ukm_id', 'category_id');
+    }
+
+    public function ukmSliders()
+    {
+        return $this->hasMany(UkmSlider::class);
     }
 
     public function getSearchResult(): SearchResult

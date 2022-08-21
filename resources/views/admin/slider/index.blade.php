@@ -93,9 +93,9 @@
 
     <script>
         $(document).ready(function() {
-            $('#table').DataTable([
+            $('#table').DataTable({
                 responsive: true
-            ]);
+            });
 
             $(".btn-success").click(function() {
                 var html = $(".clone").html();

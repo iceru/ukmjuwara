@@ -18,8 +18,7 @@
             </div>
         @endif
 
-        <form action="{{ route('admin.article.store') }}" enctype="multipart/form-data" method="POST"
-            class="mt-4 mb-5">
+        <form action="{{ route('admin.article.store') }}" enctype="multipart/form-data" method="POST" class="mt-4 mb-5">
             @csrf
             <div class="row mb-3">
                 <label for="title" class="col-12 col-md-2 col-form-label">Title</label>
@@ -95,9 +94,8 @@
                             <td scope="row">{{ $loop->iteration }}</td>
                             <td>{{ $article->title }}</td>
                             <td>{!! strlen($article->description) > 150 ? substr($article->description, 0, 150) . '...' : $article->description !!}</td>
-                            <td><img class="mb-2"
-                                    src="{{ Storage::url('article-image/' . $article->image) }}" alt="Image"
-                                    width="100"></td>
+                            <td><img class="mb-2" src="{{ Storage::url('article-image/' . $article->image) }}"
+                                    alt="Image" width="100"></td>
                             <td>{{ $article->author }}</td>
                             <td>{{ $article->time_read }} menit</td>
                             <td>
@@ -125,9 +123,9 @@
 
     <script>
         $(document).ready(function() {
-            $('#table').DataTable([
+            $('#table').DataTable({
                 responsive: true
-            ]);
+            });
 
             $(".btn-success").click(function() {
                 var html = $(".clone").html();
