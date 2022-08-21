@@ -18,8 +18,7 @@
             </div>
         @endif
 
-        <form action="{{ route('admin.slider.store') }}" enctype="multipart/form-data" method="POST"
-            class="mt-4 mb-5">
+        <form action="{{ route('admin.slider.store') }}" enctype="multipart/form-data" method="POST" class="mt-4 mb-5">
             @csrf
             <div class="row mb-3">
                 <label for="title" class="col-12 col-md-2 col-form-label">Title</label>
@@ -64,6 +63,7 @@
                     <th>Link</th>
                     <th>Type</th>
                     <th>Image</th>
+                    <th>Clicks</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -76,6 +76,8 @@
                         <td class="text-capitalize">{{ $slider->type }}</td>
                         <td><img class="mb-2" src="{{ Storage::url('slider-image/' . $slider->image) }}"
                                 alt="Image" width="250"></td>
+                        <td>{{ $slider->clicks }}</td>
+
                         <td><a class="btn btn-primary btn-small d-flex align-items-center justify-content-center mb-2"
                                 href="/admin/slider/edit/{{ $slider->id }}"><i class="fas fa-edit me-1"></i> Edit</a>
                             <a class="btn btn-danger btn-small d-flex align-items-center justify-content-center"

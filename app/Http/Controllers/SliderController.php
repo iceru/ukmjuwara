@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Click;
 use App\Models\Slider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SliderController extends Controller
 {
@@ -19,6 +21,14 @@ class SliderController extends Controller
         return view('admin.slider.index', compact('sliders'));
     }
 
+    public function clicks(Request $request)
+    {
+        $slider = Slider::findOrFail($request->id);
+        $slider->clicks = DB::raw('clicks+1');
+        $slider->save();
+
+        return('Success');
+    }
     /**
      * Show the form for creating a new resource.
      *

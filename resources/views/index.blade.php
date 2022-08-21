@@ -21,12 +21,11 @@
                 <div class="desktop header">
                     @foreach ($sliderDesktop as $slider)
                         <div>
-                            <div class="image-container ratio2halfx1">
+                            <div class="image-container ratio2halfx1 slider-link" data-id="{{ $slider->id }}">
                                 <a href="{{ $slider->link }}">
                                     <img class="image" src="{{ Storage::url('slider-image/' . $slider->image) }}"
                                         alt="{{ $slider->title }}">
                                 </a>
-
                             </div>
                         </div>
                     @endforeach
@@ -34,12 +33,11 @@
                 <div class="mobile header">
                     @foreach ($sliderMobile as $slider)
                         <div>
-                            <div class="image-container ratio2halfx1">
+                            <div class="image-container ratio2halfx1 slider-link" data-id="{{ $slider->id }}">
                                 <a href="{{ $slider->link }}">
                                     <img class="image" src="{{ Storage::url('slider-image/' . $slider->image) }}"
                                         alt="{{ $slider->title }}">
                                 </a>
-
                             </div>
                         </div>
                     @endforeach
@@ -864,5 +862,27 @@
                 $('#catalog-' + catalog).html(results);
             })
         };
+
+        $('.slider-link').click(function(e) {
+            debugger;
+            e.preventDefault();
+            var id = $(this).attr("data-id");
+            var link = $(this).children('a').attr("href");
+            $.ajax({
+                type: "POST",
+                url: "/slider-click",
+                data: {
+                    id: id
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(response) {
+                    if (link) {
+                        window.location.replace(link);
+                    }
+                }
+            });
+        });
     </script>
 </x-app-layout>
