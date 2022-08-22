@@ -123,6 +123,9 @@
                         </ul>
                     </div>
                 </li> --}}
+                <li>
+                    <a href="{{ route('catalog.showAll') }}">Semua Brand</a>
+                </li>
                 @foreach ($catalogs->slice(1, 2) as $catalog)
                     <li><a @if ($catalog->link) target="_blank" @endif
                             href="{{ $catalog->link ? $catalog->link : route('catalog.show', $catalog->slug) }}">{{ str_replace('#UKMJuWAra ', '', $catalog->title) }}</a>

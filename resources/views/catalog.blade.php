@@ -37,8 +37,8 @@
                     </div>
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-3"></div>
-                            <div class="col-md-9">
+                            <div class="col-lg-3"></div>
+                            <div class="col-lg-9">
                                 <div class="catalog-title">
                                     <img src="/images/logo-white.png" alt="" />
                                     <h2>{{ str_replace('#UKMJuWAra', '', $catalog->title) }}</h2>
@@ -54,9 +54,9 @@
                 <div class="most-viewed">
                     <div class="container pe-lg-0">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-lg-3">
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-lg-9">
                                 <div class="most-viewed-text">
                                     <h5 class="mb-3">Trending</h5>
                                 </div>
@@ -101,7 +101,7 @@
                 </div>
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-3 filter" id="filter_container">
+                        <div class="col-lg-3 d-none d-lg-block filter" id="filter_container">
                             <h3 class="mb-3">Filter</h3>
 
                             <div class="filter-desktop-checkbox">
@@ -310,7 +310,7 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="col-12 col-md-9 katalog-ukm">
+                        <div class="col-12 col-lg-9 katalog-ukm">
                             <div id="catalog">
                                 @include('catalog-ukm')
                             </div>
@@ -464,7 +464,7 @@
 
             checkUrlParams();
 
-            if ($(window).width() > 992) {
+            if ($(window).width() > 991) {
                 mobile.detach();
             } else {
                 desktop.detach();
@@ -483,7 +483,7 @@
         // });
 
         $(window).resize(function() {
-            if ($(window).width() > 992) {
+            if ($(window).width() > 991) {
                 mobile.detach();
                 desktop.appendTo($('#filter_container'))
             } else {
@@ -675,7 +675,7 @@
             max_price = price_range.max_price;
 
             var search = $('#search_ukm').val();
-            if ($(window).width() < 645) {
+            if ($(window).width() < 991) {
                 search = $('.search-ukm-mobile').val();
             }
             $('.loading-spinner').show();
@@ -800,7 +800,7 @@
             });
 
             $('#search_ukm').val(e.state.search);
-            if ($(window).width() < 645) {
+            if ($(window).width() < 991) {
                 $('.search-ukm-mobile').val(e.state.search);
             }
             var page = 1;
