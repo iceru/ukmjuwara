@@ -32,8 +32,13 @@ class IndexController extends Controller
         $articles = Article::get()->take(2);
         $cta = Cta::first();
 
+        $catalogAll = Catalog::with('ukm')->where('slug', 'semua-brand')->firstOrFail();
         $bests_all = Ukm::orderByViews('desc', Period::since('2021-11-18'))->get()->take(8);
-
+        $categories_all = Category::all();
+        $programs_all = Program::all();
+        $states_all = Ukm::select('state_name')->distinct()->where('state_name', '!=', '')->get();
+        $max_price_all = Ukm::max('max_price');
+        $min_price_all = Ukm::min('min_price');
 
         $catalogDigital = Catalog::with('ukm')->where('slug', 'ukmjuwara-go-digital')->firstOrFail();
         $bests_digital = Ukm::where('catalog_id', $catalogDigital->id)->orderByViews('desc', Period::since('2021-11-18'))->get()->take(8);
@@ -75,9 +80,8 @@ class IndexController extends Controller
                     $q->whereIn('category_id', $categoryId);
                 });
                 if($request->ajax() && $request->record === 'record' && $request->type == 'category') {
-                    $click = Click::updateOrCreate(
-                        ['catalog_id' => $catalogDigital->id, 'type_click' => 'categories', 'name_click' => 'category', 'category_id' => array_slice($categories_array, -1)[0]],
-                        ['clicks' => \DB::raw('clicks + 1')]
+                    Click::create(
+                        ['catalog_id' => $catalogDigital->id, 'type_click' => 'categories', 'name_click' => 'category', 'category_id' => array_slice($categories_array, -1)[0], 'clicks' => 1],
                     );
                 }
             }
@@ -92,6 +96,12 @@ class IndexController extends Controller
                 $bests_digital = $bests_digital->whereHas('program', function($q) use($programId) {
                     $q->whereIn('program_id', $programId);
                 });
+
+                if($request->ajax() && $request->record === 'record' && $request->type == 'program') {
+                    Click::create(
+                        ['catalog_id' => $catalogDigital->id, 'type_click' => 'program',  'name_click' => 'program', 'program_id' => array_slice($programs_array, -1)[0], 'clicks' => 1]
+                    );
+                }
             }
 
             if (isset($request->states)) {
@@ -102,9 +112,8 @@ class IndexController extends Controller
                 }
                 $bests_digital = $bests_digital->whereIn('state_name', $states_array);
                 if($request->ajax() && $request->record === 'record' && $request->type == 'state') {
-                    $click = Click::updateOrCreate(
-                        ['catalog_id' => $catalogDigital->id, 'type_click' => 'state', 'name_click' => array_slice($states_array, -1)[0]],
-                        ['clicks' => \DB::raw('clicks + 1')]
+                    Click::create(
+                        ['catalog_id' => $catalogDigital->id, 'type_click' => 'state', 'name_click' => array_slice($states_array, -1)[0], 'clicks' => 1],
                     );
                 }
             }
@@ -117,9 +126,8 @@ class IndexController extends Controller
                 }
                 $bests_digital = $bests_digital->whereIn('owner_gender', $owner_genders);
                 if($request->ajax() && $request->record === 'record' && $request->type == 'owner_gender') {
-                    $click = Click::updateOrCreate(
-                        ['catalog_id' => $catalogDigital->id, 'type_click' => 'gender', 'name_click' => array_slice($owner_genders, -1)[0]],
-                        ['clicks' => \DB::raw('clicks + 1')]
+                    Click::create(
+                        ['catalog_id' => $catalogDigital->id, 'type_click' => 'gender', 'name_click' => array_slice($owner_genders, -1)[0], 'clicks' => 1],
                     );
                 }
             }
@@ -154,9 +162,8 @@ class IndexController extends Controller
                     $q->whereIn('category_id', $categoryId);
                 });
                 if($request->ajax() && $request->record === 'record' && $request->type == 'category') {
-                    $click = Click::updateOrCreate(
-                        ['catalog_id' => $catalogGlobal->id, 'type_click' => 'categories', 'name_click' => 'category', 'category_id' => array_slice($categories_array, -1)[0]],
-                        ['clicks' => \DB::raw('clicks + 1')]
+                    Click::create(
+                        ['catalog_id' => $catalogGlobal->id, 'type_click' => 'categories', 'name_click' => 'category', 'category_id' => array_slice($categories_array, -1)[0], 'clicks' => 1],
                     );
                 }
             }
@@ -171,6 +178,11 @@ class IndexController extends Controller
                 $bests_global = $bests_global->whereHas('program', function($q) use($programId) {
                     $q->whereIn('program_id', $programId);
                 });
+                if($request->ajax() && $request->record === 'record' && $request->type == 'program') {
+                    Click::create(
+                        ['catalog_id' => $catalogGlobal->id, 'type_click' => 'program',  'name_click' => 'program', 'program_id' => array_slice($programs_array, -1)[0], 'clicks' => 1]
+                    );
+                }
             }
 
             if (isset($request->states_global)) {
@@ -181,9 +193,8 @@ class IndexController extends Controller
                 }
                 $bests_global = $bests_global->whereIn('state_name', $states_array);
                 if($request->ajax() && $request->record === 'record' && $request->type == 'state') {
-                    $click = Click::updateOrCreate(
-                        ['catalog_id' => $catalogGlobal->id, 'type_click' => 'state', 'name_click' => array_slice($states_array, -1)[0]],
-                        ['clicks' => \DB::raw('clicks + 1')]
+                    Click::create(
+                        ['catalog_id' => $catalogGlobal>id, 'type_click' => 'state', 'name_click' => array_slice($states_array, -1)[0], 'clicks' => 1],
                     );
                 }
             }
@@ -196,9 +207,8 @@ class IndexController extends Controller
                 }
                 $bests_global = $bests_global->whereIn('owner_gender', $owner_genders);
                 if($request->ajax() && $request->record === 'record' && $request->type == 'owner_gender') {
-                    $click = Click::updateOrCreate(
-                        ['catalog_id' => $catalogGlobal->id, 'type_click' => 'gender', 'name_click' => array_slice($owner_genders, -1)[0]],
-                        ['clicks' => \DB::raw('clicks + 1')]
+                    Click::create(
+                        ['catalog_id' => $catalogGlobal->id, 'type_click' => 'gender', 'name_click' => array_slice($owner_genders, -1)[0], 'clicks' => 1],
                     );
                 }
             }
@@ -217,11 +227,93 @@ class IndexController extends Controller
             return view('index-global', compact('bests_global'));
             
         }
+
+        if ($request->ajax() && $request->catalog == $catalogAll->id) {
+            $bests_all = Ukm::orderBy('title');
+            if(isset($request->min_price_all) || isset($request->max_price_all)) {
+                $bests_all = $bests_all->where('min_price', '>=', $request->min_price_all)->where('max_price', '<=', $request->max_price_all); 
+            }
+            if (isset($request->categories_all)) {
+                if(is_string($request->categories_all)) {
+                    $categories_array = explode(',', $request->categories_all);
+                } else {
+                    $categories_array = $request->categories_all;
+                }
+                $categoryId = Category::whereIn('id', $categories_array)->pluck('id');
+                $bests_all = $bests_all->whereHas('categories', function($q) use($categoryId) {
+                    $q->whereIn('category_id', $categoryId);
+                });
+                if($request->ajax() && $request->record === 'record' && $request->type == 'category') {
+                    Click::create(
+                        ['catalog_id' => $catalogAll->id, 'type_click' => 'categories', 'name_click' => 'category', 'category_id' => array_slice($categories_array, -1)[0], 'clicks' => 1],
+                    );
+                }
+            }
+
+            if (isset($request->programs_all)) {
+                if(is_string($request->programs_all)) {
+                    $programs_array = explode(',', $request->programs_all);
+                } else {
+                    $programs_array = $request->programs_all;
+                }
+                $programId = Program::whereIn('id', $programs_array)->pluck('id');
+                $bests_all = $bests_all->whereHas('program', function($q) use($programId) {
+                    $q->whereIn('program_id', $programId);
+                });
+                if($request->ajax() && $request->record === 'record' && $request->type == 'program') {
+                    Click::create(
+                        ['catalog_id' => $catalogAll->id, 'type_click' => 'program',  'name_click' => 'program', 'program_id' => array_slice($programs_array, -1)[0], 'clicks' => 1]
+                    );
+                }
+            }
+
+            if (isset($request->states_alll)) {
+                if(is_string($request->states_alll)) {
+                    $states_array = explode(',', $request->states_alll);
+                } else {
+                    $states_array = $request->states_alll;
+                }
+                $bests_all = $bests_all->whereIn('state_name', $states_array);
+                if($request->ajax() && $request->record === 'record' && $request->type == 'state') {
+                    Click::create(
+                        ['catalog_id' => $catalogAll>id, 'type_click' => 'state', 'name_click' => array_slice($states_array, -1)[0], 'clicks' => 1],
+                    );
+                }
+            }
+
+            if (isset($request->owner_genders_all)) {
+                if(is_string($request->owner_genders_all)) {
+                    $owner_genders = explode(',', $request->owner_genders_all);
+                } else {
+                    $owner_genders = $request->owner_genders_all;
+                }
+                $bests_all = $bests_all->whereIn('owner_gender', $owner_genders);
+                if($request->ajax() && $request->record === 'record' && $request->type == 'owner_gender') {
+                    Click::create(
+                        ['catalog_id' => $catalogAll->id, 'type_click' => 'gender', 'name_click' => array_slice($owner_genders, -1)[0], 'clicks' => 1],
+                    );
+                }
+            }
+
+            if (isset($request->search_all)) {
+                $bests_all = $bests_all->where('title', 'LIKE','%'.$request->search.'%');
+            }
+
+            if(!isset($request->categories_all) && !isset($request->programs_all) && !isset($request->states_all) 
+            && !isset($request->owner_genders_all) && !isset($request->search_all) && (!isset($request->min_price_all) || 
+            (int)$request->min_price_all === 0) && (!isset($request->max_price_all) || (int)$request->max_price_all === $max_price_all) ) {
+                $bests_all = Ukm::orderByViews('desc', Period::since('2021-11-18'))->get()->take(8);
+            } else {
+                $bests_all = $bests_all->paginate(16);
+            }
+            return view('index-all', compact('bests_all'));
+            
+        }
         
-        return view('index', compact('sliderDesktop', 'sliderMobile', 'featured', 'sponsors', 'sponsors_dukung', 
-        'bests_digital', 'bests_all', 'categories_digital', 'categories_global', 'programs_global', 'states_global', 
-        'bests_global', 'articles', 'cta', 'catalogGlobal', 'programs_digital', 'states_digital', 'catalogDigital', 'min_price_digital',
-        'max_price_digital', 'min_price_global', 'max_price_global'));
+        return view('index', compact('sliderDesktop', 'sliderMobile', 'featured', 'sponsors', 'sponsors_dukung',  'articles', 'cta',
+        'bests_global', 'categories_digital', 'categories_global', 'programs_global', 'states_global', 'catalogGlobal', 'min_price_global', 'max_price_global',
+        'bests_all', 'programs_all', 'states_all', 'catalogAll', 'min_price_all', 'max_price_all','categories_all', 
+        'bests_digital',  'programs_digital', 'states_digital', 'catalogDigital', 'min_price_digital', 'max_price_digital'));
     }
 
     public function search(Request $request)

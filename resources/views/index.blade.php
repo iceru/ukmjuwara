@@ -81,15 +81,15 @@
                         </a>
                         <div class="actions d-flex">
                             <div class="filter-btn me-3">
-                                <a id="filter_global" data-bs-toggle="offcanvas" href="#offcanvas_digital"
-                                    role="button" aria-controls="offcanvas_digital">Filter</a>
+                                <a id="filter_global" data-bs-toggle="offcanvas" href="#offcanvas_all" role="button"
+                                    aria-controls="offcanvas_digital">Filter</a>
                             </div>
                             <a href="/katalog/semua-brand" class="see-more">
                                 Lihat Semua
                             </a>
                         </div>
                     </div>
-                    <div id="catalog-{{ $catalogDigital->id }}">
+                    <div id="catalog-{{ $catalogAll->id }}">
                         @include('index-all')
                     </div>
                 </div>
@@ -256,21 +256,21 @@
                         <i class="fa fa-times" aria-hidden="true"></i>
                     </button>
                 </div>
-                <h3 class="mb-3">Filter Go Digital</h3>
-                <div class="filter-mobile-checkbox filter-digital">
+                <h3 class="mb-3">Filter Semua Brand</h3>
+                <div class="filter-mobile-checkbox filter-all">
                     <div class="search-ukm mb-3">
-                        <input type="text" class="form-control search-ukm-mobile" id="search"
+                        <input type="text" class="form-control search-ukm-mobile" id="search_all"
                             placeholder="Search" type="search">
                     </div>
-                    <a href='#' class="reset-filter digital mb-2">
+                    <a href='#' class="reset-filter all mb-2">
                         Reset Filter
                     </a>
                     <div class="category-filter mb-3">
                         <h5 class="mb-2">Kategori</h5>
-                        @foreach ($categories_digital as $category)
+                        @foreach ($categories_all as $category)
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="{{ $category->id }}"
-                                    id="category" name="category[]">
+                                    id="category_all" name="category[]">
                                 <label class="form-check-label" for="flexCheckDefault">
                                     {{ $category->title }}
                             </div>
@@ -279,10 +279,10 @@
 
                     <div class="category-filter mb-3">
                         <h5 class="mb-2">Asal Program</h5>
-                        @foreach ($programs_digital as $program)
+                        @foreach ($programs_all as $program)
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="{{ $program->id }}"
-                                    id="program" name="program[]">
+                                    id="program_all" name="program[]">
                                 <label class="form-check-label" for="flexCheckDefault">
                                     {{ $program->title }}
                             </div>
@@ -293,11 +293,11 @@
                         <div class="row ">
                             <div class="col-6">
                                 <label for="min_amount">Harga Min.</label>
-                                <input class="form-control min_amount" type="text" id="min_amount">
+                                <input class="form-control min_amount_all" type="text" id="min_amount">
                             </div>
                             <div class="col-6">
                                 <label for="max_amount">Harga Max.</label>
-                                <input class="form-control max_amount" type="text" id="max_amount">
+                                <input class="form-control max_amount_all" type="text" id="max_amount">
                             </div>
                             <div class="col-12 mt-3">
 
@@ -308,10 +308,10 @@
                     </div>
                     <div class="location-filter mb-3">
                         <h5 class="mb-2">Lokasi</h5>
-                        @foreach ($states_digital as $item)
+                        @foreach ($states_all as $item)
                             <div class="form-check">
                                 <input class="form-check-input state" type="checkbox"
-                                    value="{{ $item->state_name }}" id="state" name="state[]">
+                                    value="{{ $item->state_name }}" id="state_all" name="state[]">
                                 <label class="form-check-label text-capitalize" for="flexCheckDefault">
                                     @if ($item->state_name == 'DKI JAKARTA')
                                         DKI Jakarta
@@ -326,18 +326,18 @@
                     <div class="owner-gender-filter mb-3">
                         <h5 class="mb-2">Gender Pemilik</h5>
                         <div class="form-check">
-                            <input class="form-check-input owner" type="checkbox" value="pria" id="owner_gender"
-                                name="owner_gender[]">
+                            <input class="form-check-input owner" type="checkbox" value="pria"
+                                id="owner_gender_all" name="owner_gender[]">
                             <label class="form-check-label" for="flexCheckDefault"> Pria
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input owner" type="checkbox" value="wanita" id="owner_gender"
-                                name="owner_gender[]">
+                            <input class="form-check-input owner" type="checkbox" value="wanita"
+                                id="owner_gender_all" name="owner_gender[]">
                             <label class="form-check-label" for="flexCheckDefault"> Wanita
                         </div>
                         <div class="form-check">
                             <input class="form-check-input owner" type="checkbox" value="pria-wanita"
-                                id="owner_gender" name="owner_gender[]">
+                                id="owner_gender_all" name="owner_gender[]">
                             <label class="form-check-label" for="flexCheckDefault"> Pria & Wanita
                         </div>
                     </div>
@@ -561,6 +561,13 @@
         var min_price_global = 0;
         var max_price_global = {{ $max_price_global }};
 
+        var category_all_filter = [];
+        var state_all_filter = [];
+        var owner_gender_all_filter = [];
+        var program_all_filter = [];
+        var min_price_all = 0;
+        var max_price_all = {{ $max_price_all }};
+
         var params = {
             record: '',
             type: '',
@@ -595,7 +602,7 @@
             $('.filter-digital input[type=checkbox]').prop('checked', false);
 
             $(".min_amount_digital").val(0);
-            $(".max_amount_digitall").val({{ $max_price_digital }});
+            $(".max_amount_digital").val({{ $max_price_digital }});
             $("#slider-range-digital").slider("values", 0, 0);
             $("#slider-range-digital").slider("values", 1, {{ $max_price_digital }});
 
@@ -605,6 +612,25 @@
             program_filter = [];
             min_price = 0;
             max_price = {{ $max_price_digital }};
+            ajaxFilter(params);
+        });
+
+        $('.reset-filter.all').click(function(e) {
+            debugger;
+            e.preventDefault();
+            $('.filter-all input[type=checkbox]').prop('checked', false);
+
+            $(".min_amount_all").val(0);
+            $(".max_amount_all").val({{ $max_price_all }});
+            $("#slider-range-all").slider("values", 0, 0);
+            $("#slider-range-all").slider("values", 1, {{ $max_price_all }});
+
+            category_filter = [];
+            state_filter = [];
+            owner_gender_filter = [];
+            program_filter = [];
+            min_price = 0;
+            max_price = {{ $max_price_all }};
             ajaxFilter(params);
         });
 
@@ -770,7 +796,8 @@
         });
 
         function get_filter(filter, data, text, add) {
-            const catalog_id = filter.includes('global') ? 'catalogGlobal' : 'catalogDigital';
+            const catalog_id = filter.includes('global') ? 'catalogGlobal' : filter.includes('all') ? 'catalogAll' :
+                'catalogDigital';
             // NOTES: Harus Push nya sesuai di klik pertama. Kalau ga clicks nya bakal ga akurat
             if (add === 'add') {
                 if (window[`${filter}_filter`].indexOf(data) === -1) {
@@ -812,8 +839,8 @@
         });
 
         function ajaxFilter(params) {
-            var catalog = params.catalog_id === 'catalogGlobal' ? `{{ $catalogGlobal->id }}` :
-                `{{ $catalogDigital->id }}`
+            var catalog = params.catalog_id === 'catalogGlobal' ? `{{ $catalogGlobal->id }}` : 'catalogAll' ?
+                `{{ $catalogAll->id }}` : `{{ $catalogDigital->id }}`
             states = state_filter;
             programs = program_filter;
             owner_genders = owner_gender_filter;
@@ -828,9 +855,16 @@
             min_price_global = min_price_global;
             max_price_global = max_price_global;
 
+            states_all = state_all_filter;
+            programs_all = program_all_filter;
+            owner_genders_all = owner_gender_all_filter;
+            categories_all = category_all_filter;
+            min_price_all = min_price_all;
+            max_price_all = max_price_all;
+
             var search = $('#search').val();
             var search_global = $('#search_global').val();
-
+            var search_all = $('#search_all').val();
 
             $('.loading-spinner').show();
             $('.ukm-content').hide();
@@ -857,6 +891,13 @@
                     programs_global: programs_global,
                     min_price_global: min_price_global,
                     max_price_global: max_price_global,
+                    states_all: states_all,
+                    owner_genders_all: owner_genders_all,
+                    categories_all: categories_all,
+                    search_all: search_all,
+                    programs_all: programs_all,
+                    min_price_all: min_price_all,
+                    max_price_all: max_price_all,
                 }
             }).done(function(results) {
                 $('#catalog-' + catalog).html(results);

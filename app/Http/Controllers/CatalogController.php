@@ -164,7 +164,6 @@ class CatalogController extends Controller
                 if($request->ajax() && $request->record === 'record' && $request->type == 'owner_gender') {
                     Click::create(
                         ['catalog_id' => $catalog->id, 'type_click' => 'gender', 'name_click' => array_slice($owner_genders, -1)[0], 'clicks' => 1],
-
                     );
                 }
             }
