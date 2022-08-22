@@ -240,14 +240,28 @@
                                 </div>
                                 <div class="category-filter mb-3">
                                     <h5 class="mb-2">Kategori</h5>
-                                    @foreach ($categories as $category)
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox"
-                                                value="{{ $category->id }}" id="category" name="category[]">
-                                            <label class="form-check-label" for="flexCheckDefault">
-                                                {{ $category->title }}
-                                        </div>
-                                    @endforeach
+                                    <div class="mb-3">
+                                        <p class="fw-bold mb-1">Go Digital</p>
+                                        @foreach ($categories_digital as $category)
+                                            <div class="form-check">
+                                                <input class="form-check-input category-large" type="checkbox"
+                                                    value="{{ $category->id }}" id="category" name="category[]">
+                                                <label class="form-check-label" for="flexCheckDefault">
+                                                    {{ $category->title }}
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <div>
+                                        <p class="fw-bold mb-1">Go Global</p>
+                                        @foreach ($categories_global as $category)
+                                            <div class="form-check">
+                                                <input class="form-check-input category-large" type="checkbox"
+                                                    value="{{ $category->id }}" id="category" name="category[]">
+                                                <label class="form-check-label" for="flexCheckDefault">
+                                                    {{ $category->title }}
+                                            </div>
+                                        @endforeach
+                                    </div>
                                 </div>
 
                                 <div class="program-filter mb-3">
