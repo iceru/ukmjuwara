@@ -267,14 +267,28 @@
                     </a>
                     <div class="category-filter mb-3">
                         <h5 class="mb-2">Kategori</h5>
-                        @foreach ($categories_all as $category)
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="{{ $category->id }}"
-                                    id="category_all" name="category[]">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    {{ $category->title }}
-                            </div>
-                        @endforeach
+                        <div class="mb-3">
+                            <h6 class="mb-1">Go Digital</h6>
+                            @foreach ($categories_digital as $category)
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="{{ $category->id }}"
+                                        id="category_all" name="category[]">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        {{ $category->title }}
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="mb-2">
+                            <h6 class="mb-1">Go Global</h6>
+                            @foreach ($categories_global as $category)
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="{{ $category->id }}"
+                                        id="category_all" name="category[]">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        {{ $category->title }}
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
 
                     <div class="category-filter mb-3">
