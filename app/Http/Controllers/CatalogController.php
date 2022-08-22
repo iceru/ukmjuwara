@@ -202,13 +202,14 @@ class CatalogController extends Controller
 
         $max_price = Ukm::max('max_price');
         $min_price = Ukm::min('min_price');
-        $totalUkms = count(Ukm::where('catalog_id', $catalog->id)->get());
-        $oriTotalUkms = count(Ukm::where('catalog_id', $catalog->id)->get());
+
+        $totalUkms = count(Ukm::all());
+        $oriTotalUkms = count(Ukm::all());
             
         if ($request->categories || $request->states || $request->owner_genders || $request->search || $request->page || $request->programs || $request->min_price || $request->max_price) {
-            
+            $ukms = Ukm::orderBy('title');
             if(isset($request->min_price) || isset($request->max_price)) {
-                $ukms = UKM::where('min_price', '>=', $request->min_price)->where('max_price', '<=', $request->max_price); 
+                $ukms = $ukms->where('min_price', '>=', $request->min_price)->where('max_price', '<=', $request->max_price); 
             }
             if (isset($request->categories)) {
                 if(is_string($request->categories)) {
@@ -217,7 +218,7 @@ class CatalogController extends Controller
                     $categories_array = $request->categories;
                 }
                 $categoryId = Category::whereIn('id', $categories_array)->pluck('id');
-                $ukms = UKM::whereHas('categories', function($q) use($categoryId) {
+                $ukms = $ukms->whereHas('categories', function($q) use($categoryId) {
                     $q->whereIn('category_id', $categoryId);
                 });
                 if($request->ajax() && $request->record === 'record' && $request->type == 'category') {
@@ -234,7 +235,7 @@ class CatalogController extends Controller
                     $programs_array = $request->programs;
                 }
                 $programId = Program::whereIn('id', $programs_array)->pluck('id');
-                $ukms = UKM::whereHas('program', function($q) use($programId) {
+                $ukms = $ukms->whereHas('program', function($q) use($programId) {
                     $q->whereIn('program_id', $programId);
                 });
                 if($request->ajax() && $request->record === 'record' && $request->type == 'program') {
@@ -251,7 +252,7 @@ class CatalogController extends Controller
                 } else {
                     $states_array = $request->states;
                 }
-                $ukms = UKM::whereIn('state_name', $states_array);
+                $ukms = $ukms->whereIn('state_name', $states_array);
                 if($request->ajax() && $request->record === 'record' && $request->type == 'state') {
                     Click::create(
                         ['catalog_id' => $catalog->id, 'type_click' => 'state', 'name_click' => array_slice($states_array, -1)[0], 'clicks' => 1],
@@ -266,7 +267,7 @@ class CatalogController extends Controller
                 } else {
                     $owner_genders = $request->owner_genders;
                 }
-                $ukms = UKM::whereIn('owner_gender', $owner_genders);
+                $ukms = $ukms->whereIn('owner_gender', $owner_genders);
                 if($request->ajax() && $request->record === 'record' && $request->type == 'owner_gender') {
                     Click::create(
                         ['catalog_id' => $catalog->id, 'type_click' => 'gender', 'name_click' => array_slice($owner_genders, -1)[0], 'clicks' => 1],
@@ -276,16 +277,12 @@ class CatalogController extends Controller
             }
 
             if (isset($request->search)) {
-                $ukms = UKM::where('title', 'LIKE','%'.$request->search.'%');
+                $ukms = $ukms->where('title', 'LIKE','%'.$request->search.'%');
             }
 
             $totalUkms = count($ukms->get());
 
-            if ($ukms) {
-                $ukms = $ukms->orderBy('title')->paginate(16);
-            } else {
-                $ukms = UKM::orderBy('title')->paginate(16);
-            }
+            $ukms = $ukms->paginate(16);
 
             if($request->ajax()) {
                 return view('catalog-ukm', compact('ukms', 'totalUkms', 'oriTotalUkms'));

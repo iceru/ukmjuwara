@@ -217,7 +217,7 @@
             background-color: $primary-color;
             padding: 2rem 1.5rem;
             margin-top: -25rem;
-            border-radius: 2rem;
+            border-radius: 1rem;
             z-index: 99;
             height: 87vh;
             color: white;
@@ -335,6 +335,10 @@
 
 #floating_button {
     cursor: pointer;
+}
+
+.pagination {
+    flex-wrap: wrap;
 }
 
 .floating-button {
