@@ -11642,8 +11642,9 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before, table
   border: 1px solid #16857E;
   border-radius: 8px;
   color: #16857E;
+  margin-bottom: 0.5rem;
 }
-.dashboard .nav-tabs .nav-link:first-child {
+.dashboard .nav-tabs .nav-link:not(:last-child) {
   margin-right: 0.5rem;
 }
 .dashboard .nav-tabs .nav-link.active {

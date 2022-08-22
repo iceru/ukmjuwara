@@ -46,7 +46,7 @@ class AdminDashboardController extends Controller
             ]
         );
 
-        $catalogs_title = Catalog::skip(1)->take(2)->get();
+        $catalogs_title = Catalog::skip(1)->take(3)->get();
 
         $count_total = 'count(*) as total';
 
@@ -59,16 +59,21 @@ class AdminDashboardController extends Controller
 
             ${'category_clicks_'.$key} = collect();
 
-            for ($index = 0 ; $index < count(${'category_'.$key}); $index ++) {
-                ${'total_counts_'.$index} = array('category_id' => ${'category_'.$key}[$index]['category_id'], 
-                'category' => ${'category_'.$key}[$index]['category'],
-                'total' => ${'clicks_'.$key}[$index]['clicks']+${'category_'.$key}[$index]['total']);
-                
-                ${'category_clicks_'.$key}->push(${'total_counts_'.$index});
+            if($key < 2) {
+                for ($index = 0 ; $index < count(${'category_'.$key}); $index ++) {
+                    ${'total_counts_'.$index} = array('category_id' => ${'category_'.$key}[$index]['category_id'], 
+                    'category' => ${'category_'.$key}[$index]['category'],
+                    'total' => ${'clicks_'.$key}[$index]['clicks']+${'category_'.$key}[$index]['total']);
+                    
+                    ${'category_clicks_'.$key}->push(${'total_counts_'.$index});
+                }
             }
 
             $key++;
         }
+
+        $category_clicks_2 = Click::where('type_click', 'categories')->where('catalog_id', 4)
+        ->select(DB::raw('*'), DB::raw('clicks as total'))->orderBy('category_id')->get();
         
         foreach ($catalogs_title as $key => $value) {
             ${'state_'.$key} = Click::where('type_click', 'state')->where('catalog_id', $value->id)
@@ -175,16 +180,21 @@ class AdminDashboardController extends Controller
         
                     ${'category_clicks_'.$key} = collect();
         
-                    for ($index = 0 ; $index < count(${'category_'.$key}); $index ++) {
-                        ${'total_counts_'.$index} = array('category_id' => ${'category_'.$key}[$index]['category_id'], 
-                        'category' => ${'category_'.$key}[$index]['category'],
-                        'total' => ${'clicks_'.$key}[$index]['clicks']+${'category_'.$key}[$index]['total']);
-                        
-                        ${'category_clicks_'.$key}->push(${'total_counts_'.$index});
+                    if($key < 2) {
+                        for ($index = 0 ; $index < count(${'category_'.$key}); $index ++) {
+                            ${'total_counts_'.$index} = array('category_id' => ${'category_'.$key}[$index]['category_id'], 
+                            'category' => ${'category_'.$key}[$index]['category'],
+                            'total' => ${'clicks_'.$key}[$index]['clicks']+${'category_'.$key}[$index]['total']);
+                            
+                            ${'category_clicks_'.$key}->push(${'total_counts_'.$index});
+                        }
                     }
-        
+                    
                     $key++;
                 }
+                
+                $category_clicks_2 = Click::where('type_click', 'categories')->where('catalog_id', 4)->select(DB::raw('*'), DB::raw('clicks as total'))
+                ->whereBetween('created_at', [$request->start_date, $request->end_date])->orderBy('category_id')->get();
                 
                 foreach ($catalogs_title as $key => $value) {
                     ${'state_'.$key} = Click::where('type_click', 'state')->where('catalog_id', $value->id)
@@ -278,16 +288,21 @@ class AdminDashboardController extends Controller
                 ]
             );
 
-
-            return view('admin.dashboard-click', compact('catalogs_title', 'category_clicks_0', 'category_clicks_1',  
-            'mostVisited', 'fetchUser', 'totalVisitors', 'userDevice', 'userCountry', 'state_clicks_0', 'state_clicks_1',
-             'gender_clicks_0', 'gender_clicks_1', 'floating_clicks_0', 'floating_clicks_1', 'ukm_clicks_0', 
-             'ukm_clicks_1', 'program_clicks_0', 'program_clicks_1'));
+            return response()->json([
+                'body' => view('admin.dashboard-click', compact('catalogs_title', 'category_clicks_0', 'category_clicks_1', 'category_clicks_2',
+                'mostVisited', 'fetchUser', 'totalVisitors', 'userDevice', 'userCountry', 'state_clicks_0', 'state_clicks_1', 'state_clicks_2',
+                'gender_clicks_0', 'gender_clicks_1', 'gender_clicks_2', 'floating_clicks_0', 'floating_clicks_1', 'floating_clicks_2', 'ukm_clicks_0', 
+                'ukm_clicks_1', 'ukm_clicks_2', 'program_clicks_0', 'program_clicks_1', 'program_clicks_2'))->render(),
+                'userDevices' => $userDevice,
+                'userCountry' => $userCountry,
+                'totalVisitors' => $totalVisitors,
+            ]);
         };
 
-        return view('admin.dashboard', compact('ukms', 'articles', 'catalogs', 'categories', 'mostVisited', 'fetchUser', 'totalVisitors', 
-        'userDevice', 'userCountry', 'catalogs_title', 'category_clicks_0', 'category_clicks_1', 'state_clicks_0', 'state_clicks_1', 'gender_clicks_0', 
-        'gender_clicks_1', 'floating_clicks_0', 'floating_clicks_1', 'ukm_clicks_0', 'ukm_clicks_1', 'program_clicks_0', 'program_clicks_1'));
+        return view('admin.dashboard', compact('ukms', 'articles', 'catalogs', 'categories', 'catalogs_title', 'category_clicks_0', 'category_clicks_1', 
+        'category_clicks_2','mostVisited', 'fetchUser', 'totalVisitors', 'userDevice', 'userCountry', 'state_clicks_0', 'state_clicks_1', 'state_clicks_2',
+        'gender_clicks_0', 'gender_clicks_1', 'gender_clicks_2', 'floating_clicks_0', 'floating_clicks_1', 'floating_clicks_2', 'ukm_clicks_0', 
+        'ukm_clicks_1', 'ukm_clicks_2', 'program_clicks_0', 'program_clicks_1', 'program_clicks_2'));
     }
 
     /**

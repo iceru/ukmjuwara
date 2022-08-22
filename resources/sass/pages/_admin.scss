@@ -126,8 +126,9 @@
             border: 1px solid $primary-color;
             border-radius: 8px;
             color: $primary-color;
+            margin-bottom: .5rem;
 
-            &:first-child {
+            &:not(:last-child) {
                 margin-right: .5rem;
             }
 

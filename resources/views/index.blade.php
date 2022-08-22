@@ -84,7 +84,7 @@
                                 <a id="filter_global" data-bs-toggle="offcanvas" href="#offcanvas_digital"
                                     role="button" aria-controls="offcanvas_digital">Filter</a>
                             </div>
-                            <a href="/katalog/ukmjuwara-go-digital" class="see-more">
+                            <a href="/katalog/semua-brand" class="see-more">
                                 Lihat Semua
                             </a>
                         </div>

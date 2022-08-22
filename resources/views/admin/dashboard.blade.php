@@ -85,12 +85,12 @@
             });
             userDevicesChart();
             userCountryChart();
-            totalVistorsChart();
+            totalVisitorsChart();
 
             $('.loading').hide();
         });
 
-        function userDevicesChart() {
+        function userDevicesChart(data) {
 
             var primary = '#16857E'
             var secondary = '#58C082';
@@ -98,6 +98,9 @@
             var pink = '#f186b0';
 
             var userDevices = {!! json_encode($userDevice) !!}
+            if (data) {
+                userDevices = data;
+            }
             var type = [];
             var pageViews = [];
             userDevices.rows.forEach(element => {
@@ -125,14 +128,16 @@
             });
         }
 
-        function userCountryChart() {
-
+        function userCountryChart(data) {
             var primary = '#16857E'
             var secondary = '#58C082';
             var blue = '#4c57d3';
             var pink = '#f186b0';
 
             var userCountry = {!! json_encode($userCountry) !!}
+            if (data) {
+                userCountry = data;
+            }
             var sortedCountry = userCountry.rows.sort((a, b) => b[1] - a[1]).slice(0, 5);
             var country = [];
             var pageViewsCountry = [];
@@ -169,10 +174,13 @@
             });
         }
 
-        function totalVistorsChart() {
+        function totalVisitorsChart(data) {
             var primary = '#16857E'
 
             var total_visitors = {!! json_encode($totalVisitors) !!}
+            if (data) {
+                total_visitors = data;
+            }
             var date = [];
             var pageViews = [];
             total_visitors.forEach(element => {
@@ -230,12 +238,11 @@
                         window.myTotalVisitors.destroy();
                         window.myUserCountry.destroy();
                         window.myUserDevices.destroy();
+                        $('#dashboard_click').html(response.body);
 
-                        $('#dashboard_click').html(response);
-
-                        userDevicesChart();
-                        userCountryChart();
-                        totalVistorsChart();
+                        userDevicesChart(response.userDevices);
+                        userCountryChart(response.userCountry);
+                        totalVisitorsChart(response.totalVisitors);
                         $('.table-clicks').DataTable({
                             responsive: true,
                         })
