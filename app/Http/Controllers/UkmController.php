@@ -100,7 +100,7 @@ class UkmController extends Controller
         
         $view = views($ukm)->count();
 
-        $shareComponent = Share::currentPage()
+        $shareComponent = Share::currentPage($ukm->title.' - UKMJuWAra')
         ->facebook()
         ->twitter()
         ->linkedin()

@@ -86,6 +86,7 @@
             userDevicesChart();
             userCountryChart();
             totalVisitorsChart();
+            userTopReferrers();
 
             $('.loading').hide();
         });
@@ -127,6 +128,52 @@
                 }
             });
         }
+
+        function userTopReferrers(data) {
+
+            var primary = '#16857E'
+            var secondary = '#58C082';
+            var blue = '#4c57d3';
+            var pink = '#f186b0';
+
+            var topReferrers = {!! json_encode($topReferrers) !!}
+            if (data) {
+                topReferrers = data;
+            }
+            var type = [];
+            var pageViews = [];
+            topReferrers.forEach(element => {
+                type.push(element.url);
+                pageViews.push(element.pageViews);
+            });
+            var trs = document.getElementById("top_referrers").getContext("2d");
+            window.myTopReferrers = new Chart(trs, {
+                type: 'bar',
+                data: {
+                    labels: type,
+                    datasets: [{
+                        label: 'Top Referrers',
+                        backgroundColor: [primary, secondary, blue, 'lightgrey', pink],
+                        data: pageViews
+                    }]
+                },
+                options: {
+                    elements: {
+                        rectangle: {
+                            borderWidth: 2,
+                            borderColor: '#c1c1c1',
+                        }
+                    },
+                    indexAxis: 'y',
+                    responsive: true,
+                    title: {
+                        display: true,
+                        text: 'Top Referrers'
+                    }
+                }
+            });
+        }
+
 
         function userCountryChart(data) {
             var primary = '#16857E'
@@ -175,6 +222,7 @@
         }
 
         function totalVisitorsChart(data) {
+            var secondary = '#58C082';
             var primary = '#16857E'
 
             var total_visitors = {!! json_encode($totalVisitors) !!}
@@ -183,9 +231,11 @@
             }
             var date = [];
             var pageViews = [];
+            var visitors = [];
             total_visitors.forEach(element => {
                 date.push($.datepicker.formatDate('dd M', new Date(element.date)))
-                pageViews.push(element.visitors)
+                pageViews.push(element.pageViews);
+                visitors.push(element.visitors);
             });
             var ctxTv7 = document.getElementById("total_views").getContext("2d");
 
@@ -194,10 +244,20 @@
                 data: {
                     labels: date,
                     datasets: [{
-                        label: 'Page Views',
-                        backgroundColor: [primary],
-                        data: pageViews
-                    }]
+                            label: 'Page Views',
+                            backgroundColor: [primary],
+                            data: pageViews,
+                            tension: 0.4,
+                            borderColor: primary,
+                        },
+                        {
+                            label: 'Visitors',
+                            backgroundColor: [secondary],
+                            data: visitors,
+                            tension: 0.4,
+                            borderColor: secondary,
+                        }
+                    ]
                 },
                 options: {
                     responsive: true,
@@ -208,7 +268,7 @@
                     scales: {
                         y: {
                             ticks: {
-                                stepSize: 20
+                                stepSize: 50
                             }
                         }
                     }
@@ -238,11 +298,13 @@
                         window.myTotalVisitors.destroy();
                         window.myUserCountry.destroy();
                         window.myUserDevices.destroy();
+                        window.myTopReferrers.destroy();
                         $('#dashboard_click').html(response.body);
 
                         userDevicesChart(response.userDevices);
                         userCountryChart(response.userCountry);
                         totalVisitorsChart(response.totalVisitors);
+                        userTopReferrers(response.topReferrers);
                         $('.table-clicks').DataTable({
                             responsive: true,
                         })

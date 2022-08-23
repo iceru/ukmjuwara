@@ -27,8 +27,15 @@ class AdminDashboardController extends Controller
         $catalogs = Catalog::count();
         $categories = Category::count();
         $totalVisitors = Analytics::fetchTotalVisitorsAndPageViews(Period::days(7));
-        $mostVisited = Analytics::fetchMostVisitedPages(Period::days(7), 10);
-        $fetchUser = Analytics::fetchUserTypes(Period::days(7));
+        $mostVisited = Analytics::performQuery(
+            Period::days(7), 
+            'ga:uniquePageviews', [
+            'metrics' => 'ga:uniquePageviews, ga:pageviews',
+            'dimensions' => 'ga:pagePath', 
+            'sort' => '-ga:pageviews',
+            'max-results' => '7'
+        ]);
+        $topReferrers = Analytics::fetchTopReferrers(Period::days(7), 7);
         $userDevice = Analytics::performQuery(
             Period::days(7),
             'ga:sessions',
@@ -269,8 +276,15 @@ class AdminDashboardController extends Controller
             }
 
             $totalVisitors = Analytics::fetchTotalVisitorsAndPageViews(Period::create(new DateTime($startdate), new DateTime($enddate)));
-            $mostVisited = Analytics::fetchMostVisitedPages(Period::create(new DateTime($startdate), new DateTime($enddate)), 10);
-            $fetchUser = Analytics::fetchUserTypes(Period::create(new DateTime($startdate), new DateTime($enddate)));
+            $mostVisited = Analytics::performQuery(Period::create(
+                new DateTime($startdate), new DateTime($enddate)), 
+                'ga:uniquePageviews', 
+                [
+                    'metrics' => 'ga:uniquePageviews, ga:pageviews',
+                    'dimensions' => 'ga:pagePath', 
+                ]);
+            $topReferrers = Analytics::fetchTopReferrers(Period::create(new DateTime($startdate), new DateTime($enddate)), 7);
+
             $userDevice = Analytics::performQuery(
                 Period::create(new DateTime($startdate), new DateTime($enddate)),
                 'ga:sessions',
@@ -290,17 +304,18 @@ class AdminDashboardController extends Controller
 
             return response()->json([
                 'body' => view('admin.dashboard-click', compact('catalogs_title', 'category_clicks_0', 'category_clicks_1', 'category_clicks_2',
-                'mostVisited', 'fetchUser', 'totalVisitors', 'userDevice', 'userCountry', 'state_clicks_0', 'state_clicks_1', 'state_clicks_2',
+                'mostVisited', 'totalVisitors', 'userDevice', 'userCountry', 'state_clicks_0', 'state_clicks_1', 'state_clicks_2',
                 'gender_clicks_0', 'gender_clicks_1', 'gender_clicks_2', 'floating_clicks_0', 'floating_clicks_1', 'floating_clicks_2', 'ukm_clicks_0', 
                 'ukm_clicks_1', 'ukm_clicks_2', 'program_clicks_0', 'program_clicks_1', 'program_clicks_2'))->render(),
                 'userDevices' => $userDevice,
                 'userCountry' => $userCountry,
+                'topReferrers'=> $topReferrers,
                 'totalVisitors' => $totalVisitors,
             ]);
         };
 
         return view('admin.dashboard', compact('ukms', 'articles', 'catalogs', 'categories', 'catalogs_title', 'category_clicks_0', 'category_clicks_1', 
-        'category_clicks_2','mostVisited', 'fetchUser', 'totalVisitors', 'userDevice', 'userCountry', 'state_clicks_0', 'state_clicks_1', 'state_clicks_2',
+        'category_clicks_2','mostVisited', 'totalVisitors', 'topReferrers', 'userDevice', 'userCountry', 'state_clicks_0', 'state_clicks_1', 'state_clicks_2',
         'gender_clicks_0', 'gender_clicks_1', 'gender_clicks_2', 'floating_clicks_0', 'floating_clicks_1', 'floating_clicks_2', 'ukm_clicks_0', 
         'ukm_clicks_1', 'ukm_clicks_2', 'program_clicks_0', 'program_clicks_1', 'program_clicks_2'));
     }

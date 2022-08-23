@@ -236,9 +236,10 @@
 
     <div class="charts">
         <div class="row align-items-center">
-            <div class="col-12 col-md-6">
+            <div class="col-12 ">
                 <div class="chart">
-                    <canvas id="total_views" height=200 aria-label="Total Views in 3 Months" role="img"></canvas>
+                    <canvas id="total_views" height=200 aria-label="Total Views" style="height: 300px !important"
+                        role="img"></canvas>
                 </div>
             </div>
             <div class="col-12 col-md-6">
@@ -248,22 +249,29 @@
                             <th>No</th>
                             <th>Page</th>
                             <th>Pageviews</th>
+                            <th>Visitors</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($mostVisited as $item)
                             <tr>
                                 <td scope="row">{{ $loop->iteration }}</td>
-                                <td>{{ substr($item['url'], 0, 50) }}</td>
-                                <td>{{ $item['pageViews'] }}</td>
+                                <td>{{ substr($item[0], 0, 50) }}</td>
+                                <td>{{ $item[2] }}</td>
+                                <td>{{ $item[1] }}</td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
-            <div class="col-12 col-md-7">
+            <div class="col-12 col-md-6">
                 <div class="chart">
                     <canvas id="user_country" height=200 aria-label="Users Country" role="img"></canvas>
+                </div>
+            </div>
+            <div class="col-12 col-md-7">
+                <div class="chart">
+                    <canvas id="top_referrers" height=200 aria-label="Top Referrers" role="img"></canvas>
                 </div>
             </div>
             <div class="col-12 col-md-5">
