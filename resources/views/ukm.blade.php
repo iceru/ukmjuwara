@@ -168,6 +168,11 @@
                                 @endforeach
                             </div>
                         @endif
+
+                        <div class="social-share">
+                            <h5 class="primary-color">Share:</h5>
+                            {!! $shareComponent !!}
+                        </div>
                     </div>
                 </div>
             </div>

@@ -209,7 +209,7 @@
                                 <th>No</th>
                                 <th>UKM</th>
                                 <th>Whatsapp</th>
-                                <th>Instagram</th>
+                                <th>Website</th>
                             </tr>
                         </thead>
                         <tbody>

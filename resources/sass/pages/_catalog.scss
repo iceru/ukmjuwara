@@ -221,25 +221,31 @@
             z-index: 99;
             height: 87vh;
             color: white;
-            overflow: auto;
             position: sticky;
             top: 5rem;
+            overflow-y: auto;
+
+            .content-filter {
+                overflow: auto;
+                padding: 10px;
+            }
 
             &::-webkit-scrollbar {
-                width: 6px;
+                width: 12px;
             }
 
             &::-webkit-scrollbar-track {
-                background: #f1f1f1;
+                background: transparent;
                 margin-top: 20px;
                 margin-bottom: 20px;
-                margin-right: 4px;
+                margin-right: 20px;
                 border-radius: 8px;
             }
 
             &::-webkit-scrollbar-thumb {
-                background: lighten($color: $primary-color, $amount: 15%);
-                border-radius: 8px;
+                background: lighten($color: $primary-color, $amount: 20%);
+                border-right: 6px $primary-color solid;
+                background-clip: padding-box;
             }
 
             &::-webkit-scrollbar-thumb:hover {

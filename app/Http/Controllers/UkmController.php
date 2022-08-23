@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Ukm;
+use Share;
 use App\Models\UkmSlider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -53,6 +54,7 @@ class UkmController extends Controller
         $state_name = '';
         $city_name = '';
         $sub_name = '';
+        
         if($ukm->state) {
             $state_res = Http::get('https://ibnux.github.io/data-indonesia/propinsi.json');
             $states = json_decode($state_res->body());
@@ -97,8 +99,15 @@ class UkmController extends Controller
         $sliders = UkmSlider::where('ukm_id', $ukm->id)->get();
         
         $view = views($ukm)->count();
+
+        $shareComponent = Share::currentPage()
+        ->facebook()
+        ->twitter()
+        ->linkedin()
+        ->whatsapp();
+
     
-        return view('ukm', compact('ukm', 'view', 'city_name', 'sub_name', 'state_name', 'relatedUkms', 'sliders'));
+        return view('ukm', compact('ukm', 'view', 'city_name', 'sub_name', 'state_name', 'relatedUkms', 'sliders', 'shareComponent'));
     }
 
     public function whatsapp(Request $request)

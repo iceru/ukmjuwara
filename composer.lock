@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ed8b1bb6019ae24aba51b4dc25a57e10",
+    "content-hash": "328c74ec1731b2d91a4a56eb0847e477",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1662,6 +1662,69 @@
             "time": "2022-03-15T22:19:01+00:00"
         },
         {
+            "name": "jorenvanhocht/laravel-share",
+            "version": "4.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jorenvh/laravel-share.git",
+                "reference": "86af334068038a840567ed62f2082fe3ac981476"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jorenvh/laravel-share/zipball/86af334068038a840567ed62f2082fe3ac981476",
+                "reference": "86af334068038a840567ed62f2082fe3ac981476",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.13|^7.0",
+                "phpunit/phpunit": "^9.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Jorenvh\\Share\\Providers\\ShareServiceProvider"
+                    ],
+                    "aliases": {
+                        "Share": "Jorenvh\\Share\\ShareFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Jorenvh\\Share\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Joren Van Hocht",
+                    "email": "joren@codeswitch.be",
+                    "homepage": "https://codeswitch.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Optional package for Laravel to generate social share links.",
+            "homepage": "https://github.com/jorenvh/laravel-share",
+            "keywords": [
+                "laravel",
+                "share",
+                "social links",
+                "social share links"
+            ],
+            "support": {
+                "issues": "https://github.com/jorenvh/laravel-share/issues",
+                "source": "https://github.com/jorenvh/laravel-share/tree/4.2.0"
+            },
+            "time": "2022-02-11T17:20:09+00:00"
+        },
+        {
             "name": "kkszymanowski/traitor",
             "version": "0.2.5",
             "source": {
@@ -1710,60 +1773,6 @@
                 "source": "https://github.com/kkszymanowski/traitor"
             },
             "time": "2018-04-19T12:24:36+00:00"
-        },
-        {
-            "name": "label84/laravel-tagmanager",
-            "version": "v1.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Label84/laravel-tagmanager.git",
-                "reference": "886badc73ac0422c4f0671c672760db54c5c850d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Label84/laravel-tagmanager/zipball/886badc73ac0422c4f0671c672760db54c5c850d",
-                "reference": "886badc73ac0422c4f0671c672760db54c5c850d",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "^8.0|^9.0"
-            },
-            "require-dev": {
-                "nunomaduro/larastan": "^1.0",
-                "orchestra/testbench": "^6.0|^7.0"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "Label84\\TagManager\\TagManagerServiceProvider"
-                    ],
-                    "aliases": {
-                        "TagManager": "Label84\\TagManager\\Facades\\TagManager"
-                    }
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Label84\\TagManager\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Label84",
-                    "email": "info@tjardo.com"
-                }
-            ],
-            "description": "An easier way to add Google Tag Manager to your Laravel application.",
-            "support": {
-                "issues": "https://github.com/Label84/laravel-tagmanager/issues",
-                "source": "https://github.com/Label84/laravel-tagmanager/tree/v1.3.0"
-            },
-            "time": "2022-01-27T15:43:06+00:00"
         },
         {
             "name": "laravel/framework",
