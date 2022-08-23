@@ -3,7 +3,7 @@
         <i class="fa fa-times" aria-hidden="true"></i>
     </div>
     <a href="/">
-        <h5><img src="/images/logo-white.png" alt="UKMJuWAra"></h5>
+        <h5><img src="/images/logo-white.png" class="w-75" alt="UKMJuWAra"></h5>
     </a>
     <div class="admin mb-4 mt-4 d-flex">
         <img src="/images/default-user.jpg" class="me-3 circular" width="50" height="50" alt="">
