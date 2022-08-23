@@ -23,13 +23,6 @@
             @csrf
             <input type="text" name="id" value="{{ $slider->id }}" hidden readonly>
             <div class="row mb-3">
-                <label for="title" class="col-12 col-md-2 col-form-label">Title</label>
-                <div class="col-12 col-md-10">
-                    <input type="text" class="form-control" value="{{ $slider->title }}" id="title"
-                        name="title">
-                </div>
-            </div>
-            <div class="row mb-3">
                 <label for="link" class="col-12 col-md-2 col-form-label">Link</label>
                 <div class="col-12 col-md-10">
                     <input type="text" class="form-control" value="{{ $slider->link }}" id="link"

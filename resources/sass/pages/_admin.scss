@@ -200,6 +200,8 @@
     }
 
     .table {
+        width: 100%;
+
         .categories {
             span:not(:last-child) {
                 &:after {

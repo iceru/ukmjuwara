@@ -190,19 +190,17 @@
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 @foreach ($catalogs_title as $catalog)
-                    <button class="nav-link {{ $loop->first ? 'active' : '' }}"
-                        id="floating_{{ $catalog->slug }}-tab" data-bs-toggle="tab"
-                        data-bs-target="#floating_{{ $catalog->slug }}" type="button" role="tab"
-                        aria-controls="floating_{{ $catalog->slug }}"
+                    <button class="nav-link {{ $loop->first ? 'active' : '' }}" id="ukm{{ $catalog->slug }}-tab"
+                        data-bs-toggle="tab" data-bs-target="#ukm{{ $catalog->slug }}" type="button"
+                        role="tab" aria-controls="ukm{{ $catalog->slug }}"
                         aria-selected="true">{{ $catalog->title }}</button>
                 @endforeach
             </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
             @foreach ($catalogs_title as $key => $catalog)
-                <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}"
-                    id="floating_{{ $catalog->slug }}" role="tabpanel"
-                    aria-labelledby="floating_{{ $catalog->slug }}-tab">
+                <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="ukm{{ $catalog->slug }}"
+                    role="tabpanel" aria-labelledby="ukm{{ $catalog->slug }}-tab">
                     <table class="table table-clicks" id="table">
                         <thead>
                             <tr>

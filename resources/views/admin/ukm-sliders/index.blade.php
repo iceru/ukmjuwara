@@ -60,6 +60,7 @@
                     <th>Link</th>
                     <th>Image</th>
                     <th>UKM</th>
+                    <th>Clicks</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -71,6 +72,7 @@
                         <td><img class="mb-2" src="{{ Storage::url('ukm-slider/' . $slider->image) }}" alt="Image"
                                 width="250"></td>
                         <td>{{ $slider->ukm->title }}</td>
+                        <td>{{ $slider->clicks }}</td>
 
                         <td><a class="btn btn-primary btn-small d-flex align-items-center justify-content-center mb-2"
                                 href="/admin/ukm-sliders/edit/{{ $slider->id }}"><i class="fas fa-edit me-1"></i>

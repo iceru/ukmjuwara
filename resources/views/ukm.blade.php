@@ -159,12 +159,13 @@
                         @if ($sliders)
                             <div class="ukm-sliders" id="ukm_sliders">
                                 @foreach ($sliders as $slider)
-                                    <div>
+                                    <a href='{{ $slider->link }}' class="d-block slider-click"
+                                        data-id={{ $slider->id }}>
                                         <div class="image-container ratio16x9">
                                             <img src="{{ Storage::url('ukm-slider/' . $slider->image) }}"
                                                 alt="{{ $ukm->title }}">
                                         </div>
-                                    </div>
+                                    </a>
                                 @endforeach
                             </div>
                         @endif
@@ -263,6 +264,22 @@
             var text = $(this).text();
             $(this).text(
                 text == "Lebih Sedikit" ? "... Selengkapnya" : "Lebih Sedikit");
+        });
+
+        $('.slider-click').click(function(e) {
+            e.preventDefault();
+            var slider = $(this).attr('data-id');
+            var link = $(this).attr('href');
+            $.ajax({
+                url: '/ukm-click/slider-click',
+                type: 'GET',
+                data: {
+                    slider: slider
+                }
+            }).done(function(res) {
+                console.log('Click recorded')
+                window.open(link, '_blank');
+            })
         });
 
         $('.instagram-click').click(function(e) {

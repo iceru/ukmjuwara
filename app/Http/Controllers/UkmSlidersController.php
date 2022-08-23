@@ -55,6 +55,7 @@ class UkmSlidersController extends Controller
         $slider->image = $filename;
         $slider->link = $request->link;
         $slider->ukm_id = $request->ukm;
+        $slider->clicks = 0;
         $slider->save();
 
         return redirect()->route('admin.ukm-sliders')->with('success','Data berhasil di input');
@@ -95,14 +96,13 @@ class UkmSlidersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $slider = Slider::find($request->id);
+        $slider = UkmSlider::find($request->id);
 
         $request->validate([
-            'title' => 'required',
             'link' => 'nullable',
-            'image' => 'nullable'
+            'image' => 'nullable',
         ]);
 
         if ($request->hasFile('image')) {
@@ -112,7 +112,6 @@ class UkmSlidersController extends Controller
             $slider->image = $filename;
         }
 
-        $slider->title = $request->title;
         $slider->link = $request->link;
         $slider->save();
 

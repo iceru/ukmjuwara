@@ -43,6 +43,7 @@ Route::get('/katalog-click/floating-click', [CatalogController::class, 'floating
 Route::get('/ukm/{slug}', [UkmController::class, 'show'])->name('ukm.show');
 Route::get('/ukm-click/whatsapp-click', [UkmController::class, 'whatsapp'])->name('ukm.whatsapp');
 Route::get('/ukm-click/instagram-click', [UkmController::class, 'instagram'])->name('ukm.instagram');
+Route::get('/ukm-click/slider-click', [UkmController::class, 'sliderclick'])->name('ukm.sliderclick');
 
 Route::get('/berita', [ArticleController::class, 'index'])->name('article.index');
 Route::get('/berita/{slug}', [ArticleController::class, 'show'])->name('article.show');

@@ -124,6 +124,13 @@ class UkmController extends Controller
         }
     }
 
+    public function sliderclick (Request $request)
+    {
+        if($request->ajax()) {
+            UkmSlider::where('id',$request->slider)->increment('clicks', 1);
+        }
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

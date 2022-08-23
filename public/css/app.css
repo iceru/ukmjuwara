@@ -11701,6 +11701,9 @@ table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before, table
 .admin-content form .btn-primary:hover {
   box-shadow: none;
 }
+.admin-content .table {
+  width: 100%;
+}
 .admin-content .table .categories span:not(:last-child):after {
   content: ",";
 }
