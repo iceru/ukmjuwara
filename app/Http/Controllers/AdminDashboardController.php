@@ -33,7 +33,7 @@ class AdminDashboardController extends Controller
             'metrics' => 'ga:uniquePageviews, ga:pageviews',
             'dimensions' => 'ga:pagePath', 
             'sort' => '-ga:pageviews',
-            'max-results' => '7'
+            'max-results' => '12'
         ]);
         $topReferrers = Analytics::fetchTopReferrers(Period::days(7), 7);
         $userDevice = Analytics::performQuery(
@@ -282,6 +282,8 @@ class AdminDashboardController extends Controller
                 [
                     'metrics' => 'ga:uniquePageviews, ga:pageviews',
                     'dimensions' => 'ga:pagePath', 
+                    'sort' => '-ga:pageviews',
+                    'max-results' => '12'
                 ]);
             $topReferrers = Analytics::fetchTopReferrers(Period::create(new DateTime($startdate), new DateTime($enddate)), 7);
 

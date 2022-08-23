@@ -299,8 +299,12 @@
                         window.myUserCountry.destroy();
                         window.myUserDevices.destroy();
                         window.myTopReferrers.destroy();
+                        debugger;
                         $('#dashboard_click').html(response.body);
 
+                        $('#timeText').text(
+                            `for ${$.datepicker.formatDate("dd-mm-yy", new Date(start_date))} until ${$.datepicker.formatDate("dd-mm-yy", new Date(end_date))}`
+                        );
                         userDevicesChart(response.userDevices);
                         userCountryChart(response.userCountry);
                         totalVisitorsChart(response.totalVisitors);
