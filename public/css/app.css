@@ -10947,16 +10947,28 @@ p {
   padding-top: 40%;
 }
 
-table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before, table.dataTable.dtr-inline.collapsed > tbody > tr > th.dtr-control:before {
+table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before,
+table.dataTable.dtr-inline.collapsed > tbody > tr > th.dtr-control:before {
   top: 20px;
   left: -2px;
 }
 
-.dashboard .dataTables_filter {
-  display: none;
-}
 .dashboard .dataTables_info {
   display: none;
+}
+.dashboard button.dt-button {
+  background: none;
+  background-color: #16857E;
+  border-radius: 8px;
+  border: none;
+  color: white;
+}
+.dashboard button.dt-button:hover, .dashboard button.dt-button:focus, .dashboard button.dt-button:active, .dashboard button.dt-button:active:not(.disabled):hover:not(.disabled) {
+  background: none;
+  text-shadow: none;
+  background-color: #1a9b93;
+  color: white;
+  border: none;
 }
 
 .ukm {

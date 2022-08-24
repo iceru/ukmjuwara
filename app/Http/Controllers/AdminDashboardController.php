@@ -10,7 +10,9 @@ use App\Models\Article;
 use App\Models\Catalog;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Excel;
 use Spatie\Analytics\Period;
+use App\Exports\ClicksExport;
 use Illuminate\Support\Facades\DB;
 
 class AdminDashboardController extends Controller
@@ -418,6 +420,11 @@ class AdminDashboardController extends Controller
     public function create()
     {
         //
+    }
+
+    public function export() 
+    {
+        return Excel::download(new ClicksExport, 'Dashboard.xlsx');
     }
 
     /**

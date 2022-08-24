@@ -35,7 +35,9 @@
                 </div>
             </div>
         </div>
-
+        <a class="btn btn-success mb-3" href="/export">
+            Export <i class="fas fa-file-excel ms-2"></i>
+        </a>
         <div class="row">
             <div class="col-12">
                 <div class="d-flex justify-content-between align-items-center">
@@ -82,6 +84,10 @@
 
             $('.table-clicks').DataTable({
                 responsive: true,
+                dom: 'Bfrtip',
+                buttons: [
+                    'csv', 'excel'
+                ]
             });
             userDevicesChart();
             userCountryChart();
@@ -173,7 +179,6 @@
                 }
             });
         }
-
 
         function userCountryChart(data) {
             var primary = '#16857E'
@@ -311,6 +316,10 @@
                         userTopReferrers(response.topReferrers);
                         $('.table-clicks').DataTable({
                             responsive: true,
+                            buttons: [
+                                'excelHtml5',
+                                'csvHtml5',
+                            ]
                         })
                         $('.loading').fadeOut();
                     }
