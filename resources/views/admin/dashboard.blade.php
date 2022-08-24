@@ -35,9 +35,6 @@
                 </div>
             </div>
         </div>
-        <a class="btn btn-success mb-3" href="/export">
-            Export <i class="fas fa-file-excel ms-2"></i>
-        </a>
         <div class="row">
             <div class="col-12">
                 <div class="d-flex justify-content-between align-items-center">
