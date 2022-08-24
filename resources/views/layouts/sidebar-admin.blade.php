@@ -3,7 +3,7 @@
         <i class="fa fa-times" aria-hidden="true"></i>
     </div>
     <a href="/">
-        <h5>UKMJuWAra</h5>
+        <h5><img src="/images/logo-white.png" class="w-75" alt="UKMJuWAra"></h5>
     </a>
     <div class="admin mb-4 mt-4 d-flex">
         <img src="/images/default-user.jpg" class="me-3 circular" width="50" height="50" alt="">
@@ -40,6 +40,12 @@
             <li class="{{ request()->is('admin/ukm') ? 'active' : '' }}"><i class="fas fa-store fa-fw"></i> &nbsp;
                 UKM</li>
         </a>
+        <a href="{{ route('admin.ukm-sliders') }}">
+            <li class="{{ request()->is('admin/ukm-sliders') ? 'active' : '' }}">
+                <i class="fas fa-file-image fa-fw"></i> &nbsp;
+                UKM Sliders
+            </li>
+        </a>
         <a href="{{ route('admin.article') }}">
             <li class="{{ request()->is('admin/article') ? 'active' : '' }}"><i class="fas fa-newspaper fa-fw"></i>
                 &nbsp; Artikel</li>
@@ -58,7 +64,8 @@
         </a>
         <form method="POST" action="{{ route('logout') }}">
             @csrf
-            <a href="{{ route('logout') }}" onclick="event.preventDefault();
+            <a href="{{ route('logout') }}"
+                onclick="event.preventDefault();
             this.closest('form').submit();">
                 <li><i class="fas fa-sign-out-alt fa-fw"></i> &nbsp; Logout</li>
             </a>

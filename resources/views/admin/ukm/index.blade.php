@@ -86,8 +86,8 @@
                     <select class="form-select" name="catalog" id="catalog">
                         <option disabled selected>Pilih Katalog</option>
                         @foreach ($catalogs as $catalog)
-                            <option {{ old('catalog') == $catalog->id ? 'selected' : '' }}
-                                value="{{ $catalog->id }}">{{ $catalog->title }}</option>
+                            <option {{ old('catalog') == $catalog->id ? 'selected' : '' }} value="{{ $catalog->id }}">
+                                {{ $catalog->title }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -212,8 +212,8 @@
                     <select class="form-select" name="state" id="state">
                         <option disabled selected>Pilih Provinsi</option>
                         @foreach ($states as $state)
-                            <option {{ old('state') == $state['id'] ? 'selected' : '' }}
-                                value="{{ $state['id'] }}">{{ $state['nama'] }}</option>
+                            <option {{ old('state') == $state['id'] ? 'selected' : '' }} value="{{ $state['id'] }}">
+                                {{ $state['nama'] }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -234,15 +234,6 @@
                     <select class="form-select" name="subDistrict" id="subDistrict">
                         <option disabled selected>Pilih Kecamatan</option>
                     </select>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label for="catalog" class="col-12 col-md-2 col-form-label">Sliders UKM</label>
-                <div class="col-12 col-md-10">
-                    <input type="file" class="form-control" multiple name="sliders[]" accept="image/*">
-                    <p class="form-text text-muted">
-                        Data gambar bisa di upload lebih dari 1 files
-                    </p>
                 </div>
             </div>
             <div class="mb-3 row">
@@ -320,11 +311,13 @@
                         <td>Rp{{ $ukm->min_price }} - Rp{{ $ukm->max_price }}</td>
                         <td>
                             <div class="d-flex">
-                                @foreach (array_slice((array) json_decode($ukm->sliders), 0, 2) as $item)
-                                    <div>
-                                        <img class="mb-2" src="{{ Storage::url('ukm-sliders/' . $item) }}"
-                                            alt="Image" width="100" height="100" loading='lazy'>
-                                    </div>
+                                @foreach ($sliders as $item)
+                                    @if ($item->id == $ukm->id)
+                                        <div>
+                                            <img class="mb-2" src="{{ Storage::url('ukm-slider/' . $item) }}"
+                                                alt="Image" width="100" height="100" loading='lazy'>
+                                        </div>
+                                    @endif
                                 @endforeach
                             </div>
                         </td>
@@ -332,6 +325,9 @@
                         <td><a class="btn btn-warning btn-small d-flex align-items-center justify-content-center mb-2"
                                 href="/ukm/{{ $ukm->slug }}" target="_blank"><i class="fas fa-eye me-1"
                                     aria-hidden="true"></i> Preview</a>
+                            <a class="btn btn-success btn-small d-flex align-items-center justify-content-center mb-2"
+                                href="/admin/ukm-sliders/show/{{ $ukm->id }}" target="_blank"><i
+                                    class="fas fa-file-image   fa-fw"></i> Add Sliders</a>
                             <a class="btn btn-primary btn-small d-flex align-items-center justify-content-center mb-2"
                                 href="/admin/ukm/edit/{{ $ukm->id }}"><i class="fas fa-edit me-1"></i> Edit</a>
                             <a class="btn btn-danger btn-small d-flex align-items-center justify-content-center"

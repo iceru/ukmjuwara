@@ -14,6 +14,7 @@ use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\AdminTagController;
 use App\Http\Controllers\AdminUkmController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\UkmSlidersController;
 use App\Http\Controllers\AdminArticleController;
 use App\Http\Controllers\AdminDashboardController;
 
@@ -29,28 +30,29 @@ use App\Http\Controllers\AdminDashboardController;
 */
 
 Route::get('/', [IndexController::class, 'index'])->name('index');
+Route::post('/slider-click', [SliderController::class, 'clicks'])->name('slider.click');
 Route::get('/tentang-kami', [AboutController::class, 'index'])->name('about');
 Route::get('/kemitraan', [ContactController::class, 'index'])->name('contact');
 
 Route::get('/search', [IndexController::class, 'search'])->name('search');
 
+Route::get('/katalog/semua-brand', [CatalogController::class, 'showAll'])->name('catalog.showAll');
 Route::get('/katalog/{slug}', [CatalogController::class, 'show'])->name('catalog.show');
 Route::get('/katalog/filter', [CatalogController::class, 'filter'])->name('catalog.filter');
 Route::get('/katalog-click/floating-click', [CatalogController::class, 'floating'])->name('catalog.floating');
 Route::get('/ukm/{slug}', [UkmController::class, 'show'])->name('ukm.show');
 Route::get('/ukm-click/whatsapp-click', [UkmController::class, 'whatsapp'])->name('ukm.whatsapp');
 Route::get('/ukm-click/instagram-click', [UkmController::class, 'instagram'])->name('ukm.instagram');
+Route::get('/ukm-click/slider-click', [UkmController::class, 'sliderclick'])->name('ukm.sliderclick');
 
 Route::get('/berita', [ArticleController::class, 'index'])->name('article.index');
 Route::get('/berita/{slug}', [ArticleController::class, 'show'])->name('article.show');
 
-// Route::get('/dashboard', function () {
-//     return view('admin.dashboard');
-// })->middleware(['auth'])->name('dashboard');
-
 Route::middleware(['auth', 'role:administrator'])->group(function (){
     Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
     Route::post('/upload/image', [AdminArticleController::class, 'upload'])->name('admin.upload.image');
+    
+    Route::get('export', [AdminDashboardController::class, 'export'])->name('admin.export');
 
     Route::get('/admin/article', [AdminArticleController::class, 'index'])->name('admin.article');
     Route::post('/admin/article/store', [AdminArticleController::class, 'store'])->name('admin.article.store');
@@ -95,6 +97,13 @@ Route::middleware(['auth', 'role:administrator'])->group(function (){
     Route::get('/admin/slider/edit/{id}', [SliderController::class, 'edit'])->name('admin.slider.edit');
     Route::post('/admin/slider/update', [SliderController::class, 'update'])->name('admin.slider.update');
     Route::get('/admin/slider/delete/{id}', [SliderController::class, 'destroy'])->name('admin.slider.destroy');
+
+    Route::get('/admin/ukm-sliders', [UkmSlidersController::class, 'index'])->name('admin.ukm-sliders');
+    Route::get('/admin/ukm-sliders/show/{id}', [UkmSlidersController::class, 'show'])->name('admin.ukm-sliders.show');
+    Route::post('/admin/ukm-sliders/store', [UkmSlidersController::class, 'store'])->name('admin.ukm-sliders.store');
+    Route::get('/admin/ukm-sliders/edit/{id}', [UkmSlidersController::class, 'edit'])->name('admin.ukm-sliders.edit');
+    Route::post('/admin/ukm-sliders/update', [UkmSlidersController::class, 'update'])->name('admin.ukm-sliders.update');
+    Route::get('/admin/ukm-sliders/delete/{id}', [UkmSlidersController::class, 'destroy'])->name('admin.ukm-sliders.destroy');
 
     Route::get('/admin/cta', [CtaController::class, 'index'])->name('admin.cta');
     Route::post('/admin/cta/store', [CtaController::class, 'store'])->name('admin.cta.store');

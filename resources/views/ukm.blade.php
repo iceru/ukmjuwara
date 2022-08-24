@@ -156,18 +156,24 @@
                             </div>
                         </div>
 
-                        @if ($ukm->sliders)
+                        @if ($sliders)
                             <div class="ukm-sliders" id="ukm_sliders">
-                                @foreach ((array) json_decode($ukm->sliders) as $slider)
-                                    <div>
+                                @foreach ($sliders as $slider)
+                                    <a href='{{ $slider->link }}' class="d-block slider-click"
+                                        data-id={{ $slider->id }}>
                                         <div class="image-container ratio16x9">
-                                            <img src="{{ Storage::url('ukm-sliders/' . $slider) }}"
+                                            <img src="{{ Storage::url('ukm-slider/' . $slider->image) }}"
                                                 alt="{{ $ukm->title }}">
                                         </div>
-                                    </div>
+                                    </a>
                                 @endforeach
                             </div>
                         @endif
+
+                        <div class="social-share">
+                            <h5 class="primary-color">Share:</h5>
+                            {!! $shareComponent !!}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -238,7 +244,7 @@
 
         $('.whatsapp-click').click(function(e) {
             e.preventDefault();
-            var ukm = '{{ $ukm->id }}'
+            var ukm = {!! $ukm !!}
             window.open('{{ $ukm->whatsapp }}', '_blank');
 
             $.ajax({
@@ -260,9 +266,25 @@
                 text == "Lebih Sedikit" ? "... Selengkapnya" : "Lebih Sedikit");
         });
 
+        $('.slider-click').click(function(e) {
+            e.preventDefault();
+            var slider = $(this).attr('data-id');
+            var link = $(this).attr('href');
+            $.ajax({
+                url: '/ukm-click/slider-click',
+                type: 'GET',
+                data: {
+                    slider: slider
+                }
+            }).done(function(res) {
+                console.log('Click recorded')
+                window.open(link, '_blank');
+            })
+        });
+
         $('.instagram-click').click(function(e) {
             e.preventDefault();
-            var ukm = '{{ $ukm->id }}'
+            var ukm = {!! $ukm !!}
             window.open('{{ $ukm->instagram }}', '_blank');
 
             $.ajax({

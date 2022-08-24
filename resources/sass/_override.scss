@@ -1,14 +1,30 @@
-table.dataTable.dtr-inline.collapsed>tbody>tr>td.dtr-control:before, table.dataTable.dtr-inline.collapsed>tbody>tr>th.dtr-control:before {
+table.dataTable.dtr-inline.collapsed>tbody>tr>td.dtr-control:before,
+table.dataTable.dtr-inline.collapsed>tbody>tr>th.dtr-control:before {
     top: 20px;
     left: -2px;
 }
 
 .dashboard {
-    .dataTables_filter {
+    .dataTables_info {
         display: none;
     }
 
-    .dataTables_info {
-        display: none;
+    button.dt-button {
+        background: none;
+        background-color: $primary-color;
+        border-radius: 8px;
+        border: none;
+        color: white;
+
+        &:hover,
+        &:focus,
+        &:active,
+        &:active:not(.disabled):hover:not(.disabled) {
+            background: none;
+            text-shadow: none;
+            background-color: lighten($color: $primary-color, $amount: 5%);
+            color: white;
+            border: none;
+        }
     }
 }

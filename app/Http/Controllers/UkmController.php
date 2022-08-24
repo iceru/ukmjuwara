@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Share;
 use App\Models\Ukm;
+use App\Models\Click;
+use App\Models\UkmSlider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cookie;
@@ -52,6 +55,7 @@ class UkmController extends Controller
         $state_name = '';
         $city_name = '';
         $sub_name = '';
+        
         if($ukm->state) {
             $state_res = Http::get('https://ibnux.github.io/data-indonesia/propinsi.json');
             $states = json_decode($state_res->body());
@@ -92,25 +96,43 @@ class UkmController extends Controller
         views($ukm)
         ->cooldown(10)
         ->record();
+
+        $sliders = UkmSlider::where('ukm_id', $ukm->id)->get();
         
         $view = views($ukm)->count();
+
+        $shareComponent = Share::currentPage($ukm->title.' - UKMJuWAra')
+        ->facebook()
+        ->twitter()
+        ->linkedin()
+        ->whatsapp();
+
     
-        return view('ukm', compact('ukm', 'view', 'city_name', 'sub_name', 'state_name', 'relatedUkms'));
+        return view('ukm', compact('ukm', 'view', 'city_name', 'sub_name', 'state_name', 'relatedUkms', 'sliders', 'shareComponent'));
     }
 
     public function whatsapp(Request $request)
     {
         if($request->ajax()) {
-            $ukmIncrement = Ukm::where('id',$request->ukm)->increment('whatsapp_clicks', 1);
-
-            dd(Ukm::where('id', $request->ukm)->first());
+            Click::create(
+                ['catalog_id' => $request->ukm['catalog_id'], 'type_click' => 'whatsapp', 'name_click' => $request->ukm['title'], 'clicks' => 1],
+            );
         }
     }
 
     public function instagram(Request $request)
     {
         if($request->ajax()) {
-            Ukm::where('id',$request->ukm)->increment('instagram_clicks', 1);
+            Click::create(
+                ['catalog_id' => $request->ukm['catalog_id'], 'type_click' => 'instagram', 'name_click' => $request->ukm['title'], 'clicks' => 1],
+            );
+        }
+    }
+
+    public function sliderclick (Request $request)
+    {
+        if($request->ajax()) {
+            UkmSlider::where('id',$request->slider)->increment('clicks', 1);
         }
     }
 

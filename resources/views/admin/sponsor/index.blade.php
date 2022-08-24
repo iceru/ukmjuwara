@@ -18,8 +18,7 @@
             </div>
         @endif
 
-        <form action="{{ route('admin.sponsor.store') }}" enctype="multipart/form-data" method="POST"
-            class="mt-4 mb-5">
+        <form action="{{ route('admin.sponsor.store') }}" enctype="multipart/form-data" method="POST" class="mt-4 mb-5">
             @csrf
             <div class="row mb-3">
                 <label for="title" class="col-12 col-md-2 col-form-label">Title</label>
@@ -95,9 +94,9 @@
 
     <script>
         $(document).ready(function() {
-            $('#table').DataTable([
+            $('#table').DataTable({
                 responsive: true
-            ]);
+            });
 
             $(".btn-success").click(function() {
                 var html = $(".clone").html();

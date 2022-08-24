@@ -37,8 +37,8 @@
                     </div>
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-3"></div>
-                            <div class="col-md-9">
+                            <div class="col-lg-3"></div>
+                            <div class="col-lg-9">
                                 <div class="catalog-title">
                                     <img style="filter: brightness(0) invert(1)" src="/images/logo-primary.png" alt="">
                                     <h2>{{ str_replace('#UKMJuWAra', '', $catalog->title) }}</h2>
@@ -54,9 +54,9 @@
                 <div class="most-viewed">
                     <div class="container pe-lg-0">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-lg-3">
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-lg-9">
                                 <div class="most-viewed-text">
                                     <h5 class="mb-3">Trending</h5>
                                 </div>
@@ -101,7 +101,7 @@
                 </div>
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-3 filter" id="filter_container">
+                        <div class="col-lg-3 d-none d-lg-block filter" id="filter_container">
                             <h3 class="mb-3">Filter</h3>
 
                             <div class="filter-desktop-checkbox">
@@ -203,6 +203,9 @@
                             </div>
                             <div class="mb-2 category-data" hidden>
                                 <b>Kategori: </b> <span class="category-selected"></span>
+                            </div>
+                            <div class="mb-2 program-data" hidden>
+                                <b>Program: </b> <span class="program-selected"></span>
                             </div>
                             <div class="mb-2 state-data" hidden>
                                 <b>Lokasi: </b> <span class="state-selected text-capitalize"></span>
@@ -307,8 +310,10 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="col-12 col-md-9 katalog-ukm" id="catalog">
-                            @include('catalog-ukm')
+                        <div class="col-12 col-lg-9 katalog-ukm">
+                            <div id="catalog">
+                                @include('catalog-ukm')
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -378,6 +383,8 @@
                 }, ]
             });
             $('.loading-spinner').hide();
+            $('.filter-count').hide();
+
             desktop = $('.filter-desktop-checkbox');
             mobile = $('.filter-mobile-checkbox');
 
@@ -457,7 +464,7 @@
 
             checkUrlParams();
 
-            if ($(window).width() > 992) {
+            if ($(window).width() > 991) {
                 mobile.detach();
             } else {
                 desktop.detach();
@@ -476,7 +483,7 @@
         // });
 
         $(window).resize(function() {
-            if ($(window).width() > 992) {
+            if ($(window).width() > 991) {
                 mobile.detach();
                 desktop.appendTo($('#filter_container'))
             } else {
@@ -516,6 +523,10 @@
                 });
                 $('.state-selected').html(state_texts);
                 $('.state-data').removeAttr('hidden')
+            } else {
+                state_texts = []
+                $('.state-selected').html('');
+                $('.state-data').attr('hidden')
             }
 
             if (owner_genders_params) {
@@ -528,6 +539,10 @@
                 });
                 $('.owner_gender-selected').html(owner_gender_texts);
                 $('.owner_gender-data').removeAttr('hidden')
+            } else {
+                owner_gender_texts = []
+                $('.owner_gender-selected').html('');
+                $('.owner_gender-data').attr('hidden')
             }
 
             if (categories_params) {
@@ -541,6 +556,10 @@
                 });
                 $('.category-selected').html(category_texts);
                 $('.category-data').removeAttr('hidden')
+            } else {
+                category_texts = []
+                $('.category-selected').html('');
+                $('.category-data').attr('hidden')
             }
 
             if (programs_params) {
@@ -552,8 +571,12 @@
                     window[`program_texts`].push($(`input[type="checkbox"][value='${element}']`).next().first()
                         .text().trim());
                 });
-                $('.program-selected').html(category_texts);
+                $('.program-selected').html(program_texts);
                 $('.program-data').removeAttr('hidden')
+            } else {
+                program_texts = []
+                $('.program-selected').html('');
+                $('.program-data').attr('hidden')
             }
 
             if (search_params) {
@@ -652,7 +675,7 @@
             max_price = price_range.max_price;
 
             var search = $('#search_ukm').val();
-            if ($(window).width() < 645) {
+            if ($(window).width() < 991) {
                 search = $('.search-ukm-mobile').val();
             }
             $('.loading-spinner').show();
@@ -678,6 +701,7 @@
             }).done(function(results) {
                 $('#catalog').html(results);
                 $('.ukm-content').show();
+                $('.filter-count').show();
                 $('.loading-spinner').hide();
                 var url = new URL(window.location.href);
                 var stateObj = {
@@ -691,26 +715,50 @@
                     min_price: price_range.min_price,
                     max_price: price_range.max_price,
                 }
-                if (stateObj.states.length > 0)
+                if (stateObj.states.length > 0) {
                     url.searchParams.set('states', states)
-                else
+                    $('.state-selected').html(state_texts);
+                    $('.state-data').removeAttr('hidden')
+                } else {
                     url.searchParams.delete('states')
-                if (stateObj.owner_genders.length > 0)
+                    state_texts = []
+                    $('.state-selected').html('');
+                    $('.state-data').attr('hidden', 'hidden')
+                }
+                if (stateObj.owner_genders.length > 0) {
+                    $('.owner_gender-selected').html(owner_gender_texts);
+                    $('.owner_gender-data').removeAttr('hidden')
                     url.searchParams.set('owner_genders', owner_genders)
-                else
+                } else {
                     url.searchParams.delete('owner_genders')
-                if (stateObj.categories.length > 0)
+                    owner_gender_texts = []
+                    $('.owner_gender-selected').html('');
+                    $('.owner_gender-data').attr('hidden', 'hidden')
+                }
+                if (stateObj.categories.length > 0) {
                     url.searchParams.set('categories', categories)
-                else
+                    $('.category-selected').html(category_texts);
+                    $('.category-data').removeAttr('hidden')
+                } else {
                     url.searchParams.delete('categories')
+                    category_texts = []
+                    $('.category-selected').html('');
+                    $('.category-data').attr('hidden', 'hidden')
+                }
                 if (stateObj.search !== '')
                     url.searchParams.set('search', search)
                 else
                     url.searchParams.delete('search')
-                if (stateObj.programs.length > 0)
+                if (stateObj.programs.length > 0) {
+                    $('.program-selected').html(category_texts);
+                    $('.program-data').removeAttr('hidden')
                     url.searchParams.set('programs', programs)
-                else
+                } else {
                     url.searchParams.delete('programs')
+                    program_texts = []
+                    $('.program-selected').html('');
+                    $('.program-data').attr('hidden', 'hidden')
+                }
                 if (stateObj.page !== 1)
                     url.searchParams.set('page', page)
                 else
@@ -752,7 +800,7 @@
             });
 
             $('#search_ukm').val(e.state.search);
-            if ($(window).width() < 645) {
+            if ($(window).width() < 991) {
                 $('.search-ukm-mobile').val(e.state.search);
             }
             var page = 1;

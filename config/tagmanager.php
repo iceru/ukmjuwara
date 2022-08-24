@@ -6,7 +6,7 @@ return [
      *
      * The GTM ID has the following format: GTM-XXXXXXX
      */
-    'id' => env('GOOGLE_TAG_MANAGER_ID', ''),
+    'id' => env('GOOGLE_TAG_MANAGER_ID', 'GTM-KLWTFV8'),
 
     /*
      * Enable or disable the GTM script in your views.
@@ -14,7 +14,7 @@ return [
      * Enable = true
      * Disable = false
      */
-    'enabled' => env('GOOGLE_TAG_MANAGER_ENABLED', true),
+    'enabled' => env('GOOGLE_TAG_MANAGER_ENABLED', false),
 
     /*
      * The key that is used to save the data to the session.

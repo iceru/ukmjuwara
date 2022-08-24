@@ -127,6 +127,40 @@
     }
 }
 
+#social-links {
+    ul {
+        display: flex;
+        align-items: center;
+
+        li {
+            margin-right: 1rem;
+
+            &:first-child {
+                a {
+                    color: #4267B2;
+                }
+            }
+
+            &:nth-child(2) {
+                a {
+                    color: #1DA1F2;
+                }
+            }
+
+            &:nth-child(3) {
+                a {
+                    color: #0e76a8;
+                }
+            }
+
+            a {
+                font-size: 2rem;
+                color: $primary-color;
+            }
+        }
+    }
+}
+
 .categories-text {
     span:not(:last-child) {
         &:after {

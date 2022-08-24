@@ -8,7 +8,7 @@
 
     <title>@yield('title')</title>
     <meta name="description" content="@yield('meta-content')">
-
+    @include('googletagmanager::head')
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-206865884-3"></script>
     <script>
@@ -23,7 +23,7 @@
     </script>
 
     <x-tagmanager-head />
-    <!-- <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon"> -->
+
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
@@ -48,15 +48,15 @@
     <script type="text/javascript"
         src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="{{ asset('js/share.js') }}"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
 
 </head>
 
 <body class="font-sans antialiased">
-    <x-tagmanager-body />
     <div class="min-h-screen bg-gray-100">
         @include('layouts.navigation', ['catalogs' => \App\Models\Catalog::all()])
-
+        @include('googletagmanager::body')
         <!-- Page Content -->
         <main>
             {{ $slot }}
