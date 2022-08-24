@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Ukm;
 use Share;
+use App\Models\Ukm;
+use App\Models\Click;
 use App\Models\UkmSlider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
@@ -113,14 +114,18 @@ class UkmController extends Controller
     public function whatsapp(Request $request)
     {
         if($request->ajax()) {
-            Ukm::where('id',$request->ukm)->increment('whatsapp_clicks', 1);
+            Click::create(
+                ['catalog_id' => $request->ukm['catalog_id'], 'type_click' => 'whatsapp', 'name_click' => $request->ukm['title'], 'clicks' => 1],
+            );
         }
     }
 
     public function instagram(Request $request)
     {
         if($request->ajax()) {
-            Ukm::where('id',$request->ukm)->increment('instagram_clicks', 1);
+            Click::create(
+                ['catalog_id' => $request->ukm['catalog_id'], 'type_click' => 'instagram', 'name_click' => $request->ukm['title'], 'clicks' => 1],
+            );
         }
     }
 

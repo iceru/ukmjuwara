@@ -244,7 +244,7 @@
 
         $('.whatsapp-click').click(function(e) {
             e.preventDefault();
-            var ukm = '{{ $ukm->id }}'
+            var ukm = {!! $ukm !!}
             window.open('{{ $ukm->whatsapp }}', '_blank');
 
             $.ajax({
@@ -284,7 +284,7 @@
 
         $('.instagram-click').click(function(e) {
             e.preventDefault();
-            var ukm = '{{ $ukm->id }}'
+            var ukm = {!! $ukm !!}
             window.open('{{ $ukm->instagram }}', '_blank');
 
             $.ajax({

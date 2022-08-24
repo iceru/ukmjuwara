@@ -33,7 +33,7 @@ class IndexController extends Controller
         $cta = Cta::first();
 
         $catalogAll = Catalog::with('ukm')->where('slug', 'semua-brand')->firstOrFail();
-        $bests_all = Ukm::orderByViews('desc', Period::since('2021-11-18'))->get()->take(8);
+        $bests_all = Ukm::all()->random(8);
         $categories_all = Category::all();
         $programs_all = Program::all();
         $states_all = Ukm::select('state_name')->distinct()->where('state_name', '!=', '')->get();

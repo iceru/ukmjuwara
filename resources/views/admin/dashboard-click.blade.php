@@ -206,6 +206,7 @@
                             <tr>
                                 <th>No</th>
                                 <th>UKM</th>
+                                <th>Views</th>
                                 <th>Whatsapp</th>
                                 <th>Website</th>
                             </tr>
@@ -215,8 +216,10 @@
                                 <tr>
                                     <td scope="row">{{ $loop->iteration }}</td>
                                     <td>{{ $ukm_clicks->title }}</td>
-                                    <td>{{ $ukm_clicks->whatsapp_clicks }}</td>
-                                    <td>{{ $ukm_clicks->instagram_clicks }}</td>
+                                    <td>{{ views($ukm_clicks)->period(\CyrildeWit\EloquentViewable\Support\Period::create($start_formatted, $end_formatted))->unique()->count() }}
+                                    </td>
+                                    <td>{{ $ukm_clicks->whatsapp_clicks ? $ukm_clicks->whatsapp_clicks : 0 }}</td>
+                                    <td>{{ $ukm_clicks->instagram_clicks ? $ukm_clicks->instagram_clicks : 0 }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
