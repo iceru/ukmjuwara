@@ -298,10 +298,9 @@ class CatalogController extends Controller
     public function floating(Request $request)
     {
         Click::create(
-            ['catalog_id' => $request->catalog, 'type_click' => 'floating', 'name_click' => 'Katalog Whatsapp UKM Indonesia'],
-            ['clicks' => \DB::raw('clicks + 1')]
+            ['catalog_id' => $request->catalog, 'type_click' => 'floating', 'name_click' => 'Katalog Whatsapp UKM Indonesia',  'clicks' => 1],
         );
-
+        
         return 'Success';
     }
 
