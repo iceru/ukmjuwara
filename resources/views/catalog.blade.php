@@ -447,7 +447,6 @@
 
             $('.whatsapp-click').click(function(e) {
                 e.preventDefault();
-                debugger;
                 var ukm = $(this).attr('data-id');
                 var link = $(this).attr('data-href');
                 window.open(link, '_blank');

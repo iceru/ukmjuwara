@@ -630,7 +630,6 @@
         });
 
         $('.reset-filter.all').click(function(e) {
-            debugger;
             e.preventDefault();
             $('.filter-all input[type=checkbox]').prop('checked', false);
 
@@ -919,7 +918,6 @@
         };
 
         $('.slider-link').click(function(e) {
-            debugger;
             e.preventDefault();
             var id = $(this).attr("data-id");
             var link = $(this).children('a').attr("href");
