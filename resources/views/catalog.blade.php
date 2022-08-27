@@ -40,7 +40,8 @@
                             <div class="col-lg-3"></div>
                             <div class="col-lg-9">
                                 <div class="catalog-title">
-                                    <img style="filter: brightness(0) invert(1)" src="/images/logo-primary.png" alt="">
+                                    <img style="filter: brightness(0) invert(1)" src="/images/logo-primary.png"
+                                        alt="">
                                     <h2>{{ str_replace('#UKMJuWAra', '', $catalog->title) }}</h2>
                                 </div>
                                 <div class="catalog-desc">{!! $catalog->description !!}</div>
@@ -74,7 +75,8 @@
                                                         </div>
                                                     </div>
                                                     <div class="ukm-wa">
-                                                        <a href="{{ $ukm->whatsapp }}">
+                                                        <a href="#" class="whatsapp-click"
+                                                            data-id={{ $ukm->id }} data-href={{ $ukm->whatsapp }}>
                                                             <img src="/images/whatsapp.png" alt="">
                                                         </a>
                                                     </div>
@@ -85,7 +87,8 @@
                                                     <h5 title="{{ $ukm->title }}">{{ $ukm->title }}</h5>
                                                 </div>
                                                 <div class="ukm-desc">
-                                                    <small title="{{ $ukm->product }}" class="ellipsis categories-text">
+                                                    <small title="{{ $ukm->product }}"
+                                                        class="ellipsis categories-text">
                                                         @foreach ($ukm->categories as $item)
                                                             <span>{{ $item->title }}</span>
                                                         @endforeach
@@ -439,6 +442,25 @@
                     ajaxFilter()
                 }
                 return
+            });
+
+
+            $('.whatsapp-click').click(function(e) {
+                e.preventDefault();
+                debugger;
+                var ukm = $(this).attr('data-id');
+                var link = $(this).attr('data-href');
+                window.open(link, '_blank');
+
+                $.ajax({
+                    url: '/ukm-click/whatsapp-click',
+                    type: 'GET',
+                    data: {
+                        ukm_id: parseInt(ukm)
+                    }
+                }).done(function(res) {
+                    console.log('Click recorded');
+                })
             });
 
 

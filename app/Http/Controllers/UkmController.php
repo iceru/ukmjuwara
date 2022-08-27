@@ -114,9 +114,16 @@ class UkmController extends Controller
     public function whatsapp(Request $request)
     {
         if($request->ajax()) {
-            Click::create(
-                ['catalog_id' => $request->ukm['catalog_id'], 'type_click' => 'whatsapp', 'name_click' => $request->ukm['title'], 'clicks' => 1],
-            );
+            if($request->ukm_id) {
+                $ukm = Ukm::findOrFail($request->ukm_id);
+                Click::create(
+                    ['catalog_id' => $ukm['catalog_id'], 'type_click' => 'whatsapp', 'name_click' => $ukm['title'], 'clicks' => 1],
+                );
+            } else {
+                Click::create(
+                    ['catalog_id' => $request->ukm['catalog_id'], 'type_click' => 'whatsapp', 'name_click' => $request->ukm['title'], 'clicks' => 1],
+                );
+            }
         }
     }
 

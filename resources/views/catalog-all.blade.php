@@ -73,7 +73,8 @@
                                                         </div>
                                                     </div>
                                                     <div class="ukm-wa">
-                                                        <a href="{{ $ukm->whatsapp }}">
+                                                        <a href="#" class="whatsapp-click"
+                                                            data-id={{ $ukm->id }} data-href={{ $ukm->whatsapp }}>
                                                             <img src="/images/whatsapp.png" alt="">
                                                         </a>
                                                     </div>
@@ -668,6 +669,25 @@
                 console.log('Click recorded');
             })
         });
+
+        $('.whatsapp-click').click(function(e) {
+            e.preventDefault();
+            debugger;
+            var ukm = $(this).attr('data-id');
+            var link = $(this).attr('data-href');
+            window.open(link, '_blank');
+
+            $.ajax({
+                url: '/ukm-click/whatsapp-click',
+                type: 'GET',
+                data: {
+                    ukm_id: parseInt(ukm)
+                }
+            }).done(function(res) {
+                console.log('Click recorded');
+            })
+        });
+
 
         function ajaxFilter(page, record, type) {
             var catalog = '{{ $catalog->id }}'

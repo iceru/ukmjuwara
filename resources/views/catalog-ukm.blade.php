@@ -22,7 +22,8 @@
                         </div>
                     </div>
                     <div class="ukm-wa">
-                        <a href="{{ $ukm->whatsapp }}">
+                        <a href="#" class="whatsapp-click" data-id={{ $ukm->id }}
+                            data-href={{ $ukm->whatsapp }}>
                             <img src="/images/whatsapp.png" alt="">
                         </a>
                     </div>
