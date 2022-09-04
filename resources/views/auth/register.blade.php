@@ -14,19 +14,19 @@
                             </ul>
                         </div>
                     @endif
-                    <h3 class="login-text">UKMJuWAra</h3>
+                    <h3 class="login-text">UKMJAGOWAN.ID</h3>
                     <div class="login-card">
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
                             <div class="mb-4">
                                 <label class="form-label" for="name" class="form-label">Name</label>
-                                <input type="text" class="form-control" id="name" required autofocus name="name"
-                                    :value="old('email')">
+                                <input type="text" class="form-control" id="name" required autofocus
+                                    name="name" :value="old('email')">
                             </div>
                             <div class="form-group mb-4">
                                 <label class="form-label" for="email">Email</label>
-                                <input type="email" class="form-control" id="email" required autofocus name="email"
-                                    :value="old('email')">
+                                <input type="email" class="form-control" id="email" required autofocus
+                                    name="email" :value="old('email')">
                             </div>
 
                             <div class="form-group mb-4">

@@ -72,7 +72,7 @@
     <div class="container">
         <div class="search-content">
             <div class="text">
-                Cari UKMJuWAra
+                Cari UKMJAGOWAN.ID
             </div>
             <form action="{{ route('search') }}" role="search" id="search_form" class="d-flex" method="GET">
                 @csrf
@@ -105,7 +105,8 @@
         </button>
     </div>
     <div class="menu-overlay">
-        <h1> <img width="200" style="filter: brightness(0) invert(1)" src="/images/logo-primary.png" alt=""></h1>
+        <h1> <img width="200" style="filter: brightness(0) invert(1)" src="/images/logo-primary.png" alt="">
+        </h1>
         <div class="list-menu">
             <ul>
                 {{-- <li>

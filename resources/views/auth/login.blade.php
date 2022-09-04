@@ -13,15 +13,15 @@
                             </ul>
                         </div>
                     @endif
-                    <h3 class="login-text">UKMJuWAra</h3>
+                    <h3 class="login-text">UKMJAGOWAN.ID</h3>
                     <div class="login-card">
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
 
                             <div class="form-group mb-4">
                                 <label class="form-label" for="email">Email</label>
-                                <input type="text" class="form-control" id="email" required autofocus type="email"
-                                    name="email" :value="old('email')">
+                                <input type="text" class="form-control" id="email" required autofocus
+                                    type="email" name="email" :value="old('email')">
                             </div>
 
                             <div class="form-group">
