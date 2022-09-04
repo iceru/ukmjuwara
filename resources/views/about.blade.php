@@ -44,7 +44,7 @@
                         khususnya yang terkait dengan akses pasar, modal, dan mentor tadi.
                         <br><br>
                         Inilah yang menjadi alasan lahirnya gagasan mengembangkan program Katalog Bisnis UMKM
-                        www.ukmjuwara.id, yaitu untuk menata dan menyajikan tebaran informasi di internet, agar UMKM
+                        www.UKMJAGOWAN.id, yaitu untuk menata dan menyajikan tebaran informasi di internet, agar UMKM
                         unggul yang memiliki semangat maju bisa lebih dipromosikan dan mudah ditemukan oleh para pihak
                         yang memiliki sumber daya untuk memberi dukungan, baik dari pihak Pemerintah, perusahaan,
                         akademisi, media, dan NGO.
@@ -75,9 +75,10 @@
                             kewirausahaan dan pola pikir maju yang sudah terkurasi.
                             <br><br>
                             Kami juga membuka ruang bagi mitra-mitra komunitas atau Institusi lain untuk memberi
-                            rekomendasi UKMJuWAra yang akan dikurasi performa usahanya serta diwajibkan untuk
+                            rekomendasi UKMJAGOWAN.ID yang akan dikurasi performa usahanya serta diwajibkan untuk
                             menyelesaikan keseluruhan modul online yang telah kami sediakan. Ini adalah komponen penting
-                            untuk membangun Katalog UKMJuWAra sebagai aquarium para wirausaha yang punya semangat maju,
+                            untuk membangun Katalog UKMJAGOWAN.ID sebagai aquarium para wirausaha yang punya semangat
+                            maju,
                             yang tercermin dari keinginannya untuk terus belajar.
                             <br><br>
                         </p>
@@ -153,7 +154,7 @@
                         Dewi Meisari Haryanti<br>
                         Chief Editor, ukmindonesia.id<br>
                         #saatnyaUKMnaikkelas<br>
-                        #UKMjuWAra<br>
+                        #UKMJAGOWAN.ID<br>
 
                     </p>
 

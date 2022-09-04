@@ -4,7 +4,7 @@
     @endsection
     @section('meta-content')
         Sebagai komunitas pertama di dunia yang menghadirkan katalog member dalam format Whatsapp. Business Catalog
-        c-commerce s.id/UKMJUWARA dan katalog pada situs www.ukmjuwara.id, kanal ini akan terus memproduksi katalog berkala
+        c-commerce s.id/UKMJUWARA dan katalog pada situs www.UKMJAGOWAN.id, kanal ini akan terus memproduksi katalog berkala
         dan melakukan pengembangan konten dengan menghadirkan variasi tema katalog seperti UKM JUWARA GLOBAL yang berfokus
         pada peningkatan penetrasi pasar global oleh pelaku UKM Iokal berikut dengan berita-berita sangat relevan dengan
         kebutuhan UKM untuk meroket.
@@ -48,7 +48,8 @@
                                         <h3 class="mb-3 article-title">{{ $article->title }}</h4>
                                     </a>
                                     <div class="d-flex mb-3 author align-items-center">
-                                        <img src="/images/default-user.jpg" class="me-3" width="37" alt="">
+                                        <img src="/images/default-user.jpg" class="me-3" width="37"
+                                            alt="">
                                         <p>{{ $article->author }}</p>
                                     </div>
                                     <article class="article-description">
@@ -66,7 +67,8 @@
                                 <div class="col-4">
                                     <a href="{{ route('article.show', $article->slug) }}">
                                         <div class="article-image">
-                                            <img src="{{ Storage::url('article-image/' . $article->image) }}" alt="">
+                                            <img src="{{ Storage::url('article-image/' . $article->image) }}"
+                                                alt="">
                                         </div>
                                     </a>
                                 </div>
@@ -75,7 +77,8 @@
                                         <h5 class="mb-2 article-title">{{ $article->title }}</h4>
                                     </a>
                                     <div class="d-flex mb-2 author align-items-center">
-                                        <img src="/images/default-user.jpg" class="me-3" width="25" alt="">
+                                        <img src="/images/default-user.jpg" class="me-3" width="25"
+                                            alt="">
                                         <p>{{ $article->author }}</p>
                                     </div>
                                     <div class="article-description"
