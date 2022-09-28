@@ -6,7 +6,7 @@
         </a>
         <a href="{{ route('index') }}">
             <div class="logo">
-                <img style="filter: brightness(0) invert(1)" src="/images/logo-primary.png" alt="">
+                <img style="filter: brightness(0) invert(1)" src="/images/logo-primary-3.png" alt="">
             </div>
         </a>
         <div class="d-flex align-items-center">
@@ -105,7 +105,7 @@
         </button>
     </div>
     <div class="menu-overlay">
-        <h1> <img width="200" style="filter: brightness(0) invert(1)" src="/images/logo-primary.png" alt="">
+        <h1> <img width="200" style="filter: brightness(0) invert(1)" src="/images/logo-primary-3.png" alt="">
         </h1>
         <div class="list-menu">
             <ul>

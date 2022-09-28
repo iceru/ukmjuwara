@@ -103,7 +103,7 @@
                 a11y_advanced_options: true,
                 toolbar_mode: 'floating',
                 tinycomments_mode: 'embedded',
-                tinycomments_author: 'UKM Juwara',
+                tinycomments_author: 'UKMJAGOWAN.ID',
                 height: "350",
                 color_cols: 5,
                 color_map: [

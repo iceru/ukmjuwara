@@ -1,11 +1,11 @@
 <x-app-layout>
     @section('title')
-        Semua Brand
+        Semua Brand - UKMJAGOWAN.ID
     @endsection
     @section('meta-content')
         Sebagai komunitas pertama di dunia yang menghadirkan katalog member dalam format Whatsapp. Business Catalog
         c-commerce s.id/UKMJUWARA dan katalog pada situs www.UKMJAGOWAN.id, kanal ini akan terus memproduksi katalog berkala
-        dan melakukan pengembangan konten dengan menghadirkan variasi tema katalog seperti UKM JUWARA GLOBAL yang berfokus
+        dan melakukan pengembangan konten dengan menghadirkan variasi tema katalog seperti UKMJAGOWAN.ID GLOBAL yang berfokus
         pada peningkatan penetrasi pasar global oleh pelaku UKM Iokal berikut dengan berita-berita sangat relevan dengan
         kebutuhan UKM untuk meroket.
     @endsection
@@ -39,7 +39,8 @@
                             <div class="col-md-3"></div>
                             <div class="col-md-9">
                                 <div class="catalog-title">
-                                    <img src="/images/logo-white.png" alt="" />
+                                <img style="filter: brightness(0) invert(1)" src="/images/logo-primary-3.png"
+                                        alt="">
                                     <h2>{{ str_replace('#UKMJuWAra', '', $catalog->title) }}</h2>
                                 </div>
                                 <div class="catalog-desc">{!! $catalog->description !!}</div>

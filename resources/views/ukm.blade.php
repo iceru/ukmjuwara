@@ -6,7 +6,7 @@
         Sebagai komunitas pertama di dunia yang menghadirkan katalog member dalam format Whatsapp. Business Catalog
         c-commerce s.id/UKMJUWARA dan katalog pada situs www.UKMJAGOWAN.ID.id, kanal ini akan terus memproduksi katalog
         berkala
-        dan melakukan pengembangan konten dengan menghadirkan variasi tema katalog seperti UKM JUWARA GLOBAL yang berfokus
+        dan melakukan pengembangan konten dengan menghadirkan variasi tema katalog seperti UKMJAGOWAN.ID GLOBAL yang berfokus
         pada peningkatan penetrasi pasar global oleh pelaku UKM Iokal berikut dengan berita-berita sangat relevan dengan
         kebutuhan UKM untuk meroket.
     @endsection
