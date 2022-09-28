@@ -46,12 +46,29 @@
             slidesToScroll: 1,
             autoplay: true,
             autoplaySpeed: 3000,
-            responsive: [{
-                breakpoint: 567,
-                settings: {
-                    slidesToShow: 2
+            responsive: [    
+                {
+                    breakpoint: 1200,
+                    settings: {
+                        slidesToShow: 6,
+                        slidesToScroll: 1,
+                    }
+                },
+                {
+                    breakpoint: 992,
+                    settings: {
+                        slidesToShow: 4,
+                        slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 576,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1
+                    }
                 }
-            }, ]
+            ]
         });
     });
 </script>

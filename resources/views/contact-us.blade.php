@@ -1,11 +1,11 @@
 <x-app-layout>
     @section('title')
-        Kemitraan - UKM Juwara
+        Kemitraan - UKMJAGOWAN.ID
     @endsection
     @section('meta-content')
         Sebagai komunitas pertama di dunia yang menghadirkan katalog member dalam format Whatsapp. Business Catalog
         c-commerce s.id/UKMJUWARA dan katalog pada situs www.UKMJAGOWAN.id, kanal ini akan terus memproduksi katalog berkala
-        dan melakukan pengembangan konten dengan menghadirkan variasi tema katalog seperti UKM JUWARA GLOBAL yang berfokus
+        dan melakukan pengembangan konten dengan menghadirkan variasi tema katalog seperti UKMJAGOWAN.ID GLOBAL yang berfokus
         pada peningkatan penetrasi pasar global oleh pelaku UKM Iokal berikut dengan berita-berita sangat relevan dengan
         kebutuhan UKM untuk meroket.
     @endsection
@@ -22,7 +22,7 @@
                     </h4>
 
                     <div class="contact-items">
-                        <h5>Kontak UKM Juwara</h5>
+                        <h5>Kontak UKMJAGOWAN.ID</h5>
                         <div class="item row">
                             <div class="col-1">
                                 <i class="fas fa-map-marked fa-fw"></i>
