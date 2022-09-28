@@ -101,7 +101,7 @@
                 </div>
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-3 filter" id="filter_container">
+                        <div class="col-lg-3 d-none d-lg-block filter" id="filter_container">
                             <h3 class="mb-3">Filter</h3>
 
                             <div class="filter-desktop-checkbox">
