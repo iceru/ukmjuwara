@@ -337,7 +337,7 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="col-12 col-md-9 katalog-ukm" id="catalog">
+                        <div class="col-12 col-lg-9 katalog-ukm" id="catalog">
                             @include('catalog-ukm')
                         </div>
                     </div>
