@@ -5,7 +5,8 @@
     @section('meta-content')
         Sebagai komunitas pertama di dunia yang menghadirkan katalog member dalam format Whatsapp. Business Catalog
         c-commerce s.id/UKMJUWARA dan katalog pada situs www.UKMJAGOWAN.id, kanal ini akan terus memproduksi katalog berkala
-        dan melakukan pengembangan konten dengan menghadirkan variasi tema katalog seperti UKMJAGOWAN.ID GLOBAL yang berfokus
+        dan melakukan pengembangan konten dengan menghadirkan variasi tema katalog seperti UKMJAGOWAN.ID GLOBAL yang
+        berfokus
         pada peningkatan penetrasi pasar global oleh pelaku UKM Iokal berikut dengan berita-berita sangat relevan dengan
         kebutuhan UKM untuk meroket.
     @endsection
@@ -36,10 +37,10 @@
                     </div>
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-3"></div>
-                            <div class="col-md-9">
+                            <div class="col-lg-3 d-none d-lg-block"></div>
+                            <div class="col-lg-9">
                                 <div class="catalog-title">
-                                <img style="filter: brightness(0) invert(1)" src="/images/logo-primary-3.png"
+                                    <img style="filter: brightness(0) invert(1)" src="/images/logo-primary-3.png"
                                         alt="">
                                     <h2>{{ str_replace('#UKMJuWAra', '', $catalog->title) }}</h2>
                                 </div>
@@ -54,9 +55,9 @@
                 <div class="most-viewed">
                     <div class="container pe-lg-0">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-lg-3 d-none d-lg-block">
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-lg-9">
                                 <div class="most-viewed-text">
                                     <h5 class="mb-3">Trending</h5>
                                 </div>
