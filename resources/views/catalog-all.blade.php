@@ -485,7 +485,7 @@
 
             checkUrlParams();
 
-            if ($(window).width() > 641) {
+            if ($(window).width() > 991) {
                 mobile.detach();
             } else {
                 desktop.detach();
@@ -504,7 +504,7 @@
         // });
 
         $(window).resize(function() {
-            if ($(window).width() > 641) {
+            if ($(window).width() > 991) {
                 mobile.detach();
                 desktop.appendTo($('#filter_container'))
             } else {
@@ -699,7 +699,7 @@
             max_price = price_range.max_price;
 
             var search = $('#search_ukm').val();
-            if ($(window).width() < 645) {
+            if ($(window).width() < 991) {
                 search = $('.search-ukm-mobile').val();
             }
             $('.loading-spinner').show();
@@ -799,7 +799,7 @@
             });
 
             $('#search_ukm').val(e.state.search);
-            if ($(window).width() < 645) {
+            if ($(window).width() < 991) {
                 $('.search-ukm-mobile').val(e.state.search);
             }
             var page = 1;
