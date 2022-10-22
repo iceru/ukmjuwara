@@ -1,6 +1,6 @@
 <x-app-layout>
     @section('title')
-        Tentang Kami
+        Tentang Kami - UKMJAGOWAN.ID
     @endsection
 
     <div class="about">
@@ -95,7 +95,7 @@
                 <div class="col-12 mb-4">
                     <p class="mb-3">
                         Sebagai persembahan Indonesia Tumbuh Inklusif (ukmindonesia.id) dan WhatsApp, website katalog
-                        UKM JUWARA dikembangkan dengan pemisahan berdasarkan orientasi pengembangan usaha yaitu Katalog
+                        UKMJAGOWAN.ID dikembangkan dengan pemisahan berdasarkan orientasi pengembangan usaha yaitu Katalog
                         Go Digital dan Katalog Go Global serta dilengkapi dengan fitur filter berdasarkan lokasi,
                         kategori produk, gender pemilik, filter harga, dan juga asal program, untuk menghadirkan
                         kenyamanan pencarian agar pengunjung serta mempermudah navigasi kepentingan atau tujuan
@@ -108,7 +108,7 @@
 
                         Dengan turut didukung oleh Kementerian Koperasi dan UKM RI, Kementerian Perdagangan, APINDO UMKM
                         Akademi, dan IBAN, dan ID Seed, kami mengundang lebih banyak pihak untuk bergabung ke dalam
-                        ekosistem pendukung pelaku UKM JuWAra kita. Mereka yang ada di katalog ini adalah bisnis-bisnis
+                        ekosistem pendukung pelaku UKMJAGOWAN kita. Mereka yang ada di katalog ini adalah bisnis-bisnis
                         yang dapat menjadi inspirasi atau role model bahwa walau bisnis masih skala UMKM, bukan berarti
                         gak bisa keren, kan?
 

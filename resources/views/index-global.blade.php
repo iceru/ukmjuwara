@@ -42,16 +42,19 @@
     $(document).ready(function() {
         $('#ukm_bests_global').slick({
             infinite: true,
-            slidesToShow: 6,
+            slidesToShow: 2,
             slidesToScroll: 1,
             autoplay: true,
+            mobileFirst: true,
             autoplaySpeed: 3000,
-            responsive: [{
-                breakpoint: 567,
+            responsive: [
+            {
+                breakpoint: 992,
                 settings: {
-                    slidesToShow: 2
+                    slidesToShow: 6
                 }
-            }, ]
+            },
+        ]
         });
     });
 </script>

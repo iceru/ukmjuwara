@@ -1,6 +1,6 @@
 <x-app-layout>
     @section('title')
-        {{ $article->title }} - UKM Juwara
+        {{ $article->title }} - UKMJAGOWAN.ID
     @endsection
     @section('meta-content')
         {!! substr(strip_tags($article->description), 0, 120) !!}

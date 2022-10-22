@@ -301,7 +301,6 @@
                         window.myUserCountry.destroy();
                         window.myUserDevices.destroy();
                         window.myTopReferrers.destroy();
-                        debugger;
                         $('#dashboard_click').html(response.body);
 
                         $('#timeText').text(

@@ -1,11 +1,12 @@
 <x-app-layout>
     @section('title')
-        Semua Brand
+        Semua Brand - UKMJAGOWAN.ID
     @endsection
     @section('meta-content')
         Sebagai komunitas pertama di dunia yang menghadirkan katalog member dalam format Whatsapp. Business Catalog
         c-commerce s.id/UKMJUWARA dan katalog pada situs www.UKMJAGOWAN.id, kanal ini akan terus memproduksi katalog berkala
-        dan melakukan pengembangan konten dengan menghadirkan variasi tema katalog seperti UKM JUWARA GLOBAL yang berfokus
+        dan melakukan pengembangan konten dengan menghadirkan variasi tema katalog seperti UKMJAGOWAN.ID GLOBAL yang
+        berfokus
         pada peningkatan penetrasi pasar global oleh pelaku UKM Iokal berikut dengan berita-berita sangat relevan dengan
         kebutuhan UKM untuk meroket.
     @endsection
@@ -36,10 +37,11 @@
                     </div>
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-3"></div>
-                            <div class="col-md-9">
+                            <div class="col-lg-3 d-none d-lg-block"></div>
+                            <div class="col-lg-9">
                                 <div class="catalog-title">
-                                    <img src="/images/logo-white.png" alt="" />
+                                    <img style="filter: brightness(0) invert(1)" src="/images/logo-primary-3.png"
+                                        alt="">
                                     <h2>{{ str_replace('#UKMJuWAra', '', $catalog->title) }}</h2>
                                 </div>
                                 <div class="catalog-desc">{!! $catalog->description !!}</div>
@@ -53,9 +55,9 @@
                 <div class="most-viewed">
                     <div class="container pe-lg-0">
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-lg-3 d-none d-lg-block">
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-lg-9">
                                 <div class="most-viewed-text">
                                     <h5 class="mb-3">Trending</h5>
                                 </div>
@@ -101,7 +103,7 @@
                 </div>
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-3 filter" id="filter_container">
+                        <div class="col-lg-3 d-none d-lg-block filter" id="filter_container">
                             <h3 class="mb-3">Filter</h3>
 
                             <div class="filter-desktop-checkbox">
@@ -335,7 +337,7 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="col-12 col-md-9 katalog-ukm" id="catalog">
+                        <div class="col-12 col-lg-9 katalog-ukm" id="catalog">
                             @include('catalog-ukm')
                         </div>
                     </div>
@@ -485,7 +487,7 @@
 
             checkUrlParams();
 
-            if ($(window).width() > 641) {
+            if ($(window).width() > 991) {
                 mobile.detach();
             } else {
                 desktop.detach();
@@ -504,7 +506,7 @@
         // });
 
         $(window).resize(function() {
-            if ($(window).width() > 641) {
+            if ($(window).width() > 991) {
                 mobile.detach();
                 desktop.appendTo($('#filter_container'))
             } else {
@@ -672,7 +674,6 @@
 
         $('.whatsapp-click').click(function(e) {
             e.preventDefault();
-            debugger;
             var ukm = $(this).attr('data-id');
             var link = $(this).attr('data-href');
             window.open(link, '_blank');
@@ -699,7 +700,7 @@
             max_price = price_range.max_price;
 
             var search = $('#search_ukm').val();
-            if ($(window).width() < 645) {
+            if ($(window).width() < 991) {
                 search = $('.search-ukm-mobile').val();
             }
             $('.loading-spinner').show();
@@ -799,7 +800,7 @@
             });
 
             $('#search_ukm').val(e.state.search);
-            if ($(window).width() < 645) {
+            if ($(window).width() < 991) {
                 $('.search-ukm-mobile').val(e.state.search);
             }
             var page = 1;
