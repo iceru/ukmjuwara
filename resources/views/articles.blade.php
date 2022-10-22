@@ -5,7 +5,8 @@
     @section('meta-content')
         Sebagai komunitas pertama di dunia yang menghadirkan katalog member dalam format Whatsapp. Business Catalog
         c-commerce s.id/UKMJUWARA dan katalog pada situs www.UKMJAGOWAN.id, kanal ini akan terus memproduksi katalog berkala
-        dan melakukan pengembangan konten dengan menghadirkan variasi tema katalog seperti UKMJAGOWAN.ID GLOBAL yang berfokus
+        dan melakukan pengembangan konten dengan menghadirkan variasi tema katalog seperti UKMJAGOWAN.ID GLOBAL yang
+        berfokus
         pada peningkatan penetrasi pasar global oleh pelaku UKM Iokal berikut dengan berita-berita sangat relevan dengan
         kebutuhan UKM untuk meroket.
     @endsection
@@ -22,7 +23,7 @@
                             </a>
                             <div class="d-flex mb-3 author align-items-center">
                                 <img src="/images/default-user.jpg" class="me-3" width="37" alt="">
-                                <p>{{ $article->author }}</p>
+                                <p>UKMJagoWAn</p>
                             </div>
                             <div class="article-title">
                                 <p>{!! $article->description !!}</p>
@@ -50,7 +51,7 @@
                                     <div class="d-flex mb-3 author align-items-center">
                                         <img src="/images/default-user.jpg" class="me-3" width="37"
                                             alt="">
-                                        <p>{{ $article->author }}</p>
+                                        <p>UKMJagoWAn</p>
                                     </div>
                                     <article class="article-description">
                                         <p>{!! $article->description !!}</p>
@@ -79,7 +80,7 @@
                                     <div class="d-flex mb-2 author align-items-center">
                                         <img src="/images/default-user.jpg" class="me-3" width="25"
                                             alt="">
-                                        <p>{{ $article->author }}</p>
+                                        <p>UKMJagoWAn</p>
                                     </div>
                                     <div class="article-description"
                                         style="display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3;">
@@ -109,7 +110,7 @@
                         </a>
                         <div class="d-flex mb-3 author align-items-center">
                             <img src="/images/default-user.jpg" class="me-3" width="37" alt="">
-                            <p>{{ $article->author }}</p>
+                            <p>UKMJagoWAn</p>
                         </div>
                         <div class="article-description" style="height:73px">
                             <p>{!! $article->description !!}</p>

@@ -14,7 +14,7 @@
                         <h2 class="mb-3">{{ $article->title }}</h2>
                         <div class="d-flex align-items-center mb-3">
                             <img src="/images/default-user.jpg" class="circular me-3" width="50" alt="">
-                            <h5>{{ $article->author }}</h5>
+                            <h5>UKMJagoWAn</h5>
                         </div>
                         <p>{{ date('d F Y', strtotime($article->created_at)) }} | {{ $article->time_read }} Mins
                             Read</p>
@@ -45,7 +45,7 @@
                             <h3>Berita Lainnya</h3>
                         </div>
                         @foreach ($relatedArticles as $article)
-                            <div class="article medium col-md-3">
+                            <div class="article medium col-md-3 mb-3">
                                 <a href="{{ route('article.show', $article->slug) }}">
                                     <div class="article-image">
                                         <img src="{{ Storage::url('article-image/' . $article->image) }}"
