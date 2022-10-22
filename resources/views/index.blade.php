@@ -656,6 +656,7 @@
                 slidesToScroll: 1,
                 autoplay: true,
                 autoplaySpeed: 4000,
+                mobileFirst: true,
                 responsive: [{
                     breakpoint: 567,
                     settings: {
@@ -920,7 +921,6 @@
         };
 
         $('.slider-link').click(function(e) {
-            debugger;
             e.preventDefault();
             var id = $(this).attr("data-id");
             var link = $(this).children('a').attr("href");
@@ -933,10 +933,9 @@
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                success: function(response) {
-                    if (link) {
-                        window.location.replace(link);
-                    }
+            }).done(function(res) {
+                if (link) {
+                    window.open(link);
                 }
             });
         });

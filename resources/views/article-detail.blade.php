@@ -7,8 +7,7 @@
     @endsection
 
     <div class="article-detail">
-        <header class="article header-article"
-            style="background-image: url('{{ Storage::url('article-image/' . $article->image) }}')">
+        <header class="article header-article">
             <div class="article-content container">
                 <div class="row">
                     <div class="col-12">
@@ -28,9 +27,9 @@
             <div class="row">
                 <div class="col-12 mb-5">
                     <div class="article-detail-content">
-                        <div class="article-image mb-3 text-center">
-                            <img src="{{ Storage::url('article-image/' . $article->image) }}" class="w-50"
-                                alt="">
+                        <div class="article-image text-center">
+                            <img src="{{ Storage::url('article-image/' . $article->image) }}"
+                                alt="{{ $article->title }}">
                         </div>
                         <div class="share-button mb-3">
                             <div class="addthis_inline_share_toolbox"></div>
@@ -49,7 +48,8 @@
                             <div class="article medium col-md-3">
                                 <a href="{{ route('article.show', $article->slug) }}">
                                     <div class="article-image">
-                                        <img src="{{ Storage::url('article-image/' . $article->image) }}" alt="">
+                                        <img src="{{ Storage::url('article-image/' . $article->image) }}"
+                                            alt="">
                                     </div>
                                     <h4 class="mb-3 article-title primary-color">{{ $article->title }}</h4>
                                 </a>

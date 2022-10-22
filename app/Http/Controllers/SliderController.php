@@ -27,7 +27,7 @@ class SliderController extends Controller
         $slider->clicks = DB::raw('clicks+1');
         $slider->save();
 
-        return('Success');
+        return \Response::json('success', 200);
     }
     /**
      * Show the form for creating a new resource.
