@@ -66,6 +66,7 @@ class SliderController extends Controller
         $slider->link = $request->link;
         $slider->title = $request->title;
         $slider->type = $request->type;
+        $slider->clicks = 0;
         $slider->save();
 
         return redirect()->route('admin.slider')->with('success','Data berhasil di input');
