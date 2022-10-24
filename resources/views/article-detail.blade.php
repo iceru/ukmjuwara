@@ -11,7 +11,7 @@
             <div class="article-content container-fluid">
                 <div class="container">
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-12 w-100">
                             <h2 class="mb-3">{{ $article->title }}</h2>
                             <div class="d-flex align-items-center mb-3">
                                 <img src="/images/default-user.jpg" class="circular me-3" width="50" alt="">
