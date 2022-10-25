@@ -925,7 +925,7 @@
             var id = $(this).attr("data-id");
             var link = $(this).children('a').attr("href");
             if (link) {
-                window.location.href(link);
+                window.open(link);
             }
             $.ajax({
                 type: "POST",
