@@ -29,7 +29,7 @@ class IndexController extends Controller
         $sponsors = Sponsor::where('type', 'dipersembahkan')->get();
         $sponsors_dukung = Sponsor::where('type', 'didukung')->get();
         $featured = Catalog::where('featured', 'yes')->take(2)->get();
-        $articles = Article::get()->take(2);
+        $articles = Article::orderBy('created_at', 'desc')->get()->take(2);
         $cta = Cta::first();
 
         $catalogAll = Catalog::with('ukm')->where('slug', 'semua-brand')->firstOrFail();
