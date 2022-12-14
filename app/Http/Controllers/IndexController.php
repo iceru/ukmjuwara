@@ -340,7 +340,8 @@ class IndexController extends Controller
     {
         $posts = Article::orderBy('updated_at', 'DESC')->get();
         $catalogs = Catalog::all();
-        return response()->view('sitemap', compact('posts', 'catalogs'))->header('Content-Type', 'text/xml');
+        $ukms = Ukm::all();
+        return response()->view('sitemap', compact('posts', 'catalogs', 'ukms'))->header('Content-Type', 'text/xml');
     }
 
     /**
