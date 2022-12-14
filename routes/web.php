@@ -48,6 +48,8 @@ Route::get('/ukm-click/slider-click', [UkmController::class, 'sliderclick'])->na
 Route::get('/berita', [ArticleController::class, 'index'])->name('article.index');
 Route::get('/berita/{slug}', [ArticleController::class, 'show'])->name('article.show');
 
+Route::get('/sitemap.xml', [IndexController::class, 'sitemap'])->name('sitemap');
+
 Route::middleware(['auth', 'role:administrator'])->group(function (){
     Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
     Route::post('/upload/image', [AdminArticleController::class, 'upload'])->name('admin.upload.image');

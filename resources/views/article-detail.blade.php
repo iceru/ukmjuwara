@@ -51,7 +51,7 @@
                                 <a href="{{ route('article.show', $article->slug) }}">
                                     <div class="article-image">
                                         <img src="{{ Storage::url('article-image/' . $article->image) }}"
-                                            alt="">
+                                            alt="{{ $article->title }}">
                                     </div>
                                     <h4 class="mb-3 article-title primary-color">{{ $article->title }}</h4>
                                 </a>
