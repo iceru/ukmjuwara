@@ -19,4 +19,9 @@
             <loc>https://ukmjagowan.id/katalog/{{ $catalog->slug }}</loc>
         </url>
     @endforeach
+    @foreach ($ukms as $ukm)
+        <url>
+            <loc>https://ukmjagowan.id/ukm/{{ $ukm->slug }}</loc>
+        </url>
+    @endforeach
 </urlset>
