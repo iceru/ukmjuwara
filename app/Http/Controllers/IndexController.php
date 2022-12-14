@@ -336,6 +336,13 @@ class IndexController extends Controller
         //
     }
 
+    public function sitemap()
+    {
+        $posts = Article::orderBy('updated_at', 'DESC')->get();
+        $catalogs = Catalog::all();
+        return response()->view('sitemap', compact('posts', 'catalogs'))->header('Content-Type', 'text/xml');
+    }
+
     /**
      * Store a newly created resource in storage.
      *
