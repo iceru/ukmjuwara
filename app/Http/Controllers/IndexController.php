@@ -41,7 +41,7 @@ class IndexController extends Controller
         $min_price_all = Ukm::min('min_price');
 
         $catalogDigital = Catalog::with('ukm')->where('slug', 'ukmjuwara-go-digital')->firstOrFail();
-        $bests_digital = Ukm::where('catalog_id', $catalogDigital->id)->orderByViews('desc', Period::since('2021-11-18'))->get()->take(8);
+        $bests_digital = Ukm::where('catalog_id', $catalogDigital->id)->orderByViews('desc', Period::pastMonths(1))->get()->take(8);
         $categories_digital = Category::whereHas('ukms', function($q) use($catalogDigital) {
             $q->where('catalog_id', $catalogDigital->id);
         })->get();
@@ -53,7 +53,7 @@ class IndexController extends Controller
         $min_price_digital = Ukm::where('catalog_id', $catalogDigital->id)->min('min_price');
 
         $catalogGlobal = Catalog::with('ukm')->where('slug', 'ukmjuwara-go-global')->firstOrFail();
-        $bests_global = Ukm::where('catalog_id', $catalogGlobal->id)->orderByViews('desc', Period::since('2021-11-18'))->get()->take(8);
+        $bests_global = Ukm::where('catalog_id', $catalogGlobal->id)->orderByViews('desc', Period::pastMonths(1))->get()->take(8);
         $categories_global = Category::whereHas('ukms', function($q) use($catalogGlobal) {
             $q->where('catalog_id', $catalogGlobal->id);
         })->get();
@@ -139,7 +139,7 @@ class IndexController extends Controller
             if(!isset($request->categories) && !isset($request->programs) && !isset($request->states) && !isset($request->owner_genders) 
             && !isset($request->search) && (!isset($request->min_price) || (int)$request->min_price === 0) 
             && (!isset($request->max_price) || (int)$request->max_price === $max_price_digital) ) {
-                $bests_digital = Ukm::where('catalog_id', $catalogDigital->id)->orderByViews('desc', Period::since('2021-11-18'))->get()->take(8);
+                $bests_digital = Ukm::where('catalog_id', $catalogDigital->id)->orderByViews('desc', Period::pastMonths(1))->get()->take(8);
             } else {
                 $bests_digital = $bests_digital->orderBy('title')->paginate(16);
             }
@@ -220,7 +220,7 @@ class IndexController extends Controller
             if(!isset($request->categories_global) && !isset($request->programs_global) && !isset($request->states_global) 
             && !isset($request->owner_genders_global) && !isset($request->search_global) && (!isset($request->min_price_global) || 
             (int)$request->min_price_global === 0) && (!isset($request->max_price_global) || (int)$request->max_price_global === $max_price_global) ) {
-                $bests_global = Ukm::where('catalog_id', $catalogGlobal->id)->orderByViews('desc', Period::since('2021-11-18'))->get()->take(8);
+                $bests_global = Ukm::where('catalog_id', $catalogGlobal->id)->orderByViews('desc', Period::pastMonths(1))->get()->take(8);
             } else {
                 $bests_global = $bests_global->orderBy('title')->paginate(16);
             }
@@ -302,7 +302,7 @@ class IndexController extends Controller
             if(!isset($request->categories_all) && !isset($request->programs_all) && !isset($request->states_all) 
             && !isset($request->owner_genders_all) && !isset($request->search_all) && (!isset($request->min_price_all) || 
             (int)$request->min_price_all === 0) && (!isset($request->max_price_all) || (int)$request->max_price_all === $max_price_all) ) {
-                $bests_all = Ukm::orderByViews('desc', Period::since('2021-11-18'))->get()->take(8);
+                $bests_all = Ukm::orderByViews('desc', Period::pastMonths(1))->get()->take(8);
             } else {
                 $bests_all = $bests_all->paginate(16);
             }

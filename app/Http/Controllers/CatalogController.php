@@ -86,7 +86,7 @@ class CatalogController extends Controller
     {
         $catalog = Catalog::with('ukm')->where('slug', $slug)->firstOrFail();
         $ukms = Ukm::where('catalog_id', $catalog->id)->orderBy('title')->paginate(16);
-        $bests = Ukm::where('catalog_id', $catalog->id)->orderByViews('desc', Period::since('2021-11-18'))->get()->take(8);
+        $bests = Ukm::where('catalog_id', $catalog->id)->orderByViews('desc', Period::pastMonths(1))->get()->take(8);
         $states = Ukm::where('catalog_id', $catalog->id)->select('state_name')->distinct()->where('state_name', '!=', '')->get();
         $categories = Category::whereHas('ukms', function($q) use($catalog) {
             $q->where('catalog_id', $catalog->id);
@@ -189,7 +189,7 @@ class CatalogController extends Controller
         $ukms = Ukm::orderBy('title')->paginate(16);
         $catalog = Catalog::where('slug', 'semua-brand')->firstOrFail();
         $catalogs = Catalog::all();
-        $bests = Ukm::orderByViews('desc', Period::since('2021-11-18'))->get()->take(8);
+        $bests = Ukm::orderByViews('desc', Period::pastMonths(1))->get()->take(8);
         $categories_digital = Category::whereHas('ukms', function($q) {
             $q->where('catalog_id', 2);
         })->get();
