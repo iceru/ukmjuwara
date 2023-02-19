@@ -280,7 +280,7 @@
                         <td>
                             @foreach (array_slice((array) json_decode($ukm->images), 0, 1) as $item)
                                 <div>
-                                    <img class="mb-2" src="{{ Storage::url('ukm-image/' . $item) }}"
+                                    <img class="mb-2" src="{{ Storage::url('ukm-optimized/' . $item) }}"
                                         alt="Image" width="100" height="100" loading='lazy'>
                                 </div>
                             @endforeach

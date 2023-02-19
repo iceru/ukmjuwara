@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Validator;
 use App\Models\Ukm;
 use App\Models\Catalog;
 use App\Models\Program;
@@ -10,8 +9,10 @@ use App\Models\Category;
 use App\Models\UkmSlider;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class AdminUkmController extends Controller
 {
@@ -34,13 +35,13 @@ class AdminUkmController extends Controller
 
     public function getCity(Request $request)
     {
-        $cities = json_decode(file_get_contents('https://ibnux.github.io/data-indonesia/kabupaten/'.$request->state_id.'.json'), true);
+        $cities = json_decode(file_get_contents('https://ibnux.github.io/data-indonesia/kabupaten/' . $request->state_id . '.json'), true);
         return response()->json($cities);
     }
 
     public function getSubdistrict(Request $request)
     {
-        $cities = json_decode(file_get_contents('https://ibnux.github.io/data-indonesia/kecamatan/'.$request->city_id.'.json'), true);
+        $cities = json_decode(file_get_contents('https://ibnux.github.io/data-indonesia/kecamatan/' . $request->city_id . '.json'), true);
         return response()->json($cities);
     }
 
@@ -83,8 +84,8 @@ class AdminUkmController extends Controller
             'min_price' => 'nullable',
             'max_price' => 'nullable',
             'subDistrict' => 'required',
-            'city_name'=> 'required',
-            'owner_gender'=> 'required',
+            'city_name' => 'required',
+            'owner_gender' => 'required',
             'operational_hours' => 'nullable',
             'operational_hours_end' => 'nullable',
             'achievement' => 'nullable',
@@ -96,37 +97,46 @@ class AdminUkmController extends Controller
 
         ]);
 
-        
+
         if ($validator->fails()) {
             return back()->withErrors($validator)
-            ->withInput();
+                ->withInput();
         }
 
         if ($request->hasFile('image')) {
 
             $images = $request->file('image');
+            $x = 1;
+            foreach ($images as $image) {
+                $clientName = $image->getClientOriginalName();
+                $filename = $request->title . '_' . time() . '_' . $clientName;
+                $imageMake = Image::make(public_path('storage/ukm-optimized/' . $image));
 
-            foreach($images as $image) {
-                $name = $image->getClientOriginalName();
-                $filename = $request->title.'_'.time().'.'.$name;
-                $path = $image->storeAs('public/ukm-image', $filename);
+                if ($imageMake->width() > 800) {
+                    $imageMake->resize(800, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                    });;
+                }
+                Storage::disk('public')->put("ukm-optimized/" . $filename, (string) $imageMake->encode());
                 $data[] = $filename;
+
+                $x++;
             }
         }
 
-        if($request->hasFile('sliders')) {
+        if ($request->hasFile('sliders')) {
             $sliders = $request->file('sliders');
 
-            foreach($sliders as $slider) {
+            foreach ($sliders as $slider) {
                 $name = $slider->getClientOriginalName();
-                $filename = $request->title.'_'.time().'.'.$name;
-                $path = $slider->storeAs('public/ukm-sliders', $filename);
+                $filename = $request->title . '_' . time() . '.' . $name;
+                $slider->storeAs('public/ukm-sliders', $filename);
                 $dataSliders[] = $filename;
             }
             $ukm->sliders = json_encode($dataSliders);
         }
 
-        $ukm->images=json_encode($data);
+        $ukm->images = json_encode($data);
 
         $ukm->title = $request->title;
         $ukm->product = $request->product;
@@ -156,11 +166,11 @@ class AdminUkmController extends Controller
 
         $ukm->save();
 
-        if($request->categories) {
+        if ($request->categories) {
             $categoryArray = $request->categories;
             $categories = array();
 
-            foreach($categoryArray as $ukmCategory) {
+            foreach ($categoryArray as $ukmCategory) {
                 $category = Category::firstOrCreate([
                     'title' => $ukmCategory
                 ]);
@@ -171,7 +181,7 @@ class AdminUkmController extends Controller
             $ukm->categories()->attach($categories);
         }
 
-        return redirect()->back()->with('success','Data berhasil di input');
+        return redirect()->back()->with('success', 'Data berhasil di input');
     }
 
     /**
@@ -182,7 +192,6 @@ class AdminUkmController extends Controller
      */
     public function show($id)
     {
-        
     }
 
     /**
@@ -201,11 +210,18 @@ class AdminUkmController extends Controller
 
         $categories_array = array();
 
-        foreach($ukm->categories as $category) {
+        foreach ($ukm->categories as $category) {
             array_push($categories_array, $category->title);
         }
 
-        return view('admin.ukm.edit', compact('ukm', 'catalogs', 'categories', 'categories_array', 'states', 'programs'));
+        return view('admin.ukm.edit', compact(
+            'ukm',
+            'catalogs',
+            'categories',
+            'categories_array',
+            'states',
+            'programs'
+        ));
     }
 
     /**
@@ -250,31 +266,47 @@ class AdminUkmController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-
-            $images = $request->file('image');
-
-            foreach($images as $image) {
-                $name = $image->getClientOriginalName();
-                $filename = $request->inputTitle.'_'.time().'.'.$name;
-                $path = $image->storeAs('public/ukm-image', $filename);
-                $data[] = $filename;
+            if (Storage::exists('public/ukm-image/' . $ukm->image)) {
+                Storage::disk('public')->delete('ukm-image/' . $ukm->image);
             }
 
-            $ukm->images=json_encode($data);
+            if (Storage::exists('public/ukm-optimized/' . $ukm->image)) {
+                Storage::disk('public')->delete('ukm-optimized/' . $ukm->image);
+            }
+
+            $images = $request->file('image');
+            $x = 1;
+            foreach ($images as $image) {
+                $clientName = $image->getClientOriginalName();
+                $filename = $request->title . '_' . time() . '_' . $clientName;
+                $imageMake = Image::make($image);
+
+                if ($imageMake->width() > 800) {
+                    $imageMake->resize(800, null, function ($constraint) {
+                        $constraint->aspectRatio();
+                    });;
+                }
+                Storage::disk('public')->put("ukm-optimized/" . $filename, (string) $imageMake->encode());
+                $data[] = $filename;
+
+                $x++;
+            }
+
+            $ukm->images = json_encode($data);
         }
 
-        if($request->hasFile('sliders')) {
+        if ($request->hasFile('sliders')) {
             $sliders = $request->file('sliders');
             $dataSliders = [];
 
-            foreach($sliders as $slider) {
+            foreach ($sliders as $slider) {
                 $name = $slider->getClientOriginalName();
-                $filename = $request->title.'_'.time().'.'.$name;
+                $filename = $request->title . '_' . time() . '.' . $name;
                 $path = $slider->storeAs('public/ukm-sliders', $filename);
                 $dataSliders[] = $filename;
             }
 
-            if(count($dataSliders) > 0) {
+            if (count($dataSliders) > 0) {
                 $ukm->sliders = json_encode($dataSliders);
             }
         }
@@ -310,7 +342,7 @@ class AdminUkmController extends Controller
         $categoryArray = $request->categories;
         $categories = array();
 
-        foreach($categoryArray as $ukmCategory) {
+        foreach ($categoryArray as $ukmCategory) {
             $category = Category::firstOrCreate([
                 'title' => $ukmCategory
             ]);
@@ -320,7 +352,7 @@ class AdminUkmController extends Controller
 
         $ukm->categories()->sync($categories);
 
-        return redirect()->route('admin.ukm')->with('success','Data berhasil di update');
+        return redirect()->route('admin.ukm')->with('success', 'Data berhasil di update');
     }
 
     /**
@@ -332,7 +364,13 @@ class AdminUkmController extends Controller
     public function destroy($id)
     {
         $ukm = Ukm::findOrFail($id);
-        Storage::disk('public')->delete('ukm-image/'.$ukm->image);
+        if (Storage::exists('public/ukm-image/' . $ukm->image)) {
+            Storage::disk('public')->delete('ukm-image/' . $ukm->image);
+        }
+
+        if (Storage::exists('public/ukm-optimized/' . $ukm->image)) {
+            Storage::disk('public')->delete('ukm-optimized/' . $ukm->image);
+        }
 
         Ukm::find($id)->delete();
         return redirect()->route('admin.ukm')->with('success', 'Data berhasil dihapus');

@@ -145,6 +145,10 @@
 .administrator {
     .col-lg-2.sidebar-admin {
         width: 20% !important;
+
+        @include breakpoint-down(small) {
+            width: 100% !important;
+        }
     }
 
     .col-lg-10.content-admin {

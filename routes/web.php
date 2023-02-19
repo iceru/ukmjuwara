@@ -30,6 +30,7 @@ use App\Http\Controllers\AdminDashboardController;
 */
 
 Route::get('/', [IndexController::class, 'index'])->name('index');
+Route::get('/optimize-image', [IndexController::class, 'compressImage'])->name('compressImage');
 Route::post('/slider-click', [SliderController::class, 'clicks'])->name('slider.click');
 Route::get('/tentang-kami', [AboutController::class, 'index'])->name('about');
 Route::get('/kemitraan', [ContactController::class, 'index'])->name('contact');
@@ -50,10 +51,10 @@ Route::get('/berita/{slug}', [ArticleController::class, 'show'])->name('article.
 
 Route::get('/sitemap.xml', [IndexController::class, 'sitemap'])->name('sitemap');
 
-Route::middleware(['auth', 'role:administrator'])->group(function (){
+Route::middleware(['auth', 'role:administrator'])->group(function () {
     Route::get('/admin', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
     Route::post('/upload/image', [AdminArticleController::class, 'upload'])->name('admin.upload.image');
-    
+
     Route::get('export', [AdminDashboardController::class, 'export'])->name('admin.export');
 
     Route::get('/admin/article', [AdminArticleController::class, 'index'])->name('admin.article');
@@ -81,12 +82,14 @@ Route::middleware(['auth', 'role:administrator'])->group(function (){
     Route::get('/admin/program/delete/{id}', [ProgramController::class, 'destroy'])->name('admin.program.destroy');
 
     Route::get('/admin/ukm', [AdminUkmController::class, 'index'])->name('admin.ukm');
-    Route::post('/admin/ukm/store', [AdminUkmController::class, 'store'])->name('admin.ukm.store');
+    Route::middleware('optimizeImages')->group(function () {
+        Route::post('/admin/ukm/store', [AdminUkmController::class, 'store'])->name('admin.ukm.store');
+        Route::post('/admin/ukm/update', [AdminUkmController::class, 'update'])->name('admin.ukm.update');
+    });
     Route::get('/admin/ukm/edit/{ukm}', [AdminUkmController::class, 'edit'])->name('admin.ukm.edit');
-    Route::post('/admin/ukm/update', [AdminUkmController::class, 'update'])->name('admin.ukm.update');
     Route::get('/admin/ukm/delete/{ukm}', [AdminUkmController::class, 'destroy'])->name('admin.ukm.destroy');
-    Route::get('getSubdistrict',[AdminUkmController::class, 'getSubdistrict'])->name('admin.ukm.getSubdistrict');
-    Route::get('getCity',[AdminUkmController::class, 'getCity'])->name('admin.ukm.getCity');
+    Route::get('getSubdistrict', [AdminUkmController::class, 'getSubdistrict'])->name('admin.ukm.getSubdistrict');
+    Route::get('getCity', [AdminUkmController::class, 'getCity'])->name('admin.ukm.getCity');
 
     Route::get('/admin/tags', [AdminTagController::class, 'index'])->name('admin.tags');
     Route::post('/admin/tags/store', [AdminTagController::class, 'store'])->name('admin.tags.store');
@@ -120,4 +123,4 @@ Route::middleware(['auth', 'role:administrator'])->group(function (){
     Route::get('/admin/sponsor/delete/{id}', [SponsorController::class, 'destroy'])->name('admin.sponsor.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
