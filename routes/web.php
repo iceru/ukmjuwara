@@ -30,7 +30,6 @@ use App\Http\Controllers\AdminDashboardController;
 */
 
 Route::get('/', [IndexController::class, 'index'])->name('index');
-Route::get('/optimize-image', [IndexController::class, 'compressImage'])->name('compressImage');
 Route::post('/slider-click', [SliderController::class, 'clicks'])->name('slider.click');
 Route::get('/tentang-kami', [AboutController::class, 'index'])->name('about');
 Route::get('/kemitraan', [ContactController::class, 'index'])->name('contact');
