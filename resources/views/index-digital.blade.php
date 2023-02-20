@@ -7,7 +7,7 @@
                         <div class="ukm-image">
                             <div class="ratio ratio-1x1">
                                 @foreach ((array) json_decode($ukm->images)[0] as $image)
-                                    <img src="{{ Storage::url('ukm-image/' . $image) }}" alt="">
+                                    <img src="{{ Storage::url('ukm-thumbnail/' . $image) }}" alt="{{ $ukm->title }}">
                                 @endforeach
                             </div>
                         </div>

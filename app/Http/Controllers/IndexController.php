@@ -444,16 +444,34 @@ class IndexController extends Controller
 
         foreach ($ukm as $item) {
             foreach (json_decode($item->images) as $image) {
-                $width = Image::make(public_path('storage/ukm-image/' . $image))->width();
+                $imageExist = Storage::exists('public/ukm-image/' . $image);
                 $exist = Storage::exists('public/ukm-optimized/' . $image);
-                if ($width > 910 && !$exist) {
-                    $img = Image::make(public_path('storage/ukm-image/' . $image))
-                        ->resize(800, null, function ($constraint) {
-                            $constraint->aspectRatio();
-                        });
-                    Storage::disk('public')->put("ukm-optimized/" . $image, (string) $img->encode());
-                    echo ($image . ' - success <br />');
+                $thumbExist = Storage::exists('public/ukm-thumbnail/' . $image);
+                $x = 0;
+
+                if ($imageExist) {
+                    $width = Image::make(public_path('storage/ukm-image/' . $image))->width();
+
+                    if ($width > 910 && !$exist) {
+                        $img = Image::make(public_path('storage/ukm-image/' . $image))
+                            ->resize(800, null, function ($constraint) {
+                                $constraint->aspectRatio();
+                            });
+                        Storage::disk('public')->put("ukm-optimized/" . $image, (string) $img->encode());
+                        echo ($image . ' - success <br />');
+                    }
+
+                    if (!$thumbExist) {
+                        $thumbnail = Image::make(public_path('storage/ukm-image/' . $image))
+                            ->resize(200, null, function ($constraint) {
+                                $constraint->aspectRatio();
+                            });
+                        Storage::disk('public')->put("ukm-thumbnail/" . $image, (string) $thumbnail->encode());
+                        echo ($image . ' - success thumbnail <br />');
+                    }
                 }
+                $x++;
+                echo ($x);
             }
         }
     }

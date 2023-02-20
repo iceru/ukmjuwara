@@ -118,6 +118,12 @@ class AdminUkmController extends Controller
                     });;
                 }
                 Storage::disk('public')->put("ukm-optimized/" . $filename, (string) $imageMake->encode());
+
+                // Add to thumbnail
+                $thumbnail = $imageMake->resize(200, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                });;
+                Storage::disk('public')->put("ukm-thumbnail/" . $filename . '- thumbnail', (string) $thumbnail->encode());
                 $data[] = $filename;
 
                 $x++;
@@ -287,6 +293,12 @@ class AdminUkmController extends Controller
                     });;
                 }
                 Storage::disk('public')->put("ukm-optimized/" . $filename, (string) $imageMake->encode());
+
+                // Add to thumbnail
+                $thumbnail = $imageMake->resize(200, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                });;
+                Storage::disk('public')->put("ukm-thumbnail/" . $filename . '- thumbnail', (string) $thumbnail->encode());
                 $data[] = $filename;
 
                 $x++;
