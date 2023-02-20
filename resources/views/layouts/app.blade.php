@@ -48,7 +48,7 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script src="{{ asset('js/share.js') }}"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
-
+    <meta name="google-site-verification" content="35feMXUgmaN-sMrPNC37h1v5QM5xk3ZqRChdS2rp4D0" />
 </head>
 
 <body class="font-sans antialiased">

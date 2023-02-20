@@ -30,10 +30,10 @@ class AdminDashboardController extends Controller
         $categories = Category::count();
         $totalVisitors = Analytics::fetchTotalVisitorsAndPageViews(Period::days(7));
         $mostVisited = Analytics::performQuery(
-            Period::days(7), 
+            Period::days(7),
             'ga:uniquePageviews', [
             'metrics' => 'ga:uniquePageviews, ga:pageviews',
-            'dimensions' => 'ga:pagePath', 
+            'dimensions' => 'ga:pagePath',
             'sort' => '-ga:pageviews',
             'max-results' => '12'
         ]);
@@ -60,21 +60,24 @@ class AdminDashboardController extends Controller
         $count_total = 'count(*) as total';
 
         foreach ($catalogs_title as $key => $value) {
-            ${'category_'.$key} = Click::with('category')->where('type_click', 'categories')->where('catalog_id', $value->id)
-            ->groupBy('category_id')->select('category_id', DB::raw($count_total))->orderBy('category_id')->get()->toArray();
+            ${'category_'.$key} = Click::with('category')->where('type_click', 'categories')
+            ->where('catalog_id', $value->id)->groupBy('category_id')
+            ->select('category_id', DB::raw($count_total))->orderBy('category_id')->get()->toArray();
 
             ${'clicks_'.$key} = Click::where('type_click', 'categories')->where('catalog_id', $value->id)
             ->where('created_at', '<=', '2022-08-25 00:00:00')->orderBy('category_id')->get()->toArray();
 
             ${'category_clicks_'.$key} = collect();
 
-            if($key < 2) {
+            if ($key < 2) {
                 for ($index = 0 ; $index < count(${'category_'.$key}); $index ++) {
-                    ${'total_counts_'.$index} = array('category_id' => ${'category_'.$key}[$index]['category_id'], 
-                    'category' => ${'category_'.$key}[$index]['category'],
-                    'total' => ${'clicks_'.$key}[$index]['clicks']+${'category_'.$key}[$index]['total']);
-                    
-                    ${'category_clicks_'.$key}->push(${'total_counts_'.$index});
+                    if (isset(${'clicks_'.$key}[$index]['clicks']) && isset(${'category_'.$key}[$index]['total'])) {
+                        ${'total_counts_'.$index} = array('category_id' => ${'category_'.$key}[$index]['category_id'],
+                        'category' => ${'category_'.$key}[$index]['category'],
+                        'total' => ${'clicks_'.$key}[$index]['clicks']+${'category_'.$key}[$index]['total']);
+                        
+                        ${'category_clicks_'.$key}->push(${'total_counts_'.$index});
+                    }
                 }
             }
 
@@ -86,7 +89,8 @@ class AdminDashboardController extends Controller
         
         foreach ($catalogs_title as $key => $value) {
             ${'state_'.$key} = Click::where('type_click', 'state')->where('catalog_id', $value->id)
-            ->groupBy('name_click')->select('name_click', DB::raw($count_total))->orderBy('name_click')->get()->toArray();
+            ->groupBy('name_click')->select('name_click', DB::raw($count_total))
+            ->orderBy('name_click')->get()->toArray();
 
             ${'state_count_'.$key} = Click::where('type_click', 'state')->where('catalog_id', $value->id)
             ->where('created_at', '<=', '2022-08-25 00:00:00')->orderBy('name_click')->get()->toArray();
@@ -162,7 +166,8 @@ class AdminDashboardController extends Controller
                         ->where('type_click', 'whatsapp')
                         ->orWhere('type_click', 'instagram');
                     })
-                ->where('catalog_id', $value->id)->groupBy('name_click', 'type_click')->select('name_click', 'type_click', DB::raw($count_total))->get();
+                ->where('catalog_id', $value->id)->groupBy('name_click', 'type_click')
+                ->select('name_click', 'type_click', DB::raw($count_total))->get();
 
                 $countItem['instagram_clicks'] = $countItem['instagram_clicks'];
                 $countItem['whatsapp_clicks'] = $countItem['whatsapp_clicks'];

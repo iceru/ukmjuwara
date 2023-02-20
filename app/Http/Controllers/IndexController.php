@@ -437,7 +437,6 @@ class IndexController extends Controller
     {
         //
     }
-
     public function compressImage()
     {
         $ukm = Ukm::where('images', '!=', null)->get();
