@@ -229,7 +229,7 @@
         </div>
     </div>
 </div>
-<div class="row ">
+{{-- <div class="row ">
     <div class="col-6">
         <h5 class="mb-3 mt-2">Analytics <span id="timeText">for the last 7 days</span></h5>
     </div>
@@ -283,4 +283,4 @@
         </div>
     </div>
 
-</div>
+</div> --}}

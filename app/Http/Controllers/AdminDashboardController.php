@@ -28,32 +28,32 @@ class AdminDashboardController extends Controller
         $articles = Article::count();
         $catalogs = Catalog::count();
         $categories = Category::count();
-        $totalVisitors = Analytics::fetchTotalVisitorsAndPageViews(Period::days(7));
-        $mostVisited = Analytics::performQuery(
-            Period::days(7),
-            'ga:uniquePageviews', [
-            'metrics' => 'ga:uniquePageviews, ga:pageviews',
-            'dimensions' => 'ga:pagePath',
-            'sort' => '-ga:pageviews',
-            'max-results' => '12'
-        ]);
-        $topReferrers = Analytics::fetchTopReferrers(Period::days(7), 7);
-        $userDevice = Analytics::performQuery(
-            Period::days(7),
-            'ga:sessions',
-            [
-                'metrics' => 'ga:sessions,ga:pageviews,ga:sessionDuration',
-                'dimensions' => 'ga:deviceCategory',
-            ]
-        );
-        $userCountry = Analytics::performQuery(
-            Period::days(7),
-            'ga:sessions',
-            [
-                'metrics' => 'ga:sessions',
-                'dimensions' => 'ga:country',
-            ]
-        );
+        // $totalVisitors = Analytics::fetchTotalVisitorsAndPageViews(Period::days(7));
+        // $mostVisited = Analytics::performQuery(
+        //     Period::days(7),
+        //     'ga:uniquePageviews', [
+        //     'metrics' => 'ga:uniquePageviews, ga:pageviews',
+        //     'dimensions' => 'ga:pagePath',
+        //     'sort' => '-ga:pageviews',
+        //     'max-results' => '12'
+        // ]);
+        // $topReferrers = Analytics::fetchTopReferrers(Period::days(7), 7);
+        // $userDevice = Analytics::performQuery(
+        //     Period::days(7),
+        //     'ga:sessions',
+        //     [
+        //         'metrics' => 'ga:sessions,ga:pageviews,ga:sessionDuration',
+        //         'dimensions' => 'ga:deviceCategory',
+        //     ]
+        // );
+        // $userCountry = Analytics::performQuery(
+        //     Period::days(7),
+        //     'ga:sessions',
+        //     [
+        //         'metrics' => 'ga:sessions',
+        //         'dimensions' => 'ga:country',
+        //     ]
+        // );
 
         $catalogs_title = Catalog::skip(1)->take(3)->get();
 
@@ -94,14 +94,17 @@ class AdminDashboardController extends Controller
 
             ${'state_count_'.$key} = Click::where('type_click', 'state')->where('catalog_id', $value->id)
             ->where('created_at', '<=', '2022-08-25 00:00:00')->orderBy('name_click')->get()->toArray();
-
             ${'state_clicks_'.$key} = collect();
             if($key < 2) {
                 for ($index = 0 ; $index < count(${'state_'.$key}); $index ++) {
-                    ${'total_counts_'.$index} = array('title' => ${'state_'.$key}[$index]['name_click'],
-                    'total' => ${'state_count_'.$key}[$index]['clicks']+${'state_'.$key}[$index]['total']);
+                   
+                    if(${'state_count_'.$key}[$index] ?? null) {
+                        ${'total_counts_'.$index} = array('title' => ${'state_'.$key}[$index]['name_click'],
+                        'total' => ${'state_count_'.$key}[$index]['clicks']+${'state_'.$key}[$index]['total']);
+                        ${'state_clicks_'.$key}->push(${'total_counts_'.$index});
+                    }
                     
-                    ${'state_clicks_'.$key}->push(${'total_counts_'.$index});
+                   
                 }
             }
 
@@ -400,49 +403,45 @@ class AdminDashboardController extends Controller
                 ->groupBy('program_id')->select('program_id', DB::raw($count_total))->get();
             }
 
-            $totalVisitors = Analytics::fetchTotalVisitorsAndPageViews(Period::create($start_formatted, $end_formatted));
-            $mostVisited = Analytics::performQuery(Period::create(
-                $start_formatted, $end_formatted), 
-                'ga:uniquePageviews', 
-                [
-                    'metrics' => 'ga:uniquePageviews, ga:pageviews',
-                    'dimensions' => 'ga:pagePath', 
-                    'sort' => '-ga:pageviews',
-                    'max-results' => '12'
-                ]);
-            $topReferrers = Analytics::fetchTopReferrers(Period::create($start_formatted, $end_formatted), 7);
+            // $totalVisitors = Analytics::fetchTotalVisitorsAndPageViews(Period::create($start_formatted, $end_formatted));
+            // $mostVisited = Analytics::performQuery(Period::create(
+            //     $start_formatted, $end_formatted), 
+            //     'ga:uniquePageviews', 
+            //     [
+            //         'metrics' => 'ga:uniquePageviews, ga:pageviews',
+            //         'dimensions' => 'ga:pagePath', 
+            //         'sort' => '-ga:pageviews',
+            //         'max-results' => '12'
+            //     ]);
+            // $topReferrers = Analytics::fetchTopReferrers(Period::create($start_formatted, $end_formatted), 7);
 
-            $userDevice = Analytics::performQuery(
-                Period::create($start_formatted, $end_formatted),
-                'ga:sessions',
-                [
-                    'metrics' => 'ga:sessions,ga:pageviews,ga:sessionDuration',
-                    'dimensions' => 'ga:deviceCategory',
-                ]
-            );
-            $userCountry = Analytics::performQuery(
-                Period::create($start_formatted, $end_formatted),
-                'ga:sessions',
-                [
-                    'metrics' => 'ga:sessions',
-                    'dimensions' => 'ga:country',
-                ]
-            );
+            // $userDevice = Analytics::performQuery(
+            //     Period::create($start_formatted, $end_formatted),
+            //     'ga:sessions',
+            //     [
+            //         'metrics' => 'ga:sessions,ga:pageviews,ga:sessionDuration',
+            //         'dimensions' => 'ga:deviceCategory',
+            //     ]
+            // );
+            // $userCountry = Analytics::performQuery(
+            //     Period::create($start_formatted, $end_formatted),
+            //     'ga:sessions',
+            //     [
+            //         'metrics' => 'ga:sessions',
+            //         'dimensions' => 'ga:country',
+            //     ]
+            // );
 
             return response()->json([
                 'body' => view('admin.dashboard-click', compact('catalogs_title', 'category_clicks_0', 'category_clicks_1', 'category_clicks_2',
-                'mostVisited', 'totalVisitors', 'userDevice', 'userCountry', 'state_clicks_0', 'state_clicks_1', 'state_clicks_2',
+                 'state_clicks_0', 'state_clicks_1', 'state_clicks_2',
                 'gender_clicks_0', 'gender_clicks_1', 'gender_clicks_2', 'floating_clicks_0', 'floating_clicks_1', 'floating_clicks_2', 'ukm_clicks_0', 
-                'ukm_clicks_1', 'ukm_clicks_2', 'program_clicks_0', 'program_clicks_1', 'program_clicks_2', 'start_formatted', 'end_formatted'))->render(),
-                'userDevices' => $userDevice,
-                'userCountry' => $userCountry,
-                'topReferrers'=> $topReferrers,
-                'totalVisitors' => $totalVisitors,
+                'ukm_clicks_1', 'ukm_clicks_2', 'program_clicks_0', 'program_clicks_1', 'program_clicks_2', 'start_formatted', 'end_formatted'))->render()
             ]);
         };
 
         return view('admin.dashboard', compact('ukms', 'articles', 'catalogs', 'categories', 'catalogs_title', 'category_clicks_0', 'category_clicks_1', 
-        'category_clicks_2','mostVisited', 'totalVisitors', 'topReferrers', 'userDevice', 'userCountry', 'state_clicks_0', 'state_clicks_1', 'state_clicks_2',
+        'category_clicks_2', 'state_clicks_0', 'state_clicks_1', 'state_clicks_2',
         'gender_clicks_0', 'gender_clicks_1', 'gender_clicks_2', 'floating_clicks_0', 'floating_clicks_1', 'floating_clicks_2', 'ukm_clicks_0', 
         'ukm_clicks_1', 'ukm_clicks_2', 'program_clicks_0', 'program_clicks_1', 'program_clicks_2', 'start_formatted', 'end_formatted'));
     }
